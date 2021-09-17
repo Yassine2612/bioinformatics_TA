@@ -1,0 +1,118 @@
+Quality Control
+===============
+
+The output of a modern Illumina sequencers are FastQ files. In order to work with these files we need to apply quality filtering that trims reads if the tips are of low quality or toss entire sequences if the full sequence is of low quality.
+
+FASTQ
+-----
+
+FastQ files consist of sequences and associated qualities. Each base in fastq has a quality:
+
+.. code-block:: none
+    :linenos:
+
+    @A00460:311:HJMCYDRXX:1:1101:20130:1000 1:N:0:ATTGGCTTCT+TGACAATGTC
+    CNCACCAGTCTGGCGCATGCTGCAAAATATCTTCGAGAGCCTCTTTTGATATGACAAAAACCGGAATATCCAGACCAAACTGTTCTTTTATCATCGTCTCA
+    +
+    F#FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFF:FFFFFFFF:FFFFF,FFFFFFFFFFFFF,FFF,FFFFFFFFFFFFFFFFF
+
+
+E.g. If your sequencing run yields 1 sequence, your fastq file will be 4 lines.
+
+Paired-End Sequencing
+---------------------
+
+In most cases you will send your sequencing sample for Paired-End sequencing. That means that an individual DNA Insert will be sequenced twice. The R1 read will be sequenced from the front of the insert. Then the insert is reverse complemented and the R2 read is sequenced from the front of the inverted insert. Usually reads will look the following:
+
+
+.. code-block:: none
+    :linenos:
+    
+    Insert: -------------------------------
+    R1:     -------->
+    R2:                           <--------
+
+
+The result are two files which we usually refer to as forward+reverse or R1+R2 files.
+
+Read Quality Control
+--------------------
+
+Read quality control is often the first step you perform in your analysis pipeline. You will have to tweak parameters depending on what you want to do with your data. E.g. if you want to assemble you data then low quality reads usually don't harm the resulting assembly too much. If you want to call SNPs on your data then low quality reads will introduce a bias. Revisit your quality control pipeline regularly and tweak it to its purpose.
+
+What is read quality control? It is an umbrella term that describes:
+
+1. Removal of adapters
+2. Removal of technical sequences, e.g. PhiX spikeins.
+3. Removal of low quality reads from your samples 
+4. Removal of host sequences (Optional)
+5. Additional steps depending on your data/usecase (Optional)
+
+I have downloaded an example dataset from ENA that we will use as an input for QC. We will use `bbduk` for all steps of quality control. Please read the documentation [https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide/](https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide/) regarding parameters.
+
+Raw data
+________
+
+.. code-block:: none
+    :linenos:
+    
+    $ ls /science/teaching/ecoli_wgs/raw/*fastq.gz
+    SRR11669351_1.fastq.gz
+    SRR11669351_2.fastq.gz
+
+
+Both files have combined 9'081'282 reads and 1'353'839'100 bases (avg read length 149 bases)
+
+Adapter removal
+_______________
+
+Adapters are non-biological sequences that were ligated to the insert so that binding to the flowcell works. The Illumina software already removed adapters. But some are kept. We will remove these from the beginning/end of the sequence.
+
+.. code-block:: none
+    :linenos:
+    
+    ml BBMap/38.26-foss-2018b
+    bbduk.sh -Xmx1G usejni=t threads=1 overwrite=t qin=33 in1=/science/teaching/ecoli_wgs/raw/SRR11669351_1.fastq.gz in2=/science/teaching/ecoli_wgs/raw/SRR11669351_2.fastq.gz ref=/science/teaching/ecoli_wgs/resources/adapters.fa ktrim=r k=23 mink=11 hdist=1 out1=/science/teaching/ecoli_wgs/qc/SRR11669351.noadapters_1.fastq.gz out2=/science/teaching/ecoli_wgs/qc/SRR11669351.noadapters_2.fastq.gz &> /science/teaching/ecoli_wgs/qc/SRR11669351.noadapters.log
+
+
+Both files have combined 9'081'276 reads and 1'353'737'593 bases (avg read length 149 bases).
+
+
+PhiX removal
+____________
+
+The known PhiX sequence is added to most Illumina sequencing runs to detect errors in sequencing (keyword Phasing). We remove sequences that are very likely PhiX. PhiX is normally removed by your sequencing center. Not finding PhiX is a good sign.
+
+.. code-block:: none
+    :linenos:
+    
+    bbduk.sh -Xmx1G usejni=t threads=1 overwrite=t qin=33 in1=/science/teaching/ecoli_wgs/qc/SRR11669351.noadapters_1.fastq.gz in2=/science/teaching/ecoli_wgs/qc/SRR11669351.noadapters_2.fastq.gz out1=/science/teaching/ecoli_wgs/qc/SRR11669351.noadapters.nophix_1.fastq.gz out2=/science/teaching/ecoli_wgs/qc/SRR11669351.noadapters.nophix_2.fastq.gz  ref=/science/teaching/ecoli_wgs/resources/phix174_ill.ref.fa.gz k=31 hdist=1 &> /science/teaching/ecoli_wgs/qc/SRR11669351.noadapters.nophix.log
+ 
+ 
+Both files have combined 9'081'276 reads and 1'353'737'593 bases (avg read length 149 bases).
+
+
+Low quality base/read removal
+_____________________________
+
+This step removes sequences with low quality and/or low quality tails of sequences:
+
+.. code-block:: none
+    :linenos:
+    
+    bbduk.sh -Xmx1G usejni=t threads=1 overwrite=t qin=33 in1=/science/teaching/ecoli_wgs/qc/SRR11669351.noadapters.nophix_1.fastq.gz in2=/science/teaching/ecoli_wgs/qc/SRR11669351.noadapters.nophix_2.fastq.gz fastawrap=10000 out1=/science/teaching/ecoli_wgs/qc/SRR11669351.noadapters.nophix.qualitytrimmed_1.fastq.gz out2=/science/teaching/ecoli_wgs/qc/SRR11669351.noadapters.nophix.qualitytrimmed_2.fastq.gz minlength=45 qtrim=r maq=20 maxns=1 overwrite=t trimq=14 &> /science/teaching/ecoli_wgs/qc/SRR11669351.noadapters.nophix.qualitytrimmed.log
+    
+Both files have combined 8'763'956 reads and 1'312'057'099 bases (avg read length 149 bases).
+
+Exercises
+---------
+
+* Why is the adapter added to inserts? When removing adapters, will you remove the entire sequence or just a part of it?
+* Why is PhiX added to sequencing runs? When removing PhiX from your sequencing run, will you remove entire sequences or just parts of that sequences?
+* Why is the quality of Illumina sequencing data decreasing towards the end of the sequences?
+* Try to run the commands and change parameters for `maq`, `k` and `trimq`. What happens?
+* What is the fraction of reads/bases that made it through QC?
+
+.. container:: nextlink
+
+    `Next: Short Read Alignment <2.2_Short_Read_Align.html>`_

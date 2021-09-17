@@ -1,0 +1,41 @@
+Welcome to Week 1
+=================
+
+We will begin by making sure everybody meets the infrastructural requirements for today.
+
+
+Windows and Mac OS
+------------------
+
+AnyConnect VPN Client
+^^^^^^^^^^^^^^^^^^^^^^
+
+ 1. Go to https://sslvpn.ethz.ch
+ 2. Login with your ETH username (username@student-net.ethz.ch) and ETH network password. Note that your ETH **network** password may differ from your ETH password. If you encounter problems, please check: https://iam.password.ethz.ch
+ 3. Download the VPN client and follow the instructions to install the software.
+ 4. Open the AnyConnect software and connect to: sslvpn.ethz.ch/student-net with: username@student-net.ethz.ch and your ETH **network** password.
+
+Windows
+-------
+
+MobaXterm
+^^^^^^^^^^
+
+ 1. If you are on a computer managed by the ETH Zurich, go to the ETH software kiosk https://app.ethz.ch/kiosk, find and install MobaXTerm 10.6.
+ 2. Otherwise go to https://mobaxterm.mobatek.net and download the free edition.
+ 3. Run the downloaded executable and follow the installation instructions.
+ 
+Mac OS X
+--------
+
+Terminal
+^^^^^^^^^
+
+The MacOS X pre-installed application *Terminal* can be used. You can find it in the *Utilities* subfolder in *Applications* or using Spotlight search.
+
+   
+.. container:: nextlink
+
+    `Next: The Command Line Interface  <1.2_ssh.html>`_
+
+

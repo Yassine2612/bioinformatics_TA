@@ -1,0 +1,64 @@
+Calculation and Variables
+=========================
+
+Calculation and Variables
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+R as a calculator
+-----------------
+
+Using R at its most basic, it is a calculator. You can enter a calculation into the console and immediately evaluate the result.
+
+.. code-block:: r
+
+    # R is a calculator
+    1 + 2
+    3 * 4
+
+Variables
+---------
+
+A core concept in programming, a **variable**, is essentially a named piece of data. That is, when you refer to the variable by its name within the program, you are actually referring to the data stored under that name.
+
+To **assign** data to a variable in R, use the following syntax:
+
+.. code-block:: r
+
+    # Assignment of data to a variable
+    x <- 2
+    y <- 3.5
+
+    # Alternative syntax
+    x = 2
+    y = 3.5
+
+After you have assigned data to variables, you can then use the variables to perform calculations:
+
+.. code-block:: r
+
+    # R is a clever calculator
+    x + 2
+    x * y
+    z <- x + x + x
+
+If you need to see the value of a variable in the command line, you can just type its name:
+
+.. code-block:: r
+
+    # What is x?
+    x
+
+Note that variable names are case sensitive, and cannot start with a number.
+
+Exercises
+---------
+
+* Experiment for yourself with the R command line to do some simple calculations.
+* Assign some different numbers to the variables *x* and *y* and check if calculations with them work as you expect.
+* Try to do a calculation with a variable you haven't assigned any data to, *a* for instance.
+* Set *x* to 1, then check what happens when you run the calculation *x <- x + 1*, what value is *x* afterwards?
+* Be aware that R has special values for certain calculations - try dividing by 0 for instance.
+
+.. container:: nextlink
+
+    `Next: Vectors, lists and data.frames in R <2.3_vectors.html>`_

@@ -1,0 +1,223 @@
+    
+Searching for and within Files
+==============================
+
+Looking at files
+----------------
+
+The command **cat** displays the entire contents of a file directly on the terminal. For large files this can be disastrous, so remember that you can cancel commands in progress with **ctrl + c**.
+
+.. code-block:: bash
+
+    # ConCATenate
+    cat E.coli_K12_MG1655.fna
+
+The command **head** displays only the first 10 lines of a file directly on the terminal. If you look at the available options for the command, *-n x* outputs the first *x* lines instead, and using a negative number outputs the lines except for the last *x*.
+
+.. code-block:: bash
+
+    # Show file head
+    head E.coli_K12_MG1655.fna
+    head -n 1 E.coli_K12_MG1655.fna
+
+The command **tail** displays only the last 10 lines of a file directly on the terminal. It has similar options to *head*; *-n x* outputs the last *x* lines, and using a positive number *+x* (note the "+" character) outputs the lines except for the first *x*.
+
+.. code-block:: bash
+
+    # Show file tail
+    tail E.coli_K12_MG1655.fna
+
+The command **less** is a versatile way to look at a file in the command line. Instead of showing you the contents of a file directly on the terminal, it 'opens' the file to browse. You can use the arrow keys, page up, page down, home, end and the spacebar to navigate the file. Pressing *q* will quit. A number of useful options exist for the command, such as showing line numbers or displaying without line wrapping. It also has a search feature that we will cover later.
+
+.. code-block:: bash
+
+    # Browse file
+    less E.coli_K12_MG1655.fna
+
+The command **wc** is a command that will quickly count the number of lines, words and characters in a file, including invisible characters like 'newline' and whitespace. Its options allow you to specify which value to return, otherwise it gives all three.
+
+.. code-block:: bash
+
+    # Count things
+    wc E.coli_K12_MG1655.fna
+
+Exercises
+---------
+
+* Use **cat** to look at the *E. coli* genome file you copied last time, is it suitable for looking at this file?
+* Use **head** and **tail** to examine the first and last 10 lines of the genome file. Now try to look at the first and last 20 lines.
+* Use **less** to look at the genome file. Navigate through the file with the keys listed above, then return to the Terminal.
+* Use the **man** command we learned to read about the **wc** command.
+* Can you find out how many lines are in the genome file?
+
+.. hidden-code-block:: bash
+
+    # Look at the first 20 lines
+    head -n 20 E.coli_K12_MG1655.fna
+
+    # Look at the last 20 lines
+    tail -n 20 E.coli_K12_MG1655.fna
+
+    # Count the number of lines in the file
+    wc -l E.coli_K12_MG1655.fna
+
+Wildcards
+---------
+
+When providing a file path as an argument to a command, it is often possible to provide multiple file paths using *wildcards*. These are special characters or strings that can be substituted for a matching pattern.
+
+* **?** matches any single character
+* \* matches any number of any characters
+* **[...]** matches any character within the brackets
+* **{word1,word2,...}** matches any string inside the brackets
+
+For instance:
+
+.. code-block:: bash
+
+    # Pattern matching
+    ls /cluster/home/ssunagaw/teaching/ecoli/*      # lists all files in the ecoli directory
+    ls /cluster/home/ssunagaw/teaching/ecoli/*.fna  # lists all nucleotide fasta files there
+    ls /cluster/home/ssunagaw/teaching/ecoli/*.f?a  # lists all nucleotide and protein fasta files there
+
+Searching for a file
+--------------------
+
+When you are trying to find a file in your system, the command **find** offers a number of options to help you. The first argument is where to start looking (it looks recursively inside all directories from there), and then an option must be given to specify the search criteria.
+
+.. code-block:: bash
+
+    # Finding files
+    find . -name "*.txt"  # searches for files ending in .txt
+    find . -mtime -2      # searches for files modified in the last two days
+    find . -mtime +365    # searches for files modified at least one year ago
+    find . -size +1G      # searches for files at least 1GB or larger
+    find . -maxdepth 1    # searches only here, i.e.: doesn't look inside directories
+
+Exercises
+---------
+
+* Use **ls** to get a list of all files in the /cluster/home/ssunagaw/teaching/ecoli directory
+* Use **cp** to copy all files from the ecoli directory into a directory in your home directory
+* Navigate to the /cluster/ssunagaw/teaching directory
+* Use **find** to look for all .txt files there
+* Use **find** to look for all files larger than 1MB
+* Now combine these criteria to find all .txt files larger than 1MB
+
+.. hidden-code-block:: bash
+
+    # Make a directory for the new files
+    cd ~
+    mkdir ecoli
+
+    # Copy all the files
+    cp /cluster/home/ssunagaw/teaching/ecoli/* ~/ecoli/
+
+    # Navigation
+    cd /cluster/home/ssunagaw/teaching
+
+    # Looking for files
+    find . -name "*.txt"
+    find . -size +1M
+    find . -name "*.txt" -size +1M
+
+Searching in **less**
+---------------------
+
+When you open a file to look at it using **less**, it is also possible to search within that file by pressing **/** (search forwards) or **?** (search backwards) followed by a pattern.
+
+.. code-block:: bash
+
+    # Finding strings
+    /AAAAAAAAA  # finds the next instance of "AAAA"
+    ?TTTTTTTTT  # finds the previous instance of "TTTT"
+
+These same commands will also work with **man**, helping you to find a particular argument more easily.
+
+But what happens when you search for "."? The entire document will be highlighted! Why is this?
+
+Regular Expressions
+-------------------
+
+The reason this happens is that in the context of these search functions, "." represents *any character*. It is acting as a wildcard, from a different set of wildcards to those discussed above.
+
+This set of wildcards is part of a system of defining a search pattern called **regular expression** or **regex**. Such a pattern can consist of wildcards, groups and quantifiers, and may involve some complex logic which we will not cover here. Further, the exact set of wildcards available depends on the programming language being used.
+
+.. code-block:: bash
+
+    # Wildcards and quantifiers
+    .   any character
+    \d  any digit
+    \w  any letter or digit
+    \s  any whitespace
+
+    ^   the start of the string
+    $   the end of the string
+
+    *   pattern is seen 0 or more times
+    +   pattern is seen 1 or more times
+    ?   pattern is seen 0 or 1 times
+
+These are just a few of the possibilities available. An example regular expression that would search for email addresses, for instance, would be:
+
+.. code-block:: bash
+
+    # name@domain.net can be matched as: \w+@\w+\.\w+
+    echo "name@domain.net" | grep -E '\w+@\w+\.\w+'
+    echo "name@domain.net" | grep -E '\w+@\w+'
+    echo "name@domain.net" | grep -E '@\w+'
+
+Grep
+----
+
+The command **grep** allows you to search within files without opening them first with another program. It also uses regular expressions to allow for powerful searches, and has a number of useful options to help give you the right output.
+
+.. code-block:: bash
+
+    # A simple **grep**
+    grep "AAAAAAAAA" E.coli.fna        # shows all lines containing "AAAAAAAAA" highlighted
+
+    # Using grep with a regex
+    grep -E "(ACGT)(ACGT)+" E.coli.fna # shows all lines containing "ACGTACGT.." highlighted
+
+    # Useful options
+    grep -o  # show only the matches
+    grep -c  # show only a count of the matches
+
+Exercises
+---------
+
+* Navigate to the directory you copied the *E. coli* files to earlier.
+* Use **less** to look at the GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna file, containing nucleotide gene sequences.
+* Search within less to find the sequence for **dnaA**.
+* Use **grep** to find the same entry in the file.
+* Use **grep** to count how many fasta entries the file has. As a reminder, a FASTA header always starts with a '>'.
+* Find out, which entry number the gene **dnaA** is?
+* If you are interested in learning regular expressions, try the exercises `here <https://regexone.com/>`_
+
+.. hidden-code-block:: bash
+
+    # Navigation
+    cd ~/ecoli
+
+    # Look at the file
+    less GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna
+
+    # Type this within less:
+    /dnaA 
+
+    # Type 'n' or 'N' after to see if there are more search hits
+
+    # Use grep
+    grep 'dnaA' GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna
+    
+    # Use grep to count
+    grep -c '>' GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna
+    
+    # Which entry number?
+    grep '>' GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna | grep -n 'dnaA'
+    
+.. container:: nextlink
+
+    `Next: Pipes and redirection usage <1.6_pipes.html>`_
+

@@ -1,0 +1,102 @@
+Working with Files
+==================
+
+In Unix systems there are only really two types of files: text or binary. The file name ending (.txt or .jpg) doesn't really matter like it does in Windows or Mac OS, however it is used to indicate the file type by convention. Some file types you will encounter include:
+
+* .txt - A generic text file.
+* .csv - A 'comma separated values' file, which is usually a table of data with each line a row and each column separated by a comma.
+* .tsv - A 'tab separated values' file, which is the same but separated by tab characters.
+* .fasta or .fa - A fasta formatted sequence file, in which each sequence has a header line starting with '>'.
+* .fna - A fasta formatted nucleotide sequence file, usually gene sequences.
+* .faa - A fasta formatted protein sequence file.
+* .sh - A 'shell script', which contains commands to run.
+* .r - An R script, which contains R commands to run.
+* .py - A python script, which contains python commands to run.
+* .gz or .tar.gz - A file that has been compressed using a protocol called 'gzip' so that it takes up less space on the disk and transfers over the internet faster.
+
+Transferring files
+------------------
+
+The easiest way to transfer files between a server and your computer is to use the file browser offered by *MobaXterm*. This works via a protocol called **SFTP**, and other programs such as *Filezilla* offer the same utility.
+
+.. image:: /contents/images/sftp.png
+    :align: center
+
+Another file transfer protocol is **scp**, and programs such as *WinSCP* use it. There are differences between the two protocols, but the outcome is the same. The command **scp** is an easy way to transfer a file immediately between the server you are working on and another (or two different servers!). Another command to copy files is **rsync**, which can be used with many options such as preserving the ownership and date of creation of a file (and much more). 
+
+.. code-block:: bash
+
+    # Secure CoPy
+    man scp
+    scp source user@server:destination # local to server
+    scp user@server:source destination # server to local
+    
+    # Rsync
+    man rsync
+    rsync -a source user@server:destination # local to server
+    rsync -a user@server:source destination # server to local
+    
+    # Copy the E.coli genome (or any existing file) from the home directory on Euler to the current directory of your local computer
+    # On Euler, run:
+    cd
+    cp /cluster/home/ssunagaw/teaching/ecoli/GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna.gz E.coli_K12_MG1655.fna.gz 
+    
+    # Then, logout and run the following commands on your local system (not on Euler)
+    scp user@euler.ethz.ch:~/E.coli_K12_MG1655.fna.gz .
+    rsync -a user@euler.ethz.ch:~/E.coli_K12_MG1655.fna.gz .
+    
+    # Copy the E.coli genome (or any file) from your local computer to the home folder on Euler
+    # Again, on your local system, run the following commands in a terminal (not on Euler)
+    scp E.coli_K12_MG1655.fna.gz user@euler.ethz.ch:~/
+    rsync -a E.coli_K12_MG1655.fna.gz user@euler.ethz.ch:~/
+
+Sometimes you want to download a file directly from the internet to the server, rather than going via your local machine. **wget** allows you to download files in this way.
+
+.. code-block:: bash
+
+    # Download from the internet
+    wget source-URL
+    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/482/265/GCF_000482265.1_EC_K12_MG1655_Broad_SNP/GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna.gz
+
+Compressing and decompressing files
+-----------------------------------
+
+Files can be compressed to take up less space on the hard drive (disk), or for transfer over the internet. The file you downloaded is an example, and we can decompress it using the **gunzip** command:
+
+.. code-block:: bash
+
+    # Decompress a file
+    gunzip GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna.gz
+
+If you ever need to compress a file, for instance to send it to someone, you can use the **gzip** command:
+
+.. code-block:: bash
+
+    # Compress a file
+    gzip GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna
+    
+Exercises
+---------
+
+* Windows: On your local computer, using the file browser, upload a file of your choice to your home directory on Euler.
+* Mac OS X: In the *Terminal*, open a new window or logout from Euler, then upload a file from your local computer to your home directory on Euler using the **scp** command.
+ 
+* On the server, download the file in the example above to your home folder.
+* Decompress the file
+
+.. hidden-code-block:: bash
+
+    # Make sure I am in my home directory
+    cd ~
+
+  
+    # Download the file 
+    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/482/265/GCF_000482265.1_EC_K12_MG1655_Broad_SNP/GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna.gz
+   
+
+    # Decompress it 
+    gunzip GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna.gz
+   
+.. container:: nextlink
+
+    `Next: Searching files in less and regular expressions <1.5_searching.html>`_

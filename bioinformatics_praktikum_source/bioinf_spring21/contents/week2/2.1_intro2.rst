@@ -1,0 +1,82 @@
+Welcome to Week 2
+=================
+
+We will begin by making sure everybody meets the infrastructural requirements for today.
+
+Connection to the R Studio Server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ 1. Open the AnyConnect software and connect to: sslvpn.ethz.ch/student-net with: username@student-net.ch and your ETH **network** password.
+ 2. Once your VPN connection is active, open a new web browser window and visit: https://rstudio-teaching.ethz.ch/
+ 3. Use your ETH username (same as for VPN, but without: "@student-net.ch") and ETH password (the one you use for your email account).
+ 4. You should now connect to the R-Studio Server for this course.
+
+R Studio
+^^^^^^^^
+
+**R Studio** is an integrated development environment (IDE) for **R**. This means that it provides an interface to help you write, run and debug code.
+
+.. image:: /contents/images/rstudio.png
+    :align: center
+
+0. If you do not see the **code editor** as the top left panel (shown as #3 above), please open a new one by clicking: File-->New File-->R Script.
+
+1. The bottom left panel is the **R console** (#1). Here you can type in commands and have them immediately executed. Note that there is also a **Terminal** tab. You can use it to copy files from/to other servers! See also the section "Transferring files" below.
+
+2. The top right panel (#2) shows you the current variables in your environment. By default you are shown the variable names and a short preview of their contents, but you can get more information by changing the view type from *List* to *Grid*. Another tab here shows you your command history.
+
+3. The top left panel is the **code editor** (#3) where you can write, edit and view your code, and where can you view 2D variables such as matrices and data frames (more on those later).
+
+4. The bottom right panel (#4) shows a file browser. If you are working on the web version, this will show your UNIX home directory by default. Other tabs show plots that you create, additional functions, known as packages, you have installed, and help files for various functions.
+
+Useful commands
+---------------
+
+* If you want to run the script you are looking at, you can press **ctrl + shift + enter**.
+
+* If you just want to run a single line in the script, or the lines you have highlighted, you can press **ctrl + enter**.
+
+* If you want to interrupt a running command or script, you can press **esc** in the console window.
+
+* If something goes really wrong, you can select *Interrupt Kernel / Interrupt R** or *Restart / Terminate R* from the *Session* menu.
+
+Other Tips
+----------
+
+* Use the R console to try things out, and when you are happy that you have written a command correctly you can copy and paste it into your code editor.
+
+* The R console works very much like the UNIX terminal:
+
+  * You can use the arrow keys to scroll back through previously run commands
+
+  * You can use tab to auto-complete commands and variables - a handy menu comes up with options if there is ambiguity
+
+  * You can copy and paste as you would do normally in other programs
+
+* In the code editor there are line numbers to make it easier to find errors
+
+Transferring files
+------------------
+
+* The **Terminal** tab in the bottom left panel is a UNIX Terminal. If you open it, you are located in your home folder on the R-Studio server. As discussed last time, you can download files from the web and copy files from the same or a different server, for example.
+
+.. code-block:: bash
+
+   # Try out the following to copy files from another server to your home folder:
+   cd
+   pwd
+   ls
+   rsync -av <username>@euler.ethz.ch:/cluster/home/ssunagaw/teaching/README .
+   # if this fails, please use: scp <username>@euler:/cluster/home/ssunagaw/teaching/README .
+   ls
+   cat README
+
+* You should see now the file name "README" also in the file browser on the bottom right panel. Try clicking on the README file.
+
+NOTE: if the terminal tab does not work properly, try to change web browser (there were some issues with internet explorer).
+
+.. container:: nextlink
+
+    `Next: Calculation and Variables  <2.2_variables.html>`_
+
+

@@ -1,0 +1,74 @@
+Packages
+========
+
+We've so far used a lot of fundamental functions in R, the sort without which you couldn't execute simple scripts at all. When performing data analysis however, there may well be better or more specific functions available for what you are trying to do. R is very flexible because it allows the loading of additional **packages** created by the user community to enhance and add functionality.
+
+Loading a Package
+-----------------
+
+To load a package, we use the **library** function. Once loaded, all of the functions inside the package become available to R. If a function should have the identical name to an existing function, it will mask the current version and refer instead to the version in the package, and give you a warning.
+
+.. code-block:: R
+
+    # For instance if we want to work with phylogenetic trees
+    # If you look at the example.tree file itself you can see the format is non-intuitive
+    library(ape)
+    tree <- read.tree("/science/teaching/example.tree")
+    
+    # Packages can load other packages and mask functions
+    library(Hmisc)
+
+Installing a Package
+--------------------
+
+For native R packages, the **install.packages** function allows installation of new packages into a personal user library.
+
+.. code-block:: R
+
+    # Install a new package
+    install.packages("beeswarm")
+
+    # Load the package and demonstrate
+    library(beeswarm)
+    random_numbers <- rnorm(100)
+    beeswarm(random_numbers)
+    beeswarm(random_numbers,method="hex")
+
+If the package has not been submitted to the standard R repositories, but exists for instance on github, the package **devtools** allows you to install it directly - you may have to install it yourself using the method above.
+
+.. code-block:: R
+
+    # Load devtools
+    library(devtools)
+
+    # Install a package from github
+    install_github(https://github.com/Gibbsdavidl/CatterPlots)
+
+    # Load the package and demonstrate
+    library(catterplots)
+    x <- rnorm(10)
+    y <- rnorm(10)
+    multicat(x,y)
+
+Bioconductor
+------------
+
+**Bioconductor** is a popular set of specific bioinformatics tools, such as DESeq2 and Biostrings, that need to be installed via the **BiocManager** package.
+
+.. code-block:: R
+
+    # First of all install the manager
+    install.packages("BiocManager")
+
+    # Use it directly without loading
+    BiocManager::install("Biostrings")
+
+    # Load the package and demonstrate
+    library(Biostrings)
+    cdss <- read.DNAStringSet("ecoli/EC_K12_MG1655_genomic.fna")
+    subseq(cdss,1,10)
+
+.. container:: nextlink
+
+    `Next: A case study <5.2_CaseStudy.html>`_
+

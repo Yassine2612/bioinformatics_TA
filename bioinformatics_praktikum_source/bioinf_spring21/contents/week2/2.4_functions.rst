@@ -1,0 +1,351 @@
+Using Functions
+===============
+
+R does more than just simple calculations or allowing you to import and look at data. Its power comes from functions. There is a wide selection of different functions in R, some of them are built into R and some of them can be made accessible by downloading **packages**.
+
+Basic functions in R
+--------------------
+
+A function requires input *arguments*, some necessary, such as the data you want to run the function on, and some optional, such as the choice of method or additional parameters. As most optional arguments already have a pre-set default value it can be tricky to grasp how many arguments the function has. We will now look at a very simple first function **mean** in R.
+
+First, if we want to understand a function, we read its help file.
+
+.. code-block:: r
+
+    # Get help
+    ?mean
+    
+This prints out the documentation of that function. The first paragraph provides a description of what the function does. The second paragraph shows how to use the function in your script or the console. It also explains if there are any default values set for any of the arguments. The third paragraph takes you through all the different arguments and explains each of them. In our example, the only necessary argument x is an object that we want to apply this function to. The paragraph called *Value* explains what the output of the function will be. At the very bottom of the documentation you can also find some examples of how to use the function. 
+If we don’t even know if a function exists, we can use the double question mark to search for key words
+
+.. code-block:: r
+
+    # #search keywords
+    ??substring 
+    
+Now let’s start using the **mean** function with a vector that contains all numbers from 1 to 10. *Arguments* for a function can be declared both by their *position* or their *name*. A function expects to see the arguments in a specific order, so the first argument without a name is expected to be the first argument in the function. As already discussed, the mean function only needs one input argument x.
+
+.. code-block:: r
+
+    # Find the mean of a vector
+    c <- 1:10
+    #method 1: using the predefined postions
+    mean(c)
+    #method 2: declare input by name
+    mean(x = c)
+    
+
+Exercises 1 
+-----------
+* try calculating the sum of the same vector using the **sum** function
+* extract the length of the vector using the **length** function
+* calculate the mean using the results from the first two exercises and compare it to the result using **mean**. Can you see how using functions reduces the length of your code?
+* calculate the median of the vector using the **median** function
+
+.. hidden-code-block:: r
+
+    #defining vector c
+    c <- 1:10
+    #calculate sum 
+    sum <- sum(c)
+    len <- length(c)
+    mean_calc <- sum/len
+    show(mean_calc)
+    #we can see that the result of mean_calc and mean are the same.  However, we used up 3 lines to code the median. The function median       only uses one line and is much more efficient. 
+    
+    #calculate median of c
+    med <- median(c)
+    show(med)
+
+Functions 2
+-----------
+
+We will use the *swiss* data set to test the mean function again. First, we will have a look at what this data set contains.
+
+.. code-block:: r
+
+    #loading swiss data set 
+    data(swiss)
+    #view swiss data set
+    View(swiss)
+    #calculating mean for fertility
+    #method 1: using the predefined postions
+    mean(swiss$Fertility) 
+    #method 2: declare input by name
+    mean( x = swiss$Fertility)
+    
+Let’s look at another function called **sd**. Sd calculated the standard deviation. 
+
+.. code-block:: r
+
+    #calculating standard deviation for fertility
+    sd(swiss$Fertility)
+
+You can also use a function to find the object with the largest or smallest value in a vector using the **max** or **min** function.
+
+.. code-block:: r
+    
+    #finding object with largest/smallest in vector x
+    c <- 2:30
+    max(c) #= 30
+    min(c) #= 2
+    
+Exercises 2
+-----------
+
+Explore the swiss data set. The following questions can guide you:
+
+* How catholic is the region with the highest fertility? 
+* Is there a difference in infant mortality between low-education and high education areas? (hint: define high as > 10 and low as <= 10) 
+* Is education higher in regions with lower agriculture? (hint: use **min , max** and **mean**) 
+
+.. hidden-code-block:: r
+    
+    #how catholic is the region with the highest fertility
+    #get all columns for max fertility
+    swiss[swiss$Fertility == max(swiss$Fertility),]
+    #only get Catholic column
+    swiss[swiss$Fertility == max(swiss$Fertility), "Catholic"]
+    
+    #difference in mean between high and low education areas
+    #slicing data frame
+    low_education <- swiss[swiss$Education <= 10,]
+    high_education <- swiss[swiss$Education > 10,]
+    #calculating means
+    mean(low_education$Infant.Mortality)
+    mean(high_education$Infant.Mortality)
+    
+    #how does education affect agriculture?
+    #slicing data frame
+    low_agriculture <- swiss[swiss$Agriculture <= 50,]
+    high_agriculture <- swiss[swiss$Agriculture > 50,]
+    #calculating means
+    mean(low_agriculture$Education)
+    mean(high_agriculture$Education)
+    #calculating maxima and minima
+    swiss[swiss$Agriculture == max(swiss$Agriculture),]
+    swiss[swiss$Agriculture == min(swiss$Agriculture),]
+
+Functions and class
+-------------------
+
+Many R functions are written so that they behave differently depending on what class of variable they are given. For instance, the **summary** function gives additional information about a variable, and what it shows depends on the variable's class.
+
+.. code-block:: r
+
+    # Class discrimination
+    x <- 1:10
+    summary(x)
+
+    data(swiss)
+    summary(swiss)
+    
+    data(Titanic)
+    summary(Titanic)
+
+So when a function does something unexpected, consider what mode or class the variables you gave it have.
+
+
+Introduction to statistical functions in R
+------------------------------------------
+R also provides a large range of *statistical functions*. A commonly used one is the correlation function **cor**. Again, have a look at the documentation to learn what the input arguments for this function need to be.
+
+.. code-block:: r
+
+    #look at documentation 
+    ?cor
+    
+The documentation tells us that we need at least one argument x. The default correlation method is set to *pearson*. Let’s say we want to investigate if there is a correlation between fertility and catholic. 
+
+.. code-block:: r
+    
+    cor(swiss$Fertility, swiss$Catholic)
+    
+The function gives you a correlation 1x1 matrix. Your inputs do not necessarily have to be vectors, you can also input an entire matrix or data frame. 
+
+.. code-block:: r
+
+    #correlation between the entire swiss data frame and fertility 
+    cor(swiss, swiss$Fertility) 
+    
+Next, we will change the correlation method (check out the documentation again to see which ones you can pick from).
+
+.. code-block:: r
+
+    #change method
+    cor(swiss$Fertility, swiss$Catholic, method = “spearman”) 
+    
+You can also use R for *significance testing*. There is a huge amount of statistical tests available. We will only have a look at the **t.test** function at this point. 
+Have a look at the *iris data* set.
+
+.. code-block:: r
+
+    #load iris data set
+    data(iris) 
+    #iris data set
+    View(iris) 
+    
+We now want to see if there is a significant difference in petal length between the two species setosa and versicolor. The **t.test** function calculates a "Welch Two samples t-test".
+
+.. code-block:: r
+
+    #calculate t test
+    t.test(iris[iris$Species == "setosa",]$Petal.Length, iris[iris$Species == "versicolor",]$Petal.Length)
+    
+This will print out the summary of the t test in your consol. If you are planning on using the output for further calculation or simulations it makes sense to *store the result in a variable*. 
+
+.. code-block:: r
+
+    #calculate t test and save in variable t_test
+    t_test <- t.test(iris[iris$Species == "setosa",]$Petal.Length, iris[iris$Species == "versicolor",]$Petal.Length)
+
+The output is now stored as a list called t_test.  You can easily access the different quantities using the *dollar sign* or *double square brackets*. For example, we can extract the t-statistic from our calculation
+
+.. code-block:: r 
+
+    #get t-statistics 
+    t_test$statistic
+    t_test[[statistic]]
+
+To get an overview of all quantities provided by the function you can use the **names** function.
+
+.. code-block:: r
+
+    #overview over all quantities
+    names(t_test) 
+    
+Exercise 3
+----------
+
+Go back to your results in exercise 2. Are the results statistically significant? 
+
+.. hidden-code-block:: r
+
+    #difference in mean between high and low education areas
+    low_education <- swiss[swiss$Education <= 10,]
+    high_education <- swiss[swiss$Education > 10,]
+    res_edu <- t.test(low_education$Infant.Mortality, high_education$Infant.Mortality)
+    res_edu$p.value # = 0.44, not significant
+    
+    low_agriculture <- swiss[swiss$Agriculture <= 50,]
+    high_agriculture <- swiss[swiss$Agriculture > 50,]
+    res_agri <-t.test(low_agriculture$Education, high_agriculture$Education)
+    res_agri$p.value #= 0.0012, significant
+    
+Writing Functions
+=================
+
+Introduction
+------------
+
+You can define your **own function** in R. This is particularly useful if you want to perform the same task with many different data sets. Your definition requires you to declare your function’s arguments and whether they have a set default value or not. Arguments cannot by default be forced to a certain mode or class, but you can check for them in the function an coerce them if necessary. Variables within your function are limited to only that function, and after it has run will simply disappear. If you want to store a result from a function, you must **return** it to the main program. 
+
+Defining a basic function
+-------------------------
+
+Functions always have the same structure: 
+
+.. code-block:: r 
+
+  function_name <- function(argument, argument = default value) {
+        statement or operations
+        return(result)
+  }
+
+
+You need to define a **name** for your function that you will later use to call it with. The *curly brackets* define where the function starts and ends. The *return* command returns the result back to the main program. Let's have a look at a first example. We would like to write a function that converts temperature Fahrenheit to Celsius. 
+
+.. code-block:: r
+
+  # defining function 
+  f_to_c <- function(temp_F) {          #define a function and argument temp_F, no default arguments
+    temp_C <- (temp_F - 32) * 5 / 9     #perform calculations using the argument 
+    return(temp_C)                      #return the result to the main program
+  }
+  
+  # using the function                   
+  f_to_c(70) # = 21.1                   #using the name of the function to call it
+
+
+The next function decrypts numbers into letters. We define two arguments: the necessary argument x and the optional argument offset which is set to 0 by default. 
+
+.. code-block:: r
+
+  # defining a function
+  caesarDecrypt <- function(x,offset=0){
+    new_x = x - offset - 1                  # Remove the offset and minus 1 for the next line
+    new_x = new_x%%26 + 1                   # Find the modulo, add 1 to move from 0:25 to 1:26
+    string = letters[new_x]                 # Translate numbers to letters
+    return(string)                          # Return the answer
+  }
+  # Using it
+  x <- c(3,8,18,9,19)
+  caesarDecrypt(x)
+  x <- c(7,14,20,17,20,12,4)
+  caesarDecrypt(x, offset = 12)
+
+  
+You can create functions as complex as you like. For example, we can include an if statement or for loops. This next function only multiplies by 3 the input if it is an even number.
+
+
+.. code-block:: r
+
+  #multiply all even number by a certain factor 
+  OnlyIfEven <- function(number, factor = 3){             #define function. mulitplication factor is set to 3 by default
+    temp_res <- number %% 2                               #calculate modulo 
+    if (temp_res == 0){                                   #if modulo is zero then the number is even
+    res <- number*factor                                  #mulitplication
+    print(res)                                            #print result. Careful, this does not return the result!
+    }
+    else{print("error: expected even number")}            #print error message if modulo not zero     
+  }
+
+  #using the function
+  OnlyIfEven(4) #=12
+  OnlyIfEven(5) #error: expected even number
+
+  
+Organising Functions 
+--------------------
+  
+If you need to write many different functions for your data set it is recommended to keep them saved in separate files. This keeps your scripts nice and tidy. You can always call another file in your current script by using the **source** command. 
+
+.. code-block:: r
+
+  source("path_to_your_file/filename.R")
+  
+  
+Exercises
+---------
+
+* Write a function to add up all numbers in a vector except for the highest.
+* Write a function that deciphers letters into numbers. (hint: use the **which** function)
+
+.. hidden-code-block:: r
+
+  # add up all numbers in a vector except for the highest
+  SumWithoutMax <- function(input_vector){            #defining function
+    sum_v <- sum(input_vector)                        #sum over whole vector
+    max_v <- max(input_vector)                        #determine max value
+    sum_final <- sum_v - max_v                        #subtract
+    return(sum_final)
+  }
+  #using it
+  v <- c(1:10)
+  SumWithoutMax(v) #=45
+  
+  #deciphers letters into numbers
+  caesarCrypt <- function(x, offset = 0){
+    res <- c()                                      #define empty result vector for numbers             
+    for (character in x){                           #for loop for each character in argument
+      num <- which(letters == character)            #find index for that character
+      num_off <- num - offset                       #correct for offset
+      res <- c(res, num_off)                        #add to current result to result vector
+    }
+    return(res)       
+  }  
+
+    
+.. container:: nextlink
+
+    `Next: Control of program flow, read and write data to and from files <2.5_programflow.html>`_

@@ -1,0 +1,30 @@
+RepFail study metadata summary
+==============================
+
+Learning Goals
+---------------
+
+Use the metadata associated with the RepFail study to obtain an overview of the available data and underlying data structure
+
+Excercises/Questions
+--------------------
+Go to ``\\gram\biol_micro_practical\BlockCourses\551-1119-00L\masterdata\metadata`` in order to download the metadata for the RepFail study. The file is called MFV_metadata_block_course_HS2020.xlsx
+
+
+Load the metadata file into r (you might have to save it as a tab-delimited .txt file first) and use base-R, tidyverse and ggplot2 to answer the following questions:
+
+Hint: all the variables in the metadata are explained in the second tab of the excel-sheet.
+
+1. How many labs are included in the study?
+
+2. How many different types of samples are included in the metadata and how many samples per sample type do we have?
+
+3. How many male and female mice were included in the study per lab?
+
+4. What is the mean body weight of males and female mice within different labs? How does this differ depending on what measure of body weight you take?
+
+5. What is the number of cages per lab?
+
+6. Create a histogram of number of reads per sample. For this you will also need to import the ASV/OTU table into R
+
+You can find a summary of the study design :download:`here <downloads/RepFail_study_design.pdf>`

@@ -1,0 +1,47 @@
+Welcome to Week 1!
+==================
+
+We will begin by making sure everybody meets the system requirements and has access to the necessary server.
+
+
+Both Operating Systems
+----------------------
+
+AnyConnect VPN Client
+^^^^^^^^^^^^^^^^^^^^^^
+
+ 1. Go to https://sslvpn.ethz.ch/
+ 2. Login with your ETH username (username@staff-net.ethz.ch or username@student-net.ethz.ch) and ETH network password. Note that your ETH network password may differ from your ETH password. If you encounter problems, please check: https://iam.password.ethz.ch/
+ 3. Download the VPN client and follow the instructions to install the software
+ 4. Open the AnyConnect software and connect to: sslvpn.ethz.ch/biol-public with: ETHusername@biol-public.ethz.ch and your ETH network password.
+
+
+RStudio Web
+^^^^^^^^^^^^
+
+ * You can work in RStudio from your browser if your VPN connection is active: https://rstudio-web.ethz.ch/
+ 
+Windows
+-------
+
+MobaXterm
+^^^^^^^^^^
+
+ 1. If you are on a managed computer, go to the ETH software kiosk https://app.ethz.ch/kiosk, find and install MobaXTerm 10.6
+ 2. Otherwise go to https://mobaxterm.mobatek.net/ and download the free edition
+ 3. Run the downloaded executable and follow the installation instructions
+ 
+MacOS
+-----
+
+Terminal
+^^^^^^^^^
+
+The MacOS preinstalled *terminal* can be used. You can find it in the Utilities subfolder in Applications or using spotlight search.
+
+   
+.. container:: nextlink
+
+    `Next: The Command Line <1.2_ssh.html>`_
+
+

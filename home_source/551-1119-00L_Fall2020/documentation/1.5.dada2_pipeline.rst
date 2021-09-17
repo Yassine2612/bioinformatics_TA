@@ -1,0 +1,239 @@
+
+Session 1.5. 16S rRNA analysis using dada2
+==========================================
+
+The next step after sequencing data generation is the analysis of the raw sequencing data. For that we will use a pipeline that takes raw 16S rRNA sequencing data as input and generates a table of unique 16S sequences and their abundances in samples. This table is often called OTU-Table or ASV-Table.
+
+
+
+Learning Goal
+-------------
+
+The goal of this session is to understand the primary analysis of 16S sequencing data and execute the analysis pipeline described below on a small set of samples.
+
+
+Input Data
+----------
+
+Raw sequencing data is usually encoded in the FASTQ format which combines sequence information with values that describe the quality of every single base.
+
+The FASTQ files serve as input for our pipeline. There are always 2 files per sample, one for the R1 reads and one for the R2 reads (see lecture). The structure of the files/folders is the following:
+
+
+.. code-block:: bash
+
+    # Login to the VMs and the Morgan to see these files
+    $ ls /nfs/practical/BlockCourses/551-1119-00L/masterdata/analysis/FGCZ/0raw/
+    100A_FGCZ  107A_FGCZ  117A_FGCZ  1A_FGCZ   24A_FGCZ  29A_FGCZ  39B_FGCZ  47B_FGCZ  55A_FGCZ ...
+    # The above line shows the sequencing samples.
+
+    # Looking in to a random sample folder lists the FASTQ files (and a stats file)
+    $ ls /nfs/practical/BlockCourses/551-1119-00L/masterdata/analysis/FGCZ/0raw/100A_FGCZ
+    100A_FGCZ_R1.fastq.gz  100A_FGCZ_R2.fastq.gz  100A_FGCZ_readstats
+
+    # Inspect a FASTQ file with less (you can exit the less command by typing "q")
+    # sequences are 250 bases long and are encoded in the FASTQ format
+    less /nfs/practical/BlockCourses/551-1119-00L/masterdata/analysis/FGCZ/0raw/100A_FGCZ/100A_FGCZ_R1.fastq.gz
+    @A00460:439:HHMMGDRXX:1:2101:5981:1016 1:N:0:CTCTCTAC+CTATTAAG
+    GNATCGTGCCAGCAGCCGCGGTAATACGGAGGATGCGAGCGTTATCCGGATTTATTGGGTTTAAAGGGTGCGTAGGCGGCATTATAAGTTAGTGGTAAAATATTGGGGCTTCACCTCACTACGCCATTAATACTGTAGAGCTAGAGAACAGACGAGGTAGGCGGAATAAGTTAAGTAGCGGTGAAATGCATAGATATAACTTAGAACACCGATAGCGAAGGCAGCTTACCAGACTGAGTCTGACGCTGATG
+    +
+    F#FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,FFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+    @A00460:439:HHMMGDRXX:1:2101:17390:1016 1:N:0:CTCTCTAC+CTATTAAG
+    GNTTCGTGCCAGCAGCCGCGGTAATACGTAGGGGGCAAGCGTTATCCGGATTTACTGGGTGTAAAGGGAGCGTAGACGGCACGGCAAGTCTGAAGTGAAAGCCCGGGGCTCAACCCCGGGACTGCTTTGGAAACTGCCGGGCTGGAGTGCAGGAGAGGTAAGTGGAATTCCTAGTGTAGCGGTGAAATGCGTAGATATTAGGAGGAACACCAGTGGCGAAGGCGGCTTACTGGACTGTAACTGACGTTGAG
+    ...
+
+Sequence Adapter Removal
+------------------------
+
+Targeted sequencing, such as 16S sequencing, is executed with specific primers that are used to extract only the piece of DNA of interest. These primer, even though they are part of the biological sequence need to be removed prior to analysis. For that we use the tool `cutadapt`.
+
+`cutadapt` takes the primer sequences (515F and 806R) and the sequences files as input and removes the primers that are in most cases at the beginning of the reads.
+
+.. code-block:: bash
+
+    # You need to adapt the code.
+    # {sample} is the placeholder for the sample name, e.g. 1A_FGCZ
+    # {user} is the placeholder for your username, e.g. biolcourse-XX
+
+    # 1. Create a workfolder in your home directory:
+    cd /nfs/practical/BlockCourses/551-1119-00L/home/{user}
+    mkdir -p ./primary_analysis/cutadapt/
+
+    # 2. Load the cutadapt module
+    ml cutadapt/2.8-foss-2018b-Python-3.6.6
+
+    # 3. Run cutadapt
+    cutadapt -O 12 --discard-untrimmed -g GTGYCAGCMGCCGCGGTAA -G GGACTACNVGGGTWTCTAAT -o ./primary_analysis/cutadapt/{sample}_R1.fastq.gz -p ./primary_analysis/cutadapt/{sample}_R2.fastq.gz /nfs/practical/BlockCourses/551-1119-00L/masterdata/analysis/FGCZ/0raw/{sample}/{sample}_R1.fastq.gz /nfs/practical/BlockCourses/551-1119-00L/masterdata/analysis/FGCZ/0raw/{sample}/{sample}_R2.fastq.gz -j 8 --pair-adapters --minimum-length 75
+
+The previous step should be repeated until you have 3 samples processed. I suggest to use the samples 1A_FGCZ, 1B_FGCZ and 9A_FGCZ.
+
+Exercise:
+
+- In how many sequences were both primers detected?
+- How many sequences were removed because no primer could be detected?
+
+Hint: Use the log that is printed to the screen when executing `cutadapt`.
+
+
+Quality Control
+---------------
+
+Sequencers have massively improved in terms of throughput and quality in the recent years. However they still produce erroneous bases. These appear usually at the end of the sequences but it can also happen that entire cycles lead to to quality bases. Then all reads have a lower quality at a specific position.
+
+
+In order to remove sequences with bad quality and to remove low quality tails of otherwise good sequences we use the `filterAndTrim` routine from the `dada2` package.
+
+
+.. code-block:: R
+
+    # 1. Load and open R
+    ml R
+    R
+
+    # 2. Load the dada package
+    library(dada2)
+
+    # 3. Create an output directory
+    dir.create("./primary_analysis/filterAndTrim/",showWarnings = F)
+
+    # 4. Execute the command:
+    infqgz1 <- './primary_analysis/cutadapt/{sample}_R1.fastq.gz'
+    infqgz2 <- './primary_analysis/cutadapt/{sample}_R2.fastq.gz'
+    outfqgz1 <- './primary_analysis/filterAndTrim/{sample}_R1.fastq.gz'
+    outfqgz2 <- './primary_analysis/filterAndTrim/{sample}_R2.fastq.gz'
+
+    filterAndTrim(fwd=infqgz1, filt=outfqgz1, rev=infqgz2, filt.rev=outfqgz2, maxEE=2, truncQ=3, maxN=0, rm.phix=TRUE, compress=TRUE, verbose=TRUE, multithread=1, minLen=150, trimRight = c(40, 40))
+
+
+Analyse all samples that you have processed in the `cutadapt` step.
+
+Exercise:
+
+- How many sequences do make it through the quality control?
+- Do all samples lose the same amount of sequences?
+
+
+
+Learn the Error-model
+---------------------
+
+The `dada2` tool that we will use for this analysis uses a statistic approach that aims to predict if sequences are actually true biological sequences or are partly generated by errors that appear during sequencing.
+
+
+This step learns the error model of this sequencing run and is then used in the next step.
+
+.. code-block:: R
+
+    library(ggplot2)
+    dir.create("./primary_analysis/learnErrors/",showWarnings = F)
+
+    outfile <- './primary_analysis/learnErrors/{orientation}.errors.rds'
+    outfile.plot <- paste(outfile, '.pdf', sep = '')
+    samples <- list.files("./primary_analysis/filterAndTrim/",pattern="_{orientation}",full.names = T)
+    err <- learnErrors(samples, nbases=10000, multithread=FALSE, randomize=TRUE, verbose = 1)
+    saveRDS(err, file = outfile)
+
+    plot <- plotErrors(err,nominalQ=TRUE)
+    ggsave(outfile.plot, plot = plot)
+
+This step has to be run twice. Once for each orientation=R1|R2
+
+Exercise:
+
+- Inspect the plot that this function generates. What do you see in this plot? How should it look like?
+
+
+
+Sample Inference
+----------------
+
+This step is the actual core of the `dada2` tool. The `dada2` tool will inspect every sequence and decide, based on the error model, if a sequence is a real biological sequence with no errors or a sequence that contains errors. Sequences that contain errors then merged with real biological sequences.
+
+
+.. code-block:: R
+
+    dir.create("./primary_analysis/SampleInference/",showWarnings = F)
+
+    samples <-  list.files("./primary_analysis/filterAndTrim/",pattern="_{orientation}",full.names = T)
+    outfile.dd <- './primary_analysis/SampleInference/sampleInference_{orientation}.rds'
+    err.rds <- './primary_analysis/learnErrors/{orientation}.errors.rds'
+
+    err <- readRDS(err.rds)
+    dd <- dada(samples, err=err, pool='pseudo', multithread = FALSE)
+    saveRDS(dd, file = outfile.dd)
+
+This step has to be run twice. Once for each orientation=R1|R2
+
+Exercise:
+
+- You're lucky. No exercises at this step
+
+
+Read Merging
+------------
+
+So far we have been working on read level. This means that all steps were executed for R1 and R2 files individually. In this step we will merge reads that come from the same insert (see lecture).
+
+
+.. code-block:: R
+
+    dir.create("./primary_analysis/MergeReads/",showWarnings = F)
+
+    samples.r1 <- list.files("./primary_analysis/filterAndTrim/",pattern="_R1",full.names = T)
+    samples.r2 <- list.files("./primary_analysis/filterAndTrim/",pattern="_R2",full.names = T)
+    infile.r1 <- './primary_analysis/SampleInference/sampleInference_R1.rds'
+    infile.r2 <- './primary_analysis/SampleInference/sampleInference_R2.rds'
+
+    outfile <- './primary_analysis/MergeReads/merged_seqtab.rds'
+    dd.r1 <- readRDS(infile.r1)
+    dd.r2 <- readRDS(infile.r2)
+    mergers <- mergePairs(dd.r1, samples.r1, dd.r2, samples.r2, verbose = TRUE)
+    seqtab.m <- makeSequenceTable(mergers)
+    saveRDS(seqtab.m, file = outfile)
+
+
+Exercise:
+
+- How many sequences could be merged?
+- Are there differences between samples?
+
+Hint: Load the output file into R and sum up abundances for each sample.
+
+
+Ch|Bimera Removal
+------------------
+
+One step of the preparation of the sequencing library is the amplication of 16S rRNA fragments. This step is prone to generate so-called Chimeras. That are sequences that were formed from two or more sequences during the PCR step. They're not biological sequences but are also not detectable by sequence quality. These sequences are filtered out in this step.
+
+
+.. code-block:: R
+
+    dir.create("./primary_analysis/NoBimera/",showWarnings = F)
+
+    wbim.file <- './primary_analysis/MergeReads/merged_seqtab.rds'
+    nobim.file <- './primary_analysis/NoBimera/nobimera_seqtab.rds'
+    wbim.tab <- readRDS(wbim.file)
+    nobim.tab <- removeBimeraDenovo(wbim.tab, method="pooled", multithread=FALSE, verbose=TRUE)
+    saveRDS(nobim.tab, file = nobim.file)
+
+Exercise:
+
+- How many sequences were removed?
+- Are there differences between samples?
+- Compare how many reads/inserts made it through the pipeline.
+
+Hint: Load the output file into R and sum up abundances for each sample.
+
+Taxonomic annotation
+--------------------
+
+Once we have inferred ASVs we need to taxonomically annotate them. For that purpose we will use the SILVA database which we will download.
+
+.. code-block:: R
+
+    dir.create("./primary_analysis/Taxonomy/",showWarnings = F)
+
+    taxa.file<-'./primary_analysis/Taxonomy/taxa.rds'
+    download.file(url = "https://zenodo.org/record/3986799/files/silva_nr99_v138_wSpecies_train_set.fa.gz?download=1",destfile = "./primary_analysis/Taxonomy/silva_nr99_v138_wSpecies_train_set.fa.gz")
+    taxa <- assignTaxonomy(nobim.tab, "./primary_analysis/Taxonomy/silva_nr99_v138_wSpecies_train_set.fa.gz", multithread=F)
+    saveRDS(taxa, file = taxa.file)

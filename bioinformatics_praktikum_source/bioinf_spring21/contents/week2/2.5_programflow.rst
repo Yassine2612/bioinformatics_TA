@@ -1,0 +1,203 @@
+Program Flow
+============
+
+Without controls, a program will simply run from top to bottom, performing each command in turn. This would mean writing a lot of code if you wanted to perform the same set of actions on multiple different sets of data. Here we will learn how to control which parts of a program execute with **if**, and how to perform repetitive actions with the **for** loop.
+
+The *if* function
+-----------------
+
+An **if** function performs a logical test -- is something *TRUE*? -- and then runs commands if the test is passed.
+
+.. code-block:: r
+
+    # If function
+    x <- 4
+    if(x >= 0){
+        y = sqrt(x)
+    }
+
+Here, we only want to calculate the square root of x if x is positive.
+
+We can extend the use of *if* to include a block of code to execute if something is *FALSE*.
+
+.. code-block:: r
+
+    # If / Else
+    x <- -2
+    if(x >= 0){
+        y = sqrt(x)
+    }else{
+        cat("The result would be a complex number!")
+    }
+
+You can go further by making *if* dependent on multiple logic statements, or use recursive *if* statements.
+
+.. code-block:: r
+
+    # Calculate square root only if x is an integer
+    x <- 4.2
+    if((x >= 0) & (x%%1==0)){
+        y = sqrt(x)
+    }else{
+        cat("x was not an integer!")
+    }
+
+    # Alternative method
+    if(x >= 0){
+        if(x%%1==0){
+            y = sqrt(x)
+        }else{
+            cat("x was not an integer!")
+        }
+    }else{
+        cat("The result would be a complex number!")
+    }
+
+Exercises
+---------
+
+* In the script window, copy the first **if** statement above and execute it. You should get the correct result, 2.
+* Now make x a negative value and execute the script again, what happens?
+* Add an **else** statement to your script as in the second example above and test it.
+* Using either multiple logic statements or nested *if* statements, write a script that print the square root of *x* only if *y* is an integer.
+
+.. hidden-code-block:: r
+
+    # Script to determine if x is a square number
+    if(x >= 0){
+        y = sqrt(x)
+        if(y%%1==0){
+            cat("The square root of",x," is an integer: ",y)
+        }else{
+            cat("The square root of",x," is not an integer")
+        }
+    }else{
+        cat("The result would be a complex number!")
+    }
+
+    # Test it for yourself with different values of x!
+
+The *for* loop
+--------------
+
+Whilst it's very simple to run basic calculations on a vector or matrix of data, more sophisticated code is required for data.frames or when you want to perform complex functions on individual pieces of data.
+
+The **for** loop is a basic programming concept that runs a series of commands through each loop, with one variable changing each time, which may or may not be used in the loop's code. For instance we could loop through the numbers 1 to 10 if we wanted to perform an action 10 times, or if we wanted to use the numbers 1 to 10 each in the same calculation.
+
+.. code-block:: r
+
+    # A basic for loop
+    for(i in 1:10){
+        cat("Loop!")
+    }
+
+    # A loop involving the loop variable
+    for(i in 1:10){
+        cat(paste("Loop",i,"!"))
+    }
+
+These are simple examples and don't capture the results of the loop. If we want to store our results, we have to declare a variable ahead of time to put them into.
+
+.. code-block:: r
+
+    # A loop that gets results
+    data(EuStockMarkets)
+    plot(EuStockMarkets[,1])
+    movingAverage <- vector()
+    for(i in 1:length(EuStockMarkets[,1])){
+        movingAverage[i] <- mean(EuStockMarkets[i:(i+29),1])
+    }
+    plot(movingAverage)
+
+Note that an error was produced because when we reach the end of the time series, the data points we ask for don't exist -- we could adjust our loop to account for this by reducing the number of times we go through the loop so that we don't reach past the end of the data.
+
+Also, rather than refer to the pieces of data directly, we are using *i* to keep track of the *index* of the data we want to work with. This allows us to refer to data by its index, and therefore slice a moving section of data. In other circumstances, you can of course refer to items by their names.
+
+Exercises
+---------
+
+* Write a **for** loop that prints out a countdown from 10 to 1.
+* Using the **EuStockMarkets** data, make a plot of the FTSE data. Note that this data is not a *data.frame* but a *time.series* - you can find out more with **?ts**.
+* Using a *for* loop, calculate a moving average (for example, with a window size of 30) and make a corresponding vector of time points with the centres of each average.
+* Add the moving average to the plot using the **lines** function.
+
+.. hidden-code-block:: r
+
+    # Countdown
+    for(i in 10:1){
+        cat(i)
+    }
+    cat("Blast off!")
+
+    # Plot FTSE data
+    data(EuStockMarkets)
+    plot(EuStockMarkets[,"FTSE"])
+    # Note that the $ syntax does not work with time.series objects
+
+    # Calculate the moving average
+    movingAverage <- c()
+    for(i in 1:(length(EuStockMarkets[,"FTSE"])-29)){
+        # Note that we avoid the error from earlier
+        movingAverage[i] <- mean(EuStockMarkets[i:(i+29),"FTSE"])
+    }
+    times <- time(EuStockMarkets)[15:(length(EuStockMarkets[,"FTSE"])-15)]
+
+    # Add to the plot
+    plot(EuStockMarkets[,"FTSE"])
+    lines(times,movingAverage,col=2)
+
+
+The *apply* functions
+---------------------
+
+Consider that we might want to calculate an average of each of the data sets in the *EuStockMarkets* data over time. We can write a loop to do this:
+
+.. code-block:: r
+
+    # Calculate stock market average
+    stock_average <- c()
+    for(i in 1:nrow(EuStockMarkets)){
+        stock_average[i] <- mean(EuStockMarkets[i,])
+    }
+
+
+Although this seems brief, it can quickly become a lot of code when you want to work with multidimensional data, and although you won't notice on this small amount of data, it is slow.
+
+Instead, it would be easier to identify the function we are interested in using and simply **apply** it to our data.
+
+.. code-block:: r
+
+    # Using the apply function
+    stock_average <- apply(EuStockMarkets,1,mean)
+
+The function works by giving it a matrix or data.frame (or here, a time.series also works), telling it whether you want to run the function across rows (**1**) or columns (**2**) and then the function you want to use. As a fourth argument you can give a list of additional arguments for the function you are running.
+
+The **apply** function is for matrices and data.frames, but you can run **lapply** for a list, **vapply** for a vector, or **sapply** works for both.
+
+Exercise
+--------
+* Using the **apply** function, find the **mean** and standard deviation (**sd**) of the four data sets (i.e., each stock market is a data set) over time.
+* Make a plot of the *mean* against the *sd*.
+* Use linear regression to determine if there is a correlation between the *mean* and *sd* of this data and add a trend line to your plot.
+
+.. hidden-code-block:: r
+
+    # Use apply
+    stock_mean <- apply(EuStockMarkets,1,mean)
+    stock_sd <- apply(EuStockMarkets,1,sd)
+
+    # Plot the two
+    plot(stock_mean,stock_sd,pch=20,xlab="Stock Market Mean",ylab="Stock Market Standard Deviation",col="red")
+
+    # Use linear regression
+    fit <- lm(stock_sd ~ stock_mean)
+    summary(fit)
+    # A high R-squared and very small p-value indicates a strong correlation
+
+    # Add a line to the plot
+    abline(fit)
+
+.. container:: nextlink
+
+    `Next: Plot simple figures and customise them <2.6_figures.html>`_
+

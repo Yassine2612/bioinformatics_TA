@@ -1,0 +1,105 @@
+Hypothesis Testing
+==================
+
+A hypothesis test is performed to determine whether or not there is a statistical relationship between either two data sets or a data set and synthetic data from an idealised model. The significance of this relationship, or the **p-value**, is the likelihood of the data under the null hypothesis, i.e.: that the two data sets are from the same distribution, or that the single data set fits the model.
+
+**Parametric** tests make assumptions about the distribution of the data, whereas **non-parametric** tests are either distribution-free or do not rely on distribution parameters. If your data does not conform to the assumptions made for the test, the results of said test are not reliable. However, non-parametric tests are less sensitive.
+
+Some useful tests
+-----------------
+
+The ever popular **Student t-test** asks whether or not the mean of two data sets is equal, however it has very strict assumptions. The data sets must be normally distributed and have equal variance, and they must be either independent or paired.
+
+An adaptation that allows you to test data sets with different variances is **Welch's t-test**.
+
+For comparing multiple data sets, perhaps measurements of the same variable taken of different groups or in different conditions, there is the **one-way ANOVA**. This assumes that the data for each group is normally distributed with equal variance, and that the number of data points in each set is approximately equal (i.e.: the data is balanced) but is fairly robust to violations of these assumptions.
+
+A common way to handle data non-parametrically is by ranking, and the **Mann-Whitney U test** is used to determine whether two distributions are equal or not, assuming they are independent and can be ordinally ranked.
+
+Another common non-parametric test is the **Wilcoxon test**, in which paired data is ranked (or randomly paired and ranked), though you must be able to calculate differences between data points, so ranks alone are not sufficient.
+
+The **Kolmogorov-Smirnov test** is a non-parametric test to determine if a data set is drawn from a reference distribution or if two data sets are drawn from the same distribution. It does this by comparing the empiricial distribution functions, so is sensitive to both location and shape of the distributions.
+
+The non-parametric equivalent of ANOVA is the **Kruskal-Wallis test**.
+
+R Functions
+-----------
+
+The default **t.test** function in R actually performs an unpaired *Welch test*, but the arguments **paired** and **var.equal** can be used to modify this. Addtionally, **pairwise.t.test** will perform a *t.test* between all pairs of groups if a group variable is provided.
+
+.. code-block:: R
+
+    # T-test examples
+    data(iris)
+    t.test(iris[iris$Species=="setosa",]$Petal.Length,iris[iris$Species=="versicolor",]$Petal.Length)
+    pairwise.t.test(iris$Petal.Length,g=iris$Species)
+
+To perform *ANOVA* you should use the function **aov**. There is another function **anova** but this requires a fitted model such as created by **lm**.
+
+.. code-block:: R
+
+    # ANOVA
+    data(iris)
+    iris_anova <- aov(iris$Petal.Length ~ iris$Species)
+    summary(iris_anova)
+
+The **wilcox.test** function acts as the *Mann Whitney U test* by default, but the argument **paired** can be used to make it into a genuine *Wilcoxon test*. There is also a **pairwise.wilcox.test**.
+
+.. code-block:: R
+
+    # Non-parametric examples
+    data(iris)
+    wilcox.test(iris[iris$Species=="setosa",]$Petal.Length,iris[iris$Species=="versicolor",]$Petal.Length)
+    pairwise.wilcox.test(iris$Petal.Length,g=iris$Species)
+
+For *Klomogorov-Smirnov*, the function to use is **ks.test**, and either provide a model distribution (for instance with pnorm) or a second data set to compare to.
+
+.. code-block:: R
+
+    # KS test
+    data(LakeHuron)
+    ks.test(LakeHuron,pnorm(mean(LakeHuron),var(LakeHuron)))
+
+Finally, for *Kruskal-Wallis*, the relevant function is **kruskal.test**.
+
+.. code-block:: R
+
+    # KW test
+    data(iris)
+    kruskal.test(iris$Petal.Length ~ iris$Species)
+
+Multiple testing correction
+---------------------------
+
+You have probably come across the concept of **correcting for multiple tests**, perhaps via the **false discovery rate** (FDR) or **Bonferroni** methods. To understand why you might have to do this consider a lottery with a 1 in 1 million chance of winning. If I told a million different people a different set of numbers, one of them would win, and from their perspective the odds I would get this right are very small. I cheated by trying 1 million times, however. The likelihood of my having psychic powers needs to be adjusted for my multiple attempts, and similarly to avoid false positives in your own data you have to do the same when you test many different possibilities, for instance many different genes for correlation with some phenotype.
+
+There are multiple methods for p-value correction, and many are accessible in R through the **p.adjust** function. The most conservative is **Bonferroni**. Other popular methods are **Benjamini-Hochberg** (which is known as the FDR method) and **Benjamini-Yekutieli**, which assume the tests are independent or arbitrarily dependent on one another, respectively.
+
+Exercises
+---------
+
+* Load the **PlantGrowth** data set and determine for yourself whether the two treatments result in a significantly different growth to the control.
+* Load the **chickwts** data and again, figure out which treatments are significantly different from one another.
+* In both cases, create a figure that clearly displays the data and the results of your test(s).
+
+.. hidden-code-block:: R
+
+    # Plant Growth
+    data(PlantGrowth)
+    pairwise.t.test(PlantGrowth$weight, PlantGrowth$group)
+    
+    # So treatment 1 is significantly different to treatment 2, but neither is too dissimilar to the control
+    # Not enough points per set to really test normality, but all points together pass Shapiro-Wilk
+    # A good plot would be a side-by-side box-and-whisker plot
+
+    # Chick Weights
+    data(chickwts)
+    pairwise.t.test(chickwts$weight, chickwts$feed)
+
+    # This is a similar data set to the plant growth
+    # Also seems normal across all data points so t-tests are reasonable.
+    # A similar plot is also suitable, though there are many boxes so ordering will be important visually
+
+.. container:: nextlink
+
+    `Next: Linear Regression <2.2_LinearRegression.html>`_

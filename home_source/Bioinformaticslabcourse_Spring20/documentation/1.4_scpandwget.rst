@@ -1,0 +1,84 @@
+Working with Files
+==================
+
+In Unix systems there are only really two types of files: text or binary. The file name ending (.txt or .jpg) doesn't really matter like it does in Windows or MacOS, however it is used to indicate the file type by convention. Some file types you will encounter include:
+
+* .txt - A generic text file
+* .csv - A 'comma separated values' file, which is usually a table of data with each line a row and each column separated by a comma
+* .tsv - A 'tab separated values' file, which is the same by separated by tab characters
+* .fasta or .fa - A fasta formatted sequence file, in which each sequence has a header line starting with '>'
+* .fna - A fasta formatted nucleotide sequence file, usually gene sequences
+* .faa - A fasta formatted protein sequence file
+* .sh - A 'shell script', which contains terminal commands to run sequentially
+* .r - An R script, which contains R commands to run
+* .py - A python script, which contains python commands to run
+* .gz or .tar.gz - A file that has been compressed using a protocol called 'gzip' so that it takes up less space on the disk and transfers over the internet faster
+
+
+Transferring files
+------------------
+
+The easiest way to transfer files between a server and your computer is to use the file browser offered by *MobaXterm*. This works via a protocol called **SFTP**, and other programs such as *Filezilla* offer the same utility.
+
+.. image:: /Introduction_to_Unix/contents/images/sftp.png
+    :align: center
+
+Another file transfer protocol is **SCP** and programs such as *WinSCP* use it. There are differences between the two protocols but they don't often matter. *SCP* is an easy way to transfer a file immediately between the server you are working on and another (or two different servers!).
+
+.. code-block:: bash
+
+    # Secure CoPy
+    scp source user@server:destination # local to server
+    scp user@server:source destination # server to local
+
+    scp E.coli_K12_MG1655.fna fieldc@cousteau.ethz.ch:genomes/
+
+Sometimes you want to download a file directly from the internet to the server, rather than going via your local machine. **wget** allows you to download files in this way.
+
+.. code-block:: bash
+
+    # Download from the internet
+    wget source-URL
+    wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/482/265/GCF_000482265.1_EC_K12_MG1655_Broad_SNP/GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna.gz
+
+Compressing and Decompressing files
+-----------------------------------
+
+Files can be compressed to take up less space on disk, or for transfer over the internet. The file you downloaded is an example, and we can decompress it using the *gunzip* command:
+
+.. code-block:: bash
+
+    # Decompress a file
+    gunzip GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna.gz
+
+If you ever need to compress a file, for instance to send it to someone, you can use the gzip command:
+
+.. code-block:: bash
+
+    # Compress a file
+    gzip GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna
+    
+Exercises
+---------
+
+* Using the file browser, download the *E. coli* genome file to your computer
+* Then upload any file you like to your home directory
+* Using *wget*, download the file in the example above
+* Decompress the file
+
+.. hidden-code-block:: bash
+
+    # Make sure I am in my home directory
+    cd ~
+
+  
+    # Download the file 
+    wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/482/265/GCF_000482265.1_EC_K12_MG1655_Broad_SNP/GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna.gz
+   
+
+    # Decompress it 
+    gunzip GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna.gz
+   
+.. container:: nextlink
+
+    `Next: Searching for and within Files <1.5_searching.html>`_

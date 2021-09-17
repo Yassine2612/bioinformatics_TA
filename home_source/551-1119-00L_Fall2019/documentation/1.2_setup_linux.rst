@@ -1,0 +1,146 @@
+
+Session 1.2. Setup and Linux Introduction
+=========================================
+
+Infrastructure
+--------------
+
+The resources for this course are provided in the form of a virtual machine. All required software is preinstalled and we provide sufficient storage for all data. The data you create will be provided to you after the course via our website.
+
+----
+
+Connection to the Virtual Machine
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Each of you got a piece of paper with a username (d\biolcourse-XX) and a password. Use this login token for the Virtual Machine and also to login to our server (morgan). Don't share the login token with other users or you will be logged out as the other user logs in.
+
+You need to login to the Virtual Machine with one of the following routines. Windows 10, Windows 8 and users with the latest Windows 7 patch use the first option. MacOS users with recent versions >= (10.13) can use the second option. The last option is for Linux and old Windows/macOS users. The first two options will be faster and easier to use.
+
+Windows 10, 8, 7 (latest patch)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Tested on Windows 10 1803 (20180801)
+
+
+* Windows 10
+* Go to: `https://biolcourse.ethz.ch <https://biolcourse.ethz.ch>`_
+* Login with username/password (d\biolcourse-XX)
+* Click on the link. That will download a file used to connect to the server
+* Click on the file and connect to the VM with your username/password
+* If the remote resources have been added successfully you can click finish and find the resources in your start menu
+
+macOS >= 10.13
+~~~~~~~~~~~~~~
+
+Tested on macOS 10.13.5 (High Sierra) using Microsoft Remote Desktop Client Version 10.1.8 (983)  (20180723)
+
+
+* Download the `Remote Desktop <https://apps.apple.com/ch/app/microsoft-remote-desktop-10/id1295203466?l=en>`_ client from the App Store. (Might be already installed)
+* Follow the instructions from the Windows 10 section 
+
+Linux, old Windows/macOS
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+* go to `https://biolcourse.ethz.ch/RDWeb/webclient/index.html  <https://biolcourse.ethz.ch/RDWeb/webclient/index.html>`_
+* login with your nethz credentials (e.g. d\biolcourse-XX)
+* click the "biolcourse"
+* You will be connected to the Virtual Machine via your web browser
+
+----
+
+Inside the Virtual Machine
+--------------------------
+
+Tools required for the tutorial are preinstalled and highlighted. Some other tools have been added for your convenience.
+
+
+* Required software
+
+  * **mobaXterm**
+  * **R 3.5.0**
+  * **RStudio**
+
+* Additional software
+
+  * python version: 3.6.8
+  * anaconda: 2019.03  
+  * anaconda-navigator: 1.9.7
+  * conda version : 4.6.14
+  * jupyterlab: 0.35.4
+  * Jupyter Notebook: 5.7.8
+  * FileZilla
+  * Acrobat
+  * MS Office
+
+The VM runs Windows 10. After logging in you will be asked if you want to install updates. Ignore this message.
+Try opening RStudio and mobaXterm and see if they work.
+Open the network drive in the file explorer (S:). All data used and produced in this course will be stored here.
+
+**Use only the subfolder with your username for writing!. E.g home/biolcourse-60.**
+
+Server and Linux Intro
+----------------------
+
+Heavy calculations performed during this course will be executed on our server (\ ``morgan``\ ). We need to login to the server and then learn how to use the commandline.
+
+Connection to the server
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+To login to morgan you open ``mobaXterm``\ , start a new session and type:
+
+.. code-block:: bash
+
+   ssh morgan.ethz.ch
+
+You will be asked if you trust this connection (type yes) and will then be asked for the password (same as for the VM).
+
+Proceed to your work directory (replace biolcourse-XX with your our username):
+
+.. code-block:: bash
+
+   cd /nfs/practical/BlockCourses/551-1119-00L/home/biolcourse-XX/
+
+This is the same folder as you see it on your Windows Desktop and will serve as data folder for all your computations.
+
+**ALL FOLLOWING COMMANDS HAVE TO BE EXECUTED ON MORGAN AND NOT ON WINDOWS**
+
+----
+
+Quick Linux Introduction
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Being able to use the Linux terminal is an integral part of most bioinformatic workflows. In order to use the 16S pipeline on Linux we have to know some basic commands:
+
+.. code-block:: bash
+
+   # print current directory
+   pwd
+   # e.g. /nfs/practical/BlockCourses/551-1119-00L/home/biolcourse-XX/
+
+   # change to new directory
+   cd /nfs/practical/BlockCourses/551-1119-00L/masterdata/16S/
+   pwd
+   # now you are in /nfs/practical/BlockCourses/551-1119-00L/masterdata/16S/
+
+   # list all files and folders inside the current directory
+   ls
+
+   # analysis_relaxed_maxee  analysis_strict_maxee  raw  updated
+
+   # list all files and folders inside a specific directory
+   ls /nfs/practical/BlockCourses/551-1119-00L/home/
+
+   # go one directory up
+   cd ..
+   # now you are in /nfs/practical/BlockCourses/551-1119-00L/masterdata
+
+   # inspect a file
+   less /nfs/practical/BlockCourses/551-1119-00L/masterdata/16S/updated/FSE-10-50/FSE-10-50_R1.fastq.gz
+   # Use the cursor to navigate, use space to go one page down, use q to leave the program
+
+Familiarise yourself with the commands ``mkdir``\ , ``cp``\ , ``mv``\ , ``rm`` and ``ln``. Discuss with us before you execute any of these commands. Execute commands ONLY from your home folder (\ ``/nfs/practical/BlockCourses/551-1119-00L/home/biolcourse-XX/``\ )
+
+Mastering the terminal is an incredible useful skill for most bioinformatic workflows. We show you only the minimum number commands that are needed for this tutorial. There're great `tutorials <http://swcarpentry.github.io/shell-novice/>`_ if you would like to continue working with the terminal.
+
+Please use the `unix cheat sheet <UNIX_cheatsheet.pdf>`_ as a reference for Linux commands.

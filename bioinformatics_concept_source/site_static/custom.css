@@ -1,0 +1,26 @@
+div.related {
+    background-color: #005B81;
+    line-height: 32px;
+    color: #fff;
+    text-shadow: 0px 1px 0 #444;
+    font-size: 0.9em;
+}
+
+code.download {
+    font-family: Arial, sans-serif;
+    font-size: 100% !important;
+    font-weight: normal !important;
+    color: #005B81;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+code.download:hover {
+    color: #E32E00;
+}
+
+.nextlink {
+    text-align: right;
+    font-size: 1.5em;
+}

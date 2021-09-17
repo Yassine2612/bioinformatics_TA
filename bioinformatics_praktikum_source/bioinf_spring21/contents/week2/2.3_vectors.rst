@@ -1,0 +1,491 @@
+Vectors, Lists and Data Frames
+==============================
+
+Variables
+^^^^^^^^^
+
+A core concept in programming, a **variable**, is essentially a named piece of data. That is, when you refer to the variable by its name within the program, you are actually referring to the data stored under that name.
+
+To **assign** data to a variable in R, use the following syntax:
+
+.. code-block:: r
+
+    # Assignment of data to a variable
+    x <- 2
+    y <- 3.5
+
+    # Alternative syntax
+    x = 2
+    y = 3.5
+
+After you have assigned data to variables, you can then use the variables to perform calculations:
+
+.. code-block:: r
+
+    # R is a clever calculator
+    x + 2
+    x * y
+    z <- x + x + x
+
+If you need to see the value of a variable in the command line, you can just type its name:
+
+.. code-block:: r
+
+    # What is x?
+    x
+
+Note that variable names are case sensitive, and cannot start with a number.
+
+Exercises
+---------
+
+* Experiment for yourself with the R command line to do some simple calculations.
+* Assign some different numbers to the variables *x* and *y* and check if calculations with them work as you expect.
+* Try to do a calculation with a variable you haven't assigned any data to, *a* for instance.
+* Set *x* to 1, then check what happens when you run the calculation *x <- x + 1*, what value is *x* afterwards?
+
+
+Variable types
+^^^^^^^^^^^^^^
+
+In R, and many other languages, variables also have a **type**, which defines the sort of data they store. R is actually a bit more complicated because it has **modes** and **classes**:
+
+* A **mode** is most like a type in other languages, and determines the type of data stored, such as 'numeric' or 'character'.
+* A **class** is a container that describes how the data is arranged and tells functions how to work with the data.
+
+Some modes you might encounter:
+
+* **numeric** - numbers, including integers and floating points numbers
+* **character** - strings
+* **logical** - TRUE or FALSE
+* **list** - a special mode for containing multiple items of any, possibly different, mode(s), whose mode becomes 'list'
+
+Some classes you might encounter:
+
+* **vector** - a one-dimensional set of items of the same mode
+* **matrix** - a multidimensional set of items of the same mode
+* **data.frame** - a two-dimensional table with columns of different modes
+* **formula** - a declaration of how variables are related to each other, for fitting models
+
+The reason that it is sometimes important to know what mode and class your variable has, is that functions behave differently according to the data they are given. It's easy to accidentally transform your variable into an unexpected format and then get an unexpected result from the functions you use in your program.
+
+Mode detection
+--------------
+
+To a certain extent, R will auto-detect what mode a variable should have based on the data. There are convenient functions to check a variable's mode when you need to.
+
+.. code-block:: r
+
+    # Auto-detection of variable mode
+    x <- 1
+    y <- "word"
+
+    mode(x)
+    mode(y)
+
+    # What about if we make a mistake
+    x <- "1"
+
+    is.numeric(x)
+
+Vectors
+^^^^^^^
+
+If we want to create a variable that contains multiple pieces of data, we must make a **declaration** when we assign data to the variable.
+
+.. code-block:: r
+
+    # Creating a vector
+    x <- c(1, 2, 3)
+    x
+
+    # Lazy sequences
+    x <- 1:3
+    x
+
+    # Creating a vector with variables
+    x <- 1
+    y <- 2
+    z <- c(x, y, 3)
+    z
+
+Exercises
+---------
+
+* Create a vector containing the numbers 1 to 10
+* What happens if you add 1 to this variable?
+* What happens if you multiple the variable by 2?
+* What happens if you add the variable to itself?
+* Now create two vectors of the same length containing different numbers, say 1 to 3 and 4 to 6.
+* What happens when you add or multiply these together?
+* What happens if you add or multiply two vectors of different lengths?
+
+.. hidden-code-block:: r
+
+    # Create a vector
+    x <- 1:10
+
+    # Do some arithmetic
+    x + 1 
+    # It adds 1 to each value in the vector
+    x * 2
+    # It multiplies every value by 2
+    x + x
+    # This time it adds the first value to the first value, the second to the second, etc.
+
+    # Create two different vectors
+    a <- 1:3
+    b <- 4:6
+
+    # Do some arithmetic
+    a + b
+    # It adds them element-wise, i.e.: first to first, etc.
+    a * b
+    # It multiplies element-wise
+
+    # Different length vectors
+    a + x
+    # We get a warning, but it produces a result: repeating the shorter vector to have enough elements to add to the larger vector
+    # But let's try another
+    x <- 1:6
+    a + x
+    # No warning this time because the length of a (3) is a multiple of the length of x (6)
+    # R assumes you meant to do this, and repeats a twice to add to x
+
+Lists and data frames
+^^^^^^^^^^^^^^^^^^^^^
+
+Lists
+-----
+
+Vectors and matrices have the limitation that they must contain data all in the same mode, i.e.: all numbers or all characters. **Lists** circumvent this limitation, acting as containers for absolutely any type of data.
+
+.. code-block:: r
+
+    # Declare an empty list
+    l <- list()
+
+    # Declare a list with items
+    l <- list("a", 1, "b", 2:4)
+    l
+
+    # Declare a list with named items
+    l <- list(names=c("Anna", "Ben", "Chris"), scores=c(23, 31, 34))
+    l
+
+Data frames
+-----------
+
+In that last example, it would be ideal if we could link the names with the scores, and maybe further data. We can store tabular data in R in a **data frame**, which is really a special kind of list.
+
+.. code-block:: r
+
+    # Declare a data.frame
+    df <- data.frame(names=c("Anna", "Ben", "Chris"), scores=c(23, 31, 34))
+    df
+
+Looking at the *df*, you can see that the data is neatly arranged in named columns. You can also change the format of a variable between list and data frame quite easily.
+
+.. code-block:: r
+
+    # Change between list and data.frame
+    l <- list(names=c("Anna", "Ben", "Chris"), scores=c(23, 31, 34))
+    df_from_l <- as.data.frame(l)
+    
+    df <- data.frame(names=c("Anna", "Ben", "Chris"), scores=c(23, 31, 34))
+    l_from_df <- as.list(df)
+
+
+Exercises
+---------
+
+* Create a simple list containing some numbers - not vectors of numbers
+* What happens if you try to do arithmetic with the list?
+* Now create a data frame with three columns, a name and two numeric values per name, such as coordinates.
+* What happens if you try to do arithmetic with the data frame?
+
+.. hidden-code-block:: r
+
+    # A list of only numbers
+    numbers <- list(1, 3, 6, 10)
+    numbers + 1
+    # We get an error - lists cannot be used like vectors!
+
+    # A data frame of mixed types
+    coords <- data.frame(Place=c("London", "Paris", "Zurich"), Latitude=c(51.5074, 48.8566, 47.3769), Longitude=c(-0.1278, 2.3522, 8.5417))
+    coords + 1
+    # Depending on your R version you get different results:
+    #  - <4.0 We get a result, and a warning - the data frame cannot do arithmetic with factors, but can with the numbers.
+    #  - >= 4.0 it gives an error
+
+Import and Export of Data
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Importing data
+--------------
+
+R has a host of functions for importing data of different types. I generally recommend that if you have a data table from *Excel*, for instance, you save the file as **tab-delimited text** for import into R.
+
+Firstly, we need a data table to import: "ecoli_genes.txt". There are several ways to copy this file to your home folder. One way is to download it following the download link: :download:`Ecoli Genes <../downloads/ecoli_genes.txt>`, and then use the *Upload* button in the file browser window. A more advanced method would be to use the *Terminal* window and use the command: **wget**.
+
+.. code-block:: bash
+
+   # Switch to the *Terminal* window and download the file with **wget**
+   wget https://sunagawalab.ethz.ch/share/Bioinformatics_Spring21/_downloads/88002fa642d6a7bfacb4d2639fa25294/ecoli_genes.txt
+
+We can then switch back to the **R console** and use the **read.table** function to import the data.
+
+.. code-block:: r
+
+    # Import a data table
+    genes <- read.table("ecoli_genes.txt")
+
+Note I am assuming the file is in your working directory, which you can find with the command **getwd()** or set in the **Session** menu. Alternatively you can give a relative or absolute path, just as on the Unix command line.
+
+We can now see what the table looks like using the **Environment** tab in the top-right - but something went wrong and the column headings are in the first row. We can fix this pretty easily.
+
+.. code-block:: r
+
+    # Import the table again
+    genes <- read.table("ecoli_genes.txt",header=TRUE)
+
+There are a few other useful arguments to help import tables of various formats:
+
+* sep - determines the field separator (between columns), i.e.: sep=","
+* quote - determines the quote mark (items in quote marks are considered to be the same field), i.e.: quote="\""
+* row.names - determines which column contains the row names, if there are any
+* comment.char - determines which character, if at the start of a line, indicates the line should be ignored, i.e.: comment.char="#"
+* stringsAsFactors - determines whether the table should turn text into factors, which you may want to turn off, i.e.: stringsAsFactors=F (NOTE: this was a major issue using older versions of R. From R 4.0 the default is stringsAsFactors=F)
+
+
+Exporting data
+--------------
+
+Conversely, R has functions for exporting data into different formats. You will most likely want to create a file to open in R later, or a *.csv* file to open in *Excel*.
+
+.. code-block:: r
+
+    # Write a data.frame to an R-friendly format
+    write.table(df,"Rfriendly_df.txt")
+
+    # Write a data.frame to a .csv file
+    write.csv(df,"df.csv")
+
+Many of the arguments for the *read* functions also apply to the *write* functions, so you can decide whether you want to see row or column headings, how the text fields are separated, etc.
+
+Exercises
+---------
+
+* If you have not done yet, download and import the "ecoli_genes.txt" file for yourself. Make sure to get the column headings correct.
+* Write the table out to a new file name using **write.table**
+* Now import the table again without any additional arguments to **read.table** - do you still need to correct the column headings?
+
+Data Access - by Name, Index and Logic
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Names
+-----
+
+In R, it is not just variables that have names. We have seen that data frames can have column names, and it's also possible to give them row names. In fact, any element in a vector or list can be given a name, and these names are accesible through a simple function.
+
+.. code-block:: r
+
+    # Naming a vector
+    x <- 1:5
+    names(x) # NULL
+
+    names(x) <- c("A","B","C","D","E")
+    names(x)
+    x
+
+This is slightly different in a matrix or data.frame, where you can name the rows and columns.
+
+.. code-block:: r
+
+    # Naming rows and columns
+    df <- data.frame(1:3,4:6,7:9)
+    df
+    rownames(df)
+    colnames(df)
+
+    rownames(df) <- c("A","B","C")
+    colnames(df) <- c("X","Y","Z")
+    df
+
+Indexing
+--------
+
+Sometimes you want to refer to only part of a vector, matrix or data.frame -- perhaps a single column or even single item. This is called **slicing** and requires an understanding of how R **indexes** the elements in objects.
+
+For a vector, you can either reference an item by its **position** or **name**.
+
+.. code-block:: r
+
+    # Slicing a vector
+    x <- c("Chris","Field","Bioinformatician")
+    names(x) <- c("Name","Surname","Job")
+
+    x[1]
+    x["Name"]
+
+For a matrix or data.frame, the same methods work for indexing the row or column of the object, or both. The convention is that first you give the row, then the column, separated by a comma, and if one is left blank it implies you want 'all' rows or columns. For this example we are going to load up a pre-made set of data that comes with R.
+
+.. code-block:: r
+
+    # Slicing a data.frame
+    data(swiss)
+    
+    swiss[1,]
+    swiss[,1]
+    swiss[1,1]
+    swiss["Gruyere",]
+    swiss[,"Fertility"]
+
+Finally there are two additional ways to access items in a list, or columns (only) of a data frame.
+
+.. code-block:: r
+
+    # Accessing a list item
+    l <- list(names=c("Anna", "Ben", "Chris"), scores=c(23, 31, 34))
+    l$names
+    l[[1]]
+    l[["names"]]
+
+    # The difference between single and double brackets for a list
+    l[1] # Produces a list of one item
+    l[1:2] # Produces a list of two items
+    l[[1]] # Produces a vector
+    l[[1:2]] # Produces a single item, the second entry in the first item in the list
+
+    # Accessing a column of a data frame
+    swiss$Fertility
+    swiss[[1]]
+    swiss[["Fertility"]]
+
+You can also slice multiple items by giving a vector of numbers or names. Remember that R automatically translates the code *n:m* into a range of integers from *n* to *m*.
+
+.. code-block:: r
+
+    # Slicing a range
+    x[1:2]
+    swiss[1:3,]
+    swiss[4:5,1:3]
+    swiss[c("Aigle","Vevey"),c("Fertility","Catholic")]
+
+Exercises
+---------
+
+* Load the pre-made data set *swiss*.
+* Look at the row and column names, then try to rename the columns.
+* What happens if you give fewer names than there are columns?
+* Create a vector containing the numbers 1 to 10 and then create a vector containing the first ten square numbers.
+* Slice the vector to check the value of the 7th square number.
+* Returning to the *swiss* data set, extract the data for just *Sion*.
+* Now extract only the *Catholic* data for the first ten places, and for just *Sion*.
+* Finally use vectors to find the data on *Examination* and *Education* for *Neuchatel* and *Sierre*.
+
+.. hidden-code-block:: r
+
+    # Load the data
+    data(swiss)
+
+    # Look at the row and col names, try to rename
+    rownames(swiss)
+    colnames(swiss)
+    colnames(swiss) <- c("A","B","C","D","E","F")
+
+    # What happens if I don't give enough names
+    colnames(swiss) <- c("A","B")
+    # The other columns are named NA, which is a problem
+
+    # Create the vectors
+    n <- 1:10
+    sq <- n*n
+
+    # Slice the 7th square
+    sq[7]
+
+    # Reload (because we renamed things) and extract data for Sion
+    data(swiss)
+    swiss["Sion",]
+    
+    # Extract just Catholic data
+    swiss$Catholic
+    # or
+    swiss[,"Catholic"]
+    # or even, but this is less reliable if things move around
+    swiss[,5]
+
+    # Extract more specific data
+    swiss[1:10,"Catholic"]
+    swiss["Sion","Catholic"]
+
+    # Extract very specific data
+    swiss[c("Neuchatel","Sierre"),c("Examination","Education")]
+    # Note that in the original table, Neuchatel appears after Sierre, but here they are reported in the order I gave
+
+Logical slicing
+---------------
+
+We have seen that we can give R a vector of numbers or names and it will slice out the corresponding data from a vector or data frame. We can actually go further than that and use a vector of **logical** values, **TRUE** or **FALSE** to determine which elements we want to slice out. Furthermore, we can write the vector as a variable ahead of time if we like.
+
+.. code-block:: r
+
+    # Slice using premade vectors
+    places <- c("Neuchatel","Sierre")
+    cols_of_interest <- c("Examination","Education")
+    
+    data(swiss)
+    swiss[places,cols_of_interest]
+
+    # Slice using a logical
+    cols_of_interest <- c(FALSE, FALSE, TRUE, TRUE, FALSE, FALSE)
+    swiss[places,cols_of_interest]
+
+Now the really clever bit is that we can generate a vector of logical values using the data itself, with any of the comparison functions such as **>**, **<**, **==**.
+
+.. code-block:: r
+
+    # Logical slicing
+    isCatholic <- swiss$Catholic > 50
+    swiss[isCatholic,]
+
+    # Logical slicing without saving the vector ahead of time
+    swiss[swiss$Fertility < 50,]
+
+Exercises
+---------
+
+* Reload the *swiss* data set, in case you have edited it
+* Create a vector with the column names in alphabetical order and use it to 'slice' the table (we are really just rearranging!)
+* Slice the table to see just the places with an *Agriculture* score less than 50
+* Now, making sure to save the results into new variables, split the table into two based on whether a place has more or less than 50 in *Catholic*
+* In each table, look at the *Catholic* column data only, what do you notice about it?
+
+.. hidden-code-block:: r
+
+    # Reload the data
+    data(swiss)
+
+    # Create a sorted vector of column names
+    names_sorted <- c("Agriculture", "Catholic", "Education", "Examination", "Fertility", "Infant.Mortality")
+    swiss_sorted <- swiss[,names_sorted]
+
+    # Find places with low agriculture
+    low_ag <- swiss$Agriculture < 50
+    swiss[low_ag,]
+    # or directly
+    swiss[swiss$Agriculture < 50,]
+
+    # Split the table by catholic score
+    low_cath <- swiss[swiss$Catholic < 50,]
+    hi_cath <- swiss[swiss$Catholic >= 50,]
+
+    # Look at the values
+    low_cath$Catholic
+    hi_cath$Catholic
+
+.. container:: nextlink
+
+    `Next: Simple functions and their design <2.4_functions.html>`_
+

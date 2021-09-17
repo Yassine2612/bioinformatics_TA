@@ -1,0 +1,40 @@
+Week 2: Introduction to R
+=========================
+
+* Course dates (Fridays): 05.03.; 26.03.; 30.04.; 28.05.
+
+  * Time: 9:00 - 12:00 & 13:30 - 16:30
+  
+* Location:
+
+  * Online (Zoom): `https://ethz.zoom.us/j/92241194215 <https://ethz.zoom.us/j/92241194215>`_ 
+
+* Instructors:
+
+  * Alessio Milanese
+  * Lucas Paoli
+  * Shinichi Sunagawa
+
+Learning objectives
+-------------------
+* You are familiar with variables and types
+* You can use vectors, lists and data frames
+* You are familiar with functions and can define their own
+* You can control program flow
+* You can read and write data to and from files
+* You can plot basic figures and customise them
+* You can load and install libraries to access additional functionality
+
+Content
+-------
+
+.. toctree::
+    :titlesonly:
+    :glob:
+
+    week2/*
+
+   
+.. container:: nextlink
+
+    `Next: Welcome to Week 2 <week2/2.1_intro2.html>`_

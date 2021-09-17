@@ -1,0 +1,186 @@
+
+Session 1.5. 16S amplicon pipeline
+==================================
+
+Starting specifications
+-----------------------
+
+We are going to:
+
+
+* define the **working directory** (WD).
+* create a ``out`` folder where results are going to be saved.
+* define the path to the taxonomic database.
+* load the required modules and check the software versions.
+
+The subfolder ``data`` has to contain fastq files with **_R1_** and **_R2_** within the files name.
+
+.. code-block:: bash
+
+   WD=/nfs/practical/BlockCourses/551-1119-00L/home/biolcourse-70
+   DATA=/nfs/practical/BlockCourses/551-1119-00L/masterdata/16S/test_raw/
+
+   # Create the output folder
+   out=${WD}/results
+   db=/nfs/practical/BlockCourses/551-1119-00L/masterdata/silva/SILVA_132_SSURef_Nr99_tax_silva_trunc.fasta
+   mkdir -p $out
+
+
+   # Load required modules
+   ml USEARCH
+   ml cutadapt
+   export OMP_NUM_THREADS=4
+
+Merging paired reads
+--------------------
+
+We are going to execute ``fastq_mergepairs`` command within USEARCH. The ``fastq_mergepairs`` command merges (assembles) paired-end reads to create consensus sequences. You can find more information `here <http://www.drive5.com/usearch/manual/cmd_fastq_mergepairs.html>`_.
+
+
+* ``relabel``\ : gets the sample identifier from the FASTQ file name by truncating at the first underscore (_) or period (.).
+* ``fastq_maxdiffs``\ : Maximum number of mismatches in the alignment.
+* ``fastq_maxdiffpct``\ : Maximum number of mismatches as an integer percentage.
+* ``fastq_minovlen``\ : Minimum overlap for merging
+
+.. code-block:: bash
+
+   #Merging paired reads...
+
+   usearch -fastq_mergepairs ${DATA}/*_R1.fastq -fastqout $out/merged.fq -fastq_minovlen 16 -relabel @ -fastq_pctid 90 -fastq_maxdiffs 300 -threads ${threads} 2> $out/merge.log
+
+   #Done merging reads
+
+Filtering merged reads
+----------------------
+
+Quality filtering is performed by executing the ``fastq_filter`` command within USEARCH. More info `here <http://www.drive5.com/usearch/manual/cmd_fastq_filter.html>`_
+
+
+* ``fastq_maxee``\ : Discard reads with > E total expected errors for all bases in the read
+* ``fastq_minlen``\ : Minimum length of sequence after filtering
+
+.. code-block:: bash
+
+   #Filtering merged reads
+
+   usearch -fastq_filter $out/merged.fq -fastq_maxee 0.1 -fastq_minlen 100 -fastaout $out/filtered.fa -threads ${threads} 2>> $out/filter.log
+
+   #Done filtering merged reads
+
+Selecting reads with perfect primer matches
+-------------------------------------------
+
+Only the reads with a perfect match with the primers are kept. This is done by executing CUTADAPT.
+
+.. code-block:: bash
+
+   #Selecting reads with perfect primer matches
+
+   cutadapt --discard-untrimmed -g GTGYCAGCMGCCGCGGTAA -O 19 -e 0 --minimum-length 100 -o $out/filtered.tmp.F.fa $out/filtered.fa &> $out/primermatch.log
+
+   cutadapt --discard-untrimmed -a ATTAGAWACCCBNGTAGTCC -O 20 -e 0 --minimum-length 100 -o $out/filtered_primermatch.fa $out/filtered.tmp.F.fa &>> $out/primermatch.log
+
+   rm $out/filtered.tmp.F.fa
+
+   #Reverse complement reads
+   usearch -fastx_revcomp $out/filtered.fa -label_suffix _RC -fastaout $out/filtered.tmp.RC.fa &>> $out/primermatch.log
+
+   cutadapt --discard-untrimmed -g GTGYCAGCMGCCGCGGTAA -O 19 -e 0 --minimum-length 100 -o $out/filtered.tmp.RC.F.fa $out/filtered.tmp.RC.fa &>> $out/primermatch.log
+
+   cutadapt --discard-untrimmed -a ATTAGAWACCCBNGTAGTCC -O 20 -e 0 --minimum-length 100 -o $out/filtered_primermatch_RC.fa $out/filtered.tmp.RC.F.fa &>> $out/primermatch.log
+
+   rm $out/filtered.tmp.RC.F.fa
+   rm $out/filtered.tmp.RC.fa
+
+   cat $out/filtered_primermatch_RC.fa >> $out/filtered_primermatch.fa
+
+   rm $out/filtered_primermatch_RC.fa
+
+   #Done selecting reads
+
+Dereplication
+-------------
+
+Dereplication is the process of finding the set of unique sequences in an input file. Input is a FASTA or FASTQ file. Sequences are compared letter-by-letter and must be identical over the full length of both sequences. This is done with the USEARCH ``fastx_uniques`` command. More info `here <http://www.drive5.com/usearch/manual/cmd_fastx_uniques.html>`_.
+
+
+* ``sizeout``\ : specifies that size annotations should be added to the output sequence labels.
+* ``relabel``\ : specifies a string that is used to re-label the dereplicated sequences.
+
+.. code-block:: bash
+
+   #Dereplicating reads
+
+   usearch -fastx_uniques $out/filtered_primermatch.fa -minuniquesize 1 -sizeout -relabel Uniq -fastaout $out/uniques.uparse.fa 2> $out/uniques.uparse.log
+
+   #Done dereplicating reads
+
+Clustering
+----------
+
+Different clustering methods exist and new ones are continuosly developed. Here we will use the **UPARSE-OTU algorithm** implemented within USEARCH.
+
+The ``cluster_otus command`` performs 97% OTU clustering using the **UPARSE-OTU algorithm**. More info `here <http://www.drive5.com/usearch/manual/cmd_cluster_otus.html>`_.
+
+
+* ``minsize``\ : specify a minimum abundance; for example you can use -minsize 2 to discard singletons.
+* ``relabel``\ : specifies a string that is used to re-label OTUs.
+
+.. code-block:: bash
+
+   #Clustering reads
+
+   usearch -cluster_otus $out/uniques.uparse.fa -minsize 2 -otus $out/otus.uparse.fa -relabel Otu 2> $out/cluster_otus.uparse.log 
+   # also removes chimera
+   #Done clustering reads.
+
+Taxonomical annotation of OTUs
+------------------------------
+
+We now search each OTU representative sequence against a reference 16S database, the `SILVA <https://www.arb-silva.de/>`_ database in this case.
+
+.. code-block:: bash
+
+   #Annotating OTUs
+
+   usearch -usearch_global $out/otus.uparse.fa -db ${db} -id 0.95 -maxaccepts 500 -maxrejects 500 -strand both -top_hits_only --output_no_hits -blast6out $out/taxsearch_uparse.tax -threads ${threads} 2> $out/taxsearch_uparse.log
+
+   # LCA
+   function lca(){ cat $@ | sed -e '$!{N;s/^\(.*\).*\n\1.*$/\1\n\1/;D;}' | awk -F ";" '{$NF=""; OFS=";"; print $0}'; return; }
+
+   for i in $(cut -f 1 -d $'\t' $out/taxsearch_uparse.tax | sort | uniq); do id=$(grep -m 1 -P $i'\t' $out/taxsearch_uparse.tax | cut -f 3 -d$'\t'); res=$(grep -P $i'\t' $out/taxsearch_uparse.tax | cut -f 2 -d$'\t' | cut -f 1 -d ' ' --complement | lca); echo -e $i'\t'$res'\t'$id; done > $out/taxonomy_uparse_lca.txt
+
+   # Done annotating OTUs
+
+Quantification of OTU abundances
+--------------------------------
+
+Once we generate and annotate the OTUs we need to quantify the abundance of each OTU by mapping the reads to the OTU reference sequences. The mapping is done by using the ``usearch_global`` command.
+
+.. code-block:: bash
+
+   #Quantifying vs OTUs using all filtered reads
+
+   usearch -otutab $out/filtered.fa -otus $out/otus.uparse.fa -strand both -id 0.97 -otutabout $out/otutab_uparse.txt -sample_delim . -threads ${threads} &> $out/make_otutab_uparse.log
+
+   #one quantifying vs OTUs using al reads
+
+Using the qsub command
+----------------------
+
+.. code-block:: bash
+
+   # SGE parameters
+   #$ -cwd                   # run in current directory
+   #$ -S /bin/bash           # Interpreting shell for the job
+   #$ -N job1                # Name of the job
+   #$ -V                     # .bashrc is read in all nodes
+   #$ -pe smp 10             # number of job slots to be reserved
+   #$ -l h_vmem=16G          # memory required
+   #$ -e error.log           # error file
+   #$ -o out.log             # output file
+   #$ -m abe                 # send an email at the beggining, end and if aborted
+   #$ -M yourmail@ethz.ch
+
+   ml R             # you can load modules in this same script
+   date             # execute any command

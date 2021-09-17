@@ -1,0 +1,170 @@
+Data Wrangling
+==============
+
+**If you are working on Euler then the required files are located at /cluster/home/fieldc/session3**
+
+----
+
+A lot of time and effort in bioinformatics is spent arranging data in the correct way or correct format. Consequently, it is very useful to know how to do filter and rearrange data files. In these exercises we will learn some of the commands we use to do this.
+
+**sort** will sort each line of a file, alphabetically by default, but other options are available.
+
+.. code-block:: bash
+
+    # Sort some example files
+    sort /science/teaching/sort_words.txt
+    sort -n /science/teaching/sort_nums.txt
+
+**cut** allows you to extract a single column of data from a file, for instance a .csv or .tsv file.
+
+.. code-block:: bash
+
+    # Look at some experimental metadata and extract the column we are interested in
+    less /science/teaching/metadata.tsv
+    cut -f 4 /science/teaching/metadata.tsv
+
+**paste** allows you to put data from different files into columns of the same file.
+
+.. code-block:: bash
+
+    # Put together two files into one
+    paste /science/teaching/sort_words.txt /science/teaching/sort_nums.txt
+
+**tr** will replace a given character set with another character set, but to use it properly you need to know how to combine commands (below).
+
+.. code-block:: bash
+
+    # For instance, this command requires you to type the input in
+    tr 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 'abcdefghijklmnopqrstuvwxyz'
+    # Then try typing AN UPPER CASE SENTENCE
+
+    # It can also be used to delete characters
+    tr -d 'a'
+    # Then try typing a sentence with the letter 'a' in it.
+
+    # Remember to exit a program that is running use Ctrl-C
+
+**uniq** compresses adjacent repeated lines into one line, and is best used with sort when combining commands (see below)
+
+.. code-block:: bash
+
+    # Look at a file and remove adjacent repeated lines
+    less /science/teaching/uniq_nums.txt
+    uniq /science/teaching/uniq_nums.txt
+
+    # Count how many times each value is repeated
+    uniq -c /science/teaching/uniq_nums.txt
+
+Exercises
+---------
+
+* Use the **sort** examples above and see what happens when you try to sort the *sort_nums.txt* file without the -n flag
+* Look at the file */science/teaching/sort_tab.txt*
+* Extract the second column of this file using **cut**
+* Looking at the manual for **sort**, can you figure out how to sort *sort_tab.txt* according to the second column, or 'key'?
+* Use **paste** to combine the two files *sort_words.txt* and *sort_nums.txt* into a single two-column output
+* Use **tr** so that when you enter the word *banana* it comes out as *rococo*
+* Use the **uniq** examples above, then check with **uniq -c** that each line in *sort_tab.txt* is unique
+
+.. hidden-code-block:: bash
+
+    # Look at sort_tab.txt
+    less /science/teaching/sort_tab.txt
+
+    # Extract the second column
+    cut -f 2 /science/teaching/sort_tab.txt
+
+    # Sort the table by second column
+    sort -n -k 2 /science/teaching/sort_tab.txt
+    # Note that if you forget the -n then the numbers are sorted alphabetically, not numerically
+
+    # Use paste to combine files
+    paste /science/teaching/sort_words.txt /science/teaching/sort_nums.txt
+
+    # Use tr to convert one word into another
+    tr 'ban' 'roc'
+    # Then input banana and back comes rococo!
+
+    # Check file with uniq
+    uniq -c /science/teaching/sort_tab.txt
+    # Each value in the first column is 1 - no repeats!
+
+Combining Commands
+------------------
+
+The power of this set of commands comes when you use them together, and when you can save your manipulated data into a file. To understand how to do this we have to think about the command line input and output data.”
+
+Input and Output
+----------------
+
+So far we have been using files as arguments for the commands we have practiced. The computer looks at the memory where the file is stored and then passes it through RAM to the processor, where it can perform whatever you have asked it to. We have seen output on the terminal, but it's equally possible to store that output in memory, as a file. Similarly, if we want to use the output of one command as the input to a second command, we can bypass the step where we make an intermediate file.
+
+The command line understands this in terms of **data streams**, which are communication channels you can direct to/from files or further commands:
+
+.. code-block:: none
+
+     stdin: the standard data input stream
+    stdout: the standard data output stream (defaults to appearing on the terminal)
+    stderr: the standard error stream (also defaults to the terminal)
+
+Although you can usually give files as input to a program through an argument, you can also use *stdin*. Further, you can redirect the output of *stdout* and *stderr* to files of your choice.
+
+.. code-block:: bash
+
+    # Using the standard streams
+    head < E.coli.fna                  # send the file to head via stdin using '<'
+    head E.coli.fna > E.coli_head.fna  # send stdout to a new file using '>'
+    head E.coli.fna 2> E.coli_err.fna  # send stderr to a new file using '2>'
+    head E.coli.fna &> Ecoli_both.fna  # send both stdout and stderr to the same file using '&>'
+
+Chaining programs together
+--------------------------
+
+Sometimes you want to take the output of one program and use it in another -- for instance, run *grep* on only the first 10 lines of a file from *head*. This is a procedure known as **piping** and requires you to put the **|** character in between commands (although this may not work with more complex programs).
+
+.. code-block:: bash
+
+    # Piping
+    head E.coli.fna | grep "ACGT"                  # send the output of head to grep and search
+    grep -A 1 ">" E.coli_CDS.fna | grep -c "^ATG"  # use grep to find the first line of sequence of each gene and send it to a second grep to see if the gene starts with ATG
+
+Exercises
+---------
+
+* Locate (and copy to your home folder if necessary) the *E. coli* coding sequences file */science/teaching/ecoli/GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna*
+* Use **grep** to find all the fasta headers in this file, remember that a fasta header line starts with '>'
+* Send the output of this search to a new file called *cds_headers.txt*
+* Use **grep** again to find only the headers with gene name information, which looks like, for instance [gene=lacZ], and save the results in another new file called named_cds.txt
+* Use **wc** to count how many lines are in the file you made
+* Now repeat this exercise **without** making the intermediate files, instead using pipes
+
+As an additional challenge:
+
+* Using the commands we have used, find the start codon of each gene in *E. coli* and then count up the frequency of the different start codons.
+
+.. hidden-code-block:: bash
+
+    # Copy the file to your home directory
+    cp /science/teaching/ecoli/GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna ~/
+
+    # Find the fasta headers
+    grep '^>' GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna
+
+    # Send the output to a new file
+    grep '^>' GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna > cds_headers.txt
+
+    # Find named genes
+    grep '[gene=' cds_headers.txt > named_cds.txt
+
+    # Count how many there are
+    wc -l named_cds.txt
+
+    # Repeat without intermediate files
+    grep '^>' GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna | grep '[gene=' | wc -l
+
+    # Count the frequency of start codons in the *E.coli* genome
+    grep -A 1 '^>' GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna | grep -Eo '^[ACGT]{3}' | sort | uniq -c | sort -nr -k 1
+    # The first part finds all headers plus the first line of sequence
+    # The second part is a regular expression to find the first three nucleotides in the sequence lines
+    # Then we have to sort them so that we can count them with uniq
+    # The final part is a bonus that sorts by descending frequency

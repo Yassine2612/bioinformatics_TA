@@ -1,0 +1,117 @@
+Writing Functions
+=================
+
+Introduction
+------------
+
+You can define your **own function** in R. This is particularly useful if you want to perform the same task with many different data sets. Your definition requires you to declare your function’s arguments and whether they have a set default value or not. Arguments cannot by default be forced to a certain mode or class, but you can check for them in the function an coerce them if necessary. Variables within your function are limited to only that function, and after it has run will simply disappear. If you want to store a result from a function, you must **return** it to the main program. 
+
+Defining a basic function
+-------------------------
+
+Functions always have the same structure: 
+
+.. code-block:: R 
+
+  function_name <- function(argument, argument = default value) {
+        statement or operations
+        return(result)
+  }
+
+
+You need to define a **name** for your function that you will later use to call it with. The *curly brackets* define where the function starts and ends. The *return* command returns the result back to the main program. Let's have a look at a first example. We would like to write a function that converts temperature Fahrenheit to Celsius. 
+
+.. code-block:: R
+
+  # defining function 
+  f_to_c <- function(temp_F) {          #define a function and argument temp_F, no default arguments
+    temp_C <- (temp_F - 32) * 5 / 9     #perform calculations using the argument 
+    return(temp_C)                      #return the result to the main program
+  }
+  
+  # using the function                   
+  f_to_c(70) # = 21.1                   #using the name of the function to call it
+
+
+The next function decrypts numbers into letters. We define two arguments: the necessary argument x and the optional argument offset which is set to 0 by default. 
+
+.. code-block:: R
+
+  # defining a function
+  caesarDecrypt <- function(x,offset=0){
+    new_x = x - offset - 1                  # Remove the offset and minus 1 for the next line
+    new_x = new_x%%26 + 1                   # Find the modulo, add 1 to move from 0:25 to 1:26
+    string = letters[new_x]                 # Translate numbers to letters
+    return(string)                          # Return the answer
+  }
+  # Using it
+  x <- c(3,8,18,9,19)
+  caesarDecrypt(x)
+  x <- c(7,14,20,17,20,12,4)
+  caesarDecrypt(x, offset = 12)
+
+  
+You can create functions as complex as you like. For example, we can include an if statement or for loops. This next function only multiplies by 3 the input if it is an even number.
+
+
+.. code-block:: R
+
+  #multiply all even number by a certain factor 
+  OnlyIfEven <- function(number, factor = 3){             #define function. mulitplication factor is set to 3 by default
+    temp_res <- number %% 2                               #calculate modulo 
+    if (temp_res == 0){                                   #if modulo is zero then the number is even
+    res <- number*factor                                  #mulitplication
+    print(res)                                            #print result. Careful, this does not return the result!
+    }
+    else{print("error: expected even number")              #print error message if modulo not zero     
+  }
+
+  #using the function
+  OnlyIfEven(4) #=12
+  OnlyIfEven(5) #error: expected even number
+
+  
+Organising Functions 
+--------------------
+  
+If you need to write many different functions for your data set it is recommended to keep them saved in separate files. This keeps your scripts nice and tidy. You can always call another file in your current script by using the **source** command. 
+
+.. code-block:: R
+
+  source("path_to_your_file/filename.R")
+  
+  
+Exercises
+---------
+
+* Write a function to add up all numbers in a vector except for the highest
+* Write a function that deciphers letters into numbers. (hint: use the **which** function)
+
+.. hidden-code-block:: R
+
+  # add up all numbers in a vector except for the highest
+  SumWithoutMax <- function(input_vector){            #defining function
+    sum_v <- sum(input_vector)                        #sum over whole vector
+    max_v <- max(input_vector)                        #determine max value
+    sum_final <- sum_v - max_v                        #subtract
+    return(sum_final)
+  }
+  #using it
+  v <- c(1:10)
+  SumWithoutMax(v) #=45
+  
+  #deciphers letters into numbers
+  caesarCrypt <- function(x, offset = 0){
+    res <- c()                                      #define empty result vector for numbers             
+    for (character in x){                           #for loop for each character in argument
+      num <- which(letters == character)            #find index for that character
+      num_off <- num - offset                       #correct for offset
+      res <- c(res, num_off)                        #add to current result to result vector
+    }
+    return(res)       
+  }  
+
+.. container:: nextlink
+
+    `Next: Loading and installing packages  <5.1_Packages.html>`_
+
