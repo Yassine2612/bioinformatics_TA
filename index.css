@@ -1,0 +1,42 @@
+.grid-header {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+    background-color: #BED4EB;
+    text-align: center;
+    font-weight: normal;
+    font-size: 200%;
+    color: #212224;
+    font-family: Arial, sans-serif;
+    text-shadow: 0px 1px 0 white;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2px;
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+    background-color: #EEEEEE;
+}
+
+.grid-cell {
+    display: block;
+    margin: auto;
+    width: 80%;
+    padding: 100px 10px;
+    background-color: #FFFFFF;
+    text-align: center;
+}
+
+a {
+    font-family: Arial, sans-serif;
+    color: #005B81;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #E32E00;
+    text-decoration: underline;
+}
