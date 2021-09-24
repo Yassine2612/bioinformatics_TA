@@ -16,7 +16,7 @@ R Studio
 
 **R Studio** is an integrated development environment (IDE) for **R**. This means that it provides an interface to help you write, run and debug code.
 
-.. image:: /contents/images/rstudio.png
+.. image:: ../images/rstudio.png
     :align: center
 
 0. If you do not see the **code editor** as the top left panel (shown as #3 above), please open a new one by clicking: File-->New File-->R Script.

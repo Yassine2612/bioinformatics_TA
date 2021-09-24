@@ -38,7 +38,7 @@ The structural proteins of SARS-CoV-2 include the envelope protein (E), **spike 
 
 Source: https://www.ncbi.nlm.nih.gov/sars-cov-2/
 
-.. image:: /contents/images/sarscov2_structural.png
+.. image:: ../images/sarscov2_structural.png
     :align: center
     
 Source: https://www.prof.uzh.ch/en/news/Coronavirus-(2019-nCoV).html

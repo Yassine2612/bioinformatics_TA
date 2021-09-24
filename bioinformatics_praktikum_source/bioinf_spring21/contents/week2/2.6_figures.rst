@@ -43,7 +43,7 @@ Then, we plot the petal width on the x axis against the sepal length on the y ax
 
 Next, you can change the point shape, colour and size to your taste. Here's an overview of the different shapes:
 
-.. image:: /contents/images/r-plot-pch-symbols-points-in-r.png
+.. image:: ../images/r-plot-pch-symbols-points-in-r.png
     :width: 50%
     :align: center
  
@@ -60,7 +60,7 @@ Next, you can change the point shape, colour and size to your taste. Here's an o
     
 Now, we want to add our fit to the data. For this we will use the command *abline*. *Abline(a,b)* draws a straight line with intercept *a* and slope *b*. You can also change the colour, width and line type of abline. Here's an overview of the different line types available:
 
-.. image:: /contents/images/linetypes-in-r-line-types.png
+.. image:: ../images/linetypes-in-r-line-types.png
     :width: 50%
     :align: center
   
@@ -96,7 +96,7 @@ Now, last but not least, we would like to add a legend showing the adjusted r sq
 
 That's it, your scatter plot in R!
 
-.. image:: /contents/images/linear_regression.png
+.. image:: ../images/linear_regression.png
     :width: 50%
     :align: center
 
@@ -161,7 +161,7 @@ A bar chart consists of different bars displaying the values they are representi
         col = "blue")                                                   # col is used to define the colour of the bars
 
 
-.. image:: /contents/images/Barplot.png
+.. image:: ../images/Barplot.png
     :width: 50%
     :align: center       
 
@@ -186,7 +186,7 @@ Box plots are often used to display the data distribution of samples. It shows a
         main = "Boxplot")                                       # main is the plot label
      
      
-.. image:: /contents/images/Boxplot.png
+.. image:: ../images/Boxplot.png
     :width: 50%
     :align: center 
     

@@ -3,7 +3,7 @@ The File System
 
 You are probably used to the file system in Windows or Mac OS X, where directories can contain files and more directories. The Linux filesystem is structured in the same way, as a tree, that begins at the 'root' directory **/**. Directories are separated by slash characters **/**.
 
-.. image:: /contents/images/filesystem_hierarchy.png
+.. image:: ../images/filesystem_hierarchy.png
 
 When you work on the command line, you are located in a directory somewhere in this tree. There are two ways to refer to a location: its **absolute path**, starting at the root directory, or its **relative path**.
 

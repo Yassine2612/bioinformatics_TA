@@ -16,12 +16,12 @@ Windows
 -------
 In *MobaXterm*, you should start with the **Session** button:
 
-.. image:: /contents/images/session.png
-    :align: center
+.. image:: ../images/session.png
+     :align: center
 
 Then select SSH and enter the server address (remote host) and your ETH ID as the username:
 
-.. image:: /contents/images/ssh1.png
+.. image:: ../images/ssh1.png
     :align: center
 
 **NOTE:** The first time you log on to the server Euler, you will need to read and accept the terms of use and enter an access code, which will be sent by email.
@@ -30,12 +30,12 @@ When prompted, enter your password and you will connect to the server.
 
 **NOTE:** Sometime *MobaXterm* changes the layout of your keyboard. For example, the character `@` might be replaced with another character. Note that if this happens when you are typing your password, you will not be able to see the wrong character.
 
-.. image:: /contents/images/connected1.png
+.. image:: ../images/connected1.png
     :align: center
 
 The main window is your interactive session with the server through the CLI. On the left is a convenient file browser that you can use to transfer files between the server and your local computer (more on that later).
 
-.. image:: /contents/images/mobaxterm1.png
+.. image:: ../images/mobaxterm1.png
     :align: center
     
 Mac OS X
@@ -48,7 +48,7 @@ When prompted, enter your password and you will connect to the server.
 
 **NOTE:** The first time you log on to the server Euler, you will need to read and accept the terms of use and enter an access code, which will be sent by email.
 
-.. image:: /contents/images/terminal.png
+.. image:: ../images/terminal.png
     :align: center
 
 The structure of a command
@@ -56,7 +56,7 @@ The structure of a command
 
 Most commands have *options* and *arguments*. Arguments are often essential for a command to operate properly; they are the pieces of information required by a command, such as a file name. Options are, of course, optional, and offer ways to modify the way the command works.
 
-.. figure:: /contents/images/command_structure.png
+.. figure:: ../images/command_structure.png
     :align: center
 
 For instance, **echo** will take any text you give it as an argument and then send it back to you as output:

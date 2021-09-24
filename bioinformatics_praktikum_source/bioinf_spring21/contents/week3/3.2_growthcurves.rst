@@ -3,7 +3,7 @@ Bacterial Growth Curves
 
 The aim of this exercise is to analyse the growth curves of bacteria growing in liquid culture in a 96-well plate. 
 
-.. image:: /contents/images/96well.png
+.. image:: ../images/96well.png
     :align: center
 
 Source: https://www.moleculardevices.com/sites/default/files/en/assets/app-note/br/measure-long-term-cell-growth-using-a-discontinuous-kinetic-reading.pdf
