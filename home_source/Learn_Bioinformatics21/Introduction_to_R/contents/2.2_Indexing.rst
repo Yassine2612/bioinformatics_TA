@@ -1,0 +1,210 @@
+Names and Indexing
+==================
+
+Names
+-----
+
+In R, it is not just variables that have names. We have seen that data frames can have column names, and it's also possible to give them row names. In fact, any element in a vector or list can be given a name, and these names are accesible through a simple function.
+
+.. code-block:: R
+
+    # Naming a vector
+    x <- 1:5
+    names(x) # NULL
+
+    names(x) <- c("A","B","C","D","E")
+    names(x)
+    x
+
+This is slightly different in a matrix or data.frame, where you can name the rows and columns.
+
+.. code-block:: R
+
+    # Naming rows and columns
+    df <- data.frame(1:3,4:6,7:9)
+    df
+    rownames(df)
+    colnames(df)
+
+    rownames(df) <- c("A","B","C")
+    colnames(df) <- c("X","Y","Z")
+    df
+
+Indexing
+--------
+
+Sometimes you want to refer to only part of a vector, matrix or data.frame -- perhaps a single column or even single item. This is called **slicing** and requires an understanding of how R **indexes** the elements in objects.
+
+For a vector, you can either reference an item by its **position** or **name**.
+
+.. code-block:: R
+
+    # Slicing a vector
+    x <- c("Chris","Field","Bioinformatician")
+    names(x) <- c("Name","Surname","Job")
+
+    x[1]
+    x["Name"]
+
+For a matrix or data.frame, the same methods work for indexing the row or column of the object, or both. The convention is that first you give the row, then the column, separated by a comma, and if one is left blank it implies you want 'all' rows or columns. For this example we are going to load up a pre-made set of data that comes with R.
+
+.. code-block:: R
+
+    # Slicing a data.frame
+    data(swiss)
+    
+    swiss[1,]
+    swiss[,1]
+    swiss[1,1]
+    swiss["Gruyere",]
+    swiss[,"Fertility"]
+
+Finally there are two additional ways to access items in a list, or columns (only) of a data frame.
+
+.. code-block:: R
+
+    # Accessing a list item
+    l <- list(names=c("Anna", "Ben", "Chris"), scores=c(23, 31, 34))
+    l$names
+    l[[1]]
+    l[["names"]]
+
+    # The difference between single and double brackets for a list
+    l[1] # Produces a list of one item
+    l[1:2] # Produces a list of two items
+    l[[1]] # Produces a vector
+    l[[1:2]] # Produces a single item, the second entry in the first item in the list
+
+    # Accessing a column of a data frame
+    swiss$Fertility
+    swiss[[1]]
+    swiss[["Fertility"]]
+
+You can also slice multiple items by giving a vector of numbers or names. Remember that R automatically translates the code *n:m* into a range of integers from *n* to *m*.
+
+.. code-block:: R
+
+    # Slicing a range
+    x[1:2]
+    swiss[1:3,]
+    swiss[4:5,1:3]
+    swiss[c("Aigle","Vevey"),c("Fertility","Catholic")]
+
+Exercises
+---------
+
+* Load the pre-made data set **swiss**
+* Look at the row and column names, then try to rename the columns
+* What happens if you give fewer names than there are columns?
+* Create a vector containing the numbers 1 to 10 and then create a vector containing the first ten square numbers
+* Slice the vector to check the value of the 7th square number
+* Returning to the *swiss* data set, extract the data for just **Sion**
+* Now extract only the **Catholic** data for the first ten places, and for just *Sion*
+* Finally use vectors to find the data on **Examination** and **Education** for **Neuchatel** and **Sierre**
+
+.. hidden-code-block:: R
+
+    # Load the data
+    data(swiss)
+
+    # Look at the row and col names, try to rename
+    rownames(swiss)
+    colnames(swiss)
+    colnames(swiss) <- c("A","B","C","D","E","F")
+
+    # What happens if I don't give enough names
+    colnames(swiss) <- c("A","B")
+    # The other columns are named NA, which is a problem
+
+    # Create the vectors
+    n <- 1:10
+    sq <- n*n
+
+    # Slice the 7th square
+    sq[7]
+
+    # Reload (because we renamed things) and extract data for Sion
+    data(swiss)
+    swiss["Sion",]
+    
+    # Extract just Catholic data
+    swiss$Catholic
+    # or
+    swiss[,"Catholic"]
+    # or even, but this is less reliable if things move around
+    swiss[,5]
+
+    # Extract more specific data
+    swiss[1:10,"Catholic"]
+    swiss["Sion","Catholic"]
+
+    # Extract very specific data
+    swiss[c("Neuchatel","Sierre"),c("Examination","Education")]
+    # Note that in the original table, Neuchatel appears after Sierre, but here they are reported in the order I gave
+
+Logical Slicing
+---------------
+
+We have seen that we can give R a vector of numbers or names and it will slice out the corresponding data from a vector or data frame. We can actually go further than that and use a vector of **logical** values, **TRUE** or **FALSE** to determine which elements we want to slice out. Furthermore, we can write the vector as a variable ahead of time if we like.
+
+.. code-block:: R
+
+    # Slice using premade vectors
+    places <- c("Neuchatel","Sierre")
+    cols_of_interest <- c("Examination","Education")
+    
+    data(swiss)
+    swiss[places,cols_of_interest]
+
+    # Slice using a logical
+    cols_of_interest <- c(FALSE, FALSE, TRUE, TRUE, FALSE, FALSE)
+    swiss[places,cols_of_interest]
+
+Now the really clever bit is that we can generate a vector of logical values using the data itself, with any of the comparison functions such as **>**, **<**, **==**.
+
+.. code-block:: R
+
+    # Logical slicing
+    isCatholic <- swiss$Catholic > 50
+    swiss[isCatholic,]
+
+    # Logical slicing without saving the vector ahead of time
+    swiss[swiss$Fertility < 50,]
+
+Exercises
+---------
+
+* Reload the *swiss* data set, in case you have edited it
+* Create a vector with the column names in alphabetical order and use it to 'slice' the table (we are really just rearranging!)
+* Slice the table to see just the places with an *Agriculture* score less than 50
+* Now, making sure to save the results into new variables, split the table into two based on whether a place has more or less than 50 in *Catholic*
+* In each table, look at the *Catholic* column data only, what do you notice about it?
+
+.. hidden-code-block:: R
+
+    # Reload the data
+    data(swiss)
+
+    # Create a sorted vector of column names
+    names_sorted <- c("Agriculture", "Catholic", "Education", "Examination", "Fertility", "Infant.Mortality")
+    swiss_sorted <- swiss[,names_sorted]
+
+    # Find places with low agriculture
+    low_ag <- swiss$Agriculture < 50
+    swiss[low_ag,]
+    # or directly
+    swiss[swiss$Agriculture < 50,]
+
+    # Split the table by catholic score
+    low_cath <- swiss[swiss$Catholic < 50,]
+    hi_cath <- swiss[swiss$Catholic >= 50,]
+
+    # Look at the values
+    low_cath$Catholic
+    hi_cath$Catholic
+    # With only a couple of exceptions, the values are either very low or very high - the distribution of scores is bimodal!
+
+.. container:: nextlink
+
+    `Next: Functions <3.1_Functions.html>`_
+

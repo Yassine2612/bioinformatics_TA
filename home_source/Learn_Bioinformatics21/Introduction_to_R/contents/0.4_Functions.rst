@@ -1,0 +1,80 @@
+Functions
+=========
+
+R does more than just simple calculations or allowing you to look at data. Its power comes from **functions**. A function requires arguments, some necessary, such as the data you want to run the function on, some optional, such as a choice of method or additional parameters.
+
+If we want to understand a function, we read its help file. If we don't even know a function exists, we can search for keywords.
+
+.. code-block:: R
+
+    # Get help
+    ?mean
+    ??substring
+
+Now let's use the *mean* function.
+
+.. code-block:: R
+
+    # Find the mean of a vector
+    x <- 1:10
+    mean(x)
+
+Arguments can be declared both by their position and their name. A function expects to see arguments in a certain order, so the first argument given without a name is expected to be the first argument in the function definition that hasn't been declared by name already -- i.e.: it is assumed to be declared by position.
+
+.. code-block:: R
+
+    # Both methods
+    data(swiss)
+    
+    cor(swiss$Fertility,swiss$Agriculture)
+    cor(method='spearman',swiss$Fertility,x=swiss$Agriculture)
+
+Functions and class
+-------------------
+
+Many R functions are written so that they behave differently depending on what class of variable they are given. For instance, the *summary* function gives additional information about a variable, and what it shows depends on the variable's class.
+
+.. code-block:: R
+
+    # Class discrimination
+    x <- 1:10
+    summary(x)
+
+    data(swiss)
+    summary(swiss)
+    
+    data(Titanic)
+    summary(Titanic)
+
+So when a function does something unexpected, consider what mode or class the variables you gave it have.
+
+Defining a function
+-------------------
+
+You can define your own functions in R. This is useful when you want to perform the same tasks with many different pieces of data. Your definition requires you to declare your function's arguments, and whether they have a default value or not. Arguments cannot by default be forced to a certain mode or class, but you can check for those within your function.
+
+A variable in most programming languages has a **scope**, which defines which parts of the program know about it. Variables within your function are limited only to that function, and after it has run will simply disappear. If you want to store a result from a function, you must **return** it to the main program.
+
+.. code-block:: R
+
+    # Defining a function
+    caesarDecrypt <- function(x,offset=0){
+        new_x = x - offset - 1              # Remove the offset and minus 1 for the next line
+        new_x = new_x%%26 + 1               # Find the modulo, add 1 to move from 0:25 to 1:26
+        string = letters[new_x]             # Translate numbers to letters
+        return(string)                      # Return the answer
+    }
+
+    # Using it
+    x <- c(3,8,18,9,19)
+    caesarDecrypt(x)
+
+    x <- c(7,14,20,17,20,12,4)
+    caesarDecrypt(x,offset=12)
+
+Exercises
+---------
+
+* Find out the correct offset to decode the second set of numbers.
+* Write a function to add up all the numbers in a vector except for the highest.
+* You will find the *sum* and *max* functions useful for this.

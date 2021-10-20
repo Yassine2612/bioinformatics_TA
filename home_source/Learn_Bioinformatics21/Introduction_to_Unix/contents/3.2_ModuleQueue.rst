@@ -1,0 +1,171 @@
+The Module and Queueing Systems
+===============================
+
+The Module System
+-----------------
+
+There are hundreds of programs and software suites that people might want to use on the server. Whilst everyone is welcome to install each one they use for themselves, it's more sensible to make the most common packages available for everyone. Further, different pieces of software have different dependencies, which may in some cases disagree with each other -- for instance, whether to use Python 2.x or 3.x.
+
+One way to resolve this is to use a **module system**, from which different software packages can be loaded and unloaded individually. This is not the same as installing the programs - they were there all along - it's simply making them available in your **path** -- a generic term for all of the programs and libraries your system is immediately aware of, without having to be shown where they are.
+
+As an example, let's load up the module for **prodigal**, a program for finding ORFs in prokaryotic genome sequences.
+
+.. code-block:: bash
+
+    # Loading a module
+    module load prodigal
+    ml prodigal
+
+Now if we issue the command *prodigal* the program loads straight from the command line. Note that *module* can be shortened to *ml*, and if you just put a module name it is assumed you want to load it.
+
+It's also possible to unload modules:
+
+.. code-block:: bash
+
+    # Unloading a module
+    module unload prodigal
+
+    # Unload all modules
+    ml purge
+
+Now if you try to run *prodigal*, it won't recognise the command.
+
+There are also commands to show which modules you have loaded, and which modules are available to load. If you want to run a particular piece of software and it isn't available, let me know and I can see about making it available for you.
+
+.. code-block:: bash
+
+    # What have I loaded?
+    module list
+    ml
+
+    # What can I load?
+    ml avail
+
+Finally, if you want to search for a particular piece of software by name (or to find out the correct name, given that module names are case-sensitive), there is the command **spider**:
+
+.. code-block:: bash
+
+    # Search for a module
+    ml spider blast
+
+The SGE Queueing System
+-----------------------
+
+Many people have access to *morgan* and even more to *euler*. If everyone ran whatever program they liked, whenever they liked, the system would soon grind to a halt as it tried to manage the limited resources between all the users. To prevent this, and to ensure fair usage of the server, we run a queueing system that automatically manages which jobs are run when. Any program that will use either more than 1 core or thread, more than a few GB of RAM, or will run for longer than a few minutes, should be placed in the queue.
+
+To correctly submit a job to the queue on *morgan*, it's usually easiest to write a short shell script based on a template.
+
+.. code-block:: bash
+
+    # Look at the template
+    less /science/teaching/submit.sh
+
+.. code-block:: none
+
+    #$ -cwd                   # run in current directory
+    #$ -S /bin/bash           # interpreting shell for the job
+    #$ -N job1                # name of the job
+    #$ -V                     # .bashrc is read in all nodes
+    #$ -pe smp 10             # number of threads to be reserved
+    #$ -l h_vmem=16G          # memory required
+    #$ -e error.log           # error file
+    #$ -o out.log             # output file
+    #$ -m bea                 # send an email at the beginning, end and if aborted
+    #$ -M yourmail@ethz.ch
+
+    # Insert your commands here
+    echo 'Hello World!'
+
+The first few lines, beginning with *#$*, define the parameters for your job. The commands you want to run then appear below, and you can include as many as you like, one per line, which will run in succession.
+
+When the script is ready, you will need the following commands:
+
+.. code-block:: bash
+
+    # Submit the job to the queue
+    qsub submit.sh
+
+    # Check the status of your jobs
+    qstat
+
+    # Check the status of all jobs
+    qstat -u "*"
+
+    # Remove a job from the queue
+    qdel jobid
+
+The LSF Queuing System
+----------------------
+
+If you are working on *euler* then it uses a different queueing system and a submission script looks more like this:
+
+.. code-block:: none
+
+    #!/bin/bash
+    #BSUB -n 10                                 # number of threads
+    #BSUB -W 1440                               # estimated time to run
+    #BSUB -R "rusage[mem=2000, scratch=2000]"   # memory and disk space needed
+    #BSUB -e error.log                          # error file
+    #BSUB -o out.log                            # output file
+    #BSUB -u yourmail@ethz.ch                   # specify your email address
+    #BSUB -B                                    # send email when job starts
+    #BSUB -N                                    # send email when job ends
+
+    # Insert your commands here
+    echo 'Hello World!'
+
+Then the equivalent commands:
+
+.. code-block:: bash
+
+    # Submit the job to the queue
+    bsub < submit_lsf.sh
+
+    # Check the status of your jobs
+    bjobs
+
+    # Remove a job from the queue
+    bkill jobid
+
+Exercises
+---------
+
+* Copy the submit.sh script to your home directory.
+* Load the 'prodigal' module and find out the program options
+* Change the 'echo' line to load the module for *prodigal* and then run the program on the *E. coli* genome.
+* You shouldn't need more than 8 slots or 1GB of memory per slot.
+* When the job is finished, look at the output files for yourself!
+
+.. hidden-code-block:: bash
+    
+    # Copy the script
+    cp /science/teaching/submit.sh ~/
+
+    # Load the prodigal module for yourself
+    module load prodigal
+
+    # Read the options for the program
+    prodigal -h
+
+    # Edit the submit script by replacing the 'echo' line to this:
+    module load prodigal
+    prodigal -i ecoli.fna -o ecoli_genes.fna
+
+    # Submit the script to the queue
+    qsub submit.sh
+
+    # Look at the output
+    less ecoli_genes.fna
+
+    # If you are working on Euler, instead copy the submit_lsf.sh
+    cp /science/teaching/submit.sh ~/
+
+    # Manually load the module system - sorry!
+    unset MODULEPATH_ROOT
+    unset MODULESHOME
+    unset MODULEPATH
+    source /nfs/nas22/fs2201/biol_micro_unix_modules/Lmod-7.8/lmod/lmod/init/profile
+
+    # Everything else will be the same until it's time to submit the script
+    bsub < submit_lsf.sh
+

@@ -9,6 +9,7 @@ Sunagawa Lab Teaching
 
     551-1119-00L_Fall2021/index
     Practical_training_in_bioinformatics_2021/index
+    Learn_Bioinformatics21/index
 
 - `GL Biology II FS 2021 - Bioinformatics 2021: 551-0104-00L <https://sunagawalab.ethz.ch/share/Bioinformatics_Spring21/>`_
 
@@ -17,7 +18,7 @@ Sunagawa Lab Teaching
     :maxdepth: 1
     :titlesonly:
 
-    Learn_Bioinformatics/index
+    Learn_Bioinformatics20/index
     551-1119-00L_Fall2020/index
     MOTUS_ONEHEALTH_AUG2019/index
     551-1119-00L_Fall2019/index
