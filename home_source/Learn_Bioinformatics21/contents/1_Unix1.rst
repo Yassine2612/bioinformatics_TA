@@ -540,9 +540,9 @@ For instance:
 .. admonition:: Homework
     :class: homework
 
-    * Upload a picture into your home folder and name it X
+    * Upload a picture of yourself or a pet into your home folder and name it homework.jpg or .png or whatever format it is
     * Find the out-of-place file in /nfs/course/genomes and copy it into your home folder
-    * Interesting questions:
+    * For next time, find out:
         * What happens when you copy a file with the same name as an existing file?
         * What happens when you delete the directory you are currently in?
         * What happens when you create a directory with the same name as an existing one?

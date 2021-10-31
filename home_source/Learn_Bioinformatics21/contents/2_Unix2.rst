@@ -351,15 +351,105 @@ Sometimes you want to take the output of one program and use it in another -- fo
         # Consider the following alternative:
         grep -A 1 ">" E.coli_CDS.fna | grep -v '>' | grep -o "^\w\w\w" | sort | uniq -c | sort -k1nr
 
-Working on a computing cluster
-------------------------------
+Working on Morgan
+-----------------
 
-The LSF Queuing System
+The module system
+^^^^^^^^^^^^^^^^^
+
+There are hundreds of programs and software suites that people might want to use on the server. Whilst everyone is welcome to install each one they use for themselves, it's more sensible to make the most common packages available for everyone. Further, different pieces of software have different dependencies, which may in some cases disagree with each other -- for instance, whether to use Python 2.x or 3.x.
+
+One way to resolve this is to use a **module system**, from which different software packages can be loaded and unloaded individually. This is not the same as installing the programs - they were there all along - it's simply making them available in your **path** -- a generic term for all of the programs and libraries your system is immediately aware of, without having to be shown where they are.
+
+As an example, let's load up the module for **prodigal**, a program for finding ORFs in prokaryotic genome sequences.
+
+.. code-block:: bash
+
+    # Loading a module
+    module load prodigal
+    ml prodigal
+
+Now if we issue the command *prodigal* the program loads straight from the command line. Note that *module* can be shortened to *ml*, and if you just put a module name it is assumed you want to load it.
+
+It's also possible to unload modules:
+
+.. code-block:: bash
+
+    # Unloading a module
+    module unload prodigal
+
+    # Unload all modules
+    ml purge
+
+Now if you try to run *prodigal*, it won't recognise the command.
+
+There are also commands to show which modules you have loaded, and which modules are available to load. If you want to run a particular piece of software and it isn't available, let me know and I can see about making it available for you.
+
+.. code-block:: bash
+
+    # What have I loaded?
+    module list
+    ml
+
+    # What can I load?
+    ml avail
+
+Finally, if you want to search for a particular piece of software by name (or to find out the correct name, given that module names are case-sensitive), there is the command **spider**:
+
+.. code-block:: bash
+
+    # Search for a module
+    ml spider blast
+
+The SGE queuing system
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Many people have access to *euler*. If everyone ran whatever program they liked, whenever they liked, the system would soon grind to a halt as it tried to manage the limited resources between all the users. To prevent this, and to ensure fair usage of the server, there is a queueing system that automatically manages which jobs are run when. Any program that will use either more than 1 core or thread, more than a few MB of RAM, or will run for longer than a few minutes, should be placed in the queue.
+Many people have access to *morgan* and even more to *euler*. If everyone ran whatever program they liked, whenever they liked, the system would soon grind to a halt as it tried to manage the limited resources between all the users. To prevent this, and to ensure fair usage of the server, we run a queueing system that automatically manages which jobs are run when. Any program that will use either more than 1 core or thread, more than a few GB of RAM, or will run for longer than a few minutes, should be placed in the queue.
 
-To correctly submit a job to the queue on *euler*, it's usually easiest to write a short shell script based on a template.
+To correctly submit a job to the queue on *morgan*, it's usually easiest to write a short shell script based on a template.
+
+.. code-block:: bash
+
+    # Look at the template
+    less /science/teaching/submit.sh
+
+.. code-block:: none
+
+    #$ -cwd                   # run in current directory
+    #$ -S /bin/bash           # interpreting shell for the job
+    #$ -N job1                # name of the job
+    #$ -V                     # .bashrc is read in all nodes
+    #$ -pe smp 10             # number of threads to be reserved
+    #$ -l h_vmem=16G          # memory required
+    #$ -e error.log           # error file
+    #$ -o out.log             # output file
+    #$ -m bea                 # send an email at the beginning, end and if aborted
+    #$ -M yourmail@ethz.ch
+
+    # Insert your commands here
+    echo 'Hello World!'
+
+The first few lines, beginning with *#$*, define the parameters for your job. The commands you want to run then appear below, and you can include as many as you like, one per line, which will run in succession.
+
+When the script is ready, you will need the following commands:
+
+.. code-block:: bash
+
+    # Submit the job to the queue
+    qsub submit.sh
+
+    # Check the status of your jobs
+    qstat
+
+    # Check the status of all jobs
+    qstat -u "*"
+
+    # Remove a job from the queue
+    qdel jobid
+
+
+The LSF queuing system (euler)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: none
 
@@ -434,10 +524,7 @@ Then the equivalent commands:
 .. admonition:: Homework
     :class: homework
        
-    Learning a new language and computational programming have many similarities with verbs, adverbs and objects equating to commands (action), options (modify action) and arguments (target of the option). As with learning languages, mastering programming requires practice and repetition. To take first steps, please visit the following page and create a "cheat sheet" for the relevant commands used today and in Unix1, so that this will serve you as a future reference. Defining the general purpose of a command, the most important options and showing examples with meaningful placeholders may be the most effective approach.
+    Much like a spoken language, learning a new computing language is easier with repetition. To help you organise your learning, you should create a cheat sheet for the commands that you have learnt over the last two sessions. Feel free to search online for inspiration on how to lay this out. Consider that you need to know the command name, what it does, what options it has that you might use (just the ones you think most useful of course) and what arguments it requires. You might also like to sort them by purpose as we have tried to introduce them here, i.e.: navigation, file operations, etc.
 
-    Create your cheat sheet |Cheatsheet|
+    Upload your cheatsheet in whatever format you like to your home directory and we will review them next time.
 
-.. |Cheatsheet| raw:: html
-
-    <a href="https://docs.google.com/document/d/1xsH1yiW3B-rZsTIjF2T5NB_4NmaU_ZO3srcmT5_iHgc/edit" target="_blank">here</a>

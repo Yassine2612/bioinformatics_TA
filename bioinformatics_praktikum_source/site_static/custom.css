@@ -24,3 +24,13 @@ code.download:hover {
     text-align: right;
     font-size: 1.5em;
 }
+
+div.exercise {
+    background-color: #ebbec9;
+    border: 1px solid #d28094;
+}
+
+div.homework {
+    background-color: #ebe6be;
+    border: 1px solid #d2c880;
+}

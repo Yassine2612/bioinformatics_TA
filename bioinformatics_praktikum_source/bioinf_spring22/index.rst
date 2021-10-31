@@ -1,8 +1,11 @@
-Practical Training in Bioinformatics: Materials
-===============================================
-|pic1| |pic2| |pic3| |pic4| |pic5| |pic6| |pic7| |pic8| |pic9| |pic10| |pic11| |pic12| |pic13|
+Practical Training in Bioinformatics: Online learning materials
+===============================================================
+|pic0| |pic1| |pic2| |pic3| |pic4| |pic5| |pic6| |pic7| |pic8| |pic9| |pic10| |pic11| |pic12| |pic13|
 
-.. |nbspc| unicode:: U+00A0 .. non-breaking space
+.. |pic0| image:: contents/images/Setup.png
+         :width: 32%
+         :target: https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html
+
 
 .. |pic1| image:: contents/images/Unix_1.png
          :width: 32%
@@ -65,3 +68,8 @@ Practical Training in Bioinformatics: Materials
            :width: 32%
            :target: https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/13_Image_analysis_3.html
 
+.. toctree::
+    :hidden:
+    :glob:
+
+    contents/*

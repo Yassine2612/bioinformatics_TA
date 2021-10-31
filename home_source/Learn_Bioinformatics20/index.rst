@@ -1,6 +1,6 @@
 
-Learn Bioinformatics
-====================
+Learn Bioinformatics 2020
+=========================
 
 .. toctree::
     :maxdepth: 1

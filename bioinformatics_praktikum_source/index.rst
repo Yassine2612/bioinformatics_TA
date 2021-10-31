@@ -1,6 +1,6 @@
 
 Practical Training in Bioinformatics
-========================
+====================================
 
 .. toctree::
     :caption: Upcoming courses
