@@ -482,44 +482,44 @@ Then the equivalent commands:
 .. admonition:: Exercises
     :class: exercise
 
-* Copy the submit.sh script to your home directory.
-* Load the 'prodigal' module and find out the program options
-* Change the 'echo' line to load the module for *prodigal* and then run the program on the *E. coli* genome.
-* You shouldn't need more than 8 slots or 1GB of memory per slot.
-* When the job is finished, look at the output files for yourself!
+    * Copy the submit.sh script to your home directory.
+    * Load the 'prodigal' module and find out the program options
+    * Change the 'echo' line to load the module for *prodigal* and then run the program on the *E. coli* genome.
+    * You shouldn't need more than 8 slots or 1GB of memory per slot.
+    * When the job is finished, look at the output files for yourself!
 
-.. hidden-code-block:: bash
+    .. hidden-code-block:: bash
 
-    # Copy the script
-    cp /science/teaching/submit.sh ~/
+        # Copy the script
+        cp /science/teaching/submit.sh ~/
 
-    # Load the prodigal module for yourself
-    module load prodigal
+        # Load the prodigal module for yourself
+        module load prodigal
 
-    # Read the options for the program
-    prodigal -h
+        # Read the options for the program
+        prodigal -h
 
-    # Edit the submit script by replacing the 'echo' line to this:
-    module load prodigal
-    prodigal -i ecoli.fna -o ecoli_genes.fna
+        # Edit the submit script by replacing the 'echo' line to this:
+        module load prodigal
+        prodigal -i ecoli.fna -o ecoli_genes.fna
 
-    # Submit the script to the queue
-    qsub submit.sh
+        # Submit the script to the queue
+        qsub submit.sh
 
-    # Look at the output
-    less ecoli_genes.fna
+        # Look at the output
+        less ecoli_genes.fna
 
-    # If you are working on Euler, instead copy the submit_lsf.sh
-    cp /science/teaching/submit.sh ~/
+        # If you are working on Euler, instead copy the submit_lsf.sh
+        cp /science/teaching/submit.sh ~/
 
-    # Manually load the module system - sorry!
-    unset MODULEPATH_ROOT
-    unset MODULESHOME
-    unset MODULEPATH
-    source /nfs/nas22/fs2201/biol_micro_unix_modules/Lmod-7.8/lmod/lmod/init/profile
+        # Manually load the module system - sorry!
+        unset MODULEPATH_ROOT
+        unset MODULESHOME
+        unset MODULEPATH
+        source /nfs/nas22/fs2201/biol_micro_unix_modules/Lmod-7.8/lmod/lmod/init/profile
 
-    # Everything else will be the same until it's time to submit the script
-    bsub < submit_lsf.sh
+        # Everything else will be the same until it's time to submit the script
+        bsub < submit_lsf.sh
 
 .. admonition:: Homework
     :class: homework

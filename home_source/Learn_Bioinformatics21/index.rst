@@ -30,12 +30,15 @@ Detailed in :doc:`contents/0_Setup`, the course will use `R Workbench`_.
 Course Schedule
 ---------------
     
-==============  =======================
-Date & Time     Material
-==============  =======================
-                :doc:`contents/0_Setup`
-01.11.21 2-4pm  :doc:`contents/1_Unix1`
-08.11.21 2-4pm  :doc:`contents/2_Unix2`
-15.11.21 2-4pm  Introduction to R 1
-22.11.21 2-4pm  Introduction to R 2
-==============  =======================
++----------------+---------------------------+
+| Date & Time    | Material                  |
++================+===========================+
+| 01.11.21 2-4pm | | :doc:`contents/0_Setup` |
+|                | | :doc:`contents/1_Unix1` |
++----------------+---------------------------+
+| 08.11.21 2-4pm | :doc:`contents/2_Unix2`   |
++----------------+---------------------------+
+| 15.11.21 2-4pm | Introduction to R 1       |
++----------------+---------------------------+
+| 22.11.21 2-4pm | Introduction to R 2       |
++----------------+---------------------------+
