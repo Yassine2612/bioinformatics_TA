@@ -34,7 +34,7 @@ Week 1
 ^^^^^^
 
 =====  =====  ==============  =================================================
-W1.1   15.09  13:30 - 15:00   Introductory lecture
+W1.1   09.11  13:30 - 15:00   Introductory lecture
 W1.2   15.09  15:30 - 17:00   Set-up infrastructure
 W1.3   16.09  08:30 - 10:00   Lecture on "omics" techniques & data
 W1.4   16.09  10:30 - 12:00   Introduction to R

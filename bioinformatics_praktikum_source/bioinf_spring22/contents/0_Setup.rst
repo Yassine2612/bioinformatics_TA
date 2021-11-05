@@ -104,7 +104,7 @@ Since everyone is working on different devices and we are using multiple program
 
 .. |R-Workbench| raw:: html
 
-    <a href="https://rstudio-teaching.ethz.ch/" target="_blank">here</a>
+    <a href="https://rstudio-teaching.ethz.ch/" target="_blank">https://rstudio-teaching.ethz.ch/</a>
 
 Working in R
 ^^^^^^^^^^^^
@@ -207,11 +207,6 @@ To exit the Python environment you have to enter :code:`exit` into the console (
         #The environment and console changes depending on the script type you are running
 
         #To exit the python environment enter `exit` into the console
-
-
-.. |R-Workbench| raw:: html
-
-    <a href="https://rstudio-teaching.ethz.ch/" target="_blank">here</a>
 
 
 .. container:: nextlink

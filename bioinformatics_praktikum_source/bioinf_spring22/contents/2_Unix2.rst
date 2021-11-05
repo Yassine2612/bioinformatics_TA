@@ -38,7 +38,7 @@ When you are trying to find a file in your system, the command **find** offers a
 .. code-block:: bash
 
     # Finding files
-    find . -name "\*.txt"  # searches for files ending in .txt
+    find . -name "*.txt" -type f  # searches for files ending in .txt
     find . -mtime -2      # searches for files modified in the last two days
     find . -mtime +365    # searches for files modified at least one year ago
     find . -size +1G      # searches for files at least 1GB or larger

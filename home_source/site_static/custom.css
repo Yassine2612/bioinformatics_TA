@@ -29,6 +29,10 @@ table.align-default {
     margin-left: 0;
 }
 
+table.docutils div.line-block {
+    margin-left: 0;
+}
+
 div.exercise {
     background-color: #ebbec9;
     border: 1px solid #d28094;

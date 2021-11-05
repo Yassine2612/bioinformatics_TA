@@ -29,16 +29,11 @@ Detailed in :doc:`contents/0_Setup`, the course will use `R Workbench`_.
 
 Course Schedule
 ---------------
-    
-+----------------+---------------------------+
-| Date & Time    | Material                  |
-+================+===========================+
-| 01.11.21 2-4pm | | :doc:`contents/0_Setup` |
-|                | | :doc:`contents/1_Unix1` |
-+----------------+---------------------------+
-| 08.11.21 2-4pm | :doc:`contents/2_Unix2`   |
-+----------------+---------------------------+
-| 15.11.21 2-4pm | Introduction to R 1       |
-+----------------+---------------------------+
-| 22.11.21 2-4pm | Introduction to R 2       |
-+----------------+---------------------------+
+
+.. csv-table::
+    :header: "Date & Time", "Slides", "Exercises"
+
+    "01.11.21 2-4pm", ":download:`Setup <contents/files/lecture0_setup.pptx>` | :download:`Lecture 1 <contents/files/lecture1_unix1.pptx>`", ":doc:`contents/0_Setup` | :doc:`contents/1_Unix1`"
+    "08.11.21 2-4pm", "", ":doc:`contents/2_Unix2`"
+    "15.11.21 2-4pm", "", "Introduction to R 1"
+    "22.11.21 2-4pm", "", "Introduction to R 2"
