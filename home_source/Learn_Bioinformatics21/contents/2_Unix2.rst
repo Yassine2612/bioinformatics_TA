@@ -323,7 +323,7 @@ Sometimes you want to take the output of one program and use it in another -- fo
     .. hidden-code-block:: bash
 
         # Copy the file to your home directory
-        cp /cluster/home/ssunagaw/teaching/ecoli/GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna ~/E.coli_CDS.fna
+        cp nfs/course/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_cds_from_genomic.fna ~/E.coli_CDS.fna
 
         # Find the fasta headers
         grep '^>' E.coli_CDS.fna
@@ -350,6 +350,48 @@ Sometimes you want to take the output of one program and use it in another -- fo
         # And as so often in bioinformatics, there are several ways of getting a task done.
         # Consider the following alternative:
         grep -A 1 ">" E.coli_CDS.fna | grep -v '>' | grep -o "^\w\w\w" | sort | uniq -c | sort -k1nr
+
+Writing and running a script
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you construct a series of commands that you want to perform repeatedly, you can write them into a **script** and then run this script instead of each command individually. This makes it less likely that you make an error in one of the individual commands, and also keeps a record of the computation you performed so that your work is reproducible.
+
+You can write the script using a text editor on your computer, then uploading it, or in R Workbench. If you want to write a script directly in the terminal there are text editors available such as **vim** and **emacs** - you should be able to find tutorials for both online.
+
+By convention, a script should be named ending in *.sh* and is run as follows:
+
+.. code-block:: bash
+
+    # Run a script in the same directory
+    ./myscript.sh
+
+    # Run a script in another directory
+    ./mydir/myscript.sh
+
+The command line interface, or shell, that we use is called **bash** and it allows you to use arguments in your scripts, encoded as variables *$1*, *$2*, etc.
+
+For instance we could have a simple script:
+
+.. code-block:: bash
+
+    # myscript.sh
+    echo "Hello, my name is $1"
+
+.. code-block:: bash
+
+    # Running my simple script
+    ./myscript.sh Chris
+
+    "Hello, my name is Chris"
+
+This means you could write a script that performs some operations on a file, and then replace the file path in your code with *$1* to allow you to declare the file when you execute the script. Just remember that if your script changes working directory, the relative path to your file may be incorrect, so sometimes it is best to use the absolute path.
+
+.. admonition:: Exercise
+    :class: exercise
+    
+    * Write a simple script that will count the number of entries in a fasta file
+    * Use a variable to allow you to declare the file when you run the script
+    * Test it on each of the fasta files in the /nfs/course/genomes subdirectories
 
 Working on Morgan
 -----------------
@@ -411,7 +453,7 @@ To correctly submit a job to the queue on *morgan*, it's usually easiest to writ
 .. code-block:: bash
 
     # Look at the template
-    less /science/teaching/submit.sh
+    less /nfs/course/examples/submit.sh
 
 .. code-block:: none
 
@@ -482,6 +524,7 @@ Then the equivalent commands:
 .. admonition:: Exercises
     :class: exercise
 
+    * You must do this exercise on **morgan**
     * Copy the submit.sh script to your home directory.
     * Load the 'prodigal' module and find out the program options
     * Change the 'echo' line to load the module for *prodigal* and then run the program on the *E. coli* genome.
@@ -491,7 +534,7 @@ Then the equivalent commands:
     .. hidden-code-block:: bash
 
         # Copy the script
-        cp /science/teaching/submit.sh ~/
+        cp /nfs/course/examples/submit.sh ~/
 
         # Load the prodigal module for yourself
         module load prodigal
@@ -508,18 +551,6 @@ Then the equivalent commands:
 
         # Look at the output
         less ecoli_genes.fna
-
-        # If you are working on Euler, instead copy the submit_lsf.sh
-        cp /science/teaching/submit.sh ~/
-
-        # Manually load the module system - sorry!
-        unset MODULEPATH_ROOT
-        unset MODULESHOME
-        unset MODULEPATH
-        source /nfs/nas22/fs2201/biol_micro_unix_modules/Lmod-7.8/lmod/lmod/init/profile
-
-        # Everything else will be the same until it's time to submit the script
-        bsub < submit_lsf.sh
 
 .. admonition:: Homework
     :class: homework
