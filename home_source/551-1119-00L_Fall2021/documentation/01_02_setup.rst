@@ -99,7 +99,7 @@ The **..** refers to the directory above a location, so the relative path here g
 Navigation
 ^^^^^^^^^^
 
-**FROM NOW ON, REPLACE *guillems* WITH YOUR OWN *username* WHEN RUNNING THE FOLLOWING COMMANDS!!**
+**FROM NOW ON, REPLACE guillems WITH YOUR OWN username WHEN RUNNING THE FOLLOWING COMMANDS!!**
 
 **pwd** will tell you exactly where you are in the file system.
 
