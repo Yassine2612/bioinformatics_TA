@@ -37,11 +37,11 @@ Week 1
 =====  =====  ==============  =================================================
 W1.1   09.11  13:30 - 15:00   :download:`Introductory lecture <documentation/01_01_Intro.pdf>`
 W1.2   09.11  15:30 - 17:00   :doc:`Setup infrastructure <documentation/01_02_setup>`
-W1.3   10.11  08:30 - 10:00   Lecture on "omics" techniques & data
-W1.4   10.11  10:30 - 12:00   Introduction to R
+W1.3   10.11  08:30 - 10:00   :download:`Lecture on omics techniques & data <documentation/01_03_OMICS_lecture.pdf>`
+W1.4   10.11  10:30 - 12:00   :doc:`Introduction to R <documentation/01_04_Introductio_to_R>`
 W1.5   10.11  13:30 - 15:00   Lecture on metagenome-assembled genomes (MAGs)
-W1.6   10.11  15:30 - 17:00   Data transformation with R: tidyverse
-W1.7   11.11  08:30 - 10:00   Data visualization with R: ggplot2
+W1.6   10.11  15:30 - 17:00   :doc:`Data transformation with R: tidyverse <documentation/01_06_tidyverse>`
+W1.7   11.11  08:30 - 10:00   :doc:`Data visualization with R: ggplot2 <documentation/01_07_ggplot2>`
 W1.8   11.11  10:30 - 12:00   Pipeline for the analysis of 16S rRNA gene amplicon data (lecture)
 W1.9   11.11  13:30 - 15:00   Pipeline for the analysis of 16S rRNA gene amplicon data (tutorial)
 W1.10  11.11  15:30 - 17:00   Describing microbial community structure (lecture)
