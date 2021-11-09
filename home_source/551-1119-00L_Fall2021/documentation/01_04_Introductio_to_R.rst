@@ -232,7 +232,7 @@ Importing Data
 
 R has a host of functions for importing data of different types. The easiest way to import data you have stored in an Excel sheet, for example, is to save it as a **tab-delimited text** file before importing it into R.
 
-Firstly we need a data table to import: :download:`Ecoli Genes <downloads/ecoli_genes.txt>`. We can then use the **read.table** function.
+Firstly we need a data table to import.
 
 .. code-block:: R
 
@@ -246,7 +246,7 @@ We can now see what the table looks like using the **Environment** tab in the to
 .. code-block:: R
 
     # Import the table again
-    genes <- read.table("ecoli_genes.txt",header=TRUE)
+    genes <- read.table("/nfs/course/masterdata/tutorials/r_intro/ecoli_genes.txt",header=TRUE)
 
 There are a few other useful arguments to help import tables of various formats:
 
@@ -272,7 +272,7 @@ Many of the arguments for the *read* functions also apply to the *write* functio
 Exercises
 ---------
 
-* Download and import the ecoli_genes.txt table for yourself, make sure to get the column headings correct
+* Import the ecoli_genes.txt table for yourself, make sure to get the column headings correct
 * Write the table out to a new file name using **write.table**
 * Now import the table again without any additional arguments to **read.table** - do you still need to correct the column headings?
 
@@ -399,7 +399,7 @@ To load a package, we use the **library** function. Once loaded, all of the func
     # For instance if we want to work with phylogenetic trees
     # If you look at the example.tree file itself you can see the format is non-intuitive
     library(ape)
-    tree <- read.tree("/science/teaching/example.tree")
+    tree <- read.tree("/nfs/course/masterdata/tutorials/r_intro/example.tree")
 
     # Packages can load other packages and mask functions
     library(Hmisc)
@@ -436,23 +436,6 @@ If the package has not been submitted to the standard R repositories, but exists
     y <- rnorm(10)
     multicat(x,y)
 
-Bioconductor
-------------
-
-**Bioconductor** is a popular set of specific bioinformatics tools, such as DESeq2 and Biostrings, that need to be installed via the **BiocManager** package.
-
-.. code-block:: R
-
-    # First of all install the manager
-    install.packages("BiocManager")
-
-    # Use it directly without loading
-    BiocManager::install("Biostrings")
-
-    # Load the package and demonstrate
-    library(Biostrings)
-    cdss <- read.DNAStringSet("ecoli/EC_K12_MG1655_genomic.fna")
-    subseq(cdss,1,10)
 
 Program Flow
 ------------
