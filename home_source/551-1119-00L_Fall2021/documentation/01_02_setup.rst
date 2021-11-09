@@ -16,7 +16,7 @@ Each of you should be able to log in into the  `RStudio Server <https://rstudio-
 
 Once you access the RStudio server you'll see a graphical user interface similar to a local version of RStudio.
 
-.. image:: documentation/images/rstudioserver.jpg
+.. image:: images/rstudioserver.jpg
      :align: center
 
 Apart from the RStudio console you'll find, next to it, the "Terminal" through which you can interact with the server using Linux commands. We will shortly practice some basic commands in the following tutorial.
@@ -36,7 +36,7 @@ The structure of a command
 
 Most commands have *options* and *arguments*. Arguments are often essential for a command to operate properly; they are the pieces of information required by a command, such as a file name. Options are, of course, optional, and offer ways to modify the way the command works.
 
-.. figure:: documentation/images/command_structure.png
+.. figure:: images/command_structure.png
     :align: center
 
 For instance, **echo** will take any text you give it as an argument and then send it back to you as output:
@@ -75,7 +75,7 @@ The File System
 You are probably used to the file system in Windows or MacOS, where directories can contain files and more directories. The linux filesystem is structured in the same way, as a tree, that begins at the 'root' directory **/**.
 
 .. image::
-    documentation/images/filesystem_hierarchy.png
+    images/filesystem_hierarchy.png
 
 When you are working in the command line, you are located in a directory somewhere in this tree. There are two ways to refer to a location: its **absolute path** or its **relative path**.
 
@@ -99,7 +99,7 @@ The **..** refers to the directory above a location, so the relative path here g
 Navigation
 ^^^^^^^^^^
 
-From now on, replace **guillems** with your own username when running the commands!!
+FROM NOW ON, REPLACE *guillems* WITH YOUR OWN *username* WHEN RUNNING THE FOLLOWING COMMANDS!!
 
 **pwd** will tell you exactly where you are in the file system.
 
