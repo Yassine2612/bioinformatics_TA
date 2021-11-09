@@ -25,6 +25,7 @@ Useful resources
 ----------------
 
 RStudio server site: https://rstudio-teaching.ethz.ch/
+ZOOM room: https://ethz.zoom.us/j/69983594040
 
 
 Agenda
@@ -34,8 +35,8 @@ Week 1
 ^^^^^^
 
 =====  =====  ==============  =================================================
-W1.1   09.11  13:30 - 15:00   Introductory lecture
-W1.2   09.11  15:30 - 17:00   Set-up infrastructure
+W1.1   09.11  13:30 - 15:00   :download:`Introductory lecture <documentation/01_01_Intro.pdf>`
+W1.2   09.11  15:30 - 17:00   :doc:`Setup infrastructure <documentation/01_02_setup.rst>`
 W1.3   10.11  08:30 - 10:00   Lecture on "omics" techniques & data
 W1.4   10.11  10:30 - 12:00   Introduction to R
 W1.5   10.11  13:30 - 15:00   Lecture on metagenome-assembled genomes (MAGs)
@@ -101,4 +102,3 @@ W4.4  01.12  10:30 - 12:00  Prepare presentation
 W4.5  01.12  13:30 - 16:00  **Presentations**
 W4.6  01.12  16:30 - 17:00  BlockCourse wrap-up
 ====  =====  =============  ==================================================
-
