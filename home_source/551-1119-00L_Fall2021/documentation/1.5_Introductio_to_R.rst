@@ -45,7 +45,7 @@ Using R at its most basic, it is a calculator. You can enter a calculation into 
     # R is a calculator
     1 + 2
     3 * 4
-	
+
 A **variable** is a core concept in programming and is essentially a named piece of data. That is, when you refer to the variable by its name within the program, you are actually referring to the data stored under that name.
 
 To **assign** data to a variable in R, use the following syntax:
@@ -55,7 +55,7 @@ To **assign** data to a variable in R, use the following syntax:
     # Assignment
     x <- 2
     y <- 3.5
-	
+
 After you have assigned data to variables, you can then use the variables to perform calculations:
 
 .. code-block:: R
@@ -201,7 +201,7 @@ You can also change the format of a variable between list and data frame quite e
     # Change between list and data.frame
     l <- list(names=c("Anna", "Ben", "Chris"), scores=c(23, 31, 34))
     df_from_l <- as.data.frame(l)
-    
+
     df <- data.frame(names=c("Anna", "Ben", "Chris"), scores=c(23, 31, 34))
     l_from_df <- as.list(df)
 
@@ -298,7 +298,7 @@ For a matrix or data.frame, the same methods work for indexing the row or column
 
     # Slicing a data.frame
     data(swiss)
-    
+
     swiss[1,]
     swiss[,1]
     swiss[1,1]
@@ -316,15 +316,15 @@ First, if we want to understand a function, we read its help file.
 
     # Get help
     ?mean
-    
-This prints out the documentation of that function. The first paragraph provides a description of what the function does. The second paragraph shows how to use the function in your script or the console. It also explains if there are any default values set for any of the arguments. The third paragraph takes you through all the different arguments and explains each of them. In our example, the only necessary argument x is an object that we want to apply this function to. The paragraph called Value explains what the output of the function will be. At the very bottom of the documentation you can also find some examples of how to use the function. 
+
+This prints out the documentation of that function. The first paragraph provides a description of what the function does. The second paragraph shows how to use the function in your script or the console. It also explains if there are any default values set for any of the arguments. The third paragraph takes you through all the different arguments and explains each of them. In our example, the only necessary argument x is an object that we want to apply this function to. The paragraph called Value explains what the output of the function will be. At the very bottom of the documentation you can also find some examples of how to use the function.
 If we don’t even know if a function exists, we can use the double question mark to search for key words
 
 .. code-block:: R
 
     # #search keywords
-    ??substring 
-    
+    ??substring
+
 Now let’s start using the **mean** function with a vector that contains all numbers from 1 to 10. *Arguments* for a function can be declared both by their *position* or their *name*. A function expects to see the arguments in a specific order, so the first argument without a name is expected to be the first argument in the function. As already discussed, the mean function only needs one input argument x.
 
 .. code-block:: R
@@ -335,12 +335,12 @@ Now let’s start using the **mean** function with a vector that contains all nu
     mean(x)
     #method 2: declare input by name
     mean(x = c)
-    
-You can also define your own functions that perform operations that are specific to what you would like to do. This is particularly useful if you want to perform the same task with many different data sets. 
 
-When you write a function, it should always follow the same structure: 
+You can also define your own functions that perform operations that are specific to what you would like to do. This is particularly useful if you want to perform the same task with many different data sets.
 
-.. code-block:: R 
+When you write a function, it should always follow the same structure:
+
+.. code-block:: R
 
   function_name <- function(argument, argument = default value) {
         statement or operations
@@ -348,17 +348,17 @@ When you write a function, it should always follow the same structure:
   }
 
 
-Let's have a look at an example. We would like to write a function that converts temperature Fahrenheit to Celsius. 
+Let's have a look at an example. We would like to write a function that converts temperature Fahrenheit to Celsius.
 
 .. code-block:: R
 
-  # defining function 
+  # defining function
   f_to_c <- function(temp_F) {          #define a function and argument temp_F, no default arguments
-    temp_C <- (temp_F - 32) * 5 / 9     #perform calculations using the argument 
+    temp_C <- (temp_F - 32) * 5 / 9     #perform calculations using the argument
     return(temp_C)                      #return the result to the main program
   }
-  
-  # using the function                   
+
+  # using the function
   f_to_c(70) # = 21.1                   #using the name of the function to call it
 
 
@@ -383,7 +383,7 @@ Exercises
   #using it
   v <- c(1:10)
   SumWithoutMax(v) #=45
-  
+
 Packages
 ========
 
@@ -400,7 +400,7 @@ To load a package, we use the **library** function. Once loaded, all of the func
     # If you look at the example.tree file itself you can see the format is non-intuitive
     library(ape)
     tree <- read.tree("/science/teaching/example.tree")
-    
+
     # Packages can load other packages and mask functions
     library(Hmisc)
 
@@ -601,4 +601,3 @@ Exercises
     # Add to the plot
     plot(EuStockMarkets[,"FTSE"])
     lines(times,movingAverage,col=2)
-

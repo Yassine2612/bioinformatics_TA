@@ -25,7 +25,7 @@ Useful resources
 ----------------
 
 * RStudio server site: https://rstudio-teaching.ethz.ch/
-* ZOOM room: https://ethz.zoom.us/j/69983594040
+* ZOOM room: https://ethz.zoom.us/j/62465809040
 
 
 Agenda
