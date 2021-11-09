@@ -36,7 +36,7 @@ Week 1
 
 =====  =====  ==============  =================================================
 W1.1   09.11  13:30 - 15:00   :download:`Introductory lecture <documentation/01_01_Intro.pdf>`
-W1.2   09.11  15:30 - 17:00   :doc:`Setup infrastructure <documentation/01_02_setup.rst>`
+W1.2   09.11  15:30 - 17:00   :doc:`Setup infrastructure <documentation/01_02_setup>`
 W1.3   10.11  08:30 - 10:00   Lecture on "omics" techniques & data
 W1.4   10.11  10:30 - 12:00   Introduction to R
 W1.5   10.11  13:30 - 15:00   Lecture on metagenome-assembled genomes (MAGs)
