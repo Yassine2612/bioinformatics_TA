@@ -146,7 +146,7 @@ Basic File Operations
 .. code-block:: bash
 
     # Copy: cp source destination
-    cp /nfs/course/masterdata/example_file.txt .
+    cp /nfs/course/masterdata/tutorials/linux/example_file.txt .
     ls
 
 **mv** moves a file from on location to another. The second **mv** command example, because the destination is not a directory, actually renames the file. Thus you can move and rename a file with the same command.
@@ -194,28 +194,28 @@ Looking at files
 .. code-block:: bash
 
     # ConCATenate
-    cat /nfs/course/masterdata/example.fasta
+    cat /nfs/course/masterdata/tutorials/linux/example.fasta
 
 **head** displays only the first 10 lines of a file directly on the terminal. If you look at the available options for the command, *-n x* outputs the first *x* lines instead, and using a negative number outputs the lines except for the last *x*.
 
 .. code-block:: bash
 
     # Show file head
-    head /nfs/course/masterdata/example.fasta
+    head /nfs/course/masterdata/tutorials/linux/example.fasta
 
 **tail** displays only the last 10 lines of a file directly on the terminal. It has similar options to *head*; *-n x* outputs the last *x* lines, and using an explicitly positive number *+x* outputs the lines except for the first *x*.
 
 .. code-block:: bash
 
     # Show file tail
-    tail /nfs/course/masterdata/example.fasta
+    tail /nfs/course/masterdata/tutorials/linux/example.fasta
 
 **less** is the most versatile and useful way to look at a file in the command line. Instead of showing you the contents of a file directly on the terminal, it 'opens' the file to browse. You can use the arrow keys, page up, page down, home, end and the spacebar to navigate the file. Pressing *q* will quit. A number of useful options exist for the command, such as showing line numbers or displaying without line wrapping. It also has a search feature that we will cover later.
 
 .. code-block:: bash
 
     # Browse file
-    less /nfs/course/masterdata/example.fasta
+    less /nfs/course/masterdata/tutorials/linux/example.fasta
 
 Resources
 ^^^^^^^^
