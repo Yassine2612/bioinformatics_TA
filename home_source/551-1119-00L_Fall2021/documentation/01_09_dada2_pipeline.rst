@@ -64,15 +64,15 @@ In order to remove sequences with bad quality and to remove low quality tails of
     dir.create("./dada2/02_filterAndTrim/",recursive=T)
 
     # 3. Execute the command:
-    infqgz1 <- '../../551-1119-00L_masterdata/tutorials/dada2/AML_Mock_03_SUSHI_METAB_R1.fastq.gz'
-    infqgz2 <- '../../551-1119-00L_masterdata/tutorials/dada2/AML_Mock_03_SUSHI_METAB_R2.fastq.gz'
+    infqgz1 <- '../../551-1119-00L_masterdata/tutorials/dada2/01_cutAdapt/AML_Mock_03_SUSHI_METAB_R1.fastq.gz'
+    infqgz2 <- '../../551-1119-00L_masterdata/tutorials/dada2/01_cutAdapt/AML_Mock_03_SUSHI_METAB_R2.fastq.gz'
     outfqgz1 <- './dada2/02_filterAndTrim/AML_Mock_03_SUSHI_METAB_R1.fastq.gz'
     outfqgz2 <- './dada2/02_filterAndTrim/AML_Mock_03_SUSHI_METAB_R2.fastq.gz'
 
     filterAndTrim(fwd=infqgz1, filt=outfqgz1, rev=infqgz2, filt.rev=outfqgz2, matchIDs=TRUE, maxEE=2, truncQ=3, maxN=0, rm.phix=TRUE, compress=TRUE, verbose=TRUE, multithread=1, minLen=150, trimRight = c(40,40))
 
 
-Analyze the same way the other pair of FASTQ files the same way.
+**Analyze the same way the other pair of FASTQ files the same way.**
 
 Exercise:
 
@@ -89,6 +89,8 @@ The `dada2` tool that we will use for this analysis uses a statistic approach th
 
 This step learns the error model of this sequencing run and is then used in the next step.
 
+**This step has to be run twice. Once for each orientation=R1|R2**
+
 .. code-block:: R
 
     library(ggplot2)
@@ -103,7 +105,6 @@ This step learns the error model of this sequencing run and is then used in the 
     plot <- plotErrors(err,nominalQ=TRUE)
     ggsave(outfile.plot, plot = plot)
 
-This step has to be run twice. Once for each orientation=R1|R2
 
 Exercise:
 
@@ -115,6 +116,7 @@ Sample Inference
 
 This step is the actual core of the `dada2` tool. The `dada2` tool will inspect every sequence and decide, based on the error model, if a sequence is a real biological sequence with no errors or a sequence that contains errors.
 
+**This step has to be run twice. Once for each orientation=R1|R2**
 
 .. code-block:: R
 
@@ -128,7 +130,6 @@ This step is the actual core of the `dada2` tool. The `dada2` tool will inspect 
     dd <- dada(samples, err=err, pool='pseudo', multithread = FALSE)
     saveRDS(dd, file = outfile.dd)
 
-This step has to be run twice. Once for each orientation=R1|R2
 
 Exercise:
 
@@ -164,7 +165,7 @@ Exercise:
 - How many sequences could be merged?
 - Are there differences between samples?
 
-Hint: Load the output file into R and sum up abundances for each sample.
+Hint: Use the output object (`seqtab.m`)
 
 
 Ch|Bimera Removal
@@ -189,12 +190,13 @@ Exercise:
 - Are there differences between samples?
 - Compare how many reads/inserts made it through the pipeline.
 
-Hint: Load the output file into R and sum up abundances for each sample.
 
 Taxonomic annotation
 --------------------
 
 Once we have inferred ASVs we need to taxonomically annotate them. For that purpose we will use the SILVA database which we will download.
+
+**DO NOT RUN THE CODE BELOW YET. IT TAKES LONG SO YOU WON'T BE ABLE TO RUN ANYTHING ELSE**
 
 .. code-block:: R
 
