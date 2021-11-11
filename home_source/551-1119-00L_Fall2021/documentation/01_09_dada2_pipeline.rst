@@ -22,9 +22,14 @@ The FASTQ files serve as input for our pipeline. There are always 2 files per sa
 
 .. code-block:: bash
 
-    ls -l ../../551-1119-00L_masterdata/tutorials/dada2/
+    ls -l ../../551-1119-00L_masterdata/tutorials/dada2/00_rawData
 
-Use linux commands to access one of the files and have a look to its content. Can you describe what are the different parts of the content?
+Exercise:
+
+- Use linux commands to access one of the files and have a look to its content. Can you describe what are the different parts of the content?
+- Use linux commands to access all files and count the number of sequences in each. How would you count sequences in a FASTQ file?
+
+Hint: you may want to check the `wc` linux command in Google or in the linux cheatsheet provided in the first session.
 
 Sequence Adapter Removal
 ------------------------
@@ -34,7 +39,11 @@ Targeted sequencing, such as 16S sequencing, is executed with specific primers t
 * The sequence corresponding to the region the primer binds will most likely be identical to the primer. If any of the real DNA sequences in a sample would have any difference to the primer this won't be detected as the concentration of primers in the PCR reaction is much higher than the one from the template sequences.
 * The primers need to be detected to ensure that all sequences analyzed downstream corresponds to the exact same 16S region and that all the sequences are properly aligned to the same position.
 
-For that purpose we use the tool `cutadapt`. It takes the primer sequences and the FASTQ files as input and removes the primers that are in most cases at the beginning of the reads. We won't be running this initial step. In fact, the sequences provided above correspond to the FASTQ files with the primers already removed.
+For that purpose we use the tool `cutadapt`. It takes the primer sequences and the FASTQ files as input and removes the primers that are in most cases at the beginning of the reads. We won't be running this initial step. But you have the FASTQ files with the primers already removed in `../../551-1119-00L_masterdata/tutorials/dada2/01_cutAdapt`.
+
+Exercise:
+
+- Use linux commands to access all files and count the number of sequences in each. What proportion of sequences had the primers and thus were kept at this step?
 
 
 Quality Control
@@ -52,13 +61,13 @@ In order to remove sequences with bad quality and to remove low quality tails of
     library(dada2)
 
     # 2. Create an output directory
-    dir.create("./dada2/01_filterAndTrim/",recursive=T)
+    dir.create("./dada2/02_filterAndTrim/",recursive=T)
 
     # 3. Execute the command:
     infqgz1 <- '../../551-1119-00L_masterdata/tutorials/dada2/AML_Mock_03_SUSHI_METAB_R1.fastq.gz'
     infqgz2 <- '../../551-1119-00L_masterdata/tutorials/dada2/AML_Mock_03_SUSHI_METAB_R2.fastq.gz'
-    outfqgz1 <- './dada2/01_filterAndTrim/AML_Mock_03_SUSHI_METAB_R1.fastq.gz'
-    outfqgz2 <- './dada2/01_filterAndTrim/AML_Mock_03_SUSHI_METAB_R2.fastq.gz'
+    outfqgz1 <- './dada2/02_filterAndTrim/AML_Mock_03_SUSHI_METAB_R1.fastq.gz'
+    outfqgz2 <- './dada2/02_filterAndTrim/AML_Mock_03_SUSHI_METAB_R2.fastq.gz'
 
     filterAndTrim(fwd=infqgz1, filt=outfqgz1, rev=infqgz2, filt.rev=outfqgz2, matchIDs=TRUE, maxEE=2, truncQ=3, maxN=0, rm.phix=TRUE, compress=TRUE, verbose=TRUE, multithread=1, minLen=150, trimRight = c(40,40))
 
@@ -83,11 +92,11 @@ This step learns the error model of this sequencing run and is then used in the 
 .. code-block:: R
 
     library(ggplot2)
-    dir.create("./dada2/02_learnErrors/",recursive=T)
+    dir.create("./dada2/03_learnErrors/",recursive=T)
 
-    outfile <- './dada2/02_learnErrors/{orientation}.errors.rds'
+    outfile <- './dada2/03_learnErrors/{orientation}.errors.rds'
     outfile.plot <- paste(outfile, '.pdf', sep = '')
-    samples <- list.files("./dada2/01_filterAndTrim/",pattern="_{orientation}",full.names = T)
+    samples <- list.files("./dada2/02_filterAndTrim/",pattern="_{orientation}",full.names = T)
     err <- learnErrors(samples, nbases=10000, multithread=FALSE, randomize=TRUE, verbose = 1)
     saveRDS(err, file = outfile)
 
@@ -109,11 +118,11 @@ This step is the actual core of the `dada2` tool. The `dada2` tool will inspect 
 
 .. code-block:: R
 
-    dir.create("./dada2/03_sampleInference/",recursive=T)
+    dir.create("./dada2/04_sampleInference/",recursive=T)
 
-    samples <-  list.files("./dada2/01_filterAndTrim/",pattern="_{orientation}",full.names = T)
-    outfile.dd <- './dada2/03_sampleInference/sampleInference_{orientation}.rds'
-    err.rds <- './dada2/02_learnErrors/{orientation}.errors.rds'
+    samples <-  list.files("./dada2/02_filterAndTrim/",pattern="_{orientation}",full.names = T)
+    outfile.dd <- './dada2/04_sampleInference/sampleInference_{orientation}.rds'
+    err.rds <- './dada2/03_learnErrors/{orientation}.errors.rds'
 
     err <- readRDS(err.rds)
     dd <- dada(samples, err=err, pool='pseudo', multithread = FALSE)
@@ -134,13 +143,13 @@ So far we have been working on read level. This means that all steps were execut
 
 .. code-block:: R
 
-    dir.create("./dada2/04_mergeReads/",recursive=T)
+    dir.create("./dada2/05_mergeReads/",recursive=T)
 
-    samples.r1 <- list.files("./dada2/01_filterAndTrim/",pattern="_R1",full.names = T)
-    samples.r2 <- list.files("./dada2/01_filterAndTrim/",pattern="_R2",full.names = T)
-    infile.r1 <- './dada2/03_sampleInference/sampleInference_R1.rds'
-    infile.r2 <- './dada2/03_sampleInference/sampleInference_R2.rds'
-    outfile <- './dada2/04_mergeReads/merged_seqtab.rds'
+    samples.r1 <- list.files("./dada2/02_filterAndTrim/",pattern="_R1",full.names = T)
+    samples.r2 <- list.files("./dada2/02_filterAndTrim/",pattern="_R2",full.names = T)
+    infile.r1 <- './dada2/04_sampleInference/sampleInference_R1.rds'
+    infile.r2 <- './dada2/04_sampleInference/sampleInference_R2.rds'
+    outfile <- './dada2/05_mergeReads/merged_seqtab.rds'
 
     dd.r1 <- readRDS(infile.r1)
     dd.r2 <- readRDS(infile.r2)
@@ -166,10 +175,10 @@ One step of the preparation of the sequencing library is the amplication of 16S 
 
 .. code-block:: R
 
-    dir.create("./dada2/05_noBimera/",recursive=T)
+    dir.create("./dada2/06_noBimera/",recursive=T)
 
-    wbim.file <- './dada2/04_mergeReads/merged_seqtab.rds'
-    nobim.file <- './dada2/05_noBimera/nobimera_seqtab.rds'
+    wbim.file <- './dada2/05_mergeReads/merged_seqtab.rds'
+    nobim.file <- './dada2/06_noBimera/nobimera_seqtab.rds'
     wbim.tab <- readRDS(wbim.file)
     nobim.tab <- removeBimeraDenovo(wbim.tab, method="pooled", multithread=FALSE, verbose=TRUE)
     saveRDS(nobim.tab, file = nobim.file)
@@ -189,9 +198,9 @@ Once we have inferred ASVs we need to taxonomically annotate them. For that purp
 
 .. code-block:: R
 
-    dir.create("./dada2/06_taxonomy/",recursive=T)
+    dir.create("./dada2/07_taxonomy/",recursive=T)
 
-    taxa.file<-'./dada2/06_taxonomy/taxa.rds'
-    download.file(url = "https://zenodo.org/record/3986799/files/silva_nr99_v138_wSpecies_train_set.fa.gz?download=1",destfile = "./dada2/06_taxonomy/silva_nr99_v138_wSpecies_train_set.fa.gz")
-    taxa <- assignTaxonomy(nobim.tab, "./dada2/06_taxonomy/silva_nr99_v138_wSpecies_train_set.fa.gz", multithread=F)
+    taxa.file<-'./dada2/07_taxonomy/taxa.rds'
+    download.file(url = "https://zenodo.org/record/3986799/files/silva_nr99_v138_wSpecies_train_set.fa.gz?download=1",destfile = "./dada2/07_taxonomy/silva_nr99_v138_wSpecies_train_set.fa.gz")
+    taxa <- assignTaxonomy(nobim.tab, "./dada2/07_taxonomy/silva_nr99_v138_wSpecies_train_set.fa.gz", multithread=F)
     saveRDS(taxa, file = taxa.file)
