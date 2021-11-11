@@ -42,8 +42,8 @@ W1.4   10.11  10:30 - 12:00   :doc:`Introduction to R <documentation/01_04_Intro
 W1.5   10.11  13:30 - 15:00   Lecture on metagenome-assembled genomes (MAGs)
 W1.6   10.11  15:30 - 17:00   :doc:`Data transformation with R: tidyverse <documentation/01_06_tidyverse>`
 W1.7   11.11  08:30 - 10:00   :doc:`Data visualization with R: ggplot2 <documentation/01_07_ggplot2>`
-W1.8   11.11  10:30 - 12:00   Pipeline for the analysis of 16S rRNA gene amplicon data (lecture)
-W1.9   11.11  13:30 - 15:00   Pipeline for the analysis of 16S rRNA gene amplicon data (tutorial)
+W1.8   11.11  10:30 - 12:00   :download:`Pipeline for the analysis of 16S rRNA gene amplicon data (lecture) <documentation/01_08_DADA2_lecture.pdf>`
+W1.9   11.11  13:30 - 15:00   :doc:`Pipeline for the analysis of 16S rRNA gene amplicon data (tutorial) <documentation/01_09_dada2_pipeline>`
 W1.10  11.11  15:30 - 17:00   Describing microbial community structure (lecture)
 W1.11  12.11  08:30 - 10:00   Describing microbial community structure (tutorial)
 W1.12  12.11  10:30 - 12:00   Describing microbial community structure (hands-on session)
