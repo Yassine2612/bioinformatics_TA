@@ -30,18 +30,12 @@ Useful resources
 Student Projects
 ----------------
 
-- Project 1 (Mads & Elina): **Patient gut microbiome and patient response to intensive
-chemotherapy in AML**
-- Project 2 (Gioia & Lena): **Patient gut microbiome and patient risk of developing
-neutropenic enterocolitis as a consequence of intensive
-chemotherapy in AML**
-- Project 3 (Dennis & Léa): **Potential of AML patient gut microbiome to interact with
-chemotherapeutic drugs used during intensive induction
-chemotherapy**
-- Project 4 (unassigned): **Functional redundancy in AML patient gut microbiome**
-- Project 5 (unassigned): **Bacterial population structure in AML patients**
-- Project 6 (Marius & Manuel): **Investigate the uncharted diversity of the gut microbiome
-in AML patients**
+* Project 1 (Mads & Elina): **Patient gut microbiome and patient response to intensive chemotherapy in AML**
+* Project 2 (Gioia & Lena): **Patient gut microbiome and patient risk of developing neutropenic enterocolitis as a consequence of intensive chemotherapy in AML**
+* Project 3 (Dennis & Léa): **Potential of AML patient gut microbiome to interact with chemotherapeutic drugs used during intensive induction chemotherapy**
+* Project 4 (unassigned): **Functional redundancy in AML patient gut microbiome**
+* Project 5 (unassigned): **Bacterial population structure in AML patients**
+* Project 6 (Marius & Manuel): **Investigate the uncharted diversity of the gut microbiome in AML patients**
 
 Find more details in the :download:`Project presentation <documentation/01_14_student_projects.pdf>`
 
