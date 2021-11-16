@@ -33,8 +33,8 @@ Student Projects
 * Project 1 (Mads & Elina): **Patient gut microbiome and patient response to intensive chemotherapy in AML**
 * Project 2 (Gioia & Lena): **Patient gut microbiome and patient risk of developing neutropenic enterocolitis as a consequence of intensive chemotherapy in AML**
 * Project 3 (Dennis & Léa): **Potential of AML patient gut microbiome to interact with chemotherapeutic drugs used during intensive induction chemotherapy**
-* Project 4 (unassigned): **Functional redundancy in AML patient gut microbiome**
-* Project 5 (unassigned): **Bacterial population structure in AML patients**
+* Project 4 (unassigned): Functional redundancy in AML patient gut microbiome
+* Project 5 (unassigned): Bacterial population structure in AML patients
 * Project 6 (Marius & Manuel): **Investigate the uncharted diversity of the gut microbiome in AML patients**
 
 Find more details in the :download:`Project presentation <documentation/01_14_student_projects.pdf>`
@@ -43,6 +43,34 @@ Data availability
 -----------------
 
 The following data is available for the development of the projects:
+
+In general, DNA extracted from fecal samples collected from AML patients undergoing intensive chemotherapy have been sequenced using
+
+* 16S amplicon sequencing
+* metagenomic shotgun sequencing
+
+All computed data can be found at `/nfs/course/551-1119-00L_masterdata/projects` with the following folder structure:
+
+* `16S`:
+  * `aml_metab_ASV_BC_HS21.txt`: ASV table containing all samples that have been sequenced using 16S amplicon sequencing
+  * `aml_metab_tax_BC_HS21.txt`: Taxonomy table containing the sequences of individual ASVs and their taxonomic annotation as derived using mTAGs
+* `metaG`:
+  * `gene_catalog`:
+    * `AML_115_METAG_cdhit9590.functional_profile_insertcounts.lengthnorm.cellab.withKEGG.profile.gz`: Functional profile of the gene catalog. Per cell abundance of each KO.
+    * `AML_115_METAG_cdhit9590.gene_profile_insertcounts.lengthnorm.cellab.withKEGG.profile.gz`: Gene profile of the gene catalog. Per cell abundance of each gene x 1000
+  * `MAGs`:
+    * `gtdbtk.ar122.summary.tsv`: Taxonomic information on the MAGs out of GTDB (Archaea)
+    * `gtdbtk.bac120.summary.tsv`: Taxonomic information on the MAGs out of GTDB (Bacteria)
+  *`mOTUs`:
+    * `aml_metag_motus_BC_HS21.txt`: Microbial abundance profiles for all samples sequenced using shotgun metagenomic sequencing as derived using mOTUs
+* `auxiliary_data`:
+  * `clinical_data`:
+    * `AML_metadata_BC_HS21.txt`: File containing all available clinical metadata from patients enrolled within the AML study as of per OCT2021
+    * `AML_Antiinfectives.txt`: File containing the usage scheme of all antiinfective drugs given to patients enrolled within the AML study as per AUG2021
+    * `AML_AntineoplasticAgents.txt`: File containing the usage scheme of all antineoplastic drugs given to patients enrolled within the AML study as per AUG2021
+  * `DGIdb_KEGG`:
+    * `interactions_withKO.tsv`: Interaction table from DGIdb with the KO annotation for all genes.
+
 
 Agenda
 ------
