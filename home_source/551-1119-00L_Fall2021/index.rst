@@ -68,7 +68,7 @@ All computed data can be found at `/nfs/course/551-1119-00L_masterdata/projects`
     - ``gtdbtk.ar122.summary.tsv``: Taxonomic information on the MAGs out of GTDB (Archaea)
     - ``gtdbtk.bac120.summary.tsv``: Taxonomic information on the MAGs out of GTDB (Bacteria)
 
-  -``mOTUs``:
+  - ``mOTUs``:
 
     - ``aml_metag_motus_BC_HS21.txt``: Microbial abundance profiles for all samples sequenced using shotgun metagenomic sequencing as derived using mOTUs
 
