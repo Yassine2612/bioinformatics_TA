@@ -49,7 +49,7 @@ In general, DNA extracted from fecal samples collected from AML patients undergo
 - 16S amplicon sequencing
 - metagenomic shotgun sequencing
 
-All computed data can be found at `/nfs/course/551-1119-00L_masterdata/projects` with the following folder structure:
+All computed data can be found at ``/nfs/course/551-1119-00L_masterdata/projects`` with the following folder structure:
 
 - ``16S``
 
