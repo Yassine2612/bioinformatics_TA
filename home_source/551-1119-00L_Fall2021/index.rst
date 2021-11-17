@@ -61,6 +61,7 @@ All computed data can be found at ``/nfs/course/551-1119-00L_masterdata/projects
   - ``gene_catalog``:
 
     - ``AML_115_METAG_cdhit9590.functional_profile_insertcounts.lengthnorm.cellab.withKEGG.profile.gz``: Functional profile of the gene catalog. Per cell abundance of each KO.
+    - ``AML_115_METAG_cdhit9590.functional_profile_insertcounts.profile.gz``: Functional profile of the gene catalog. Number of reads of each KO. **This table is not normalized and is only intended to be used for rarefaction and downstream alpha diversity analyses**.
     - ``AML_115_METAG_cdhit9590.gene_profile_insertcounts.lengthnorm.cellab.withKEGG.profile.gz``: Gene profile of the gene catalog. Per cell abundance of each gene x 1000
 
   - ``MAGs``:
