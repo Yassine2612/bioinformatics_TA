@@ -115,7 +115,7 @@ Week 2
 =====  =====  ==============  =================================================
 W2.1   16.11  13:30 - 15:00   Plan group projects
 W2.2   16.11  15:30 - 17:00   Group projects
-W2.3   17.11  08:30 - 10:00   Lecture on best practices for data/project/software management
+W2.3   17.11  08:30 - 10:00   :download:`Lecture on best practices for data/project/software management <documentation/02_03_good_practices.pdf>`
 W2.4   17.11  10:30 - 12:00   Group projects
 W2.5   17.11  13:30 - 15:00   Group projects
 W2.6   17.11  15:30 - 17:00   Group projects
