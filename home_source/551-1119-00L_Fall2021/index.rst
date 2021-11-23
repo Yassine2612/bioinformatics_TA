@@ -133,8 +133,8 @@ Week 3
 ^^^^^^
 
 =====  =====  ==============  =================================================
-W3.1   23.11  13:30 - 15:00   Lecture on report writing (check also the report example)
-W3.2   23.11  15:30 - 17:00   Group projects
+W3.1   23.11  13:30 - 15:00   :download:`Lecture on report writing <documentation/03_01_ReportWriting_Guidelines.pdf>` (check also the :download:`report example <documentation/03_01_Report_example.pdf>`)
+W3.2   23.11  15:30 - 17:00   :download:`ANOVA and DESeq2 <documentation/03_01_ANOVA_DESeq2.pdf>`
 W3.3   24.11  08:30 - 10:00   Group projects
 W3.4   24.11  10:30 - 12:00   Group projects
 W3.5   24.11  13:30 - 15:00   Group projects
