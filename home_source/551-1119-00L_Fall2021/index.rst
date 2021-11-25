@@ -102,7 +102,7 @@ W1.6   10.11  15:30 - 17:00   :doc:`Data transformation with R: tidyverse <docum
 W1.7   11.11  08:30 - 10:00   :doc:`Data visualization with R: ggplot2 <documentation/01_07_ggplot2>`
 W1.8   11.11  10:30 - 12:00   :download:`16S rRNA gene amplicon pipeline (lecture) <documentation/01_08_DADA2_lecture.pdf>`
 W1.9   11.11  13:30 - 15:00   :doc:`16S rRNA gene amplicon pipeline (tutorial) <documentation/01_09_dada2_pipeline>`
-W1.10  11.11  15:30 - 17:00   :download:`Describing microbial community structure (Concept Course lecture) <documentation/01_10_CC_Bioinformatics.Metagenomics1.pdf>`
+W1.10  11.11  15:30 - 17:00   :download:`Describing microbial community structure (Concept Course lecture) <documentation/01_10_CC_Bioinformatics.Metagenomics1.pdf>` and :download:`Introduction to alpha and beta-diversity <documentation/01_10_Diversity_Intro.pdf>`
 W1.11  12.11  08:30 - 10:00   :doc:`Describing microbial community structure (Concept Course tutorial) <documentation/01_11_Diversity_tutorial>`
 W1.12  12.11  10:30 - 12:00   :download:`Data wrangling (hands-on session) <documentation/01_12_data_wrangling.pdf>`
 W1.13  12.11  13:30 - 15:00   :doc:`Data wrangling solutions <documentation/01_12_data_wrangling>`
