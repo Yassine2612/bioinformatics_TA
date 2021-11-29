@@ -67,9 +67,9 @@ When you are trying to find a file in your system, the command **find** offers a
         cd /nfs/course/genomes
 
         # Looking for files
-        find . -name "\*.faa"
-        find . -size +5M
-        find . -name "\*.faa" -size +5M
+        find /nfs/course/genomes -name "*.faa"
+        find /nfs/course/genomes -size +5M
+        find /nfs/course/genomes -name "*.faa" -size +5M
 
 Searching in **less**
 ^^^^^^^^^^^^^^^^^^^^^
@@ -138,7 +138,7 @@ The command **grep** allows you to search within files without opening them firs
     :class: exercise
 
     * Navigate to the directory you copied the *E. coli* files to earlier.
-    * Use **less** to look at the GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna file, containing nucleotide gene sequences.
+    * Use **less** to look at the GCF_000005845.2_ASM584v2_cds_from_genomic.fna file, containing nucleotide gene sequences.
     * Search within less to find the sequence for **dnaA**.
     * Use **grep** to find the same entry in the file.
     * Use **grep** to count how many fasta entries the file has. As a reminder, a FASTA header always starts with a '>'.

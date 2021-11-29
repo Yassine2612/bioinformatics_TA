@@ -73,10 +73,10 @@ Mac
 
 Connecting to a remote server
 -----------------------------
+Your local computer is often not capable of doing bioinformatic work within a reasonable time. Therefore, in order to do bioinformatics, you have to connect to remote servers which have higher capacities than your local machine. ETH provides to its members access to a server named **Euler**, which can be accessed at the address: :code:`euler.ethz.ch`. Bioinformatic labs often have in addition their own remote servers. 
+In order to work on a server, you have to connect to it using a protocol called **S** ecure **Sh** ell or **ssh**.
+The ssh structure usually is <your-ID>@<server-address> in case of Euler this would be <yourETH-ID>@euler.ethz.ch, so the command to connect for Euler would be.
 
-The ETH provides to its members access to a server named **Euler**, which can be accessed at the address: :code:`euler.ethz.ch`. In order to work on the server, we will connect to it using a protocol called **S**\ ecure **Sh**\ ell or **ssh**.
-
-To log into the server use the ssh command your ETH user ID and the server address. **Please note that the first time you access Euler, ETH will send you an additional verification code to your ETH-mail. This code has to be entered into the terminal in order to access Euler.**
 
 .. code-block:: bash
 
@@ -88,19 +88,25 @@ To log into the server use the ssh command your ETH user ID and the server addre
 
     * Try to connect to Euler yourself
 
-        # First, you have to open the command line interface on you computer
+    .. hidden-code-block:: bash
+
+        First, you have to open the command line interface on you computer
         For Windows: Type "command" into the taskbar menu
         For Mac: Click onto the launchpad icon in the dock and type "Terminal" into the search field
 
-        # Second, connect to Euler with the ssh command. You need your  user ID and your nethz password in order to connect to the serve
+         Second, connect to Euler with the ssh command. You need your  user ID and your nethz password in order to connect to the serve
         ssh <yourETH-ID>@euler.ethz.ch
+
+        Please note that the first time you access Euler, ETH will send you an additional verification code to your ETH-mail.**
+        This code has to be entered into the terminal in order to access Euler.
 
 R Workbench
 -----------
+Since everyone is working on different devices and we are using multiple program languages, we have arranged a single web-based platform for you to work on: |R-Workbench|. You may already be familiar with R-Studio, a development platform for programming in R. R-Workbench is built on R-Studio and can also be used for other programming languages and as a Unix terminal. **To login to the R-Workbench only your ethz-login is necessary**, you do not need to ssh, you can if you want to, the server address is ...
 
-Since everyone is working on different devices and we are using multiple program languages, we have arranged a single web-based platform for you to work on: |R-Workbench|. You may already be familiar with R-Studio, a development platform for programming in R. R-Workbench is built on R-Studio and can also be used for other programming languages and as a Unix terminal.
+**From now on, primarily all exercises and homework should be done in R-Workbench.**
 
-**From now on, all exercises and homework should be done in R-Workbench.**
+In order to be able to able to login to the R-Workbench you need to be connected to an ETH-Network or your ETH-VPN has to be active. Furthermore your ethz-login needs to be entered.
 
 .. |R-Workbench| raw:: html
 
