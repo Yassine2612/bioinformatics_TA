@@ -36,4 +36,4 @@ Course Schedule
     "01.11.21 2-4pm", ":download:`Setup <contents/files/lecture0_setup.pptx>` | :download:`Lecture 1 <contents/files/lecture1_unix1.pptx>`", ":doc:`contents/0_Setup` | :doc:`contents/1_Unix1`"
     "08.11.21 2-4pm", ":download:`Lecture 2 <contents/files/lecture2_unix2.pptx>`", ":doc:`contents/2_Unix2`"
     "15.11.21 2-4pm", ":download:`Lecture 3 <contents/files/lecture3_r1.pptx>`", ":doc:`contents/3_R1`"
-    "22.11.21 2-4pm", "", ":doc:`contents/4_R2`"
+    "22.11.21 2-4pm", ":download:`Lecture 4 <contents/files/lecture4_r2.pptx>`", ":doc:`contents/4_R2`"
