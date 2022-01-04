@@ -1,6 +1,6 @@
 Practical Training in Bioinformatics: Online learning materials
 ===============================================================
-|pic0| |pic1| |pic2| |pic3| |pic4| |pic5| |pic6| |pic7| |pic8| |pic9| |pic10| |pic11| |pic12| |pic13|
+|pic0| |pic1| |pic2| |pic4| |pic5| |pic6| |pic7| |pic3| |pic8| |pic9| |pic10| |pic11| |pic12| |pic13|
 
 .. |pic0| image:: contents/images/Setup.png
          :width: 32%
@@ -17,9 +17,9 @@ Practical Training in Bioinformatics: Online learning materials
          :target: https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/2_Unix2.html
 
 
-.. |pic3| image:: contents/images/R_Python.png
+.. |pic3| image:: contents/images/connect_parts_outlook.png
           :width: 32%
-          :target: https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/3_R_Python.html
+          :target: https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/Connect_parts_Outlook.html
 
 .. |pic4| image:: contents/images/Sequence_data.png
          :width: 32%

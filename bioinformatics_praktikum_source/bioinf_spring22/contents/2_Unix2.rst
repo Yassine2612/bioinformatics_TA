@@ -12,9 +12,9 @@ In this lecture we will continue learning to use Unix-based systems. We will lea
 Learning objectives
 ^^^^^^^^^^^^^^^^^^^
 
-* Students can search for and within files
+* Students can search for and within files using regular expressions when appropriate
 * Students are familiar with commands for data wrangling
-* Students can use pipes to control input and output, and combine commands
+* Students can use pipes to control input and output, combine commands and make use of scripts
 * Students are able to work responsibly on computing clusters
 
 Resources
@@ -37,19 +37,20 @@ When you are trying to find a file in your system, the command **find** offers a
 
 .. code-block:: bash
 
-    # Finding files
-    find . -name "*.txt" -type f  # searches for files ending in .txt
-    find . -mtime -2      # searches for files modified in the last two days
-    find . -mtime +365    # searches for files modified at least one year ago
-    find . -size +1G      # searches for files at least 1GB or larger
-    find . -maxdepth 1    # searches only here, i.e.: doesn't look inside directories
+    # Finding files ("." stands for the current directory you are in)
+    find . -name "*.txt" -type f  # searches for files ending in .txt. The type option defines the type of the file.
+    find . -mtime -2              # searches for files modified in the last two days
+    find . -mtime +365            # searches for files modified at least one year ago
+    find . -size +1G              # searches for files at least 1GB or larger
+    find . -maxdepth 1            # searches only here, i.e.: doesn't look inside directories
 
 .. admonition:: Exercises
     :class: exercise
 
-    * Use **ls** to get a list of all files in the /nfs/course/genomes directory
     * Use **cp** to copy all files from the ecoli subdirectory into a new directory in your home directory
     * Navigate to the /nfs/course/genomes directory
+    * Use **man** to read about the **find** function
+    * Use **find** to get a list from everything stored in the /nfs/course/genomes directory
     * Use **find** to look for all .faa files there
     * Use **find** to look for all files larger than 5MB
     * Now combine these criteria to find all .txt files larger than 5MB
@@ -65,6 +66,12 @@ When you are trying to find a file in your system, the command **find** offers a
 
         # Navigation
         cd /nfs/course/genomes
+
+        #Looking at find
+        man find
+        
+        #Getting a list with find
+        find /nfs/course/genomes/bacteria/
 
         # Looking for files
         find . -name "\*.faa"
@@ -89,7 +96,7 @@ But what happens when you search for "."? The entire document will be highlighte
 Regular Expressions
 ^^^^^^^^^^^^^^^^^^^
 
-The reason this happens is that in the context of these search functions, "." represents *any character*. It is acting as a wildcard, from a different set of wildcards to those discussed above.
+The reason this happens is that in the context of these search functions, "." represents *any character*. It is acting as a wildcard, from a different set of wildcards to those discussed in Unix1.
 
 This set of wildcards is part of a system of defining a search pattern called **regular expression** or **regex**. Such a pattern can consist of wildcards, groups and quantifiers, and may involve some complex logic which we will not cover here. Further, the exact set of wildcards available depends on the programming language being used.
 
@@ -140,6 +147,7 @@ The command **grep** allows you to search within files without opening them firs
     * Navigate to the directory you copied the *E. coli* files to earlier.
     * Use **less** to look at the GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna file, containing nucleotide gene sequences.
     * Search within less to find the sequence for **dnaA**.
+    * Use **man** to look at the **grep** command
     * Use **grep** to find the same entry in the file.
     * Use **grep** to count how many fasta entries the file has. As a reminder, a FASTA header always starts with a '>'.
     * Find out, which entry number the gene **dnaA** is?
@@ -155,11 +163,13 @@ The command **grep** allows you to search within files without opening them firs
 
         # Type this within less:
         /dnaA
-
         # Type 'n' or 'N' after to see if there are more search hits
 
-        # Use grep
-        grep 'dnaA' GCF_000005845.2_ASM584v2_cds_from_genomic.fna
+        #Looking at grep
+        man grep
+
+        #Using grep to search for dnaA
+        grep 'dnaA'
 
         # Use grep to count
         grep -c '>' GCF_000005845.2_ASM584v2_cds_from_genomic.fna
@@ -180,6 +190,7 @@ The command **sort** will sort each line of a file, alphabetically by default, b
     cat sort_words.txt
     sort /nfs/course/examples/sort_words.txt
 
+    #Sorting nummerically with the -n option
     cat /nfs/course/examples/sort_nums.txt
     sort -n /nfs/course/examples/sort_nums.txt
 
@@ -238,12 +249,18 @@ The command **uniq** compresses adjacent repeated lines into one line, and is be
 
     .. hidden-code-block:: bash
 
+        # Sort sort_nums.text without -n
+        sort sort_nums.txt
+        # The file will be sorted alphabetically 
+
         # Look at sort_tab.txt
         less /nfs/course/examples/sort_tab.txt
 
         # Extract the second column
         cut -f 2 /nfs/course/examples/sort_tab.txt
 
+        # Looking at he manuel
+        man sort
         # Sort the table by second column
         sort -n -k 2 /nfs/course/examples/sort_tab.txt
         # Note that if you forget the -n then the numbers are sorted alphabetically, not numerically
@@ -254,6 +271,7 @@ The command **uniq** compresses adjacent repeated lines into one line, and is be
         # Use tr to convert one word into another
         tr 'ban' 'roc'
         # Then input banana and back comes rococo!
+        # Use ctr + c to kill the command
 
         # Check file with uniq
         uniq -c /nfs/course/examples/sort_tab.txt
@@ -351,6 +369,48 @@ Sometimes you want to take the output of one program and use it in another -- fo
         # Consider the following alternative:
         grep -A 1 ">" E.coli_CDS.fna | grep -v '>' | grep -o "^\w\w\w" | sort | uniq -c | sort -k1nr
 
+Writing and running a script
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you construct a series of commands that you want to perform repeatedly, you can write them into a **script** and then run this script instead of each command individually. This makes it less likely that you make an error in one of the individual commands, and also keeps a record of the computation you performed so that your work is reproducible.
+
+You can write the script using a text editor on your computer, then uploading it, or in R Workbench. If you want to write a script directly in the terminal there are text editors available such as **vim** and **emacs** - you should be able to find tutorials for both online.
+
+By convention, a script should be named ending in *.sh* and is run as follows:
+
+.. code-block:: bash
+
+    # Run a script in the same directory
+    ./myscript.sh
+
+    # Run a script in another directory
+    ./mydir/myscript.sh
+
+The command line interface, or shell, that we use is called **bash** and it allows you to use arguments in your scripts, encoded as variables *$1*, *$2*, etc.
+
+For instance we could have a simple script:
+
+.. code-block:: bash
+
+    # myscript.sh
+    echo "Hello, my name is $1"
+
+.. code-block:: bash
+
+    # Running my simple script
+    ./myscript.sh Chris
+
+    "Hello, my name is Chris"
+
+This means you could write a script that performs some operations on a file, and then replace the file path in your code with *$1* to allow you to declare the file when you execute the script. Just remember that if your script changes working directory, the relative path to your file may be incorrect, so sometimes it is best to use the absolute path.
+
+.. admonition:: Exercise
+    :class: exercise
+
+    * Write a simple script that will count the number of entries in a fasta file
+    * Use a variable to allow you to declare the file when you run the script
+    * Test it on each of the fasta files in the /nfs/course/genomes subdirectories
+
 Working on a computing cluster
 ------------------------------
 
@@ -392,52 +452,74 @@ Then the equivalent commands:
 .. admonition:: Exercises
     :class: exercise
 
-* Copy the submit.sh script to your home directory.
-* Load the 'prodigal' module and find out the program options
-* Change the 'echo' line to load the module for *prodigal* and then run the program on the *E. coli* genome.
-* You shouldn't need more than 8 slots or 1GB of memory per slot.
-* When the job is finished, look at the output files for yourself!
+    * Copy the submit.sh script to your home directory.
+    * Load the 'prodigal' module and find out the program options
+    * Change the 'echo' line to load the module for *prodigal* and then run the program on the *E. coli* genome.
+    * You shouldn't need more than 8 slots or 1GB of memory per slot.
+    * When the job is finished, look at the output files for yourself!
 
-.. hidden-code-block:: bash
+    .. hidden-code-block:: bash
 
-    # Copy the script
-    cp /science/teaching/submit.sh ~/
+        # Copy the script
+        cp /science/teaching/submit.sh ~/
 
-    # Load the prodigal module for yourself
-    module load prodigal
+        # Load the prodigal module for yourself
+        module load prodigal
 
-    # Read the options for the program
-    prodigal -h
+        # Read the options for the program
+        prodigal -h
 
-    # Edit the submit script by replacing the 'echo' line to this:
-    module load prodigal
-    prodigal -i ecoli.fna -o ecoli_genes.fna
+        # Edit the submit script by replacing the 'echo' line to this:
+        module load prodigal
+        prodigal -i ecoli.fna -o ecoli_genes.fna
 
-    # Submit the script to the queue
-    qsub submit.sh
+        # Submit the script to the queue
+        qsub submit.sh
 
-    # Look at the output
-    less ecoli_genes.fna
+        # Look at the output
+        less ecoli_genes.fna
 
-    # If you are working on Euler, instead copy the submit_lsf.sh
-    cp /science/teaching/submit.sh ~/
+        # If you are working on Euler, instead copy the submit_lsf.sh
+        cp /science/teaching/submit.sh ~/
 
-    # Manually load the module system - sorry!
-    unset MODULEPATH_ROOT
-    unset MODULESHOME
-    unset MODULEPATH
-    source /nfs/nas22/fs2201/biol_micro_unix_modules/Lmod-7.8/lmod/lmod/init/profile
+        # Manually load the module system - sorry!
+        unset MODULEPATH_ROOT
+        unset MODULESHOME
+        unset MODULEPATH
+        source /nfs/nas22/fs2201/biol_micro_unix_modules/Lmod-7.8/lmod/lmod/init/profile
 
-    # Everything else will be the same until it's time to submit the script
-    bsub < submit_lsf.sh
+        # Everything else will be the same until it's time to submit the script
+        bsub < submit_lsf.sh
+
+Homework
+--------
+
 
 .. admonition:: Homework
     :class: homework
-       
-    Learning a new language and computational programming have many similarities with verbs, adverbs and objects equating to commands (action), options (modify action) and arguments (target of the option). As with learning languages, mastering programming requires practice and repetition. To take first steps, please visit the following page and create a "cheat sheet" for the relevant commands used today and in Unix1, so that this will serve you as a future reference. Defining the general purpose of a command, the most important options and showing examples with meaningful placeholders may be the most effective approach.
 
-    Create your cheat sheet |Cheatsheet|
+    Learning a new language and computational programming have many similarities with verbs, adverbs and objects equating to commands (action), options (modify action) and arguments (target of the option). As with learning languages, mastering programming requires practice and repetition. 
+    
+    To take a first step, please create a “cheat sheet” for **three** commands used in Unix 1/2. You should define the general purpose of the command, the most important options and show examples with meaningful placeholders (example below). Of course the example is **not** allowed to be one of your three commands. You can either use an text editor on your computer to create your cheat sheet and then upload it into your homework folder or you can use a text editor directly in the terminal such as **vim** and **emacs**. Either way, please name your cheat sheet **Cheat_sheet_<Your First Name>_<Your Last Name>.txt**
+
+        .. code-block:: bash
+
+                For example (command - placeholders between ""; option - placeholders between ''; placeholders between <>):
+                "sort" <file> - sorts a file line by line (by default alphabetically)
+                '-n' sorts numerically (instead of alphabetically)
+                '-r' reverses the order of the output
+                
+
+
+
+
 
 .. |Cheatsheet| raw:: html
 
     <a href="https://docs.google.com/document/d/1xsH1yiW3B-rZsTIjF2T5NB_4NmaU_ZO3srcmT5_iHgc/edit" target="_blank">here</a>
+
+
+.. container:: nextlink
+
+    `Next: R/Python  <3_R_Python.html>`_
+

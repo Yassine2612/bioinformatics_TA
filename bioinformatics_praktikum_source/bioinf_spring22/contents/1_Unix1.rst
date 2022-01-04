@@ -14,7 +14,6 @@ Learning objectives
 
 * Students can use the command line to issue basic commands with arguments
 * Students can navigate the Unix file system and perform basic file operations
-* Students can get help with commands and programs
 * Students can inspect files on the server
 
 Resources
@@ -27,7 +26,7 @@ This section requires the use of the |R_Workbench|.
     <a href="https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F" target="_blank">R Workbench</a>
 
 
-The structure of a command
+The command
 --------------------------
 
 Commands are our tool to tell the computer what to do. Most commands have *options* and *arguments*. Arguments are often essential for a command to operate properly; they are the pieces of information required by a command, such as a file name. Options are, of course, optional, and offer ways to modify the way the command works.
@@ -52,6 +51,24 @@ If you use the option *-n*, then it will not add a 'new line' to the end of the 
 Some commands end up with very complex structures, because they can have many options and arguments. In general, options will be of the format ``-a`` where a is a single letter or ``--word`` where word is a string (a series of letters, in computer terms).
 
 * Note: the command line is case-sensitive! So it **does** matter if you write *-a* or *-A*.
+
+Getting help
+^^^^^^^^^^^^
+
+The **man** command will show a manual for most basic commands, providing the correct syntax to use it and the various options available.
+
+.. code-block:: bash
+
+    # Read the manual
+    man ls
+
+Other programs have different ways to provide help on how to use them. A online tutorial is best, or a comprehensive manual, but sometimes you only have the command line to help you.
+
+.. code-block:: bash
+
+    # Help please!
+    python3 -h
+    python3 --help
 
 Useful command line tricks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -167,7 +184,7 @@ The **..** refers to the directory above a location, so the relative path here g
     ./
 
 Navigation
-----------
+^^^^^^^^^^
 
 **pwd** will tell you exactly where you are in the file system. If you imagine the tree structure, **pwd** tells you on which branch of the tree you are sitting. You will start off in your home folder.
 
@@ -262,24 +279,24 @@ Navigation
         # Finally let's go home
         cd 
 
+Wildcards
+^^^^^^^^^
 
-Getting help
-------------
+When providing a file path as an argument to a command, it is often possible to provide multiple file paths using *wildcards*. These are special characters or strings that can be substituted for a matching pattern. For many commands using wildcards allows you to execute the associated action on each file that matches the pattern, though this obviously does not work in all cases.
 
-**man** will show a manual for most basic commands, providing the correct syntax to use it and the various options available.
+* **?** matches any single character
+* \* matches any number of any characters
+* **[...]** matches any character within the brackets
+* **{word1,word2,...}** matches any string inside the brackets
+
+For instance:
 
 .. code-block:: bash
 
-    # Read the manual
-    man ls
-
-Other programs have different ways to provide help on how to use them. A online tutorial is best, or a comprehensive manual, but sometimes you only have the command line to help you.
-
-.. code-block:: bash
-
-    # Help please!
-    python3 -h
-    python3 --help
+    # Pattern matching
+    ls /cluster/home/ssunagaw/teaching/ecoli/*      # lists all files in the ecoli directory
+    ls /cluster/home/ssunagaw/teaching/ecoli/*.fna  # lists all nucleotide fasta files there
+    ls /cluster/home/ssunagaw/teaching/ecoli/*.f?a  # lists all nucleotide and protein fasta files there
 
 Basic file operations
 ---------------------
@@ -325,47 +342,49 @@ Basic file operations
 .. admonition:: Exercises
     :class: exercise
 
-    * Create a new directory called "genomes"
-    * Copy the E. coli file into your new directory "genomes"
+    * Create two new directories called "genomes" and "homework" in your home folder
+    * Copy any of the E. coli files (found in /nfs/course/genomes/bacteria/escherichia/any_directory/any_file.fna) into your new directory "genomes"
     * Rename the file to "E.coli_file"
     * Use the help option of the ls function to find with option gives you the size of the genome
     * Using the *man* and *cp*, find out how to copy a directory.
 
     .. hidden-code-block:: bash
 
+        # First go to your home folder
+        cd 
         # Use the mkdir function to create a directory
         mkdir genomes
+        mkdir homework
 
 
         # Use the cp function to copy. cp <source> <destination>
-        cp /file/to/copy ~/genome
+        cp /nfs/course/genomes/bacteria/escherichia/complicated_file_name  ~/genome
 
 
         # Use the move function to rename a file mv <source> <destination>
-        mv complicated_name E.coli_file
+        mv complicated_file_name E.coli_file
 
 
         # ls --help lists all the options possible
         ls --help
         
-        # the -l option prints one file per line with the size and the -h options make it    human-readable. You can join both options together
+        # The -l option prints one file per line with the size and the -h options make it human-readable. You can join both options together
         ls -lh
 
-        # create two directory
+        # Create two directory
         mkdir dir1
         mkdir dir2
         
-        # try to copy dir1 into dir2
+        # Try to copy dir1 into dir2
         cp dir1 dir2
         cp: dir1 is a directory (not copied).
         
-        # if you check 'man cp', you see that you have to use -R:
+        # If you check 'man cp', you see that you have to use -R:
+        man cp
         cp -R dir dir2
 
-
-
 File name conventions
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 In Unix systems there are only really two types of files: text or binary. The file name ending (.txt or .jpg) doesn't really matter like it does in Windows or Mac OS, however it is used to indicate the file type by convention. Some file types you will encounter include:
 
@@ -380,10 +399,13 @@ In Unix systems there are only really two types of files: text or binary. The fi
 * .py - A python script, which contains python commands to run.
 * .gz or .tar.gz - A file that has been compressed using a protocol called 'gzip' so that it takes up less space on the disk and transfers over the internet faster.
 
-Transferring files
-------------------
+Other useful file operations
+----------------------------
 
-There are many different protocols for transferring files between servers. You may have heard of **FTP** - **F**\ile **T**\ransfer **P**\rotocol - which is a non-secure but commonly used example. A more secure file transfer protocol is **SCP**, and programs such as *WinSCP* use it. The command **scp** is an easy way to transfer a file immediately between the server you are working on and another (or two different servers!). Another command to copy files is **rsync**, which can be used with many options such as preserving the ownership and date of creation of a file (and much more).
+Transferring files between computers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+There are many different protocols for transferring files between computers. You may have heard of **FTP** - **F**\ile **T**\ransfer **P**\rotocol - which is a non-secure but commonly used example. A more secure file transfer protocol is **SCP** - **S**\ecure **C**\opy **P**\rotocol, and programs such as *WinSCP* use it. The command **scp** is an easy way to transfer a file immediately between the server you are working on and another (or two different servers!). Another command to copy files is **rsync**, which can be used with many options such as preserving the ownership and date of creation of a file (and much more).
 
 .. code-block:: bash
 
@@ -417,7 +439,7 @@ Sometimes you want to download a file directly from the internet to the server, 
     wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/482/265/GCF_000482265.1_EC_K12_MG1655_Broad_SNP/GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna.gz
 
 Compressing and decompressing files
------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Files can be compressed to take up less space on the hard drive (disk), or for transfer over the internet. The file you downloaded is an example, and we can decompress it using the **gunzip** command:
 
@@ -435,10 +457,6 @@ If you ever need to compress a file, for instance to send it to someone, you can
 
 .. admonition:: Exercises
     :class: exercise
-
-    * Windows: Using Windows Command:
-    * Mac OS X: In the Mac Terminal:
-        * Upload a file of your choice to the server.
 
     * On the server, download the E. coli file in the example above to your home folder.
     * Decompress the file.
@@ -505,9 +523,19 @@ The command **wc** is a command that will quickly count the number of lines, wor
     * Use **head** and **tail** to examine the first and last 10 lines of the genome file. Now try to look at the first and last 20 lines.
     * Use **less** to look at the genome file. Navigate through the file with the keys listed above, then return to the Terminal.
     * Use the **man** command we learned to read about the **wc** command.
-    * Can you find out how many lines are in the genome file?
+    * Can you find out how many lines are in the genome file with the **wc** command?
 
     .. hidden-code-block:: bash
+
+        # Looking at the file
+        cat E.coli_K12_MG1655.fna
+        # Press ctrl + c to cancel the command
+
+        # Look at the first 10 lines (10 is the default value)
+        head E.coli_K12_MG1655.fna
+
+        # Look at the last 10 lines
+        tail E.coli_K12_MG1655.fna
 
         # Look at the first 20 lines
         head -n 20 E.coli_K12_MG1655.fna
@@ -515,38 +543,38 @@ The command **wc** is a command that will quickly count the number of lines, wor
         # Look at the last 20 lines
         tail -n 20 E.coli_K12_MG1655.fna
 
+        # Looking at the genome file
+        less E.coli_K12_MG1655.fna
+        #press q to quit
+
+        # Read about the wc command
+        man wc
+
         # Count the number of lines in the file
         wc -l E.coli_K12_MG1655.fna
 
-Wildcards
-^^^^^^^^^
-
-When providing a file path as an argument to a command, it is often possible to provide multiple file paths using *wildcards*. These are special characters or strings that can be substituted for a matching pattern.
-
-* **?** matches any single character
-* \* matches any number of any characters
-* **[...]** matches any character within the brackets
-* **{word1,word2,...}** matches any string inside the brackets
-
-For instance:
-
-.. code-block:: bash
-
-    # Pattern matching
-    ls /cluster/home/ssunagaw/teaching/ecoli/*      # lists all files in the ecoli directory
-    ls /cluster/home/ssunagaw/teaching/ecoli/*.fna  # lists all nucleotide fasta files there
-    ls /cluster/home/ssunagaw/teaching/ecoli/*.f?a  # lists all nucleotide and protein fasta files there
+Homework
+--------
 
 .. admonition:: Homework
     :class: homework
 
-    * Upload a picture into your home folder and name it X
-    * Find the out-of-place file in /nfs/course/genomes and copy it into your home folder
+    * Upload a picture into your homework folder you created in the third exercise and name it **<Your First Name>_<Your Last Name>.png**
+    * Find the out-of-place file in /nfs/course/genomes and copy it into your homework folder
     * Interesting questions:
         * What happens when you copy a file with the same name as an existing file?
         * What happens when you delete the directory you are currently in?
         * What happens when you create a directory with the same name as an existing one?
         * What happens if you `*echo* --help` ? And how can you get the help information for *echo*?
+
+        .. code-block:: bash
+
+                # If you have not created your homeworkfolder yet, here is a reminder on how you do it
+                # First make sure you are in your home folder
+                cd ~
+                # Create a new folder with the mkdir command
+                mkdir homework
+
 
 .. container:: nextlink
 
