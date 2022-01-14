@@ -48,9 +48,9 @@ When you are trying to find a file in your system, the command **find** offers a
     :class: exercise
 
     * Use **cp** to copy all files from the ecoli subdirectory into a new directory in your home directory
-    * Navigate to the /nfs/course/genomes directory
+    * Navigate to the /nfs/course/PTB_551-0132-00/genomes directory
     * Use **man** to read about the **find** function
-    * Use **find** to get a list from everything stored in the /nfs/course/genomes directory
+    * Use **find** to get a list from everything stored in the /nfs/course/PTB_551-0132-00/genomes directory
     * Use **find** to look for all .faa files there
     * Use **find** to look for all files larger than 5MB
     * Now combine these criteria to find all .txt files larger than 5MB
@@ -62,16 +62,16 @@ When you are trying to find a file in your system, the command **find** offers a
         mkdir ecoli
 
         # Copy all the files
-        cp /nfs/course/genomes/bacteria/escherichia/* ~/ecoli/
+        cp /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/* ~/ecoli/
 
         # Navigation
-        cd /nfs/course/genomes
+        cd /nfs/course/PTB_551-0132-00/genomes
 
         #Looking at find
         man find
         
         #Getting a list with find
-        find /nfs/course/genomes/bacteria/
+        find /nfs/course/PTB_551-0132-00/genomes/bacteria/
 
         # Looking for files
         find . -name "\*.faa"
@@ -188,26 +188,26 @@ The command **sort** will sort each line of a file, alphabetically by default, b
 
     # Sort some example files
     cat sort_words.txt
-    sort /nfs/course/examples/sort_words.txt
+    sort /nfs/course/PTB_551-0132-00/examples/sort_words.txt
 
     #Sorting nummerically with the -n option
-    cat /nfs/course/examples/sort_nums.txt
-    sort -n /nfs/course/examples/sort_nums.txt
+    cat /nfs/course/PTB_551-0132-00/examples/sort_nums.txt
+    sort -n /nfs/course/PTB_551-0132-00/examples/sort_nums.txt
 
 The command **cut** allows you to extract a single column of data from a file, for instance a .csv or .tsv file.
 
 .. code-block:: bash
 
     # Look at some experimental metadata and extract the column we are interested in
-    less /nfs/course/examples/metadata.tsv
-    cut -f 4 /nfs/course/examples/metadata.tsv
+    less /nfs/course/PTB_551-0132-00/examples/metadata.tsv
+    cut -f 4 /nfs/course/PTB_551-0132-00/examples/metadata.tsv
 
 The command **paste** allows you to put data from different files into columns of the same file.
 
 .. code-block:: bash
 
     # Put together two files into one
-    paste /nfs/course/examples/sort_words.txt /nfs/course/examples/sort_nums.txt
+    paste /nfs/course/PTB_551-0132-00/examples/sort_words.txt /nfs/course/PTB_551-0132-00/examples/sort_nums.txt
 
 The command **tr** will replace a given character set with another character set, but to use it properly you need to know how to combine commands (below).
 
@@ -230,20 +230,20 @@ The command **uniq** compresses adjacent repeated lines into one line, and is be
 .. code-block:: bash
 
     # Look at a file and remove adjacent repeated lines
-    less /nfs/course/examples/uniq_nums.txt
-    uniq /nfs/course/examples/uniq_nums.txt
+    less /nfs/course/PTB_551-0132-00/examples/uniq_nums.txt
+    uniq /nfs/course/PTB_551-0132-00/examples/uniq_nums.txt
 
     # Count how many times each value is repeated
-    uniq -c /nfs/course/examples/uniq_nums.txt
+    uniq -c /nfs/course/PTB_551-0132-00/examples/uniq_nums.txt
 
 .. admonition:: Exercises
     :class: exercise
 
     * Use the **sort** examples above and see what happens when you try to sort the *sort_nums.txt* file without the -n flag.
-    * Look at the file */nfs/course/examples/sort_tab.txt*.
+    * Look at the file */nfs/course/PTB_551-0132-00/examples/sort_tab.txt*.
     * Extract the second column of this file using **cut**.
     * Looking at the manual for **sort**, can you figure out how to sort *sort_tab.txt* according to the second column, or 'key'?
-    * Use **paste** to combine the two files *sort_words.txt* and *sort_nums.txt* (in the directory */nfs/course/examples/*) into a single two-column output.
+    * Use **paste** to combine the two files *sort_words.txt* and *sort_nums.txt* (in the directory */nfs/course/PTB_551-0132-00/examples/*) into a single two-column output.
     * Use **tr** so that when you enter the word *banana* it comes out as *rococo*.
     * Use the **uniq** examples above, then check with **uniq -c** that each line in *sort_tab.txt* is unique.
 
@@ -254,19 +254,19 @@ The command **uniq** compresses adjacent repeated lines into one line, and is be
         # The file will be sorted alphabetically 
 
         # Look at sort_tab.txt
-        less /nfs/course/examples/sort_tab.txt
+        less /nfs/course/PTB_551-0132-00/examples/sort_tab.txt
 
         # Extract the second column
-        cut -f 2 /nfs/course/examples/sort_tab.txt
+        cut -f 2 /nfs/course/PTB_551-0132-00/examples/sort_tab.txt
 
         # Looking at he manuel
         man sort
         # Sort the table by second column
-        sort -n -k 2 /nfs/course/examples/sort_tab.txt
+        sort -n -k 2 /nfs/course/PTB_551-0132-00/examples/sort_tab.txt
         # Note that if you forget the -n then the numbers are sorted alphabetically, not numerically
 
         # Use paste to combine files
-        paste /nfs/course/examples/sort_words.txt /nfs/course/examples/sort_nums.txt
+        paste /nfs/course/PTB_551-0132-00/examples/sort_words.txt /nfs/course/PTB_551-0132-00/examples/sort_nums.txt
 
         # Use tr to convert one word into another
         tr 'ban' 'roc'
@@ -274,7 +274,7 @@ The command **uniq** compresses adjacent repeated lines into one line, and is be
         # Use ctr + c to kill the command
 
         # Check file with uniq
-        uniq -c /nfs/course/examples/sort_tab.txt
+        uniq -c /nfs/course/PTB_551-0132-00/examples/sort_tab.txt
         # Each value in the first column is 1 - no repeats!
 
 Combining commands
@@ -301,7 +301,7 @@ Although you can usually give files as input to a program through an argument, y
 
     # Copy and rename the file containing the E.coli genome
     cd
-    cp /nfs/course/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna E.coli.fna
+    cp /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna E.coli.fna
 
     # Using the standard streams
     head < E.coli.fna                  # send the file to head via stdin using '<'
@@ -318,7 +318,7 @@ Sometimes you want to take the output of one program and use it in another -- fo
 
     # Copy and rename the file containing the E.coli open reading frames
     cd
-    cp /nfs/course/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_cds_from_genomic.fna E.coli_CDS.fna
+    cp /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_cds_from_genomic.fna E.coli_CDS.fna
 
     # Piping
     head E.coli.fna | grep "ACGT"                  # send the output of head to grep and search
@@ -409,7 +409,16 @@ This means you could write a script that performs some operations on a file, and
 
     * Write a simple script that will count the number of entries in a fasta file
     * Use a variable to allow you to declare the file when you run the script
-    * Test it on each of the fasta files in the /nfs/course/genomes subdirectories
+    * Make your script *executable* with the command "chmod +x myscript.sh"
+    * Test it on each of the fasta files in the /nfs/course/PTB_551-0132-00/genomes subdirectories
+
+    .. hidden-code-block:: bash
+
+    # Simple script to count fasta entries in a file, fastacount.sh:
+    grep -c "^>" $1
+
+    # Run the script
+    ./fastacount.sh /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_cds_from_genomic.fna
 
 Working on a computing cluster
 ------------------------------
@@ -521,5 +530,5 @@ Homework
 
 .. container:: nextlink
 
-    `Next: R/Python  <3_R_Python.html>`_
+    `Next: Sequence data  <3_Sequence.html>`_
 

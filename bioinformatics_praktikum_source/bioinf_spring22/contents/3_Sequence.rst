@@ -15,8 +15,8 @@ Learning objectives
 
 * Students can recognise and work with fastq and fasta formatted sequence files
 * Students can interpret genbank and gff formatted files
-* Students are able to identify an appropriate online database to find relevant sequence file
-* ...
+* Students are proficient with Biopython to manipulate sequences programmatically
+* Students are able to identify an appropriate online database to find relevant sequence files
 
 Requirements
 ^^^^^^^^^^^^
@@ -53,7 +53,36 @@ A fastq file may contain multiple sequences in fastq format. This is a text-base
    +
    IIIIIIIIIIIIIIIIIIIIIIIIIIIIII9IG9IC
 
-Quality scores in the standard format range between 0 and 93, although sequencing read data is rarely higher than 60. The scores are encoded such that there is one character per base in the 2nd line of the fastq entry. You can learn more about DNA sequence quality scores in the *Concept Course in Bioinformatics*.
+Quality scores
+^^^^^^^^^^^^^^
+
+Quality scores in the standard Phred format range between 0 and 93, although sequencing read data is rarely higher than 60. The scores are encoded such that there is one character per base in the 2nd line of the fastq entry, using the ASCII encoding table (a computing standard). For instance, the letter **A** has a decimal equivalent of **65**. Sanger format offsets the quality score by **33**, so this represents a quality score of **32**.
+
+.. figure:: images/illumina_fastq_coding.png
+    :align: center
+
+The Phred quality score (Q) is logarithmically related to the error probability (E) and can therefore be interpreted as an estimate of error (E) or as an estimate of accuracy (A).
+
+.. math::
+
+    & Q = -10log(E) \\
+    & E = 10^{-(Q/10)} \\
+    & A = 1-E = 1 - 10^{-(Q/10)}
+
+This formula gives us the following benchmarks for accuracy:
+
++------------------+-----------+------------+----------------------+
+| Phred Quality Score          |   Error    |  Accuracy            |
+|                              |            |                      |
++==============================+============+======================+
+| 10                           | 10%        | 90%                  |
++------------------------------+------------+----------------------+
+| 20                           | 1%         | 99%                  |
++------------------------------+------------+----------------------+
+| 30                           | 0.1%       | 99.9%                |
++------------------------------+------------+----------------------+
+| 40                           | 0.01%      | 99.99%               |
++------------------------------+------------+----------------------+
 
 FASTA format
 ^^^^^^^^^^^^
@@ -85,6 +114,8 @@ A fasta file may also contain multiple sequences in fasta format (sometimes know
     * How about for a fastq file?
     * HINT: in both cases think carefully about the ways your method might go wrong, consider using a regular expression
 
+    * In the example fastq entry above, calculate the Phred quality scores for the final 4 bases.
+
     * How could you convert a fastq file to fasta format (discarding the quality scores) using command line tools?
 
     .. hidden-code-block:: bash
@@ -111,12 +142,12 @@ Genbank flat file format
 
 The genbank flat file is designed to contain a large and varied amount of information on DNA or RNA sequences. We are not going to cover here all of the possible features of the format, but the NCBI provide a sample record with a detailed description of each component |NCBI_GenBank|.
 
-* **Locus**
-  * Locus name: originally had a set format but now just has to be a unique name for the sequence record.
-  * Sequence length: number of base pairs or amino acids.
-  * Molecule type: for instance DNA or mRNA, from a limited set of valid types.
-  * GenBank division: a three letter designation such as PRI (primate), PLN (plant) or BAC (bacteria), from a limited set of valid designations.
-  * Modification date: when the record was last updated.
+* **Locus**:
+        * Locus name: Originally had a set format but now just has to be a unique name for the sequence record.
+        * Sequence length: Number of base pairs or amino acids.
+        * Molecule type: For instance DNA or mRNA, from a limited set of valid types.
+        * GenBank division: A three letter designation such as PRI (primate), PLN (plant) or BAC (bacteria), from a limited set of valid designations.
+        * Modification date: When the record was last updated.
 
 * **Definition**: A brief description of the sequence such as source organism, gene name/protein name, or some description of the sequence's function.
 
@@ -125,9 +156,9 @@ The genbank flat file is designed to contain a large and varied amount of inform
 * **Source**: Organism name and sometimes molecule type. Under **Organism** you can find the formal scientific name for the source organism and its lineage.
 
 * **Features**: Information about genes, gene products and biologically relevant regions. Each feature has:
-  * Type: the type of feature such as gene or CDS, from a limited set of valid types.
-  * Position: the start and end of the feature, possibly multiple start/ends for eukaryotic genes for instance.
-  * Qualifiers: various additional pieces of information such as /product (product name) or /translation (amino acid sequence), from a limited set of valid qualifiers.
+        * Type: The type of feature such as gene or CDS, from a limited set of valid types.
+        * Position: The start and end of the feature, possibly multiple start/ends for eukaryotic genes for instance.
+        * Qualifiers: Various additional pieces of information such as /product (product name) or /translation (amino acid sequence), from a limited set of valid qualifiers.
 
 * **Origin**: Optionally, the full sequence of record may be included here.
 
@@ -200,216 +231,263 @@ In many ways, Seq objects behave like strings, with find and count methods:
     my_seq.count("A")
     my_seq.count("TT") # only non-overlapping sequences are counted
 
+They also have useful, sequence specific methods:
 
+.. code-block:: python
 
-* Loading Seq, SeqIO
-* Reading files
-* Accessing information
-* Modifying
-* Writing files
+    # Complement
+    my_seq.complement()
 
+    # Reverse complement
+    my_seq.reverse_complement()
 
+    # Transcription and reverse transcription
+    my_rna = my_seq.transcribe()
+    my_dna = my_rna.back_transcribe()
 
+    # Translation works on both DNA and RNA
+    my_rna.translate()
+    my_dna.translate()
 
+Sequences can also be concatenated and sliced like strings, remembering that python uses 0-based indexing.
 
-Quality checking
-^^^^^^^^^^^^^^^^
+.. code-block:: python
 
-Phred Quality Scores
---------------------
+    # Add some made up sequence
+    my_newseq = Seq("ATG") + my_seq
 
-There were several competing systems for encoding the quality scores but the Sanger format encoding Phred quality scores has won out. This is based on the decimal code for the character used from the ASCII encoding table. For instance, the letter **A** has a decimal equivalent of **65**. Sanger format offsets the quality score by **33**, so this represents a quality score of **32** for the letter **A**.
+    # Get the first 1000bp
+    my_subseq = my_seq[0:1000]
 
-.. figure:: images/Ascii_Table-nocolor.svg
-    :align: center
+    # Get the last 1000bp
+    my_subseq = my_seq[-1000:]
 
-The Phred quality score (Q) is logarithmically related to the error probability (E) and can therefore be interpreted as an estimate of error (E) or as an estimate of accuracy (A). In the FASTQ-format the estimate of accuracy is used.
+Reading files with SeqIO
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. math::
-   
-   & Q = -10log(E) \\
-   & E = 10^{-(Q/10)} \\
-   & A = 1-E = 1 - 10^{-(Q/10)}
+SeqIO provides a function *parse()* that allows you to read in a multi-fasta file as an iterator or using a handle:
 
+.. code-block:: python
 
-These formulas lead to this table on how the Phred scores can be interpreted. 
+    # As an interator
+    records = SeqIO.parse("myfile.fasta", "fasta")
 
-+------------------+-----------+------------+----------------------+
-| Phred Quality Score          |   Error    |  Accuracy            |
-|                              |            |                      |
-+==============================+============+======================+
-| 10                           | 10%        | 90%                  |
-+------------------------------+------------+----------------------+
-| 20                           | 1%         | 99%                  |
-+------------------------------+------------+----------------------+
-| 30                           | 0.1%       | 99.9%                |
-+------------------------------+------------+----------------------+
-| 40                           | 0.01%      | 99.99%               |
-+------------------------------+------------+----------------------+
+    # Using a handle
+    with open("myfile.fasta" as handle:
+        for record in SeqIO.parse(handle, "fasta")
+            <do things>
 
+The advantage of using a handle is guaranteeing that the file is closed correctly after reading.
 
-Phred quality scores usually range from 0-40 in FASTQ files. For most purposes a Phred score of 20 is the acceptable limit of quality (99% accuracy).
+Records read in by SeqIO are **SeqRecord** objects, which contain a *seq* variable that is a Seq object and additional information such as the record ID and description. Many of the methods for Seq objects work identically for SeqRecords.
+
+Sometimes you don't want to work through the records in file order, in which case you can use *list()* to convert the iterator to a python list, but be careful with very large files as this will put every record into memory at the same time. You can also convert the iterator to a dictionary with record IDs as keys using a provided function.
+
+.. code-block:: python
+
+    # As a list object
+    records = list(SeqIO.parse("myfile.fasta", "fasta"))
+
+    # As a dictionary
+    records = SeqIO.to_dict(SeqIO.parse("myfile.fasta", "fasta"))
+
+Note that the *SeqIO.parse* examples above specify the file format as "fasta". Many other formats are supported, but the correct format must be explicitly given as an argument, for instance fastq is "fastq" and GenBank is "genbank" or "gb". Sadly, GFF format is not yet supported and requires an additional package or parsing it yourself. The full list of formats is available |BioPython_SeqIO|.
+
+.. |BioPython_SeqIO| raw:: html
+
+    <a href="https://biopython.org/wiki/SeqIO" target="_blank">here</a>
+
+Accessing feature information
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you import a GenBank file with SeqIO, the Seq object will also contain information about the record's features, stored as SeqFeature objects.
+
+.. code-block:: python
+
+    # Import a genbank file and inspect its features
+    records = list(SeqIO.parse("myfile.gbk", "gb"))
+    record = records[0]
+
+    # List of features
+    record.features
+
+    # Inspect a feature
+    print(record.features[0])
+    record.features[0].location
+    record.features[0].qualifiers
+
+    # Extract the sequence for the feature
+    feature_seq = record.features[0].extract(record)
+
+As features are a list, you can of course sort them using list comprehension by type, position, or similar. Note that when you slice a sequence to create a subsequence, only features that are contained completely within the subsequence are kept by it.
+
+Writing files with SeqIO
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+SeqIO can also be used to output records to file, in the supported format of your choice. Obviously if you convert file format you might lose information, for instance fastq to fasta, or genbank to fasta. Again, the file can be written using a handle if desired.
+
+.. code-block:: python
+
+    # Write to fasta
+    SeqIO.write(records, "myrecords.fasta", "fasta")
+
+    # Write to fasta with a handle
+    with open("myrecords.fasta", w) as handle:
+        SeqIO.write(records, handle, "fasta")
+
+Converting file formats
+^^^^^^^^^^^^^^^^^^^^^^^
+
+If you use SeqIO to read in a file in one format, you can convert it by writing to another format. There are some things to note when doing this however:
+
+* If you output to a format that does not support features, such as fasta, then you lose that information
+* If you extract a feature sequence or slice a sequence, the new SeqRecord inherits the additional properties such as ID and description of the parent sequence
+* If you translate a SeqRecord from nucleotide to amino acid sequence, the additional record information such as ID and description are lost and replaced with awkward '<unknown x>' strings
 
 .. admonition:: Exercises
-   :class: exercise
+    :class: exercise
+    
+    * Using SeqIO, read in the GenBank file located at /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gbff
+    * What is the GC content (the percentage of bases that are G or C) of the genome?
+    * How many genes are there in the genome?
 
-   * Copy the files “/nfs/course/551-1119-00L_masterdata/tutorials/linux/example.fasta” and “/nfs/course/551-1119-00L_masterdata/tutorials/dada2/00_rawData/AML_Mock_03_SUSHI_METAB_R1.fastq.gz” into a new directory in your home folder.
-   * Use **grep** to find out how many sequences in the fasta file are
-   * *Some exercise for the fastq (prep etc.)* 
+    * Pick any gene and write the sequence out to a new fasta file
+    * For the same gene, write the translated amino acid sequence out to another fasta file
+
+    * Write a script that:
+       * Reads in the GenBank file
+       * Extracts the nucleotide sequences of each gene
+       * Writes them to a single multi-fasta file
+
+    .. hidden-code-block:: python
+
+        # Read in the file
+        from Bio import SeqIO
+
+        records = list(SeqIO.parse("/nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gbff", 'gb'))
+        record = records[0]
+
+        # Calculate GC content
+        gc = (record.seq.count('G') + record.seq.count('C')) / len(record)
+        gc # GC content is 50.8%
+
+        # Count genes
+        genes = [feature for feature in record.features if feature.type=='gene']
+        len(genes) # 4609 genes
+
+        # Output a gene
+        my_gene = genes[0]
+        my_gene_seqrec = genes[0].extract(record)
+        my_gene_seqrec.id = my_gene.qualifiers['gene'][0]
+        my_gene_seqrec.description = 'extracted from ' + my_gene_seqrec.description
+        SeqIO.write(my_gene_seqrec, 'my_gene.fna', 'fasta')
+
+        # Output a translation
+        my_gene_trans = my_gene_seqrec.translate()
+        my_gene_trans # see that the metadata is messed up
+        my_gene_trans.id = my_gene_seqrec.id
+        my_gene_trans.description = my_gene_seqrec.description
+        SeqIO.write(my_gene_trans, 'my_gene.faa', 'fasta')
 
 
-   .. hidden-code-block:: bash
+Sequence databases
+------------------
 
-        # Copy the files into your homefolder
-        # Copy the first file while creating a new directory
-        cp /nfs/course/551-1119-00L_masterdata/tutorials/linux/example.fasta ~/fasta_fastq/
-        # Copy the second file
-        cp /nfs/course/551-1119-00L_masterdata/tutorials/dada2/00_rawData/AML_Mock_03_SUSHI_METAB_R1.fastq.gz ~/fasta_fastq/
+In your future work, you might want to reference the genome of the organism you are working with, or some of its genes, or those of species it is related to. If you generate sequence data, you might want to identify or annotate those sequences using bioinformatic methods that rely on an evidence base of existing public sequence data. It is therefore important that you are aware of the available databases that you might browse or search for such information.
 
-        # Using grep to count
-        grep -c ">" example.fasta
+There are three primary sequence databases that essentially contain the same data, exchanged daily between them.
+
+* GenBank, part of the `NCBI <https://www.ncbi.nlm.nih.gov/>`_
+* European Nucleotide Archive or `ENA <https://www.ebi.ac.uk/ena/browser/home>`_
+* DNA Data Bank of Japan or `DDBJ <https://www.ddbj.nig.ac.jp/index-e.html>`_
+
+There are additionally a vast array of secondary databases, often specialising in particular types of sequence or individual organisms. We will discuss some of them in future parts of the course.
 
 NCBI
-^^^^^^^^^^^^^^^^^^
-The National Center for Biotechnology Information (NCBI) houses a series of databases and tools relevant to biotechnology, biomedicine and bioinformatics. It is probably the most prominent and important online database for biological research. The NCBI includes major databases such as Gene, Genome or PubMed but also useful tools such as BLAST, Primer-BLAST or Taxonomy Common Tree. Since NCBI is one of the major webpages for biological research we want to take some time and highlight some of its features.
+^^^^
 
-When you open the |NCBI| you should see something similar to figure 1. On top you have the search bar (red frame). You can either search (yellow frame) in all databases or you can select a specific database out of the 39 available databases (blue frame). 
+The National Center for Biotechnology Information (`NCBI <https://www.ncbi.nlm.nih.gov/>`_) hosts a series of databases and tools that are considered essential for modern biology. 
+
+The |NCBI| homepage (below) is a bit overwhelming. At the top you have the search bar (red frame). You can either search (yellow frame) in all databases or you can select a specific database out of the 39 available databases (blue frame).
 
 In the bottom half of the page you have some popular resources on the right side (purple frame) and on the left hand side (green frame) you find a variety of sub areas. In the middle (pink frame) other common features are linked.
 
-In the following section we want to highlight certain parts of the NCBI.
+In the following section we will describe certain parts of the NCBI to help you find what you are looking for.
 
-
-**Figure 1**
-|P1|
+.. figure:: images/NCBI_1.png
+    :align: center
 
 .. |NCBI| raw:: html
 
     <a href="https://www.ncbi.nlm.nih.gov/" target="_blank">NCBI homepage</a>
 
-.. |P1| image:: images/NCBI_1.png
+GenBank
++++++++
+
+`GenBank <https://www.ncbi.nlm.nih.gov/genbank>`_ is an annotated collection of all publically available DNA sequences. This includes genomes, individual gene or feature sequences, transcripts and more. Sequences shorter than 200bp, that aren't based on a real molecule (for instance a consensus sequence) or that are not known in nucleotide space (for instance a directly sequenced protein), primers, and mixed DNA/mRNA sequences are not accepted. Additional to GenBank is the `WGS <https://www.ncbi.nlm.nih.gov/wgs>`_ (whole genome shotgun) database, which contains sequencing projects that are currently the most common form of high-throughput sequencing, but are not yet assembled, finished or annotatable. The graphs below show how the databases have grown over time in number of entries and total base pairs.
+
+.. figure:: images/wgs_genbank.png
+    :align: center
 
 
-Entrez
-------
-Entrez is the NCBI’s primary text search and retrieval system that comprises 39 molecular and literature databases and is usually accessed via the search bar (Figure 1 red frame, nearly all search boxes on NCBI access the Entrez system). 
+GenBank is searchable by selecting the 'Nucleotide' database on the NCBI homepage. It can also be searched by alignment, which will be covered in the next lecture. When you search, you are shown the results as seen below. These can be further filtered by convenient links on the left side of the page (blue frame), or by organism on the right side of the page (red frame).
+
+.. figure:: images/Nucleotide.png
+    :align: center
+
+RefSeq
+++++++
+
+The `Reference Sequence <https://www.ncbi.nlm.nih.gov/refseq>`_ database aims to be a comprehensive, well-annotated, non-redundant set of sequences - effectively a curated subset of GenBank to represent the best quality information available for use in biological research. For instance, RefSeq contains 66,541 bacterial entries as of release 207. If you are looking for a high quality and trustworthy sequence for your work, RefSeq is a good place to start.
+
+RefSeq is not searchable from the NCBI frontpage. Instead, you can search GenBank by selecting the 'Nucleotide' database and then use the appropriate filter.
+
+Genome
+++++++
+
+The `genome <https://www.ncbi.nlm.nih.gov/genome/>`_ database is another subset of GenBank that includes genomes, chromosomes and assemblies. It aims to assign taxonomy to each entry and give an assessment of completeness. It can be searched directly from the NCBI frontpage by selecting 'Genome'.
+
+Taxonomy
+++++++++
+
+The `taxonomy <https://www.ncbi.nlm.nih.gov/taxonomy>`_ database is a curated classification of the organisms in GenBank, by which we mean their locations on the tree of life. There are alternative taxonomies available, such as the `GTDB <https://gtdb.ecogenomic.org/>`_, as phylogenetic methods differ. Taxonomy is continually under revision, and often submissions are unintentionally misassigned, so be wary when working with less well researched organisms or environments.
+
+Taxonomy can be searched directly from the NCBI frontpage by selecting 'Taxonomy'.
+
+.. admonition:: Exercises
+    :class: exercise
+
+    * Search for something..
+
+
+Searching the NCBI
+^^^^^^^^^^^^^^^^^^
+
+The NCBI’s primary text search and retrieval system, Entrez, comprises 39 molecular and literature databases and is usually accessed via the search bar (Figure 1 red frame, nearly all search boxes on NCBI access the Entrez system). 
+
 Since Entrez searches in a vast amount of databases and the search input can be almost anything (single words, short phrases, sentences, database identifiers, gene symbols, names, etc.) even simple searches can lead to an overwhelming amount of results. Therefore it is useful to know some tricks which make searching more efficient.
 
-1. Boolean Operators: You should have learned what Boolean Operators are in Statistics. They can also be used in Entrez to make your search more specific.
-        * **AND**: Finds documents that contain terms on both sides of the operator terms, the intersection of both searches.
-        * **OR**: Finds documents that contain either term, the union of both searches.
-        * **NOT**: Finds documents that contain the term on the left but not the term on the right of the operator, the subtraction of the right hand search from the one on the left.
+1. Boolean Operators: You should have be familiar with Boolean Operators from Statistics. They can be used in Entrez to make your search more specific:
+       
+    * **AND**: Finds documents that contain terms on both sides of the operator, the intersection of both searches.
+    * **OR**: Finds documents that contain either term, the union of both searches.
+    * **NOT**: Finds documents that contain the term on the left but not the term on the right of the operator, the subtraction of the right hand search from the one on the left.
 
-        **Please note that these Boolean Operators have to be written in uppercase to work and are processed from left to right**
+    **Please note that these Boolean Operators have to be written in uppercase to work and are processed from left to right**
 
-        Individual search terms separated by a **space** are joined as if an **AND** was put in between, exceptions are if the words can be matched with parts of a sentence. If you want to search for full sentences (or parts) you have to put your sentence between quotation marks (“”) so that the single words are not joined together by an AND. Furthermore, you can use **\*** as a wildcard to represent any character.
+2. Phrases: Individual search terms separated by a **space** are joined as if an **AND** was put between them, unless the words match a phrase indexed by the database, in which case the phrase is searched for as written. If you want to force a search for a phrase, put the words in quotation marks "like this". Furthermore, you can use \* as a wildcard to represent any character.
 
-2. Facet Filters: Facet filters may restrict to certain types of records or exclude undesired ones. Many useful restrictions can be applied to searches through the faceted filter links on the left-hand column of the Entrez search page (Figure 2 green frame). 
+3. Indexed Fields: Each database has various indices to improve and speed up searching - the metadata for each entry. A field can be searched specifically by putting its name in square brackets immediately after a search term. For instance, entries in Nucleotide are associated with an Organism and a Publication Date (amongst many other fields) that you can search for like so:
 
+        "Escherichia coli"[Organism] AND 2020/1/1[Publication Date]
 
-
-**Figure 2**
-|P2|
-
-
-
-.. |P2| image:: images/NCBI_2.png
-
-
-
-
-
-
-
- 
-This are only the basics about Entrez. If you want to know more about Entrez click |Entrez|
+If you want to know more about Entrez click |Entrez|.
 
 .. |Entrez| raw:: html
 
     <a href="https://www.ncbi.nlm.nih.gov/books/NBK3837/" target="_blank">here</a>
 
-BLAST
------
-After we showed you how to search in NCBI we also want to introduce you one of the most important tools on NCBI the **B**\asic **L**\ocal **A**\lignment **S**\earch **T**\ool (**BLAST**).
+.. container:: nextlink
 
-Since you will probably use BLAST a few times throughout your ETH- and scientific career it is important that **BLAST** is not just a black-box to you, where you put something in and something comes out, but that you understand its basics so that you can probably handle the results.
+    `Next: Alignment <4_Alignment.html>`_
 
-BLAST is an algorithm designed to find regions of similarity between biological sequences. It compares nucleotide or protein sequences to sequence databases and calculates the statistical significance. BLAST is a so-called heuristic algorithm. Heuristic algorithms are designed to solve problems in faster and more efficient ways but they sacrifice optimality, accuracy, precision, or completeness for the gained speed. Since heuristic algorithms do not generate the best result 100% of the time, it is helpful to have some understanding about the Algorithm to properly evaluate the results.
-
-A BLAST search begins with the input of your sequence you want to align. BLAST than filters out so-called **low complexity** regions (TTTTTTT, ACACACACAC, etc.). The remainder of the sequence is then fragmented into pieces (default setting is the length of 11 nucleotides, so the first piece goes from nucleotides 1-11, the second to 2-12 and so on) throughout the sequence.  BLAST then picks the pieces which are statistically unlikely to appear and searches for exact matches (no mismatches and gaps allowed) in the database. If BLAST finds such a piece, it starts to search for matches of the database-and search sequence in both directions. Mismatches are now allowed but still no gaps. If the matches are good, BLAST starts to connect the two sequences together (gaps are now allowed).
-
-As you can see, BLAST relays on the believe that two related biological sequences have relatively long **exactly** matching sequence sections. With this assumption, BLAST can find results much faster. On the one hand, exactly matching sequences are easier to find than similarities and on the other hand you can reduce the search space. But if the sequence you are looking for does not have an exactly matching part, you are not going to find it.
-
-To summarize, the speed of BLAST is dependent on the piece size selected. BLAST searches with long piece sizes (which need an exact match) are going to be faster than BLAST searches with small pieces sizes. But there is the danger that you miss good alignments, if the piece size is too long. It is therefore on you, the user, to set the parameters accordingly.
-
-**Maybe this text is a better fit for the alignment part then NCBI**
-
-
-Databases
-------
-As mentioned before, the NCBI consists of 39 different databases. In the following sections, we want to highlight some of them. 
-
-PubMed
-++++++
-...
-
-GenBank and RefSeq
-++++++++++++++++++
-GeneBank is a genetic sequence database which annotates and collects all publicly available DNA sequences and their protein translations.Currently, the GenBank harbours more than 12 trillion nucleotides in more than 2 billion sequences from more than 100’000 distinct organisms. The sequences are submitted from laboratories all around the world. Important, the sequences in GenBank are not raw data, all sequences in GenBank have been **annotated**, meaning information such as species, origin, potential genes, etc. are available for each sequence. Furthermore, each sequence can be identified by its individual identification number.
-
-The strength of GenBenk is also its weakness. It is fairly simple to get lost in the huge amount of data GenBank offers. Therefore, GenBank offers you to search in subsets. One of these subsets is RefSeq. RefSeq is a database with non-redundant (only one entry per sequence), especially well annotated (lot of information available) sequences. As the name suggests, RefSeq sequences are usually used as a reference point from which differences can be described. 
-
-Genome
-------
-...
-
-ENA
----
-The European Nucleotide Archive (ENA) repository for annotated DNA and RNA sequences with complementary information. The ENA consists of three main databases: The Sequence Read Archive (SRA), the Trace Archive (TA) and the EMBL Nucleotide Archive (EMBL-bank) 
-
-Sequence Read Archive
-+++++++++++++++++++++
-
-The SRA is a bioinformatic database maintained by the NCBI, European Bioinformatics Institute (EBI) and DNA Data Bank of Japan (DDBJ) providing access to DNA sequences, especially short reads (less than 1’000 base pairs). In the SRA primary data from next-generation-sequencing are stored but also data from RNA-Seq and ChIP-Seq.
-
-Trace Archive
-+++++++++++++
-Same as for the SRA also the TA is maintained by the NCBI, EBI and DDBJ together. The TA is a permanent repository of DNA sequence chromatograms (traces), base calls and quality estimates for single-pass reads from large-scale sequencing projects. 
-
-
-EMBL-bank
-+++++++++
-
-The EMBL-bank contains high high-level genome assembly details, as well as assembled sequences and their functional annotation.
-
-DDBJ
-----
-The DNA Data Bank of Japan (DDBJ) is a biological database collecting DNA sequences and is the only nucleotide database in Asia and collects mainly DNA data from Japanese researchers. 
-
-
-Exercise
---------
-
-**How to acces and work with these Databases probabley NCBI**
-
-Protein databases
-^^^^^^^^^^^^^^^^^
-
-Uniprot
--------
-
-The Universal Protein Resource (UniProt) is a database hosted by the European Bioinformatics Institute (EMBL-EBI), Swiss Institute of Bioinformatics (SIB) and  Protein Information Resource (PIR) for protein sequence, annotation and functions. Uniprot consists of three databases the UniProt Knowledgebase (UniProtKB), the UniProt Reference Clusters (UniRef), and the UniProt Archive (UniParc). 
-
-.. image:: images/overview.png
-   
-
-The UniProtKB consists of two sections, a manually annotated part and an automated annotated part which awaits manual annotation. Each entry provides functional information about a protein with as much annotation information as possible.
-
-NCBI
-----
-
-...
-
-
-Homework
-^^^^^^^^
