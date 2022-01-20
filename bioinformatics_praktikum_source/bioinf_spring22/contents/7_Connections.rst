@@ -4,21 +4,18 @@ Connect parts/Outlook
 
 Learning objective
 ^^^^^^^^^^^^^^^
-In this lecture the goal is to understand **x** (for example the basic commands of UnIx, how to connect to the server, etc.)
+In this lecture the goal is to formulate and test hypothesis on the evolution of SARS-CoV-2. 
+
+You will combine your general knowledge in biology and apply some of the practical skills you acquired during the past weeks. 
 
 Learning objectives
 ^^^^^^^^^^^^^^^^^^^^
 Learning objectives in bulletpoints (ideal same as on the landing page)
 
-* First learning objective (example: Students can navigate the Unix enviroment)
-* Second learning objective (example: Students can connect to Server0
-* etc.
+* Students can, based on their biological knowledge, rationalize the degree of sequence conservation within two example proteins of SARS-CoV2
+* Students can formulate a testable hypothesis
 
 Requirements
 ^^^^^^^^^^^^
-What is needed to be able to paricipate in the lecture
-
-* Computer/Laptop with keys
-* VPN access
-* etc.
+Laptop with access to the ETHZ network, via VPN if necessary.
 
