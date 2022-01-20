@@ -4,7 +4,7 @@ Connect parts/Outlook
 
 Learning objective
 ^^^^^^^^^^^^^^^
-In this lecture the goal is to understand **x** (for example the basic commands of UNIx, how to connect to the server, etc.)
+In this lecture the goal is to understand **x** (for example the basic commands of UnIx, how to connect to the server, etc.)
 
 Learning objectives
 ^^^^^^^^^^^^^^^^^^^^
