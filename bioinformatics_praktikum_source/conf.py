@@ -42,7 +42,8 @@ release = '2021'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 #extensions = ['recommonmark', 'sphinx_markdown_tables']
-extensions = ['hidden_code_block']
+extensions = ['hidden_code_block',
+              'sphinxcontrib.images']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['teachingtemplates']

@@ -21,32 +21,26 @@ Networks
 
 Computers have been connected to each other to exchange data since the 1950s and now we take internet access for granted on our mobile devices. Behind the screen, there are countless pieces of software and protocols that make everything work, but we won't go into the details.
 
-.. figure:: images/client_server_model.png
+.. thumbnail:: images/client_server_model.png
     :align: center
 
 It is important however to understand the concept of a **remote server**. This is a computer sitting somewhere, possibly in the ETH basement, possibly in an enormous data centre in Iceland, which is only supposed to be connected to over the internet. To be able to connect to a server you need to have appropriate access - a username and password, and perhaps you will have to be connecting from an allowed location. For instance, you can only access the ETH remote servers from within the ETH domain, either because you are on the ETH WiFi or have connected via **VPN**.
 
 A VPN, or virtual private network, is a way of connecting to a server that then channels all of your internet traffic through the server as if you were in its location. So if you use the ETH VPN, you will have access to everything as if you were connected to the ETH WiFi or cable network.
 
-If you have not already connected your devices with the ETH VPN you can find the instructions to do so |VPN|.
+If you have not already connected your devices with the ETH VPN you can find the instructions to do so `here <https://ethz.ch/content/dam/ethz/special-interest/hest/isg-hest-dam/documents/pdf/vpn-de.pdf>`_.
 
-.. |VPN| raw:: html
-    
-    <a href="https://ethz.ch/content/dam/ethz/special-interest/hest/isg-hest-dam/documents/pdf/vpn-de.pdf" target="_blank">here</a>
 
-.. admonition:: Exercises
+.. admonition:: Exercises 0.1
     :class: exercise
 
-    * Try to find out your IP-address before connecting to the ETH VPN. You can do so by going to the website |Hoststar|.
-    * Now connect to the ETH VPN and check your IP-address once more at |Hoststar|. What do you notice?
+    * Try to find out your IP-address before connecting to the ETH VPN. You can do so by going to the website `Hoststar <https://www.hoststar.ch/de/tools/meine-ip-adresse#:~:text=Geben%20Sie%20den%20Befehl%20»ping,öffentliche%20IP-Adresse%20der%20Seite.>`_.
+    * Now connect to the ETH VPN and check your IP-address once more at `Hoststar <https://www.hoststar.ch/de/tools/meine-ip-adresse#:~:text=Geben%20Sie%20den%20Befehl%20»ping,öffentliche%20IP-Adresse%20der%20Seite.>`_. What do you notice?
 
     .. hidden-code-block:: bash
 
        # You should notice that your IP-address change even though you did not physically change your location.
 
-    .. |Hoststar| raw:: html
-
-        <a href="https://www.hoststar.ch/de/tools/meine-ip-adresse#:~:text=Geben%20Sie%20den%20Befehl%20»ping,öffentliche%20IP-Adresse%20der%20Seite." target="_blank">Hoststar</a>
 
 Command line interface
 ----------------------
@@ -55,7 +49,7 @@ Although software exists which allows you to access a server just as if you were
 
 The terminal functions like an old fashioned text adventure game, or a voice-activated assistant that requires you to type in your commands.
 
-.. figure:: images/command_line.gif
+.. thumbnail:: images/command_line.gif
 
 Accessing the command line interface on your own computer depends on your system:
 
@@ -84,7 +78,7 @@ The ssh structure usually is <your-ID>@<server-address> (Note: **<** and **>** a
     # Command to connect to euler
     ssh <yourETH-ID>@euler.ethz.ch
 
-.. admonition:: Exercise
+.. admonition:: Exercise 0.2
     :class: exercise
 
     * Try to connect to Euler yourself
@@ -105,13 +99,10 @@ The ssh structure usually is <your-ID>@<server-address> (Note: **<** and **>** a
 
 R Workbench
 -----------
-Since everyone is working on different devices and we are using multiple program languages, we have arranged a single web-based platform for you to work on: |R-Workbench|. You may already be familiar with R-Studio, a development platform for programming in R. R-Workbench is built on R-Studio and can also be used for other programming languages and as a Unix terminal. **To login to the R-Workbench only your ethz-login and connection to the ETH-network (either being connected to the ETH-WiFi or via VPN) are necessary**, you do not need to ssh, you can if you want to, the server address is ... . 
+Since everyone is working on different devices and we are using multiple program languages, we have arranged a single web-based platform for you to work on:`https://rstudio-teaching.ethz.ch <https://rstudio-teaching.ethz.ch/>`_. You may already be familiar with R-Studio, a development platform for programming in R. R-Workbench is built on R-Studio and can also be used for other programming languages and as a Unix terminal. **To login to the R-Workbench only your ethz-login and connection to the ETH-network (either being connected to the ETH-WiFi or via VPN) are necessary**, you do not need to ssh, you can if you want to, the server address is ... . 
 
 **From now on, primarily all exercises and homework should be done in R-Workbench.**
 
-.. |R-Workbench| raw:: html
-
-    <a href="https://rstudio-teaching.ethz.ch/" target="_blank">https://rstudio-teaching.ethz.ch/</a>
 
 Working in R
 ^^^^^^^^^^^^
@@ -126,19 +117,19 @@ If you are wondering where the R script is, you have to open it manually. Click 
 
 |R1| |R2| |R3| |R4|
 
-.. |R1| image:: images/R_Workbench_1.png
+.. |R1| thumbnail:: images/R_Workbench_1.png
      :width: 49%
 
 
-.. |R2| image:: images/R_Workbench_2.png
+.. |R2| thumbnail:: images/R_Workbench_2.png
         :width: 49%
 
 
-.. |R3| image:: images/R_Workbench_3.png
+.. |R3| thumbnail:: images/R_Workbench_3.png
         :width: 49%
 
 
-.. |R4| image:: images/R_Workbench_4.png
+.. |R4| thumbnail:: images/R_Workbench_4.png
         :width: 49%
 
 Working in Unix
@@ -154,15 +145,15 @@ When you are working on the terminal, please note that the environment (blue fra
 
 |T1| |T2| |T3|
 
-.. |T1| image:: images/Terminal_Workbench_1.png
+.. |T1| thumbnail:: images/Terminal_Workbench_1.png
            :width: 49%
 
 
-.. |T2| image:: images/Terminal_Workbench_2.png
+.. |T2| thumbnail:: images/Terminal_Workbench_2.png
               :width: 49%
 
 
-.. |T3| image:: images/Terminal_Workbench_3.png
+.. |T3| thumbnail:: images/Terminal_Workbench_3.png
               :width: 49%
 
 
@@ -180,23 +171,23 @@ To exit the Python environment you have to enter :code:`exit` into the console (
  
 |P1| |P2| |P3| |P4|
 
-.. |P1| image:: images/Python_Workbench_1.png
+.. |P1| thumbnail:: images/Python_Workbench_1.png
               :width: 49%
 
 
-.. |P2| image:: images/Python_Workbench_2_new.png
+.. |P2| thumbnail:: images/Python_Workbench_2_new.png
                  :width: 49%
 
 
-.. |P3| image:: images/Python_Workbench_3.png
+.. |P3| thumbnail:: images/Python_Workbench_3.png
                  :width: 49%
 
 
-.. |P4| image:: images/Python_Workbench_4_new.png
+.. |P4| thumbnail:: images/Python_Workbench_4_new.png
                  :width: 49%
 
 
-.. admonition:: Exercise
+.. admonition:: Exercise 0.3
     :class: exercise
 
     * Log into the workbench yourself and check that you can access the different modes above. **If you need any help please feel free to ask**

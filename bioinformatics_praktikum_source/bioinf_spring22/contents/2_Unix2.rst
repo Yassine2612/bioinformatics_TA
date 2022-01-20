@@ -20,11 +20,7 @@ Learning objectives
 Resources
 ^^^^^^^^^
 
-This section requires the use of the |R_Workbench|.
-
-.. |R_Workbench| raw:: html
-
-    <a href="https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F" target="_blank">R Workbench</a>
+This section requires the use of the `R Workbench <https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F>`_. Specifically you will need the terminal, shown in the setup which can be found `here <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html#working-in-unix>`_.
 
 
 Searching
@@ -44,7 +40,7 @@ When you are trying to find a file in your system, the command **find** offers a
     find . -size +1G              # searches for files at least 1GB or larger
     find . -maxdepth 1            # searches only here, i.e.: doesn't look inside directories
 
-.. admonition:: Exercises
+.. admonition:: Exercises 2.1
     :class: exercise
 
     * Use **cp** to copy all files from the ecoli subdirectory into a new directory in your home directory
@@ -70,13 +66,13 @@ When you are trying to find a file in your system, the command **find** offers a
         #Looking at find
         man find
         
-        #Getting a list with find
+        # Getting a list with find
         find /nfs/course/PTB_551-0132-00/genomes/bacteria/
 
         # Looking for files
-        find . -name "\*.faa"
+        find . -name "*.faa"
         find . -size +5M
-        find . -name "\*.faa" -size +5M
+        find . -name "*.faa" -size +5M
 
 Searching in **less**
 ^^^^^^^^^^^^^^^^^^^^^
@@ -141,7 +137,7 @@ The command **grep** allows you to search within files without opening them firs
     grep -o  # show only the matches
     grep -c  # show only a count of the matches
 
-.. admonition:: Exercises
+.. admonition:: Exercises 2.2
     :class: exercise
 
     * Navigate to the directory you copied the *E. coli* files to earlier.
@@ -236,7 +232,7 @@ The command **uniq** compresses adjacent repeated lines into one line, and is be
     # Count how many times each value is repeated
     uniq -c /nfs/course/PTB_551-0132-00/examples/uniq_nums.txt
 
-.. admonition:: Exercises
+.. admonition:: Exercises 2.3
     :class: exercise
 
     * Use the **sort** examples above and see what happens when you try to sort the *sort_nums.txt* file without the -n flag.
@@ -324,7 +320,7 @@ Sometimes you want to take the output of one program and use it in another -- fo
     head E.coli.fna | grep "ACGT"                  # send the output of head to grep and search
     grep -A 1 ">" E.coli_CDS.fna | grep -c "^ATG"  # use grep to find the first line of sequence of each gene and send it to a second grep to see if the gene starts with ATG
 
-.. admonition:: Exercises
+.. admonition:: Exercises 2.4
     :class: exercise
 
     * Copy the file GCF_000005845.2_ASM584v2_cds_from_genomic.fna to your home and rename it to *E.coli_CDS.fna*
@@ -404,7 +400,7 @@ For instance we could have a simple script:
 
 This means you could write a script that performs some operations on a file, and then replace the file path in your code with *$1* to allow you to declare the file when you execute the script. Just remember that if your script changes working directory, the relative path to your file may be incorrect, so sometimes it is best to use the absolute path.
 
-.. admonition:: Exercise
+.. admonition:: Exercise 2.5
     :class: exercise
 
     * Write a simple script that will count the number of entries in a fasta file
@@ -414,11 +410,14 @@ This means you could write a script that performs some operations on a file, and
 
     .. hidden-code-block:: bash
 
-    # Simple script to count fasta entries in a file, fastacount.sh:
-    grep -c "^>" $1
+        # Simple script to count fasta entries in a file, fastacount.sh:
+        grep -c "^>" $1
 
-    # Run the script
-    ./fastacount.sh /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_cds_from_genomic.fna
+        # Make it executable
+        chmod +x fastacount.sh        
+
+        # Run the script
+        ./fastacount.sh /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_cds_from_genomic.fna # 4302
 
 Working on a computing cluster
 ------------------------------
@@ -458,7 +457,7 @@ Then the equivalent commands:
     # Remove a job from the queue
     bkill jobid
 
-.. admonition:: Exercises
+.. admonition:: Exercises 2.6
     :class: exercise
 
     * Copy the submit.sh script to your home directory.
@@ -504,7 +503,7 @@ Homework
 --------
 
 
-.. admonition:: Homework
+.. admonition:: Homework 2
     :class: homework
 
     Learning a new language and computational programming have many similarities with verbs, adverbs and objects equating to commands (action), options (modify action) and arguments (target of the option). As with learning languages, mastering programming requires practice and repetition. 

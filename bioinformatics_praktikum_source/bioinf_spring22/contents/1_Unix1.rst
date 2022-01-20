@@ -19,11 +19,7 @@ Learning objectives
 Resources
 ^^^^^^^^^
 
-This section requires the use of the |R_Workbench|.
-
-.. |R_Workbench| raw:: html
- 
-    <a href="https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F" target="_blank">R Workbench</a>
+This section requires the use of the `R Worbench <https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F>`_. Specifically you will need the terminal, shown in the setup which can be found `here <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html#working-in-unix>`_. 
 
 
 The command
@@ -31,7 +27,7 @@ The command
 
 Commands are our tool to tell the computer what to do. Most commands have *options* and *arguments*. Arguments are often essential for a command to operate properly; they are the pieces of information required by a command, such as a file name. Options are, of course, optional, and offer ways to modify the way the command works.
 
-.. figure:: images/command_structure.png
+.. thumbnail:: images/command_structure.png
        :align: center
 
 For instance, **echo** will take any text you give it as an argument and then send it back to you as output:
@@ -93,7 +89,7 @@ Useful command line tricks
 
 * Using a **#** character allows you to make comments that have no effect when run.
 
-.. admonition:: Exercises
+.. admonition:: Exercises 1.1
     :class: exercise
 
     * Try to *echo* "My first command"
@@ -158,7 +154,7 @@ The file system
 
 You may be used to the file system in Windows or Mac OS X, where directories can contain files and more directories. The Unix filesystem is structured in the same way, as a tree, that begins at the 'root' directory '**/**'. Directories are separated by slash characters **/**.
 
-.. image:: images/filesystem_hierarchy.png
+.. thumbnail:: images/filesystem_hierarchy.png
 
 When you work on the command line, you are located in a directory somewhere in this tree. There are two ways to refer to a location: its **absolute path**, starting at the root directory, or its **relative path**.
 
@@ -221,7 +217,7 @@ Navigation
     pwd
 
 
-.. admonition:: Exercises
+.. admonition:: Exercises 1.2
     :class: exercise
 
     * Use *pwd* to find out where you are in your command line session
@@ -339,13 +335,13 @@ Basic file operations
     # Remove an empty directory
     rmdir genomes
 
-.. admonition:: Exercises
+.. admonition:: Exercises 1.3
     :class: exercise
 
     * Create two new directories called "genomes" and "homework" in your home folder
     * Copy any of the E. coli files (found in /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/any_directory/any_file.fna) into your new directory "genomes" (just one)
     * Rename the file to "E.coli_file"
-    * Use the help option of the ls function to find with option gives you the size of the genome
+    * Use the help option of the ls function to find which option gives you the size of the genome
     * Using the *man* and *cp*, find out how to copy a directory.
 
     .. hidden-code-block:: bash
@@ -398,7 +394,7 @@ In Unix systems there are only really two types of files: text or binary. The fi
 * .r - An R script, which contains R commands to run.
 * .py - A python script, which contains python commands to run.
 * .gz or .tar.gz - A file that has been compressed using a protocol called 'gzip' so that it takes up less space on the disk and transfers over the internet faster.
-
+This section requires the use of the R Workbench.
 Other useful file operations
 ----------------------------
 
@@ -456,7 +452,7 @@ If you ever need to compress a file, for instance to send it to someone, you can
     # Compress a file
     gzip GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna
 
-.. admonition:: Exercises
+.. admonition:: Exercises 1.4
     :class: exercise
 
     * On the server, download the E. coli file in the example above to your home folder.
@@ -517,7 +513,7 @@ The command **wc** is a command that will quickly count the number of lines, wor
     # Count things
     wc E.coli_K12_MG1655.fna
 
-.. admonition:: Exercises
+.. admonition:: Exercises 1.5
     :class: exercise
 
     * Use **cat** to look at the *E. coli* genome file you copied last time, is it suitable for looking at this file?
@@ -557,7 +553,7 @@ The command **wc** is a command that will quickly count the number of lines, wor
 Homework
 --------
 
-.. admonition:: Homework
+.. admonition:: Homework 1
     :class: homework
 
     * Upload a picture into your homework folder you created in the third exercise and name it **<Your First Name>_<Your Last Name>.png**

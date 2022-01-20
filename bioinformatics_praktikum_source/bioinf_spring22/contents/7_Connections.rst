@@ -1,13 +1,13 @@
 Connect parts/Outlook
-====================
+=====================
 
 
 Learning objective
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 In this lecture the goal is to understand **x** (for example the basic commands of unix, how to connect to the server, etc.)
 
 Learning objectives
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 Learning objectives in bulletpoints (ideal same as on the landing page)
 
 * First learning objective (example: Students can navigate the Unix enviroment)

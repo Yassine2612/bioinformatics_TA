@@ -59,7 +59,7 @@ After connecting to Euler, create symbolic links of to the files that you will n
     # Have a look what is linked to your home folder now (and from where)
     ls -l
 
-The files protein.S.faa and protein.NSP12.faa contain amino acid sequences of the spike glycoprotein S and RNA-dependent RNA polymerase of SARS-CoV2. The files cds.S.fna and cds.NSP12.fna contain nucleotide sequences of these proteins. Remember: files ending in *.faa and *.fna are conventionally used to represent sequences in FASTA format. Lines starting with a ">" symbol contain information about the sequence, such as an identifier, which are followed by the actual sequences.
+The files protein.S.faa and protein.NSP12.faa contain amino acid sequences of the spike glycoprotein S and RNA-dependent RNA polymerase of SARS-CoV2. The files cds.S.fna and cds.NSP12.fna contain nucleotide sequences of these proteins. Remember: files ending in \*.faa and \*.fna are conventionally used to represent sequences in FASTA format. Lines starting with a ">" symbol contain information about the sequence, such as an identifier, which are followed by the actual sequences.
 
 The file genome.tsv contains information on the genomes from which the nucleotide sequences originate.
 
@@ -74,7 +74,7 @@ Data analysis
 -------------
 Once you have the workplan prepared, here are some questions that may guide your analysis. Feel free to consult the internet for help.
 
-How many sequences are in the *.faa files?
+How many sequences are in the \*.faa files?
 How many different sequences (i.e. sequence variants) are in a file?
 How long are the individual sequences?
 How long are the sequences on average?

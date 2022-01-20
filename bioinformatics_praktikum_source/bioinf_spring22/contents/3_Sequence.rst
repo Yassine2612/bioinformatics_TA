@@ -21,11 +21,7 @@ Learning objectives
 Requirements
 ^^^^^^^^^^^^
 
-This section requires the use of the |R_Workbench|.
-
-.. |R_Workbench| raw:: html
-
-    <a href="https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F" target="_blank">R Workbench</a>
+This section requires the use of the `R Workbench <https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F>`_.
 
 
 Sequence data
@@ -58,7 +54,7 @@ Quality scores
 
 Quality scores in the standard Phred format range between 0 and 93, although sequencing read data is rarely higher than 60. The scores are encoded such that there is one character per base in the 2nd line of the fastq entry, using the ASCII encoding table (a computing standard). For instance, the letter **A** has a decimal equivalent of **65**. Sanger format offsets the quality score by **33**, so this represents a quality score of **32**.
 
-.. figure:: images/illumina_fastq_coding.png
+.. thumbnail:: images/illumina_fastq_coding.png
     :align: center
 
 The Phred quality score (Q) is logarithmically related to the error probability (E) and can therefore be interpreted as an estimate of error (E) or as an estimate of accuracy (A).
@@ -140,7 +136,7 @@ As well as the sequence of biological molecules, it is useful to keep a record o
 Genbank flat file format
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The genbank flat file is designed to contain a large and varied amount of information on DNA or RNA sequences. We are not going to cover here all of the possible features of the format, but the NCBI provide a sample record with a detailed description of each component |NCBI_GenBank|.
+The genbank flat file is designed to contain a large and varied amount of information on DNA or RNA sequences. We are not going to cover here all of the possible features of the format, but the NCBI provide a sample record with a detailed description of each component `here <https://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html>`_.
 
 * **Locus**:
         * Locus name: Originally had a set format but now just has to be a unique name for the sequence record.
@@ -162,9 +158,6 @@ The genbank flat file is designed to contain a large and varied amount of inform
 
 * **Origin**: Optionally, the full sequence of record may be included here.
 
-.. |NCBI_GenBank| raw:: html
-
-    <a href="https://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html" target="_blank">here</a>
 
 GFF format
 ^^^^^^^^^^
@@ -291,11 +284,8 @@ Sometimes you don't want to work through the records in file order, in which cas
     # As a dictionary
     records = SeqIO.to_dict(SeqIO.parse("myfile.fasta", "fasta"))
 
-Note that the *SeqIO.parse* examples above specify the file format as "fasta". Many other formats are supported, but the correct format must be explicitly given as an argument, for instance fastq is "fastq" and GenBank is "genbank" or "gb". Sadly, GFF format is not yet supported and requires an additional package or parsing it yourself. The full list of formats is available |BioPython_SeqIO|.
+Note that the *SeqIO.parse* examples above specify the file format as "fasta". Many other formats are supported, but the correct format must be explicitly given as an argument, for instance fastq is "fastq" and GenBank is "genbank" or "gb". Sadly, GFF format is not yet supported and requires an additional package or parsing it yourself. The full list of formats is available `here <https://biopython.org/wiki/SeqIO>`_.
 
-.. |BioPython_SeqIO| raw:: html
-
-    <a href="https://biopython.org/wiki/SeqIO" target="_blank">here</a>
 
 Accessing feature information
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -408,31 +398,28 @@ NCBI
 
 The National Center for Biotechnology Information (`NCBI <https://www.ncbi.nlm.nih.gov/>`_) hosts a series of databases and tools that are considered essential for modern biology. 
 
-The |NCBI| homepage (below) is a bit overwhelming. At the top you have the search bar (red frame). You can either search (yellow frame) in all databases or you can select a specific database out of the 39 available databases (blue frame).
+The `NCBI homepage <https://www.ncbi.nlm.nih.gov/>`_ (below) is a bit overwhelming. At the top you have the search bar (red frame). You can either search (yellow frame) in all databases or you can select a specific database out of the 39 available databases (blue frame).
 
 In the bottom half of the page you have some popular resources on the right side (purple frame) and on the left hand side (green frame) you find a variety of sub areas. In the middle (pink frame) other common features are linked.
 
 In the following section we will describe certain parts of the NCBI to help you find what you are looking for.
 
-.. figure:: images/NCBI_1.png
+.. thumbnail:: images/NCBI_1.png
     :align: center
 
-.. |NCBI| raw:: html
-
-    <a href="https://www.ncbi.nlm.nih.gov/" target="_blank">NCBI homepage</a>
 
 GenBank
 +++++++
 
 `GenBank <https://www.ncbi.nlm.nih.gov/genbank>`_ is an annotated collection of all publically available DNA sequences. This includes genomes, individual gene or feature sequences, transcripts and more. Sequences shorter than 200bp, that aren't based on a real molecule (for instance a consensus sequence) or that are not known in nucleotide space (for instance a directly sequenced protein), primers, and mixed DNA/mRNA sequences are not accepted. Additional to GenBank is the `WGS <https://www.ncbi.nlm.nih.gov/wgs>`_ (whole genome shotgun) database, which contains sequencing projects that are currently the most common form of high-throughput sequencing, but are not yet assembled, finished or annotatable. The graphs below show how the databases have grown over time in number of entries and total base pairs.
 
-.. figure:: images/wgs_genbank.png
+.. thumbnail:: images/wgs_genbank.png
     :align: center
 
 
 GenBank is searchable by selecting the 'Nucleotide' database on the NCBI homepage. It can also be searched by alignment, which will be covered in the next lecture. When you search, you are shown the results as seen below. These can be further filtered by convenient links on the left side of the page (blue frame), or by organism on the right side of the page (red frame).
 
-.. figure:: images/Nucleotide.png
+.. thumbnail:: images/Nucleotide.png
     :align: center
 
 RefSeq
@@ -481,11 +468,8 @@ Since Entrez searches in a vast amount of databases and the search input can be 
 
         "Escherichia coli"[Organism] AND 2020/1/1[Publication Date]
 
-If you want to know more about Entrez click |Entrez|.
+If you want to know more about Entrez click `here <https://www.ncbi.nlm.nih.gov/books/NBK3837/>`_.
 
-.. |Entrez| raw:: html
-
-    <a href="https://www.ncbi.nlm.nih.gov/books/NBK3837/" target="_blank">here</a>
 
 .. container:: nextlink
 

@@ -16,7 +16,7 @@ The optical density (OD) of a metabolically-produced dye in each well of the pla
 * analyse the growth of the bacteria in each well
 
 Find and load the file
----------------
+----------------------
 
 The file is located on Euler under the home directory of the user ssunagaw.
 
