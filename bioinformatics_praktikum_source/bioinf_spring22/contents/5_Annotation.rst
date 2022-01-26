@@ -42,13 +42,12 @@ Gene prediction
 
 Genes in prokaryotes are relatively simple in structure: they begin with a start codon, end with a stop codon and contain a ribosomal binding site (RBS) motif. The coding density across a genome is also relatively high - most sequence encodes a gene. When looking for a gene, there are six possible reading frames, or six possible ways to convert a nucleotide sequences into an amino acid sequence:
 
-.. code-block::
+.. thumbnail:: images/orf.png
+    :align: center
 
+There are 3 frames on the top strand reading left to right, starting with the 1st, 2nd or 3rd base of the sequence in green, orange or magenta respectively. There are 3 additional frames on the complementary strand reading right to left, starting with the last, last but one or last but two base of the sequence in magenta, orange or green respectively. An open reading frame (ORF) is a region in one of these reading frames that begins at a start codon (M for Methionine) and then extends long enough that the region could be a gene before reaching a stop codon (* for any of the three possible stop codons). In this example a very small open reading frame exists, highlighted in grey.
 
-
-    ACAACATCCATGAAACGCATTAGCACCACCATTACCACCACCATCACCATTACCACAGGTAACGGTGCGGGCTGACGCGT
-
-An open reading frame (ORF) is a region in one of these reading frames that begins at a start codon and then extends long enough that the region could be a gene before reaching a stop codon. Gene prediction algorithms look across all six reading frames and use a model to determine which are likely genes, taking into account, based on training data:
+Gene prediction algorithms look for these open reading frames and then use a model based on training data to determine which are likely genes, taking into account:
 
 * The start codon distribution
 * RBS motifs
