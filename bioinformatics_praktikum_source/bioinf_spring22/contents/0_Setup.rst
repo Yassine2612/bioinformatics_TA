@@ -28,14 +28,14 @@ It is important however to understand the concept of a **remote server**. This i
 
 A VPN, or virtual private network, is a way of connecting to a server that then channels all of your internet traffic through the server as if you were in its location. So if you use the ETH VPN, you will have access to everything as if you were connected to the ETH WiFi or cable network.
 
-If you have not already connected your devices with the ETH VPN you can find the instructions to do so `here <https://ethz.ch/content/dam/ethz/special-interest/hest/isg-hest-dam/documents/pdf/vpn-de.pdf>`_.
+If you have not already connected your devices with the ETH VPN you can find the instructions to do so `here <https://ethz.ch/content/dam/ethz/special-interest/hest/isg-hest-dam/documents/pdf/vpn-de.pdf>`__.
 
 
 .. admonition:: Exercises 0.1
     :class: exercise
 
-    * Try to find out your IP-address before connecting to the ETH VPN. You can do so by going to the website `Hoststar <https://www.hoststar.ch/de/tools/meine-ip-adresse#:~:text=Geben%20Sie%20den%20Befehl%20»ping,öffentliche%20IP-Adresse%20der%20Seite.>`_.
-    * Now connect to the ETH VPN and check your IP-address once more at `Hoststar <https://www.hoststar.ch/de/tools/meine-ip-adresse#:~:text=Geben%20Sie%20den%20Befehl%20»ping,öffentliche%20IP-Adresse%20der%20Seite.>`_. What do you notice?
+    * Try to find out your IP-address before connecting to the ETH VPN. You can do so by going to the website `Hoststar <https://www.hoststar.ch/de/tools/meine-ip-adresse#:~:text=Geben%20Sie%20den%20Befehl%20»ping,öffentliche%20IP-Adresse%20der%20Seite.>`__.
+    * Now connect to the ETH VPN and check your IP-address once more at `Hoststar <https://www.hoststar.ch/de/tools/meine-ip-adresse#:~:text=Geben%20Sie%20den%20Befehl%20»ping,öffentliche%20IP-Adresse%20der%20Seite.>`__. What do you notice?
 
     .. hidden-code-block:: bash
 
@@ -99,7 +99,7 @@ The ssh structure usually is <your-ID>@<server-address> (Note: **<** and **>** a
 
 R Workbench
 -----------
-Since everyone is working on different devices and we are using multiple program languages, we have arranged a single web-based platform for you to work on:`https://rstudio-teaching.ethz.ch <https://rstudio-teaching.ethz.ch/>`_. You may already be familiar with R-Studio, a development platform for programming in R. R-Workbench is built on R-Studio and can also be used for other programming languages and as a Unix terminal. **To login to the R-Workbench only your ethz-login and connection to the ETH-network (either being connected to the ETH-WiFi or via VPN) are necessary**, you do not need to ssh, you can if you want to, the server address is ... . 
+Since everyone is working on different devices and we are using multiple program languages, we have arranged a single web-based platform for you to work on:`https://rstudio-teaching.ethz.ch <https://rstudio-teaching.ethz.ch/>`__. You may already be familiar with R-Studio, a development platform for programming in R. R-Workbench is built on R-Studio and can also be used for other programming languages and as a Unix terminal. **To login to the R-Workbench only your ethz-login and connection to the ETH-network (either being connected to the ETH-WiFi or via VPN) are necessary**, you do not need to ssh, you can if you want to, the server address is ... . 
 
 **From now on, primarily all exercises and homework should be done in R-Workbench.**
 
@@ -209,5 +209,5 @@ To exit the Python environment you have to enter :code:`exit` into the console (
 
 .. container:: nextlink
 
-    `Next: Introduction to Unix 1 <1_Unix1.html>`_
+    `Next: Introduction to Unix 1 <1_Unix1.html>`__
 

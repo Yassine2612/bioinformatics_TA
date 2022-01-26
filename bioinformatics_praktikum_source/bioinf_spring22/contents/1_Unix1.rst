@@ -19,7 +19,7 @@ Learning objectives
 Resources
 ^^^^^^^^^
 
-This section requires the use of the `R Worbench <https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F>`_. Specifically you will need the terminal, shown in the setup which can be found `here <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html#working-in-unix>`_. 
+This section requires the use of the `R Worbench <https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F>`__. Specifically you will need the terminal, shown in the setup which can be found `here <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html#working-in-unix>`__. 
 
 
 The command
@@ -394,7 +394,7 @@ In Unix systems there are only really two types of files: text or binary. The fi
 * .r - An R script, which contains R commands to run.
 * .py - A python script, which contains python commands to run.
 * .gz or .tar.gz - A file that has been compressed using a protocol called 'gzip' so that it takes up less space on the disk and transfers over the internet faster.
-This section requires the use of the R Workbench.
+
 Other useful file operations
 ----------------------------
 
@@ -575,5 +575,5 @@ Homework
 
 .. container:: nextlink
 
-    `Next: Introduction to Unix 2 <2_Unix2.html>`_
+    `Next: Introduction to Unix 2 <2_Unix2.html>`__
 

@@ -20,7 +20,7 @@ Learning objectives
 Resources
 ^^^^^^^^^
 
-This section requires the use of the `R Workbench <https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F>`_. Specifically you will need the terminal, shown in the setup which can be found `here <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html#working-in-unix>`_.
+This section requires the use of the `R Workbench <https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F>`__. Specifically you will need the terminal, shown in the setup which can be found `here <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html#working-in-unix>`__.
 
 
 Searching
@@ -147,7 +147,7 @@ The command **grep** allows you to search within files without opening them firs
     * Use **grep** to find the same entry in the file.
     * Use **grep** to count how many fasta entries the file has. As a reminder, a FASTA header always starts with a '>'.
     * Find out, which entry number the gene **dnaA** is?
-    * If you are interested in learning regular expressions, try the exercises `here <https://regexone.com/>`_
+    * If you are interested in learning regular expressions, try the exercises `here <https://regexone.com/>`__
 
     .. hidden-code-block:: bash
 
@@ -529,5 +529,5 @@ Homework
 
 .. container:: nextlink
 
-    `Next: Sequence data  <3_Sequence.html>`_
+    `Next: Sequence data  <3_Sequence.html>`__
 

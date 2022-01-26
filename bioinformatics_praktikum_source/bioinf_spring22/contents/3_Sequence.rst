@@ -21,7 +21,7 @@ Learning objectives
 Requirements
 ^^^^^^^^^^^^
 
-This section requires the use of the `R Workbench <https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F>`_.
+This section requires the use of the `R Workbench <https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F>`__.
 
 
 Sequence data
@@ -136,7 +136,7 @@ As well as the sequence of biological molecules, it is useful to keep a record o
 Genbank flat file format
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The genbank flat file is designed to contain a large and varied amount of information on DNA or RNA sequences. We are not going to cover here all of the possible features of the format, but the NCBI provide a sample record with a detailed description of each component `here <https://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html>`_.
+The genbank flat file is designed to contain a large and varied amount of information on DNA or RNA sequences. We are not going to cover here all of the possible features of the format, but the NCBI provide a sample record with a detailed description of each component `here <https://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html>`__.
 
 * **Locus**:
         * Locus name: Originally had a set format but now just has to be a unique name for the sequence record.
@@ -284,7 +284,7 @@ Sometimes you don't want to work through the records in file order, in which cas
     # As a dictionary
     records = SeqIO.to_dict(SeqIO.parse("myfile.fasta", "fasta"))
 
-Note that the *SeqIO.parse* examples above specify the file format as "fasta". Many other formats are supported, but the correct format must be explicitly given as an argument, for instance fastq is "fastq" and GenBank is "genbank" or "gb". Sadly, GFF format is not yet supported and requires an additional package or parsing it yourself. The full list of formats is available `here <https://biopython.org/wiki/SeqIO>`_.
+Note that the *SeqIO.parse* examples above specify the file format as "fasta". Many other formats are supported, but the correct format must be explicitly given as an argument, for instance fastq is "fastq" and GenBank is "genbank" or "gb". Sadly, GFF format is not yet supported and requires an additional package or parsing it yourself. The full list of formats is available `here <https://biopython.org/wiki/SeqIO>`__.
 
 
 Accessing feature information
@@ -387,18 +387,18 @@ In your future work, you might want to reference the genome of the organism you 
 
 There are three primary sequence databases that essentially contain the same data, exchanged daily between them.
 
-* GenBank, part of the `NCBI <https://www.ncbi.nlm.nih.gov/>`_
-* European Nucleotide Archive or `ENA <https://www.ebi.ac.uk/ena/browser/home>`_
-* DNA Data Bank of Japan or `DDBJ <https://www.ddbj.nig.ac.jp/index-e.html>`_
+* GenBank, part of the `NCBI <https://www.ncbi.nlm.nih.gov/>`__
+* European Nucleotide Archive or `ENA <https://www.ebi.ac.uk/ena/browser/home>`__
+* DNA Data Bank of Japan or `DDBJ <https://www.ddbj.nig.ac.jp/index-e.html>`__
 
 There are additionally a vast array of secondary databases, often specialising in particular types of sequence or individual organisms. We will discuss some of them in future parts of the course.
 
 NCBI
 ^^^^
 
-The National Center for Biotechnology Information (`NCBI <https://www.ncbi.nlm.nih.gov/>`_) hosts a series of databases and tools that are considered essential for modern biology. 
+The National Center for Biotechnology Information (`NCBI <https://www.ncbi.nlm.nih.gov/>`__) hosts a series of databases and tools that are considered essential for modern biology. 
 
-The `NCBI homepage <https://www.ncbi.nlm.nih.gov/>`_ (below) is a bit overwhelming. At the top you have the search bar (red frame). You can either search (yellow frame) in all databases or you can select a specific database out of the 39 available databases (blue frame).
+The `NCBI homepage <https://www.ncbi.nlm.nih.gov/>`__ (below) is a bit overwhelming. At the top you have the search bar (red frame). You can either search (yellow frame) in all databases or you can select a specific database out of the 39 available databases (blue frame).
 
 In the bottom half of the page you have some popular resources on the right side (purple frame) and on the left hand side (green frame) you find a variety of sub areas. In the middle (pink frame) other common features are linked.
 
@@ -411,7 +411,7 @@ In the following section we will describe certain parts of the NCBI to help you 
 GenBank
 +++++++
 
-`GenBank <https://www.ncbi.nlm.nih.gov/genbank>`_ is an annotated collection of all publically available DNA sequences. This includes genomes, individual gene or feature sequences, transcripts and more. Sequences shorter than 200bp, that aren't based on a real molecule (for instance a consensus sequence) or that are not known in nucleotide space (for instance a directly sequenced protein), primers, and mixed DNA/mRNA sequences are not accepted. Additional to GenBank is the `WGS <https://www.ncbi.nlm.nih.gov/wgs>`_ (whole genome shotgun) database, which contains sequencing projects that are currently the most common form of high-throughput sequencing, but are not yet assembled, finished or annotatable. The graphs below show how the databases have grown over time in number of entries and total base pairs.
+`GenBank <https://www.ncbi.nlm.nih.gov/genbank>`__ is an annotated collection of all publically available DNA sequences. This includes genomes, individual gene or feature sequences, transcripts and more. Sequences shorter than 200bp, that aren't based on a real molecule (for instance a consensus sequence) or that are not known in nucleotide space (for instance a directly sequenced protein), primers, and mixed DNA/mRNA sequences are not accepted. Additional to GenBank is the `WGS <https://www.ncbi.nlm.nih.gov/wgs>`__ (whole genome shotgun) database, which contains sequencing projects that are currently the most common form of high-throughput sequencing, but are not yet assembled, finished or annotatable. The graphs below show how the databases have grown over time in number of entries and total base pairs.
 
 .. thumbnail:: images/wgs_genbank.png
     :align: center
@@ -425,19 +425,19 @@ GenBank is searchable by selecting the 'Nucleotide' database on the NCBI homepag
 RefSeq
 ++++++
 
-The `Reference Sequence <https://www.ncbi.nlm.nih.gov/refseq>`_ database aims to be a comprehensive, well-annotated, non-redundant set of sequences - effectively a curated subset of GenBank to represent the best quality information available for use in biological research. For instance, RefSeq contains 66,541 bacterial entries as of release 207. If you are looking for a high quality and trustworthy sequence for your work, RefSeq is a good place to start.
+The `Reference Sequence <https://www.ncbi.nlm.nih.gov/refseq>`__ database aims to be a comprehensive, well-annotated, non-redundant set of sequences - effectively a curated subset of GenBank to represent the best quality information available for use in biological research. For instance, RefSeq contains 66,541 bacterial entries as of release 207. If you are looking for a high quality and trustworthy sequence for your work, RefSeq is a good place to start.
 
 RefSeq is not searchable from the NCBI frontpage. Instead, you can search GenBank by selecting the 'Nucleotide' database and then use the appropriate filter.
 
 Genome
 ++++++
 
-The `genome <https://www.ncbi.nlm.nih.gov/genome/>`_ database is another subset of GenBank that includes genomes, chromosomes and assemblies. It aims to assign taxonomy to each entry and give an assessment of completeness. It can be searched directly from the NCBI frontpage by selecting 'Genome'.
+The `genome <https://www.ncbi.nlm.nih.gov/genome/>`__ database is another subset of GenBank that includes genomes, chromosomes and assemblies. It aims to assign taxonomy to each entry and give an assessment of completeness. It can be searched directly from the NCBI frontpage by selecting 'Genome'.
 
 Taxonomy
 ++++++++
 
-The `taxonomy <https://www.ncbi.nlm.nih.gov/taxonomy>`_ database is a curated classification of the organisms in GenBank, by which we mean their locations on the tree of life. There are alternative taxonomies available, such as the `GTDB <https://gtdb.ecogenomic.org/>`_, as phylogenetic methods differ. Taxonomy is continually under revision, and often submissions are unintentionally misassigned, so be wary when working with less well researched organisms or environments.
+The `taxonomy <https://www.ncbi.nlm.nih.gov/taxonomy>`__ database is a curated classification of the organisms in GenBank, by which we mean their locations on the tree of life. There are alternative taxonomies available, such as the `GTDB <https://gtdb.ecogenomic.org/>`__, as phylogenetic methods differ. Taxonomy is continually under revision, and often submissions are unintentionally misassigned, so be wary when working with less well researched organisms or environments.
 
 Taxonomy can be searched directly from the NCBI frontpage by selecting 'Taxonomy'.
 
@@ -454,7 +454,7 @@ The NCBI’s primary text search and retrieval system, Entrez, comprises 39 mole
 
 Since Entrez searches in a vast amount of databases and the search input can be almost anything (single words, short phrases, sentences, database identifiers, gene symbols, names, etc.) even simple searches can lead to an overwhelming amount of results. Therefore it is useful to know some tricks which make searching more efficient.
 
-1. Boolean Operators: You should have be familiar with Boolean Operators from Statistics. They can be used in Entrez to make your search more specific:
+1. Boolean Operators: You should be familiar with Boolean Operators from Statistics. They can be used in Entrez to make your search more specific:
        
     * **AND**: Finds documents that contain terms on both sides of the operator, the intersection of both searches.
     * **OR**: Finds documents that contain either term, the union of both searches.
@@ -468,10 +468,10 @@ Since Entrez searches in a vast amount of databases and the search input can be 
 
         "Escherichia coli"[Organism] AND 2020/1/1[Publication Date]
 
-If you want to know more about Entrez click `here <https://www.ncbi.nlm.nih.gov/books/NBK3837/>`_.
+If you want to know more about Entrez click `here <https://www.ncbi.nlm.nih.gov/books/NBK3837/>`__.
 
 
 .. container:: nextlink
 
-    `Next: Alignment <4_Alignment.html>`_
+    `Next: Alignment <4_Alignment.html>`__
 
