@@ -45,7 +45,7 @@ Image Analysis
           :width: 24%
           :target: bioinf_spring22/contents/5_Annotation.html
 
-.. |pic6| image:: images/Phylogeny.png
+.. |pic6| image:: images/Phylogenetics.png
           :width: 24%
           :target: bioinf_spring22/contents/6_Phylogenetics.html 
 

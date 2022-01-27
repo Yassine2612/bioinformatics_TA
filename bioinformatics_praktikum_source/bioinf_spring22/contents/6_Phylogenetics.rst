@@ -23,7 +23,7 @@ Laptop with access to the ETHZ network, via VPN if necessary.
 Generating a phylogenetic tree (via a web-server)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this section of the course, we will introduce you to NGPhylogeny, a web-based platform that performs a phylogenetic analysis in a user-friendly way, that is without the need for the installation of several software programmes and the re-formatting of input and output files. The user can chose to run the analyses in a "one click" mode using default tools and parameters, or create more advanced, customised workflows. The platform provides detailed information about the individual steps that are performed and the tools that are used to execute them:
+In this section of the course, we will introduce you to `NGPhylogeny <https://ngphylogeny.fr>`__, a web-based platform that performs a phylogenetic analysis in a user-friendly way, that is without the need for the installation of several software programmes and the re-formatting of input and output files. The user can chose to run the analyses with a "one click" workflow using default tools and parameters, or create more advanced and customised workflows. The platform provides detailed information about the individual steps that are performed and the tools that are used to execute them:
 
 0. Collection and formatting of sequence data   
 1. Multiple sequence alignment (MSA)
