@@ -2,22 +2,22 @@ Annotation
 ==========
 
 General information
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 Main objective
---------------
+^^^^^^^^^^^^^^
 
 In this lecture we will introduce the concept of sequence annotation. We will look at how to predict genes from sequence, how to predict function by homology and the databases that we use to do this.
 
 Learning objectives
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 * Students are able to predict open reading frames (genes) from sequence in prokaryotes and understand the principle in eukaryotes
 * Students understand the principle of predicting function by homology
 * Students are able to use databases such as PFAM to search for functional components in a sequence
 
 Requirements
-------------
+^^^^^^^^^^^^
 
 Laptop with access to the ETHZ network, via VPN if necessary
 
@@ -45,7 +45,11 @@ Genes in prokaryotes are relatively simple in structure: they begin with a start
 .. thumbnail:: images/orf.png
     :align: center
 
-There are 3 frames on the top strand reading left to right, starting with the 1st, 2nd or 3rd base of the sequence in green, orange or magenta respectively. There are 3 additional frames on the complementary strand reading right to left, starting with the last, last but one or last but two base of the sequence in magenta, orange or green respectively. An open reading frame (ORF) is a region in one of these reading frames that begins at a start codon (M for Methionine) and then extends long enough that the region could be a gene before reaching a stop codon (* for any of the three possible stop codons). In this example a very small open reading frame exists, highlighted in grey.
+There are 3 frames on the top strand reading left to right, starting with the 1st, 2nd or 3rd base of the sequence in green, orange or magenta respectively. There are 3 additional frames on the complementary strand reading right to left, starting with the last, last but one or last but two base of the sequence in magenta, orange or green respectively. An open reading frame (ORF) is a region in one of these reading frames that begins at a start codon (M for Methionine) and then extends long enough that the region could be a gene before reaching a stop codon (* for any of the three possible stop codons). In this example a very small open reading frame exists, highlighted in grey. As a reminder, this is the amino acid codon table for prokaryotes, remembering that U is the base in RNA for T in DNA:
+
+.. thumbnail:: images/Aminoacids_table.png
+    :align: center
+    :width: 60%
 
 Gene prediction algorithms look for these open reading frames and then use a model based on training data to determine which are likely genes, taking into account:
 
@@ -57,7 +61,7 @@ Gene prediction algorithms look for these open reading frames and then use a mod
 Prodigal
 ^^^^^^^^
 
-The most popular prokaryotic gene predictor is a software package called **prodigal**, available `here <https://github.com/hyattpd/Prodigal>`_. We have also made it available on our module system. Minimally, prodigal requires an input file in fasta format of at least 20kbp and will produce output directly to the command line, which our example command improves on by using the *-o* option to send the output to a file.
+The most popular prokaryotic gene predictor is a software package called **prodigal**, available `here <https://github.com/hyattpd/Prodigal>`__. We have also made it available on our module system. Minimally, prodigal requires an input file in fasta format of at least 20kbp and will produce output directly to the command line, which our example command improves on by using the *-o* option to send the output to a file.
 
 .. code-block:: bash
 
@@ -69,30 +73,30 @@ The most popular prokaryotic gene predictor is a software package called **prodi
 
 In the second example we add the *-d* and *-a* options to output the nucleotide and amino acid sequences of the predicted genes to files. You can also modify the format of the main output file with *-f* and other options allow you to tailor the algorithm to your application, such as for a metagenome or just to train the algorithm parameters for use on another sequence.
 
-.. admonition:: Exercise
+.. admonition:: Exercise 5.1
     :class: exercises
 
-    * Run prodigal on a genome
+    * Run prodigal on a genome and get stats on the result
 
 Gene prediction in eukaryotes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In eukaryotes, genes are more complicated features, notably with introns and exons that make the prokaryotic approach unworkable. The approach is instead to train a more sophisticated model on existing eukaryotic genes in a closely-related organism and use this model to predict genes in novel sequence. An example of software that does this is GlimmerHMM, available `here <https://ccb.jhu.edu/software/glimmerhmm/>`_. As we said at the start of Comparative Sequence Analysis, it is beyond the scope of this course to look at this further.
+In eukaryotes, genes are more complicated features, notably with introns and exons that make the prokaryotic approach unworkable. The approach is instead to train a more sophisticated model on existing eukaryotic genes in a closely-related organism and use this model to predict genes in novel sequence. An example of software that does this is GlimmerHMM, available `here <https://ccb.jhu.edu/software/glimmerhmm/>`__. As we said at the start of Comparative Sequence Analysis, it is beyond the scope of this course to look at this further.
 
 Gene function prediction
 ------------------------
 
-Now we have identified potential protein sequences in our genome, we should try to find their functions using the principle of homology described in the introduction. There are many databases we could search to find similar sequences, but rather than just using the largest possible, we should consider the quality of evidence provided by each. For instance, RefSeq is a more carefully curated set of sequences than GenBank as a whole. Further, evidence of actual protein sequence and function is better than evidence of only transcript.
+Now we have identified potential protein sequences in our genome, we should try to find their functions using the principle of homology described in the introduction. There are many databases we could search to find similar sequences, but rather than just using the largest possible, we should consider the quality of evidence provided by each. For instance, RefSeq is a more carefully curated set of sequences than GenBank as a whole. Further, evidence of actual protein sequence and function is better than evidence of only transcript. Many resources exist that aim to collect the best quality information about genes and proteins
 
 UniProt
 ^^^^^^^
 
-A useful resource for protein sequence and function information is the database `UniProt <https://www.uniprot.org/>`_, a collaboration between the European Bioinformatics Institute (EMBL-EBI), the Swiss Institute of Bioinformatics (SIB) and the Protein Information Resource (PIR). Within this project exists Swiss-Prot, which is manually annotated and reviewed, and UniRef, which clusters proteins at certain threshold distances.
+A useful resource for protein sequence and function information is the database `UniProt <https://www.uniprot.org/>`__, a collaboration between the European Bioinformatics Institute (EMBL-EBI), the Swiss Institute of Bioinformatics (SIB) and the Protein Information Resource (PIR). Within this project exists Swiss-Prot, which is manually annotated and reviewed, and UniRef, which clusters proteins at certain threshold distances.
 
 .. thumbnail:: images/overview.png
     :align: center
 
-The website allows you to search by text, such as gene name or organism, or by sequence with BLAST. As a brief introduction, let's look at the `entry <https://www.uniprot.org/uniprot/P0AES4>`_ for a well known bacterial protein, DNA Gyrase subunit A or gyrA:
+The website allows you to search by text, such as gene name or organism, or by sequence with BLAST. As a brief introduction, let's look at the `entry <https://www.uniprot.org/uniprot/P0AES4>`__ for a well known bacterial protein, DNA Gyrase subunit A or gyrA:
 
 .. thumbnail:: images/uniprot_gyra.png
 
@@ -114,26 +118,125 @@ In this header you can see the gene name and organism it is from, as well as the
 
 As you can see, a vast amount of information is available about a single protein and UniProt does a good job of collating it all for easy access.
 
-PFAM
+When it comes to annotation, we can use UniProt as a database for alignment of our unknown genes. We could also use SwissProt as a narrower but more trustworthy database, since it is manually curated. If we wanted to use broader but more hypothetical information, we could consider looking at **protein domains**.
+
+Pfam
 ^^^^
 
-In the "Family & Domains" section for Gyrase A, 
+In the "Family & Domains" section for Gyrase A, one of the databases linked to is `Pfam <http://pfam.xfam.org/>`__, also run by the EMBL-EBI and indeed based on the data in UniProt. Pfam uses the principle of protein domains, functional regions that each protein has one or more of. A Pfam family consists of a small set of representative members, a multiple alignment of their sequences and a profile Hidden Markov Model (HMM) built from the MSA.
 
-Quick TOC
----------
+A Pfam HMM is a statistical model that encodes the likelihood of each amino acid at each position along with the likelihood of an insertion or deletion. You can take any sequence and score it with such an HMM to determine whether it is likely to be represented by the model or not, and therefore whether it is likely to be an example of that particular Pfam family.
 
-* Finding genes
-* Annotation by homology
-* The idea of weight matrices/statistical function prediction
-* Protein domains and PFAM
+.. thumbnail:: images/hmm.png
+    :align: center
 
-Uniprot
--------
+If we look at the Pfam entry for Gyrase A by following the link, we can see that it is composed of two different domains called *DNA topoisoIV* and *DNA gyraseA C*. Let's take a close look at the second of these domains:
 
-The Universal Protein Resource (UniProt) is a database hosted by the European Bioinformatics Institute (EMBL-EBI), Swiss Institute of Bioinformatics (SIB) and  Protein Information Resource (PIR) for protein sequence, annotation and functions. Uniprot consists of three databases the UniProt Knowledgebase (UniProtKB), the UniProt Reference Clusters (UniRef), and the UniProt Archive (UniParc).
+.. thumbnail:: images/pfam_gyra.png
+    :align: center
 
-.. image:: images/overview.png
+Pfam provides several useful pages of information accessible from the menu on the left:
 
+* Summary: describes the domain and references literature to support this.
+* Domain organisation: this shows the known layouts of proteins containing the domain.
+* Clan: some domains belong to superfamilies of similar domains.
+* Alignments: here you can get the sequences and MSAs of various sets of domains - for instance seed domains were used to construct the HMM - in various formats.
+* HMM logo: one way to visualise the HMM is with a "logo" where amino acid codes are scaled according to their likelihood.
+* Trees: displays the phylogenetic tree for the seed aligment.
+* Curation & model: metadata about the Pfam family itself and a link to download the HMM itself.
+* Species: a graphical representation of the presence of the Pfam family across species.
+* Structures: similar to the UniProt "Structure" entry.
+* Alphafold Structures: predicted structures made by the program AlphaFold.
+* trRosetta Structures: predicted structures made by the program trRosetta.
 
-The UniProtKB consists of two sections, a manually annotated part and an automated annotated part which awaits manual annotation. Each entry provides functional information about a protein with as much annotation information as possible.
+To use Pfam effectively, there is a suite of software called HMMER that can be used to both produce and search HMM profiles.
+
+HMMER
+^^^^^
+
+HMMER is available `here <http://hmmer.org/>`__, and we have made it available on the module system. We will quickly show you how to build and search with an HMM.
+
+To construct an HMM from an MSA, you should use the program **hmmbuild**:
+
+.. code-block:: bash
+
+    # Build an HMM - note the unusual order with the output file first
+    hmmbuild my_hmm.hmm my_msa.fasta
+
+    # Search sequence(s) with an HMM
+    hmmsearch my_hmm.hmm my_sequences.fasta
+
+So for annotation, we could take the Pfam family database and check our sequences against it for domains, and those can inform our functional annotation.
+
+.. admonition:: Exercise 5.2
+    :class: exercise
+
+    * Annotate the sequence mystery_sequence03.fasta using UniProt and Pfam web resources
+
+Automated annotation
+--------------------
+
+When you have a whole genome to annotate, you want a program to do as much as possible for you automatically. There are several pipelines available such as the `NCBI Prokaryotic Genome Annotation Pipeline <https://www.ncbi.nlm.nih.gov/genome/annotation_prok/>`__, `PATRIC <https://patricbrc.org/>`__ and `RAST <https://rast.nmpdr.org/>`__. Here we will show you how to use the whole genome annotation program `Prokka <https://github.com/tseemann/prokka>`__, which is a pipeline that uses various feature prediction tools:
+
+* Prodigal for genes
+* RNAmmer  for rRNA
+* Aragorn  for transfer RNA
+* SignalP  for signal peptides
+* Infernal for non-coding RNA
+
+Further it searches different databases in a specific order for protein function annotation, ranking them in order of quality:
+
+1. All bacterial proteins in UniProt that have real protein or transcript evidence and are not a fragment.
+2. All proteins from finished bacterial genomes in RefSeq for a specified genus.
+3. A series of hidden Markov model profile databases, including Pfam and TIGRFAMs.
+4. If no matches can be found, label as ‘hypothetical protein’.
+
+Prokka has some recommended ways of running it, with increasing complexity:
+
+.. code-block:: bash
+
+    # Beginner
+    # Vanilla (but with free toppings)
+    prokka contigs.fa
+
+    # Moderate
+    # Choose the names of the output files
+    prokka --outdir mydir --prefix mygenome contigs.fa
+
+    # Specialist
+    # Have curated genomes I want to use to annotate from
+    prokka --proteins MG1655.gbk --outdir mutant --prefix K12_mut contigs.fa
+
+    # Expert
+    # It's not just for bacteria, people
+    prokka --kingdom Archaea --outdir mydir --genus Pyrococcus --locustag PYCC
+
+    # Wizard
+    # Watch and learn
+    prokka --outdir mydir --locustag EHEC --proteins NewToxins.faa --evalue 0.001 --gram neg --addgenes contigs.fa
+
+Those are just examples of course, but you can see that there are many ways to customise the annotation, especially the output.
+
+??
+
+.. admonition:: Exercise 5.3
+    :class: exercise
+
+    * Run prokka on chosen reference genome from Part 3
+    * Compare stats with exercise 5.1 and official record
+
+Annotating other features
+-------------------------
+
+Other than genes, there are techniques and software for annotating an array of other features. Many of them use similar methods as we have discussed above - build a statistical model of a feature based on example sequences and use that model to find similar features. This is typical for promoters, binding sites and other sequence motifs.
+
+.. admonition:: Homework
+    :class: homework
+
+    * Run pfam to find potential topoisomerases in genomes
+    * Perform MSA
+
+.. container:: nextlink
+
+    `Next: Phylogenetics <6_Phylogenetics.html>`__
 

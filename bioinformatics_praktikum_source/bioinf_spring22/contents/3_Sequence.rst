@@ -103,14 +103,16 @@ A fasta file may also contain multiple sequences in fasta format (sometimes know
    GLMPFLHTSKHRSMMLRPLSQALFWTLTMDLLTLTWIGSQPVEYPYTIIGQMASILYFSIILAFLPIAGX
    IENY
 
-.. admonition:: Exercises
+.. admonition:: Exercise 3.1
     :class: exercise
+
+    For this exercise, the directory ?? contains example files *example_reads_R1.fastq*, *example_reads_R2.fastq* and *example_sequences.fasta*.
 
     * How might you count the number of entries in a multi-fasta file using command line tools?
     * How about for a fastq file?
     * HINT: in both cases think carefully about the ways your method might go wrong, consider using a regular expression
 
-    * In the example fastq entry above, calculate the Phred quality scores for the final 4 bases.
+    * In the example fastq entry shown above, calculate the Phred quality scores for the final 4 bases.
 
     * How could you convert a fastq file to fasta format (discarding the quality scores) using command line tools?
 
@@ -183,10 +185,46 @@ The **GFF** (**G**\eneral **F**\eature **F**\ormat) format is used in bioinforma
     NZ_AYEK01000001.1       RefSeq  gene    337     2799    .       +       .       ID=gene1;Name=P370_RS0100015;gbkey=Gene;gene_biotype=protein_coding;locus_tag=P370_RS0100015
     NZ_AYEK01000001.1       Protein Homology        CDS     337     2799    .       +       0       ID=cds1;Parent=gene1;Dbxref=Genbank:WP_001264707.1;Name=WP_001264707.1;gbkey=CDS;inference=COORDINATES: similar to AA sequence:RefSeq:WP_005124053.1;product=bifunctional aspartokinase I/homoserine dehydrogenase I;protein_id=WP_001264707.1;transl_table=11
 
-.. admonition:: Exercises
+.. admonition:: Exercise 3.2
     :class: exercise
 
-    ???
+    For this exercise, the directory ?? contains example files *example_features.gff* and *example_features.gbk*.
+
+    * How might you use command line tools to count the number of different features in a Genbank format file?
+    * How about for a GFF file?
+
+    .. hidden-code-block:: bash
+
+    # For the example Genbank file we need to find the feature types with a clever regular expression that looks for the correct spacer followed by letters and another space
+    # We tell grep to only output the hits (not the lines with hits in as default) with -o, and -P enables the complicated regex
+    # Then we remove the spaces, sort the results and count them
+    grep -oP '^\s{5}[a-zA-Z]+\s' example_features.gbk | tr -d ' ' | sort | uniq -c
+
+    #  4302 CDS
+    #  4609 gene
+    #    79 ncRNA
+    #    22 rRNA
+    #     1 source
+    #    86 tRNA
+
+    # For GFF format things are a bit easier as after the comment lines it is just a tab-delimited table
+    # So we select the 3rd column and the -s flag leaves out the comment lines because they have no delimiters
+    cut -s -f 3 example_features.gff | sort | uniq -c
+
+    #  4324 CDS
+    #   187 exon
+    #  4464 gene
+    #    50 mobile_genetic_element
+    #    79 ncRNA
+    #     1 origin_of_replication
+    #   164 pseudogene
+    #     1 region
+    #    22 rRNA
+    #    48 sequence_feature
+    #    86 tRNA
+
+    # See how the information in the two files is slightly different due to different format specifications
+
 
 Working in BioPython
 --------------------
@@ -334,7 +372,7 @@ If you use SeqIO to read in a file in one format, you can convert it by writing 
 * If you extract a feature sequence or slice a sequence, the new SeqRecord inherits the additional properties such as ID and description of the parent sequence
 * If you translate a SeqRecord from nucleotide to amino acid sequence, the additional record information such as ID and description are lost and replaced with awkward '<unknown x>' strings
 
-.. admonition:: Exercises
+.. admonition:: Exercise 3.3
     :class: exercise
     
     * Using SeqIO, read in the GenBank file located at /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gbff
@@ -344,7 +382,7 @@ If you use SeqIO to read in a file in one format, you can convert it by writing 
     * Pick any gene and write the sequence out to a new fasta file
     * For the same gene, write the translated amino acid sequence out to another fasta file
 
-    * Write a script that:
+    * Write a python script that:
        * Reads in the GenBank file
        * Extracts the nucleotide sequences of each gene
        * Writes them to a single multi-fasta file
@@ -367,18 +405,17 @@ If you use SeqIO to read in a file in one format, you can convert it by writing 
 
         # Output a gene
         my_gene = genes[0]
-        my_gene_seqrec = genes[0].extract(record)
-        my_gene_seqrec.id = my_gene.qualifiers['gene'][0]
-        my_gene_seqrec.description = 'extracted from ' + my_gene_seqrec.description
+        my_gene_seqrec = my_gene.extract(record)                                       # Note the difference between a feature and a sequence record containing features
+        my_gene_seqrec.id = my_gene.qualifiers['gene'][0]                              # Change the ID of the new sequence record
+        my_gene_seqrec.description = 'extracted from ' + my_gene_seqrec.description    # Change the description of the new record
         SeqIO.write(my_gene_seqrec, 'my_gene.fna', 'fasta')
 
         # Output a translation
         my_gene_trans = my_gene_seqrec.translate()
-        my_gene_trans # see that the metadata is messed up
-        my_gene_trans.id = my_gene_seqrec.id
-        my_gene_trans.description = my_gene_seqrec.description
+        my_gene_trans                                               # See that the metadata is messed up
+        my_gene_trans.id = my_gene_seqrec.id                        # Copy the metadata from the original sequence record
+        my_gene_trans.description = my_gene_seqrec.description      # Ditto
         SeqIO.write(my_gene_trans, 'my_gene.faa', 'fasta')
-
 
 Sequence databases
 ------------------
@@ -441,12 +478,6 @@ The `taxonomy <https://www.ncbi.nlm.nih.gov/taxonomy>`__ database is a curated c
 
 Taxonomy can be searched directly from the NCBI frontpage by selecting 'Taxonomy'.
 
-.. admonition:: Exercises
-    :class: exercise
-
-    * Search for something..
-
-
 Searching the NCBI
 ^^^^^^^^^^^^^^^^^^
 
@@ -470,6 +501,17 @@ Since Entrez searches in a vast amount of databases and the search input can be 
 
 If you want to know more about Entrez click `here <https://www.ncbi.nlm.nih.gov/books/NBK3837/>`__.
 
+.. admonition:: Exercise 3.4
+    :class: exercise
+
+    * Using NCBI search tools, find the genome record for *Escherichia coli K12 MG1655*.
+    * Using NCBI's genome database, find the RefSeq reference prokaryotic genomes that are considered to have 'Complete' assembled genomes (there should be 15)
+
+.. admonition:: Homework 3
+    :class: homework
+
+    * Do some biopython on the chosen genome to get out fna and faa files for later use
+    * Something building to 7
 
 .. container:: nextlink
 
