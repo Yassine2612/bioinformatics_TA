@@ -19,11 +19,16 @@ Learning objectives
 Resources
 ^^^^^^^^^
 
-This section requires the use of the `R Worbench <https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F>`__. Specifically you will need the terminal, shown in the setup which can be found `here <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html#working-in-unix>`__. 
+This section requires the use of the R Workbench according to your **surname**:
 
+* A-J: `Server 01 <https://rstudio-teaching-01.ethz.ch/>`__
+* K-R: `Server 02 <https://rstudio-teaching-02.ethz.ch/>`__
+* S-Z: `Server 03 <https://rstudio-teaching-03.ethz.ch/>`__
+
+Specifically you will need the terminal, shown in the setup which can be found `here <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html#working-in-unix>`__. 
 
 The command
---------------------------
+-----------
 
 Commands are our tool to tell the computer what to do. Most commands have *options* and *arguments*. Arguments are often essential for a command to operate properly; they are the pieces of information required by a command, such as a file name. Options are, of course, optional, and offer ways to modify the way the command works.
 
@@ -226,16 +231,16 @@ Navigation
     * Use *ls* to see all the home directories of other users on the server
     * Try to go up two levels using cd
     * Use cd to go back to your home directory
-    * Use absolute path to enter the directory at /nfs/course/PTB_551-0132-00/genomes. What is in it?
+    * Use absolute path to enter the directory at /nfs/course/551-0132-00L/1_Unix1/genomes. What is in it?
     * Use absolute path to go home
     * Go to the root
-    * Experiment with *cd* and *ls* to explore the directory structure within /nfs/course/PTB_551-0132-00/genomes before returning to your home directory
+    * Experiment with *cd* and *ls* to explore the directory structure within /nfs/course/551-0132-00L/1_Unix1/genomes before returning to your home directory
 
     .. hidden-code-block:: bash
 
         #use pwd to find you current location
         pwd
-        /nfs/course/home/<your eth name>
+         /nfs/course/course_home/<your eth name>
 
         #Use ls to see what in the directory is.
         ls
@@ -253,19 +258,19 @@ Navigation
         cd
 
         #use cd to change directory and give the absolute path to go to genomes
-        cd /nfs/course/PTB_551-0132-00/genomes
+        cd /nfs/course/551-0132-00L/1_Unix1/genomes
 
         #use ls to see what is in there
         ls
 
         #use cd to change directory and remember that an absolute path starts at the root
-        cd /nfs/course/home/<your eth name>
+        cd  /nfs/course/course_home/<your eth name>
 
         #use cd to change directory and to go to the root use /
         cd /
 
         # Let's start at the genomes directory:
-        cd /nfs/course/PTB_551-0132-00/genomes/
+        cd /nfs/course/551-0132-00L/1_Unix1/genomes/
         ls
 
         # What's in the bacteria directory?
@@ -290,9 +295,9 @@ For instance:
 .. code-block:: bash
 
     # Pattern matching
-    ls /cluster/home/ssunagaw/teaching/ecoli/*      # lists all files in the ecoli directory
-    ls /cluster/home/ssunagaw/teaching/ecoli/*.fna  # lists all nucleotide fasta files there
-    ls /cluster/home/ssunagaw/teaching/ecoli/*.f?a  # lists all nucleotide and protein fasta files there
+    ls /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/*      # lists all files in the ecoli directory
+    ls /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/*.fna  # lists all nucleotide fasta files there
+    ls /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/*.f?a  # lists all nucleotide and protein fasta files there
 
 Basic file operations
 ---------------------
@@ -303,7 +308,7 @@ Basic file operations
 
     # Copy
     cp <source> <destination>
-    cp /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna ~/
+    cp /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna ~/
 
 **mv** moves a file from one location to another. The example actually renames the file, because the destination is not a directory. Thus you can move and rename a file with the same command.
 
@@ -311,7 +316,7 @@ Basic file operations
 
     # Move or rename
     mv <source> <destination>
-    mv /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna ~/E.coli_K12_MG1655.fna
+    mv ~/GCF_000005845.2_ASM584v2_genomic.fna ~/E.coli_K12_MG1655.fna
 
 **rm** removes a file, so use it with care.
 
@@ -326,6 +331,7 @@ Basic file operations
 .. code-block:: bash
 
     # Make directory
+    mkdir <path to directory>
     mkdir genomes
 
 **rmdir** removes an empty directory.
@@ -333,13 +339,14 @@ Basic file operations
 .. code-block:: bash
 
     # Remove an empty directory
+    rmdir <path to directory>
     rmdir genomes
 
 .. admonition:: Exercises 1.3
     :class: exercise
 
     * Create two new directories called "genomes" and "homework" in your home folder
-    * Copy any of the E. coli files (found in /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/any_directory/any_file.fna) into your new directory "genomes" (just one)
+    * Copy the /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna file into your new directory "genomes"
     * Rename the file to "E.coli_file"
     * Use the help option of the ls function to find which option gives you the size of the genome
     * Using the *man* and *cp*, find out how to copy a directory.
@@ -354,11 +361,14 @@ Basic file operations
 
 
         # Use the cp function to copy. cp <source> <destination>
-        cp /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/complicated_file_name  ~/genomes
+        cp /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna ~/genomes
 
 
         # Use the move function to rename a file mv <source> <destination>
-        mv complicated_file_name E.coli_file
+        # Enter the genomes directory
+        cd genomes
+        # Rename file
+        mv GCF_000005845.2_ASM584v2_genomic.fna E.coli_file
 
 
         # ls --help lists all the options possible
@@ -366,7 +376,10 @@ Basic file operations
         
         # The -l option prints one file per line with the size and the -h options make it human-readable. You can join both options together
         ls -lh
+        # The size should be 4.5M
 
+        # Enter home directory
+        cd 
         # Create two directory
         mkdir dir1
         mkdir dir2
@@ -377,7 +390,7 @@ Basic file operations
         
         # If you check 'man cp', you see that you have to use -R:
         man cp
-        cp -R dir dir2
+        cp -R dir1 dir2
 
 File name conventions
 ^^^^^^^^^^^^^^^^^^^^^
@@ -417,9 +430,9 @@ There are many different protocols for transferring files between computers. You
 
     # Download an E. coli genome from the server to your local computer
     # First open Windows Command or Mac Terminal
-    scp user@micro-rstudio.ethz.ch:/nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna .
+    scp user@micro-rstudio.ethz.ch:/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna .
     # or
-    rsync -a user@micro-rstudio.ethz.ch:/nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna .
+    rsync -a user@micro-rstudio.ethz.ch:/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna .
     # Note the "." at the end of these commands stands for your current location.
 
     # Copy the E.coli genome (or any file) from your local computer to the home folder on the server
@@ -557,7 +570,7 @@ Homework
     :class: homework
 
     * Upload a picture into your homework folder you created in the third exercise and name it **<Your First Name>_<Your Last Name>.png**
-    * Find the out-of-place file in /nfs/course/PTB_551-0132-00/genomes and copy it into your homework folder
+    * Find the out-of-place file in /nfs/course/551-0132-00L/1_Unix1/genomes and copy it into your homework folder
     * Interesting questions:
         * What happens when you copy a file with the same name as an existing file?
         * What happens when you delete the directory you are currently in?

@@ -67,11 +67,10 @@ Mac
 
 Connecting to a remote server
 -----------------------------
+
 Your local computer is often not capable of doing bioinformatic work within a reasonable time. Therefore, in order to do bioinformatics, you have to connect to remote servers which have higher capacities than your local machine. ETH provides to its members access to a server named **Euler**, which can be accessed at the address: :code:`euler.ethz.ch`. Bioinformatic labs often have in addition their own remote servers. 
 In order to work on a server, you have to connect to it using a protocol called **S**\ ecure **Sh**\ ell or **ssh**.
 The ssh structure usually is <your-ID>@<server-address> (Note: **<** and **>** are not part of the command) in case of Euler this is <yourETH-ID>@euler.ethz.ch, so the command to connect for Euler is.
-
-
 
 .. code-block:: bash
 
@@ -96,13 +95,18 @@ The ssh structure usually is <your-ID>@<server-address> (Note: **<** and **>** a
         # This code has to be entered into the terminal in order to access Euler.
 
 
-
 R Workbench
 -----------
-Since everyone is working on different devices and we are using multiple program languages, we have arranged a single web-based platform for you to work on:`https://rstudio-teaching.ethz.ch <https://rstudio-teaching.ethz.ch/>`__. You may already be familiar with R-Studio, a development platform for programming in R. R-Workbench is built on R-Studio and can also be used for other programming languages and as a Unix terminal. **To login to the R-Workbench only your ethz-login and connection to the ETH-network (either being connected to the ETH-WiFi or via VPN) are necessary**, you do not need to ssh, you can if you want to, the server address is ... . 
 
-**From now on, primarily all exercises and homework should be done in R-Workbench.**
+Since everyone is working on different devices and we are using multiple program languages, we have arranged a web-based platform for you to work on called R-Workbench. Due to the number of students we have had to create 3 servers to distribute the computing load, and have split up the participants based on **surname** as follows:
 
+* A-J: `Server 01 <https://rstudio-teaching-01.ethz.ch/>`__
+* K-R: `Server 02 <https://rstudio-teaching-02.ethz.ch/>`__
+* S-Z: `Server 03 <https://rstudio-teaching-03.ethz.ch/>`__
+
+You may already be familiar with R-Studio, a development platform for programming in R. R-Workbench is built on R-Studio and can also be used for other programming languages and as a Unix terminal. **To login to the R-Workbench only your ethz-login and connection to the ETH-network (either being connected to the ETH-WiFi or via VPN) are necessary**. You do not have to SSH but can do so if you want to using the address *rstudio-teaching-XX.ethz.ch*, where *XX* is *01*, *02* or *03* as determined above.
+
+**From now on, you should be able to complete all exercises and homework via R-Workbench.**
 
 Working in R
 ^^^^^^^^^^^^

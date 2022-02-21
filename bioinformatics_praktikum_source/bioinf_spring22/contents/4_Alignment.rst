@@ -17,10 +17,14 @@ Learning objectives
 * Students can use BLAST on the command line and with a custom database
 * Students can perform a multiple sequence alignment
 
-Requirements
-^^^^^^^^^^^^
+Resources
+^^^^^^^^^
 
-Laptop with access to the ETHZ network, via VPN if necessary
+This section requires the use of the R Workbench according to your **surname**:
+
+* A-J: `Server 01 <https://rstudio-teaching-01.ethz.ch/>`__
+* K-R: `Server 02 <https://rstudio-teaching-02.ethz.ch/>`__
+* S-Z: `Server 03 <https://rstudio-teaching-03.ethz.ch/>`__
 
 Comparative Sequence Analysis
 -----------------------------

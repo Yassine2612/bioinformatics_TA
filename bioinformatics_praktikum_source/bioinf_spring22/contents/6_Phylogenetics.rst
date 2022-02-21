@@ -14,10 +14,14 @@ Learning objectives
 
 Students are able to collect DNA and protein sequences of interest and store them them in an adequate format. They can explain the different steps and know examples of software required to generate phylogenetic trees. Using phylogenetic trees, they can explain the hypothesised evolutionary relationship between organisms and genes. 
 
-Requirements
-------------
+Resources
+^^^^^^^^^
 
-Laptop with access to the ETHZ network, via VPN if necessary.
+This section requires the use of the R Workbench according to your **surname**:
+
+* A-J: `Server 01 <https://rstudio-teaching-01.ethz.ch/>`__
+* K-R: `Server 02 <https://rstudio-teaching-02.ethz.ch/>`__
+* S-Z: `Server 03 <https://rstudio-teaching-03.ethz.ch/>`__
 
 Phylogenetic trees
 ^^^^^^^^^^^^^^^^^^

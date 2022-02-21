@@ -20,8 +20,13 @@ Learning objectives
 Resources
 ^^^^^^^^^
 
-This section requires the use of the `R Workbench <https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F>`__. Specifically you will need the terminal, shown in the setup which can be found `here <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html#working-in-unix>`__.
+This section requires the use of the R Workbench according to your **surname**:
 
+* A-J: `Server 01 <https://rstudio-teaching-01.ethz.ch/>`__
+* K-R: `Server 02 <https://rstudio-teaching-02.ethz.ch/>`__
+* S-Z: `Server 03 <https://rstudio-teaching-03.ethz.ch/>`__
+
+Specifically you will need the terminal, shown in the setup which can be found `here <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html#working-in-unix>`__.
 
 Searching
 ---------

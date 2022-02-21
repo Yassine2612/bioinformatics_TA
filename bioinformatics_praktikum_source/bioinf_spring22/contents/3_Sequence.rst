@@ -9,7 +9,6 @@ Main objective
 
 In this lecture we will introduce sequence data formats *fastq* and *fasta*. We will discuss how features such as genes are annotated in *genbank* and *gff* formats. Sequence and feature data is available via any number of online databases, and we will explore NCBI and ENA resources.
 
-
 Learning objectives
 ^^^^^^^^^^^^^^^^^^^
 
@@ -18,11 +17,14 @@ Learning objectives
 * Students are proficient with Biopython to manipulate sequences programmatically
 * Students are able to identify an appropriate online database to find relevant sequence files
 
-Requirements
-^^^^^^^^^^^^
+Resources
+^^^^^^^^^
 
-This section requires the use of the `R Workbench <https://rstudio-teaching.ethz.ch/auth-sign-in?appUri=%2F>`__.
+This section requires the use of the R Workbench according to your **surname**:
 
+* A-J: `Server 01 <https://rstudio-teaching-01.ethz.ch/>`__
+* K-R: `Server 02 <https://rstudio-teaching-02.ethz.ch/>`__
+* S-Z: `Server 03 <https://rstudio-teaching-03.ethz.ch/>`__
 
 Sequence data
 -------------

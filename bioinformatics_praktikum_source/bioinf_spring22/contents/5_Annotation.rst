@@ -16,10 +16,14 @@ Learning objectives
 * Students understand the principle of predicting function by homology
 * Students are able to use databases such as PFAM to search for functional components in a sequence
 
-Requirements
-^^^^^^^^^^^^
+Resources
+^^^^^^^^^
 
-Laptop with access to the ETHZ network, via VPN if necessary
+This section requires the use of the R Workbench according to your **surname**:
+
+* A-J: `Server 01 <https://rstudio-teaching-01.ethz.ch/>`__
+* K-R: `Server 02 <https://rstudio-teaching-02.ethz.ch/>`__
+* S-Z: `Server 03 <https://rstudio-teaching-03.ethz.ch/>`__
 
 Introduction to annotation
 --------------------------
@@ -234,7 +238,7 @@ Other than genes, there are techniques and software for annotating an array of o
     :class: homework
 
     * Run pfam to find potential topoisomerases in genomes
-    * Perform MSA
+    * Perform MSA ready for part 6
 
 .. container:: nextlink
 
