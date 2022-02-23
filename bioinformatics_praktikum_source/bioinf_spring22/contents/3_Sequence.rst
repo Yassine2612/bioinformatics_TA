@@ -151,7 +151,7 @@ The genbank flat file is designed to contain a large and varied amount of inform
 
 * **Definition**: A brief description of the sequence such as source organism, gene name/protein name, or some description of the sequence's function.
 
-* **Accession**: A unique identifier for each record that never changes (but the record may become redundant).
+* **Accession**: A unique identifier for each record that never changes (but the record may become redundant). There are several different formats for historical reasons, for example: U12345, AF123456.
 
 * **Source**: Organism name and sometimes molecule type. Under **Organism** you can find the formal scientific name for the source organism and its lineage.
 
@@ -386,7 +386,7 @@ If you use SeqIO to read in a file in one format, you can convert it by writing 
 
     * Write a python script that:
        * Reads in the GenBank file
-       * Extracts the nucleotide sequences of each gene
+       * Extracts the amino acid sequence of each gene
        * Writes them to a single multi-fasta file
 
     .. hidden-code-block:: python
@@ -445,7 +445,6 @@ In the following section we will describe certain parts of the NCBI to help you 
 
 .. thumbnail:: images/NCBI_1.png
     :align: center
-
 
 GenBank
 +++++++
@@ -509,11 +508,27 @@ If you want to know more about Entrez click `here <https://www.ncbi.nlm.nih.gov/
     * Using NCBI search tools, find the genome record for *Escherichia coli K12 MG1655*.
     * Using NCBI's genome database, find the RefSeq reference prokaryotic genomes that are considered to have 'Complete' assembled genomes (there should be 15)
 
+Bio: a useful package
+---------------------
+
+We have installed a useful package called **bio** that makes the process of getting hold of sequence data much easier. You can load it as follows:
+
+.. code-block:: bash
+
+    ml Bio
+    bio
+    
 .. admonition:: Homework 3
     :class: homework
 
-    * Do some biopython on the chosen genome to get out fna and faa files for later use
-    * Something building to 7
+    * Find and read the available help information for *bio*.
+    * Choose one of the 15 genomes found in exercise 3.4 and download the fasta and genbank files using *bio* to your homework folder.
+    * Run the script you wrote in exercise 3.3 to extract the amino acid sequences for this genome.
+
+    This week and until the end of the sequence analysis section of the course, at least part of the homework will be working towards studying sequences of SARS-CoV-2, or COVID-19.
+
+    * Search the NCBI to find the accession number of the reference sequence for the SARS-CoV-2 genome. See `Genbank flat file format`_ for a description of accession numbers.
+    * Use *bio* and the accession number to download the reference genome to your homework folder.
 
 .. container:: nextlink
 

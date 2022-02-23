@@ -115,7 +115,7 @@ When you first login into the R-Workbench, it should look like picture 1. You sh
 
 * The red frame shows the R console where you can issue commands and results are shown.
 * The blue frame shows the environment, here all your variables are stored.
-* The yellow frame shows you the files, plots and packages from your session but it can also give you helpful information.
+* The yellow frame shows your **home folder** (more on this later) and the files it contains, plots, packages from your session, and it can also show you help information.
 
 If you are wondering where the R script is, you have to open it manually. Click on File -> New File -> R Script (or Ctrl + Alt + Shift + N for the short) as you can see in picture 3. This should lead you to the 4 panels you know from “Statistik II” (picture 4).
 

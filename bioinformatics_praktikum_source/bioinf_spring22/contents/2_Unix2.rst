@@ -49,9 +49,9 @@ When you are trying to find a file in your system, the command **find** offers a
     :class: exercise
 
     * Use **cp** to copy all files from the ecoli subdirectory into a new directory in your home directory
-    * Navigate to the /nfs/course/PTB_551-0132-00/genomes directory
+    * Navigate to the /nfs/course/551-0132-00L/1_Unix1/genomes directory
     * Use **man** to read about the **find** function
-    * Use **find** to get a list from everything stored in the /nfs/course/PTB_551-0132-00/genomes directory
+    * Use **find** to get a list from everything stored in the /nfs/course/551-0132-00L/1_Unix1/genomes directory
     * Use **find** to look for all .faa files there
     * Use **find** to look for all files larger than 5MB
     * Now combine these criteria to find all .txt files larger than 5MB
@@ -63,7 +63,7 @@ When you are trying to find a file in your system, the command **find** offers a
         mkdir ecoli
 
         # Copy all the files
-        cp /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/* ~/ecoli/
+        cp /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/* ~/ecoli/
 
         # Navigation
         cd /nfs/course/PTB_551-0132-00/genomes
@@ -302,7 +302,7 @@ Although you can usually give files as input to a program through an argument, y
 
     # Copy and rename the file containing the E.coli genome
     cd
-    cp /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna E.coli.fna
+    cp /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna E.coli.fna
 
     # Using the standard streams
     head < E.coli.fna                  # send the file to head via stdin using '<'
@@ -319,7 +319,7 @@ Sometimes you want to take the output of one program and use it in another -- fo
 
     # Copy and rename the file containing the E.coli open reading frames
     cd
-    cp /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_cds_from_genomic.fna E.coli_CDS.fna
+    cp /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_cds_from_genomic.fna E.coli_CDS.fna
 
     # Piping
     head E.coli.fna | grep "ACGT"                  # send the output of head to grep and search
@@ -411,7 +411,7 @@ This means you could write a script that performs some operations on a file, and
     * Write a simple script that will count the number of entries in a fasta file
     * Use a variable to allow you to declare the file when you run the script
     * Make your script *executable* with the command "chmod +x myscript.sh"
-    * Test it on each of the fasta files in the /nfs/course/PTB_551-0132-00/genomes subdirectories
+    * Test it on each of the fasta files in the /nfs/course/551-0132-00L/1_Unix1/genomes subdirectories
 
     .. hidden-code-block:: bash
 
@@ -422,7 +422,7 @@ This means you could write a script that performs some operations on a file, and
         chmod +x fastacount.sh        
 
         # Run the script
-        ./fastacount.sh /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_cds_from_genomic.fna # 4302
+        ./fastacount.sh /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_cds_from_genomic.fna # 4302
 
 Working on a computing cluster
 ------------------------------

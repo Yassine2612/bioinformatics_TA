@@ -157,7 +157,7 @@ Useful command line tricks
 The file system
 ---------------
 
-You may be used to the file system in Windows or Mac OS X, where directories can contain files and more directories. The Unix filesystem is structured in the same way, as a tree, that begins at the 'root' directory '**/**'. Directories are separated by slash characters **/**.
+You may be used to the file system in Windows or Mac OS X, where directories can contain files and more directories. The Unix filesystem is structured in the same way, as a tree, that begins at the 'root' directory '**/**'. Directories are separated by slash characters **/**. The image below shows just a part of this tree: the ``genomes`` directory is actually located at ``/nfs/course/551-0132-00L/1_Unix1/genomes``.
 
 .. thumbnail:: images/filesystem_hierarchy.png
 
@@ -231,10 +231,10 @@ Navigation
     * Use *ls* to see all the home directories of other users on the server
     * Try to go up two levels using cd
     * Use cd to go back to your home directory
-    * Use absolute path to enter the directory at /nfs/course/551-0132-00L/1_Unix1/genomes. What is in it?
+    * Use absolute path to enter the directory at ``/nfs/course/551-0132-00L/1_Unix1/genomes``. What is in it?
     * Use absolute path to go home
     * Go to the root
-    * Experiment with *cd* and *ls* to explore the directory structure within /nfs/course/551-0132-00L/1_Unix1/genomes before returning to your home directory
+    * Experiment with *cd* and *ls* to explore the directory structure within ``/nfs/course/551-0132-00L/1_Unix1/genomes`` before returning to your home directory
 
     .. hidden-code-block:: bash
 
@@ -346,8 +346,8 @@ Basic file operations
     :class: exercise
 
     * Create two new directories called "genomes" and "homework" in your home folder
-    * Copy the /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna file into your new directory "genomes"
-    * Rename the file to "E.coli_file"
+    * Copy the ``/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna`` file into your new directory "genomes"
+    * Rename the file to "E_coli.fna"
     * Use the help option of the ls function to find which option gives you the size of the genome
     * Using the *man* and *cp*, find out how to copy a directory.
 
@@ -368,7 +368,7 @@ Basic file operations
         # Enter the genomes directory
         cd genomes
         # Rename file
-        mv GCF_000005845.2_ASM584v2_genomic.fna E.coli_file
+        mv GCF_000005845.2_ASM584v2_genomic.fna E_coli.fna
 
 
         # ls --help lists all the options possible
@@ -570,7 +570,7 @@ Homework
     :class: homework
 
     * Upload a picture into your homework folder you created in the third exercise and name it **<Your First Name>_<Your Last Name>.png**
-    * Find the out-of-place file in /nfs/course/551-0132-00L/1_Unix1/genomes and copy it into your homework folder
+    * Find the out-of-place file in ``/nfs/course/551-0132-00L/1_Unix1/genomes`` and copy it into your homework folder
     * Interesting questions:
         * What happens when you copy a file with the same name as an existing file?
         * What happens when you delete the directory you are currently in?
