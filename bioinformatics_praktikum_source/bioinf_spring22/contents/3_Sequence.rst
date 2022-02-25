@@ -108,7 +108,7 @@ A fasta file may also contain multiple sequences in fasta format (sometimes know
 .. admonition:: Exercise 3.1
     :class: exercise
 
-    For this exercise, the directory ?? contains example files *example_reads_R1.fastq*, *example_reads_R2.fastq* and *example_sequences.fasta*.
+    For this exercise, the directory ``/nfs/course/551-0132-00L/3_Sequence/`` contains example files *example_reads_R1.fastq*, *example_reads_R2.fastq* and *example_sequences.fasta*.
 
     * How might you count the number of entries in a multi-fasta file using command line tools?
     * How about for a fastq file?
@@ -120,10 +120,10 @@ A fasta file may also contain multiple sequences in fasta format (sometimes know
 
     .. hidden-code-block:: bash
 
-        # Count fasta records
+        # Count fasta records - note that ^ means 'start of line'
         grep -c "^>" file.fasta
 
-        # Count fastq records
+        # Count fastq records - note that $ means 'end of line'
         grep -c "^+$" file.fastq
         (expr $(wc -l short_reads.fastq | cut -d " " -f 1) / 4) # this method is a bit complicated
 
@@ -131,6 +131,11 @@ A fasta file may also contain multiple sequences in fasta format (sometimes know
         cat file.fastq | paste - - - - | cut -f 1,2 | tr "@\t" ">\n"
 
         # Alternatively there is a tool called seqtk that will perform all of these functions and more
+
+        # Quality score calculation
+        # Final 4 bases have scores G, 9, I, C
+        # In ASCII that's: 71, 57, 73, 67
+        # In Phred that's: 38, 24, 40, 34
 
 Feature data
 ------------
@@ -190,44 +195,44 @@ The **GFF** (**G**\eneral **F**\eature **F**\ormat) format is used in bioinforma
 .. admonition:: Exercise 3.2
     :class: exercise
 
-    For this exercise, the directory ?? contains example files *example_features.gff* and *example_features.gbk*.
+    For this exercise, the directory ``/nfs/course/551-0132-00L/3_Sequence`` contains example files *example_features.gff* and *example_features.gbk*.
 
     * How might you use command line tools to count the number of different features in a Genbank format file?
     * How about for a GFF file?
 
     .. hidden-code-block:: bash
 
-    # For the example Genbank file we need to find the feature types with a clever regular expression that looks for the correct spacer followed by letters and another space
-    # We tell grep to only output the hits (not the lines with hits in as default) with -o, and -P enables the complicated regex
-    # Then we remove the spaces, sort the results and count them
-    grep -oP '^\s{5}[a-zA-Z]+\s' example_features.gbk | tr -d ' ' | sort | uniq -c
+        # For the example Genbank file we need to find the feature types with a clever regular expression that looks for the correct spacer followed by letters and another space
+        # We tell grep to only output the hits (not the lines with hits in as default) with -o, and -P enables the complicated regex
+        # Then we remove the spaces, sort the results and count them
+        grep -oP '^\s{5}[a-zA-Z]+\s' example_features.gbk | tr -d ' ' | sort | uniq -c
+    
+        #  4302 CDS
+        #  4609 gene
+        #    79 ncRNA
+        #    22 rRNA
+        #     1 source
+        #    86 tRNA
+    
+        # For GFF format things are a bit easier as after the comment lines it is just a tab-delimited table
+        # So we select the 3rd column and the -s flag leaves out the comment lines because they have no delimiters
+        cut -s -f 3 example_features.gff | sort | uniq -c
+    
+        #  4324 CDS
+        #   187 exon
+        #  4464 gene
+        #    50 mobile_genetic_element
+        #    79 ncRNA
+        #     1 origin_of_replication
+        #   164 pseudogene
+        #     1 region
+        #    22 rRNA
+        #    48 sequence_feature
+        #    86 tRNA
 
-    #  4302 CDS
-    #  4609 gene
-    #    79 ncRNA
-    #    22 rRNA
-    #     1 source
-    #    86 tRNA
+        # See how the information in the two files is slightly different due to different format specifications
 
-    # For GFF format things are a bit easier as after the comment lines it is just a tab-delimited table
-    # So we select the 3rd column and the -s flag leaves out the comment lines because they have no delimiters
-    cut -s -f 3 example_features.gff | sort | uniq -c
-
-    #  4324 CDS
-    #   187 exon
-    #  4464 gene
-    #    50 mobile_genetic_element
-    #    79 ncRNA
-    #     1 origin_of_replication
-    #   164 pseudogene
-    #     1 region
-    #    22 rRNA
-    #    48 sequence_feature
-    #    86 tRNA
-
-    # See how the information in the two files is slightly different due to different format specifications
-
-
+    
 Working in BioPython
 --------------------
 
@@ -377,24 +382,19 @@ If you use SeqIO to read in a file in one format, you can convert it by writing 
 .. admonition:: Exercise 3.3
     :class: exercise
     
-    * Using SeqIO, read in the GenBank file located at /nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gbff
+    * Using SeqIO, read in the GenBank file located at ``/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gbff``
     * What is the GC content (the percentage of bases that are G or C) of the genome?
     * How many genes are there in the genome?
 
     * Pick any gene and write the sequence out to a new fasta file
     * For the same gene, write the translated amino acid sequence out to another fasta file
 
-    * Write a python script that:
-       * Reads in the GenBank file
-       * Extracts the amino acid sequence of each gene
-       * Writes them to a single multi-fasta file
-
     .. hidden-code-block:: python
 
         # Read in the file
         from Bio import SeqIO
 
-        records = list(SeqIO.parse("/nfs/course/PTB_551-0132-00/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gbff", 'gb'))
+        records = list(SeqIO.parse("/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.gbff", 'gb'))
         record = records[0]
 
         # Calculate GC content
@@ -508,6 +508,28 @@ If you want to know more about Entrez click `here <https://www.ncbi.nlm.nih.gov/
     * Using NCBI search tools, find the genome record for *Escherichia coli K12 MG1655*.
     * Using NCBI's genome database, find the RefSeq reference prokaryotic genomes that are considered to have 'Complete' assembled genomes (there should be 15)
 
+    .. hidden-code-block:: bash
+
+        The K12 genome has the accession number NC_000913.3
+
+        The 15 genomes are:
+
+        Acinetobacter pittii PHEA-2                                         GCA_000191145.1
+        Bacillus subtilis subsp. subtilis str. 168                          GCA_000009045.1
+        Campylobacter jejuni subsp. jejuni NCTC 11168 = ATCC 700819         GCA_000009085.1
+        Caulobacter vibrioides NA1000                                       GCA_000022005.1
+        Chlamydia trachomatis D/UW-3/CX                                     GCA_000008725.1
+        Coxiella burnetii RSA 493                                           GCA_000007765.2
+        Escherichia coli O157:H7 str. Sakai                                 GCA_000008865.2
+        Escherichia coli str. K-12 substr. MG1655                           GCA_000005845.2
+        Klebsiella pneumoniae subsp. pneumoniae HS11286                     GCA_000240185.2
+        Listeria monocytogenes EGD-e                                        GCA_000196035.1
+        Mycobacterium tuberculosis H37Rv                                    GCA_000195955.2
+        Pseudomonas aeruginosa PAO1                                         GCA_000006765.1
+        Salmonella enterica subsp. enterica serovar Typhimurium str. LT2    GCA_000006945.2
+        Shigella flexneri 2a str. 301                                       GCA_000006925.2
+        Staphylococcus aureus subsp. aureus NCTC 8325                       GCA_000013425.1
+
 Bio: a useful package
 ---------------------
 
@@ -523,7 +545,13 @@ We have installed a useful package called **bio** that makes the process of gett
 
     * Find and read the available help information for *bio*.
     * Choose one of the 15 genomes found in exercise 3.4 and download the fasta and genbank files using *bio* to your homework folder.
-    * Run the script you wrote in exercise 3.3 to extract the amino acid sequences for this genome.
+    * Write a python script that will:
+      * Read in a genbank file
+      * Extract the nucleotide sequence of each gene feature
+      * Write them all to a multifasta file, "genes.fna"
+      * Translate them to amino acid sequences
+      * Write them all to a multifasta file, "genes.faa"
+    * Run the script on the genome you downloaded above.
 
     This week and until the end of the sequence analysis section of the course, at least part of the homework will be working towards studying sequences of SARS-CoV-2, or COVID-19.
 

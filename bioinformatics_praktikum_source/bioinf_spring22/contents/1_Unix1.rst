@@ -571,7 +571,7 @@ Homework
 
     * Upload a picture into your homework folder you created in the third exercise and name it **<Your First Name>_<Your Last Name>.png**
     * Find the out-of-place file in ``/nfs/course/551-0132-00L/1_Unix1/genomes`` and copy it into your homework folder
-    * Interesting questions:
+    * Consider these interesting questions for next time (nothing to submit):
         * What happens when you copy a file with the same name as an existing file?
         * What happens when you delete the directory you are currently in?
         * What happens when you create a directory with the same name as an existing one?
@@ -586,7 +586,7 @@ Homework
                 mkdir homework
 
 
-.. container:: nextlink
+.. .. container:: nextlink
 
-    `Next: Introduction to Unix 2 <2_Unix2.html>`__
+..    `Next: Introduction to Unix 2 <2_Unix2.html>`__
 
