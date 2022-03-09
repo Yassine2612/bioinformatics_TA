@@ -108,7 +108,7 @@ A fasta file may also contain multiple sequences in fasta format (sometimes know
 .. admonition:: Exercise 3.1
     :class: exercise
 
-    For this exercise, the directory ``/nfs/course/551-0132-00L/3_Sequence/`` contains example files *example_reads_R1.fastq*, *example_reads_R2.fastq* and *example_sequences.fasta*.
+    | For this exercise, the directory ``/nfs/course/551-0132-00L/3_Sequence/`` contains example files *example_reads_R1.fastq*, *example_reads_R2.fastq* and *example_sequences.fasta*.
 
     * How might you count the number of entries in a multi-fasta file using command line tools?
     * How about for a fastq file?
@@ -120,22 +120,25 @@ A fasta file may also contain multiple sequences in fasta format (sometimes know
 
     .. hidden-code-block:: bash
 
+        # Enter directory
+        cd /nfs/course/551-0132-00L/3_Sequence/
         # Count fasta records - note that ^ means 'start of line'
-        grep -c "^>" file.fasta
+        grep -c "^>" example_sequences.fasta
 
         # Count fastq records - note that $ means 'end of line'
-        grep -c "^+$" file.fastq
-        (expr $(wc -l short_reads.fastq | cut -d " " -f 1) / 4) # this method is a bit complicated
+        grep -c "^+$" example_reads_R1.fastq 
+        (expr $(wc -l example_reads_R1.fastq  | cut -d " " -f 1) / 4) # this method is a bit complicated
+
+        # Quality score calculation
+        # Final 4 bases have the symbols G, 9, I, C
+        # In ASCII code that's: 71, 57, 73, 67
+        # In Phred (ASCII-33) that's: 38, 24, 40, 34
 
         # Convert fastq to fasta
-        cat file.fastq | paste - - - - | cut -f 1,2 | tr "@\t" ">\n"
+        cat example_reads_R1.fastq | paste - - - - | cut -f 1,2 | tr "@\t" ">\n"
 
         # Alternatively there is a tool called seqtk that will perform all of these functions and more
 
-        # Quality score calculation
-        # Final 4 bases have scores G, 9, I, C
-        # In ASCII that's: 71, 57, 73, 67
-        # In Phred that's: 38, 24, 40, 34
 
 Feature data
 ------------
@@ -145,7 +148,7 @@ As well as the sequence of biological molecules, it is useful to keep a record o
 Genbank flat file format
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The genbank flat file is designed to contain a large and varied amount of information on DNA or RNA sequences. We are not going to cover here all of the possible features of the format, but the NCBI provide a sample record with a detailed description of each component `here <https://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html>`__.
+The **G**\en\ **B**\ank **F**\latfile (GBF) is designed to contain a large and varied amount of information on DNA or RNA sequences. We are not going to cover here all of the possible features of the format, but the NCBI provides a sample record with a detailed description of each component `here <https://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html>`__.
 
 * **Locus**:
         * Locus name: Originally had a set format but now just has to be a unique name for the sequence record.
@@ -195,7 +198,7 @@ The **GFF** (**G**\eneral **F**\eature **F**\ormat) format is used in bioinforma
 .. admonition:: Exercise 3.2
     :class: exercise
 
-    For this exercise, the directory ``/nfs/course/551-0132-00L/3_Sequence`` contains example files *example_features.gff* and *example_features.gbk*.
+    | For this exercise, the directory ``/nfs/course/551-0132-00L/3_Sequence`` contains example files *example_features.gff* and *example_features.gbk*.
 
     * How might you use command line tools to count the number of different features in a Genbank format file?
     * How about for a GFF file?
@@ -237,6 +240,8 @@ Working in BioPython
 --------------------
 
 BioPython is an extensive package that provides containers and functions for working with these file formats and more. You should be familiar with basic programming in Python, and here we will introduce how to use the package to read and manipulate sequence records.
+
+**For this part you have to work with Python. If you have forgotten how to switch to Python on the R-Workbench you can find a description** `here. <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html#working-in-python>`__
 
 Loading the package
 ^^^^^^^^^^^^^^^^^^^
@@ -311,7 +316,7 @@ SeqIO provides a function *parse()* that allows you to read in a multi-fasta fil
     records = SeqIO.parse("myfile.fasta", "fasta")
 
     # Using a handle
-    with open("myfile.fasta" as handle:
+    with open("myfile.fasta") as handle:
         for record in SeqIO.parse(handle, "fasta")
             <do things>
 
@@ -449,7 +454,7 @@ In the following section we will describe certain parts of the NCBI to help you 
 GenBank
 +++++++
 
-`GenBank <https://www.ncbi.nlm.nih.gov/genbank>`__ is an annotated collection of all publically available DNA sequences. This includes genomes, individual gene or feature sequences, transcripts and more. Sequences shorter than 200bp, that aren't based on a real molecule (for instance a consensus sequence) or that are not known in nucleotide space (for instance a directly sequenced protein), primers, and mixed DNA/mRNA sequences are not accepted. Additional to GenBank is the `WGS <https://www.ncbi.nlm.nih.gov/wgs>`__ (whole genome shotgun) database, which contains sequencing projects that are currently the most common form of high-throughput sequencing, but are not yet assembled, finished or annotatable. The graphs below show how the databases have grown over time in number of entries and total base pairs.
+`GenBank <https://www.ncbi.nlm.nih.gov/genbank>`__ is an annotated collection of all publically available DNA sequences. This includes genomes, individual gene or feature sequences, transcripts and more. Sequences shorter than 200bp, that aren't based on a real molecule (for instance a consensus sequence) or that are not known in nucleotide space (for instance a directly sequenced protein), primers, and mixed DNA/mRNA sequences are not accepted. Additional to GenBank is the `WGS <https://www.ncbi.nlm.nih.gov/genbank/wgs/>`__ (whole genome shotgun) database, which contains sequencing projects that are currently the most common form of high-throughput sequencing, but are not yet assembled, finished or annotatable. The graphs below show how the databases have grown over time in number of entries and total base pairs.
 
 .. thumbnail:: images/wgs_genbank.png
     :align: center
@@ -463,7 +468,7 @@ GenBank is searchable by selecting the 'Nucleotide' database on the NCBI homepag
 RefSeq
 ++++++
 
-The `Reference Sequence <https://www.ncbi.nlm.nih.gov/refseq>`__ database aims to be a comprehensive, well-annotated, non-redundant set of sequences - effectively a curated subset of GenBank to represent the best quality information available for use in biological research. For instance, RefSeq contains 66,541 bacterial entries as of release 207. If you are looking for a high quality and trustworthy sequence for your work, RefSeq is a good place to start.
+The `Reference Sequence <https://www.ncbi.nlm.nih.gov/refseq>`__ database aims to be a comprehensive, well-annotated, non-redundant set of sequences - effectively a curated subset of GenBank to represent the best quality information available for use in biological research. For instance, RefSeq contains 66,541 bacterial entries as of release 2007. If you are looking for a high quality and trustworthy sequence for your work, RefSeq is a good place to start.
 
 RefSeq is not searchable from the NCBI frontpage. Instead, you can search GenBank by selecting the 'Nucleotide' database and then use the appropriate filter.
 
@@ -510,30 +515,45 @@ If you want to know more about Entrez click `here <https://www.ncbi.nlm.nih.gov/
 
     .. hidden-code-block:: bash
 
-        The K12 genome has the accession number NC_000913.3
+        # Genome record E.coli K12
+                # We start at the NCBI homepage (https://www.ncbi.nlm.nih.gov)
+                # Change the database to Genome
+                # Search for Escherichia coli K12 MG1655 (Escherichia coli K12 works too)
+                # An overview about Escherichia coli appears
+                # Scroll down to representatives
+                # Click on the number under RefSeq 
+                # The genome record appears. The K12 genome has the accession number NC_000913.3
 
-        The 15 genomes are:
+        # Complete prokaryotic genomes
+                # We start at the NCBI genome page (https://www.ncbi.nlm.nih.gov/genome/)
+                # Select Browse by Organism 
+                # Select prokaryotes
+                # Use the Filter and select under the RefSeq category reference. The 15 genomes should be selected
+                # The 15 genomes are:
 
-        Acinetobacter pittii PHEA-2                                         GCA_000191145.1
-        Bacillus subtilis subsp. subtilis str. 168                          GCA_000009045.1
-        Campylobacter jejuni subsp. jejuni NCTC 11168 = ATCC 700819         GCA_000009085.1
-        Caulobacter vibrioides NA1000                                       GCA_000022005.1
-        Chlamydia trachomatis D/UW-3/CX                                     GCA_000008725.1
-        Coxiella burnetii RSA 493                                           GCA_000007765.2
-        Escherichia coli O157:H7 str. Sakai                                 GCA_000008865.2
-        Escherichia coli str. K-12 substr. MG1655                           GCA_000005845.2
-        Klebsiella pneumoniae subsp. pneumoniae HS11286                     GCA_000240185.2
-        Listeria monocytogenes EGD-e                                        GCA_000196035.1
-        Mycobacterium tuberculosis H37Rv                                    GCA_000195955.2
-        Pseudomonas aeruginosa PAO1                                         GCA_000006765.1
-        Salmonella enterica subsp. enterica serovar Typhimurium str. LT2    GCA_000006945.2
-        Shigella flexneri 2a str. 301                                       GCA_000006925.2
-        Staphylococcus aureus subsp. aureus NCTC 8325                       GCA_000013425.1
+                Acinetobacter pittii PHEA-2                                         GCA_000191145.1
+                Bacillus subtilis subsp. subtilis str. 168                          GCA_000009045.1
+                Campylobacter jejuni subsp. jejuni NCTC 11168 = ATCC 700819         GCA_000009085.1
+                Caulobacter vibrioides NA1000                                       GCA_000022005.1
+                Chlamydia trachomatis D/UW-3/CX                                     GCA_000008725.1
+                Coxiella burnetii RSA 493                                           GCA_000007765.2
+                Escherichia coli O157:H7 str. Sakai                                 GCA_000008865.2
+                Escherichia coli str. K-12 substr. MG1655                           GCA_000005845.2
+                Klebsiella pneumoniae subsp. pneumoniae HS11286                     GCA_000240185.2
+                Listeria monocytogenes EGD-e                                        GCA_000196035.1
+                Mycobacterium tuberculosis H37Rv                                    GCA_000195955.2
+                Pseudomonas aeruginosa PAO1                                         GCA_000006765.1
+                Salmonella enterica subsp. enterica serovar Typhimurium str. LT2    GCA_000006945.2
+                Shigella flexneri 2a str. 301                                       GCA_000006925.2
+                Staphylococcus aureus subsp. aureus NCTC 8325                       GCA_000013425.1
 
+        # Note:There are a lot of different ways to find the solution. These are just examples.
 Bio: a useful package
 ---------------------
 
-We have installed a useful package called **bio** that makes the process of getting hold of sequence data much easier. You can load it as follows:
+**For this part you have to switch back once again to the terminal (Unix) as described** `here. <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/0_Setup.html#working-in-unix>`_
+
+We have installed a useful package for the terminal called **bio** that makes the process of getting hold of sequence data much easier. You can load it as follows:
 
 .. code-block:: bash
 
@@ -546,11 +566,13 @@ We have installed a useful package called **bio** that makes the process of gett
     * Find and read the available help information for *bio*.
     * Choose one of the 15 genomes found in exercise 3.4 and download the fasta and genbank files using *bio* to your homework folder.
     * Write a python script that will:
+      
       * Read in a genbank file
       * Extract the nucleotide sequence of each gene feature
-      * Write them all to a multifasta file, "genes.fna"
+      * Write them all to a multi-fasta file, "genes.fna"
       * Translate them to amino acid sequences
-      * Write them all to a multifasta file, "genes.faa"
+      * Write them all to a multi-fasta file, "genes.faa"
+
     * Run the script on the genome you downloaded above.
 
     This week and until the end of the sequence analysis section of the course, at least part of the homework will be working towards studying sequences of SARS-CoV-2, or COVID-19.

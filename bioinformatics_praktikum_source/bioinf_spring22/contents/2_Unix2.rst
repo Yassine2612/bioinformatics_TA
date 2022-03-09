@@ -45,16 +45,16 @@ When you are trying to find a file in your system, the command **find** offers a
     find . -size +1G              # searches for files at least 1GB or larger
     find . -maxdepth 1            # searches only here, i.e.: doesn't look inside directories
 
-.. admonition:: Exercises 2.1
+.. admonition:: Exercise 2.1
     :class: exercise
 
-    * Use **cp** to copy all files from the ecoli subdirectory into a new directory in your home directory
-    * Navigate to the /nfs/course/551-0132-00L/1_Unix1/genomes directory
+    * Use **cp** to copy all files from the ``escherichia/GCF_000005845.2_ASM584v2`` subdirectory into a new directory in your home directory
+    * Navigate to the ``/nfs/course/551-0132-00L/1_Unix1/genomes directory``
     * Use **man** to read about the **find** function
-    * Use **find** to get a list from everything stored in the /nfs/course/551-0132-00L/1_Unix1/genomes directory
+    * Use **find** to get a list from everything stored in the ``/nfs/course/551-0132-00L/1_Unix1/genomes directory``
     * Use **find** to look for all .faa files there
     * Use **find** to look for all files larger than 5MB
-    * Now combine these criteria to find all .txt files larger than 5MB
+    * Now combine these criteria to find all .faa files larger than 5MB
 
     .. hidden-code-block:: bash
 
@@ -63,16 +63,16 @@ When you are trying to find a file in your system, the command **find** offers a
         mkdir ecoli
 
         # Copy all the files
-        cp /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/* ~/ecoli/
+        cp /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/* ~/ecoli/
 
         # Navigation
-        cd /nfs/course/PTB_551-0132-00/genomes
+        cd /nfs/course/551-0132-00L/1_Unix1/genomes
 
         #Looking at find
         man find
         
         # Getting a list with find
-        find /nfs/course/PTB_551-0132-00/genomes/bacteria/
+        find /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/
 
         # Looking for files
         find . -name "*.faa"
@@ -87,8 +87,8 @@ When you open a file to look at it using **less**, it is also possible to search
 .. code-block:: bash
 
     # Finding strings
-    /AAAAAAAAA  # finds the next instance of "AAAA"
-    ?TTTTTTTTT  # finds the previous instance of "TTTT"
+    /AAAA  # finds the next instance of "AAAA"
+    ?TTTT  # finds the previous instance of "TTTT"
 
 These same commands will also work with **man**, helping you to find a particular argument more easily.
 
@@ -142,11 +142,11 @@ The command **grep** allows you to search within files without opening them firs
     grep -o  # show only the matches
     grep -c  # show only a count of the matches
 
-.. admonition:: Exercises 2.2
+.. admonition:: Exercise 2.2
     :class: exercise
 
     * Navigate to the directory you copied the *E. coli* files to earlier.
-    * Use **less** to look at the GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna file, containing nucleotide gene sequences.
+    * Use **less** to look at the *GCF_000005845.2_ASM584v2_cds_from_genomic.fna* file, containing nucleotide gene sequences.
     * Search within less to find the sequence for **dnaA**.
     * Use **man** to look at the **grep** command
     * Use **grep** to find the same entry in the file.
@@ -170,7 +170,7 @@ The command **grep** allows you to search within files without opening them firs
         man grep
 
         #Using grep to search for dnaA
-        grep 'dnaA'
+        grep 'dnaA' GCF_000005845.2_ASM584v2_cds_from_genomic.fna
 
         # Use grep to count
         grep -c '>' GCF_000005845.2_ASM584v2_cds_from_genomic.fna
@@ -188,27 +188,27 @@ The command **sort** will sort each line of a file, alphabetically by default, b
 .. code-block:: bash
 
     # Sort some example files
-    cat sort_words.txt
-    sort /nfs/course/PTB_551-0132-00/examples/sort_words.txt
+    cat /nfs/course/551-0132-00L/2_Unix2/sort_words.txt
+    sort /nfs/course/551-0132-00L/2_Unix2/sort_words.txt
 
     #Sorting nummerically with the -n option
-    cat /nfs/course/PTB_551-0132-00/examples/sort_nums.txt
-    sort -n /nfs/course/PTB_551-0132-00/examples/sort_nums.txt
+    cat /nfs/course/551-0132-00L/2_Unix2/sort_nums.txt
+    sort -n /nfs/course/551-0132-00L/2_Unix2/sort_nums.txt
 
 The command **cut** allows you to extract a single column of data from a file, for instance a .csv or .tsv file.
 
 .. code-block:: bash
 
     # Look at some experimental metadata and extract the column we are interested in
-    less /nfs/course/PTB_551-0132-00/examples/metadata.tsv
-    cut -f 4 /nfs/course/PTB_551-0132-00/examples/metadata.tsv
+    less /nfs/course/551-0132-00L/2_Unix2/metadata.tsv
+    cut -f 4 /nfs/course/551-0132-00L/2_Unix2/metadata.tsv
 
 The command **paste** allows you to put data from different files into columns of the same file.
 
 .. code-block:: bash
 
     # Put together two files into one
-    paste /nfs/course/PTB_551-0132-00/examples/sort_words.txt /nfs/course/PTB_551-0132-00/examples/sort_nums.txt
+    paste /nfs/course/551-0132-00L/2_Unix2/sort_words.txt /nfs/course/551-0132-00L/2_Unix2/sort_nums.txt
 
 The command **tr** will replace a given character set with another character set, but to use it properly you need to know how to combine commands (below).
 
@@ -231,43 +231,43 @@ The command **uniq** compresses adjacent repeated lines into one line, and is be
 .. code-block:: bash
 
     # Look at a file and remove adjacent repeated lines
-    less /nfs/course/PTB_551-0132-00/examples/uniq_nums.txt
-    uniq /nfs/course/PTB_551-0132-00/examples/uniq_nums.txt
+    less /nfs/course/551-0132-00L/2_Unix2/uniq_nums.txt
+    uniq /nfs/course/551-0132-00L/2_Unix2/uniq_nums.txt
 
     # Count how many times each value is repeated
-    uniq -c /nfs/course/PTB_551-0132-00/examples/uniq_nums.txt
+    uniq -c /nfs/course/551-0132-00L/2_Unix2/uniq_nums.txt
 
-.. admonition:: Exercises 2.3
+.. admonition:: Exercise 2.3
     :class: exercise
 
     * Use the **sort** examples above and see what happens when you try to sort the *sort_nums.txt* file without the -n flag.
-    * Look at the file */nfs/course/PTB_551-0132-00/examples/sort_tab.txt*.
+    * Look at the file ``/nfs/course/551-0132-00L/2_Unix2/sort_tab.txt``.
     * Extract the second column of this file using **cut**.
     * Looking at the manual for **sort**, can you figure out how to sort *sort_tab.txt* according to the second column, or 'key'?
-    * Use **paste** to combine the two files *sort_words.txt* and *sort_nums.txt* (in the directory */nfs/course/PTB_551-0132-00/examples/*) into a single two-column output.
+    * Use **paste** to combine the two files *sort_words.txt* and *sort_nums.txt* (in the directory ``/nfs/course/551-0132-00L/2_Unix2/``) into a single two-column output.
     * Use **tr** so that when you enter the word *banana* it comes out as *rococo*.
     * Use the **uniq** examples above, then check with **uniq -c** that each line in *sort_tab.txt* is unique.
 
     .. hidden-code-block:: bash
 
         # Sort sort_nums.text without -n
-        sort sort_nums.txt
+        sort /nfs/course/551-0132-00L/2_Unix2/sort_nums.txt
         # The file will be sorted alphabetically 
 
         # Look at sort_tab.txt
-        less /nfs/course/PTB_551-0132-00/examples/sort_tab.txt
+        less /nfs/course/551-0132-00L/2_Unix2/sort_tab.txt
 
         # Extract the second column
-        cut -f 2 /nfs/course/PTB_551-0132-00/examples/sort_tab.txt
+        cut -f 2 /nfs/course/551-0132-00L/2_Unix2/sort_tab.txt
 
         # Looking at he manuel
         man sort
         # Sort the table by second column
-        sort -n -k 2 /nfs/course/PTB_551-0132-00/examples/sort_tab.txt
+        sort -n -k 2 /nfs/course/551-0132-00L/2_Unix2/sort_tab.txt
         # Note that if you forget the -n then the numbers are sorted alphabetically, not numerically
 
         # Use paste to combine files
-        paste /nfs/course/PTB_551-0132-00/examples/sort_words.txt /nfs/course/PTB_551-0132-00/examples/sort_nums.txt
+        paste /nfs/course/551-0132-00L/2_Unix2/sort_words.txt /nfs/course/551-0132-00L/2_Unix2/sort_nums.txt
 
         # Use tr to convert one word into another
         tr 'ban' 'roc'
@@ -275,7 +275,7 @@ The command **uniq** compresses adjacent repeated lines into one line, and is be
         # Use ctr + c to kill the command
 
         # Check file with uniq
-        uniq -c /nfs/course/PTB_551-0132-00/examples/sort_tab.txt
+        uniq -c /nfs/course/551-0132-00L/2_Unix2/sort_tab.txt
         # Each value in the first column is 1 - no repeats!
 
 Combining commands
@@ -325,10 +325,10 @@ Sometimes you want to take the output of one program and use it in another -- fo
     head E.coli.fna | grep "ACGT"                  # send the output of head to grep and search
     grep -A 1 ">" E.coli_CDS.fna | grep -c "^ATG"  # use grep to find the first line of sequence of each gene and send it to a second grep to see if the gene starts with ATG
 
-.. admonition:: Exercises 2.4
+.. admonition:: Exercise 2.4
     :class: exercise
 
-    * Copy the file GCF_000005845.2_ASM584v2_cds_from_genomic.fna to your home and rename it to *E.coli_CDS.fna*
+    * Copy the file GCF_000005845.2_ASM584v2_cds_from_genomic.fna in ther escherichia/GCF_000005845.2_ASM584v2/ subdirectory to your home and rename it to *E.coli_CDS.fna*
     * Use **grep** to find all the fasta headers in this file, remember that a fasta header line starts with '>'.
     * Send the output of this search to a new file called *cds_headers.txt*.
     * Use **grep** again to find only the headers with gene name information, which looks like, for instance [gene=lacZ], and save the results in another new file called named_cds.txt.
@@ -342,7 +342,7 @@ Sometimes you want to take the output of one program and use it in another -- fo
     .. hidden-code-block:: bash
 
         # Copy the file to your home directory
-        cp /cluster/home/ssunagaw/teaching/ecoli/GCF_000482265.1_EC_K12_MG1655_Broad_SNP_cds_from_genomic.fna ~/E.coli_CDS.fna
+        cp /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_cds_from_genomic.fna ~/E.coli_CDS.fna
 
         # Find the fasta headers
         grep '^>' E.coli_CDS.fna
@@ -376,6 +376,11 @@ Writing and running a script
 If you construct a series of commands that you want to perform repeatedly, you can write them into a **script** and then run this script instead of each command individually. This makes it less likely that you make an error in one of the individual commands, and also keeps a record of the computation you performed so that your work is reproducible.
 
 You can write the script using a text editor on your computer, then uploading it, or in R Workbench. If you want to write a script directly in the terminal there are text editors available such as **vim** and **emacs** - you should be able to find tutorials for both online.
+
+You can create a new script in R Workbench following the menu **File -> New File -> Shell Script**
+
+.. thumbnail:: images/new_script.png
+    :align: center
 
 By convention, a script should be named ending in *.sh* and is run as follows:
 
@@ -411,7 +416,7 @@ This means you could write a script that performs some operations on a file, and
     * Write a simple script that will count the number of entries in a fasta file
     * Use a variable to allow you to declare the file when you run the script
     * Make your script *executable* with the command "chmod +x myscript.sh"
-    * Test it on each of the fasta files in the /nfs/course/551-0132-00L/1_Unix1/genomes subdirectories
+    * Test it on some of the fasta files in the ``/nfs/course/551-0132-00L/1_Unix1/genomes`` subdirectories
 
     .. hidden-code-block:: bash
 
@@ -462,77 +467,72 @@ Then the equivalent commands:
     # Remove a job from the queue
     bkill jobid
 
-.. admonition:: Exercises 2.6
+.. admonition:: Exercise 2.6
     :class: exercise
 
-    * Copy the submit.sh script to your home directory.
-    * Load the 'prodigal' module and find out the program options
-    * Change the 'echo' line to load the module for *prodigal* and then run the program on the *E. coli* genome.
-    * You shouldn't need more than 8 slots or 1GB of memory per slot.
-    * When the job is finished, look at the output files for yourself!
+    | You must do this exercise on **Euler**. You can SSH to Euler from the R Workbench or your own computer. You will have to use SCP to transfer files.
+
+    * Copy the script ``/nfs/course/551-0132-00L/2_Unix2/submit_lsf.sh`` to your home directory.
+    * Remove the existing echo command.
+    * Run instead the script you wrote for Exercise 2.5 on one of the fasta files in ``/nfs/course/551-0132-00L/1_Unix1/genomes``.
+    * You should only use 1 thread and allot 60 minutes for runtime.
+    * Your script will also need very little memory or scratch space, so set both to 100.
+    * Copy the submit script, your script from Exercise 2.5 and one of the fasta files to Euler.
+    * Submit the job. When the job is finished, look at the output files for yourself.
 
     .. hidden-code-block:: bash
 
-        # Copy the script
-        cp /science/teaching/submit.sh ~/
+        # Copy the submit script to your home directory
+        cp /nfs/course/551-0132-00L/2_Unix2/submit_lsf.sh ~/
 
-        # Load the prodigal module for yourself
-        module load prodigal
+        # Modify the submit script to look something like this:
 
-        # Read the options for the program
-        prodigal -h
+            #!/bin/bash
+            #BSUB -n 1                                  # number of threads
+            #BSUB -W 60                                 # estimated time to run
+            #BSUB -R "rusage[mem=100, scratch=100]"     # memory and disk space needed
+            #BSUB -e error.log                          # error file
+            #BSUB -o out.log                            # output file
+            #BSUB -u yourmail@ethz.ch                   # specify your email address
+            #BSUB -B                                    # send email when job starts
+            #BSUB -N                                    # send email when job ends
 
-        # Edit the submit script by replacing the 'echo' line to this:
-        module load prodigal
-        prodigal -i ecoli.fna -o ecoli_genes.fna
+            ./my_script.sh GCF_000005845.2_ASM584v2_genomic.fna
 
-        # Submit the script to the queue
-        qsub submit.sh
+        # Copy the example submit script, your script and one of the genomes from the R Workbench server to euler
+        scp submit_lsf.sh euler.ethz.ch:
+        scp my_script.sh euler.ethz.ch:
+        scp /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna euler.ethz.ch:
 
-        # Look at the output
-        less ecoli_genes.fna
+        # SSH into euler
+        ssh <username>@euler.ethz.ch
 
-        # If you are working on Euler, instead copy the submit_lsf.sh
-        cp /science/teaching/submit.sh ~/
-
-        # Manually load the module system - sorry!
-        unset MODULEPATH_ROOT
-        unset MODULESHOME
-        unset MODULEPATH
-        source /nfs/nas22/fs2201/biol_micro_unix_modules/Lmod-7.8/lmod/lmod/init/profile
-
-        # Everything else will be the same until it's time to submit the script
+        # Then you submit it like this:
         bsub < submit_lsf.sh
+
+        # Check the output
+        less error.log      # Should be empty
+        less out.log     # Should have the output of your script
+
 
 Homework
 --------
-
 
 .. admonition:: Homework 2
     :class: homework
 
     Learning a new language and computational programming have many similarities with verbs, adverbs and objects equating to commands (action), options (modify action) and arguments (target of the option). As with learning languages, mastering programming requires practice and repetition. 
     
-    To take a first step, please create a “cheat sheet” for **three** commands used in Unix 1/2. You should define the general purpose of the command, the most important options and show examples with meaningful placeholders (example below). Of course the example is **not** allowed to be one of your three commands. You can either use an text editor on your computer to create your cheat sheet and then upload it into your homework folder or you can use a text editor directly in the terminal such as **vim** and **emacs**. Either way, please name your cheat sheet **Cheat_sheet_<Your First Name>_<Your Last Name>.txt**
+    To take a first step, please create a “cheat sheet” for at least **three** commands used in Unix 1 and 2. You should define the general purpose of the command, the most important options and show examples with meaningful placeholders (example below). Of course the example is **not** allowed to be one of your three commands. You can either use an text editor on your computer to create your cheat sheet and then upload it into your homework folder or you can use a text editor directly in the terminal such as **vim** and **emacs**. Either way, please name your cheat sheet **cheatsheet_<Your First Name>_<Your Last Name>.txt**
 
         .. code-block:: bash
 
-                For example (command - placeholders between ""; option - placeholders between ''; placeholders between <>):
+                # For example (command - placeholders between ""; option - placeholders between ''; placeholders between <>):
                 "sort" <file> - sorts a file line by line (by default alphabetically)
-                '-n' sorts numerically (instead of alphabetically)
-                '-r' reverses the order of the output
+                    '-n' sorts numerically (instead of alphabetically)
+                    '-r' reverses the order of the output
                 
+.. .. container:: nextlink
 
-
-
-
-
-.. |Cheatsheet| raw:: html
-
-    <a href="https://docs.google.com/document/d/1xsH1yiW3B-rZsTIjF2T5NB_4NmaU_ZO3srcmT5_iHgc/edit" target="_blank">here</a>
-
-
-.. container:: nextlink
-
-    `Next: Sequence data  <3_Sequence.html>`__
+..    `Next: Sequence data  <3_Sequence.html>`__
 

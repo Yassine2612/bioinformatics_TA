@@ -31,7 +31,7 @@ Image Analysis
 
 .. |pic2| image:: images/Unix_2.png
          :width: 24%
-..         :target: bioinf_spring22/contents/2_Unix2.html
+         :target: bioinf_spring22/contents/2_Unix2.html
 
 .. |pic3| image:: images/Sequence_data.png
          :width: 24%
@@ -84,7 +84,7 @@ Image Analysis
 
     bioinf_spring22/contents/0_Setup.rst
     bioinf_spring22/contents/1_Unix1.rst
-..    bioinf_spring22/contents/2_Unix2.rst
+    bioinf_spring22/contents/2_Unix2.rst
 ..    bioinf_spring22/contents/3_Sequence.rst
 ..    bioinf_spring22/contents/4_Alignment.rst
 ..    bioinf_spring22/contents/5_Annotation.rst

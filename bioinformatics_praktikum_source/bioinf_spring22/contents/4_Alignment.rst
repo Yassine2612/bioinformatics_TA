@@ -7,13 +7,13 @@ General information
 Main objective
 ^^^^^^^^^^^^^^
 
-In this lecture we will introduce the concept of sequence alignment. We will show you how to use BLAST via the web-based interface from the NCBI and via the command line.
+In this lecture we will introduce the concept of sequence alignment. We will show you how to use BLAST via the web-based interface from the NCBI and via the command line. We will also show you how to perform multiple sequence alignment.
 
 Learning objectives
 ^^^^^^^^^^^^^^^^^^^
 
-* Students understand the aim of sequence alignment
-* Students can use BLAST via the NCBI's web interface
+* Students understand the purpose of sequence alignment
+* Students can use BLAST via the NCBI's web interface and interpret the output
 * Students can use BLAST on the command line and with a custom database
 * Students can perform a multiple sequence alignment
 
@@ -46,7 +46,7 @@ We then need an algorithm that will arrange and score different possible alignme
 BLAST
 ^^^^^
 
-BLAST, or the **B**\asic **L**\ocal **A**\lignment **S**\earch **T**\ool (**BLAST**), is the most commonly used alignment tool, which you may be able to tell from its acronym, performs local alignment. The details of the algorithm are beyond the scope of this course, but understanding the scoring system is important.
+BLAST, or the **B**\asic **L**\ocal **A**\lignment **S**\earch **T**\ool (**BLAST**), is the most commonly used alignment tool and, which you may be able to tell from its acronym, performs local alignment. The details of the algorithm are beyond the scope of this course, but understanding the scoring system is important.
 
 BLAST scores an alignment residue by residue based on whether it is a **match**, **mismatch**, or a **gap** (which might exist due to the insertion or deletion of 1 or more residues in one sequence).
 
@@ -103,7 +103,7 @@ You should therefore choose your BLAST algorithm based on the nature, nucleotide
 Pairwise alignment
 ------------------
 
-We will first select Nucleotide BLAST (blastn) to perform a pairwise alignment of two nucleotide sequences that we have put in the files ??/pairwise1.fasta and ??/pairwise2.fasta.
+We will first select Nucleotide BLAST (blastn) to perform a pairwise alignment of two nucleotide sequences that we have put in the files ``/nfs/course/551-0132-00L/4_Alignment/pairwise1.fasta`` and ``/nfs/course/551-0132-00L/4_Alignment/pairwise2.fasta``.
 
 The setup page for blastn looks as follows - you should click on the checkbox highlighted to enable pairwise alignment:
 
@@ -120,7 +120,7 @@ In each of the sections *Enter Query Sequence* and *Enter Subject Sequence* you 
 .. admonition:: Exercise 4.1
     :class: exercise
 
-    * Perform a pairwise alignment of the sequences in the files ??/pairwise1.fasta and ??/pairwise2.fasta. For this example, you don't need to enter any subrange coordinates or change the algorithm from the default (megablast). It is up to you whether you want to copy and paste the sequences or upload the fasta files.
+    * Perform a pairwise alignment of the sequences in the files *pairwise1.fasta* and *pairwise2.fasta*. For this example, you don't need to enter any subrange coordinates or change the algorithm from the default (megablast). It is up to you whether you want to copy and paste the sequences or upload the fasta files.
 
 Alignment results
 ^^^^^^^^^^^^^^^^^
@@ -138,7 +138,7 @@ The first tab in the results section is Description. Here you can see the statis
 * Max Score: the highest score from the alignments found
 * Total Score: the sum of scores for all alignments found
 * Query Cover: the percentage of the query sequence for which any alignment was found
-* E value: the likelihood of the alignment being seen by chance (not that this is dependent on the database size searched)
+* E value: the likelihood of the alignment being seen by chance (note that this is dependent on the database size searched)
 * Per. Ident: the percentage identity of the alignment, i.e.: how many base pairs are identical
 * Acc. Len: the length of the subject sequence
 * Accession: the name of the subject sequence (or an arbitrary name)
@@ -212,7 +212,7 @@ The fourth and final tab gives you a taxonomy of the organisms found in the hits
 .. admonition:: Exercise 4.2
     :class: exercise
 
-    * Perform a nucleotide BLAST search for sequence found in the file mystery_sequence_01.fasta
+    * Perform a nucleotide BLAST search for sequence found in the file ``/nfs/course/551-0132-00L/4_Alignment/mystery_sequence_01.fasta``
     * Based on the results, what do you think the sequence is?
 
 BLAST on the command line
@@ -231,7 +231,7 @@ In order to run a search offline, you need a database to search. You can downloa
 
 .. code-block:: bash
 
-    /nfs/modules/databases/NCBI/ref_prok_rep_genomes/ref_prok_rep_genomes
+    /nfs/nas22/fs2201/biol_micro_unix_modules/databases/NCBI/ref_prok_rep_genomes/ref_prok_rep_genomes
 
 It's also likely that you want to search a much smaller and specific set of sequences that you have already prepared in FASTA format. For this, there is the command *makeblastdb*:
 
@@ -245,14 +245,17 @@ The *-in* argument should point to a fasta file that you want to create the data
 Running BLAST
 ^^^^^^^^^^^^^
 
-The four BLAST algorithms highlighted on the front page of the NCBI BLAST homepage have identically-named command line equivalents. We will demonstrate here with *blastn*, and some of the arguments vary slightly for the other algorithms, but the most important thing is to choose the correct one based on the nature of your query and database (as described above).
+The four BLAST algorithms highlighted on the front page of the NCBI BLAST homepage have identically-named command line equivalents. The software suite is available via our module system, called **BLAST+**. We will demonstrate here with *blastn*, and some of the arguments vary slightly for the other algorithms, but the most important thing is to choose the correct one based on the nature of your query and database (as described above).
 
 Firstly, you can perform pairwise alignment just as with the online interface by specifying a query and subject sequence, as in this minimal example:
 
 .. code-block:: bash
 
+    # Load the software module
+    ml BLAST+
+
     # Pairwise alignment with blastn
-    blastn -query ??/pairwise1.fasta -subject ??/pairwise2.fasta
+    blastn -query /nfs/course/551-0132-00L/4_Alignment/pairwise1.fasta -subject /nfs/course/551-0132-00L/4_Alignment/pairwise2.fasta
 
 Secondly, you can of course search by alignment by providing a database to look through, as in this minimal example:
 
@@ -302,7 +305,7 @@ If you are searching a very large database, *blastn* can take a very long time t
 .. admonition:: Exercise 4.3
     :class: exercise
 
-    * Run BLAST on the command line to determine what sequence mystery_sequence_02.fasta might be - be careful to choose the correct algorithm
+    * Run BLAST on the command line to determine what sequence ``/nfs/course/551-0132-00L/4_Alignment/mystery_sequence_02.fasta`` might be - be careful to choose the correct algorithm
 
 Multiple sequence alignment (MSA)
 ---------------------------------
@@ -332,11 +335,6 @@ Another popular implementation of this method is **Clustal**, the current versio
 
 The output is by default, also in fasta format, but now each sequence has gaps inserted at the right points so that the nth position in each sequence is aligned. Once again, there are many command options available, many of which won't make any sense to you at the moment, but some are immediately useful. For instance, *--outfmt* allows you to select a different output format - there is no dominant format for MSA, and programs that use them as input may or may not support any specific format you choose. Clustal has a format itself which is useful for browsing a multiple alignment as it includes a line of characters indicating whether or not a column in the alignment is identical or not. The width of this format can be adjusted with *--wrap*.
 
-.. admonition:: Exercise
-    :class: exercise
-
-    * Align example file, try different output formats
-
 Iterative alignment
 ^^^^^^^^^^^^^^^^^^^
 
@@ -351,15 +349,15 @@ A popular iterative-based method is **MUSCLE**, available `here <http://www.driv
 
 The output is by default, also in fasta format, and only a few other formats are supported. Beyond that, the options determine how long the algorithm will run for - more iterations may improve the alignment but will take longer, and each incremental improvement takes longer and longer to achieve.
 
-.. admonition:: Exercises
+.. admonition:: Exercise 4.4
     :class: exercise
 
-    * Perform a multiple sequence alignment on all of the sequences used so far in this part of the course (list)
+    * Perform a multiple alignment of the file ``/nfs/course/551-0132-00L/4_Alignment/gyra.faa`` with each program and compare the results by looking at the output files
 
-.. admonition:: Homework
+.. admonition:: Homework 4
     :class: homework
 
-    * Can come up with an exercise based on getting gyrA and parC sequences from reference genomes (possibly building on the last homework) then performing a multiple alignment
+    * ??
 
 .. container:: nextlink
 

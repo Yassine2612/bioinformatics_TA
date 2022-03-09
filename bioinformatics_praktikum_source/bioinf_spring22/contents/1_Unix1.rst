@@ -430,15 +430,15 @@ There are many different protocols for transferring files between computers. You
 
     # Download an E. coli genome from the server to your local computer
     # First open Windows Command or Mac Terminal
-    scp user@micro-rstudio.ethz.ch:/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna .
+    scp user@rstudio-teaching-XX.ethz.ch:/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna .
     # or
-    rsync -a user@micro-rstudio.ethz.ch:/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna .
-    # Note the "." at the end of these commands stands for your current location.
+    rsync -a user@studio-teaching-XX.ethz.ch:/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna .
+    # Note the "." at the end of these commands stands for your current location. Replace the XX with 01, 02 or 03 as appropriate.
 
     # Copy the E.coli genome (or any file) from your local computer to the home folder on the server
     # Again, on your local system, run the following commands in Windows Command or Mac Terminal
-    scp GCF_000005845.2_ASM584v2_genomic.fna user@micro-rstudio.ethz.ch:~/
-    rsync -a GCF_000005845.2_ASM584v2_genomic.fna user@micro-rstudio.ethz.ch:~/
+    scp GCF_000005845.2_ASM584v2_genomic.fna user@rstudio-teaching-XX.ethz.ch:~/
+    rsync -a GCF_000005845.2_ASM584v2_genomic.fna user@rstudio-teaching-XX.ethz.ch:~/
 
 Sometimes you want to download a file directly from the internet to the server, rather than going via your local machine. **wget** allows you to download files in this way.
 
@@ -586,7 +586,7 @@ Homework
                 mkdir homework
 
 
-.. .. container:: nextlink
+.. container:: nextlink
 
-..    `Next: Introduction to Unix 2 <2_Unix2.html>`__
+    `Next: Introduction to Unix 2 <2_Unix2.html>`__
 
