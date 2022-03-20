@@ -120,7 +120,18 @@ In each of the sections *Enter Query Sequence* and *Enter Subject Sequence* you 
 .. admonition:: Exercise 4.1
     :class: exercise
 
-    * Perform a pairwise alignment of the sequences in the files *pairwise1.fasta* and *pairwise2.fasta*. For this example, you don't need to enter any subrange coordinates or change the algorithm from the default (megablast). It is up to you whether you want to copy and paste the sequences or upload the fasta files.
+    * Perform a pairwise nucleotide BLAST alignment of the sequences in the files ``/nfs/course/551-0132-00L/4_Alignment/pairwise1.fasta`` and ``/nfs/course/551-0132-00L/4_Alignment/pairwise2.fasta``. For this example, you don't need to enter any subrange coordinates or change the algorithm from the default (megablast). It is up to you whether you want to copy and paste the sequences or upload the fasta files.
+
+    .. hidden-code-block:: bash
+
+        # Make sure the "Align two or more sequences" box is ticked
+        # Open the file pairwise1.fasta with less and copy the nucleotide sequence and paste under "Enter Query Sequence"
+        less /nfs/course/551-0132-00L/4_Alignment/pairwise1.fasta
+
+        # Repeat for pairwise2.fasta but paste the sequence under "Enter Subject Sequence"
+        less /nfs/course/551-0132-00L/4_Alignment/pairwise2.fasta
+
+        # You can also download the files first with the scp command you learned in Unix1 and upload the files to NCBI
 
 Alignment results
 ^^^^^^^^^^^^^^^^^
@@ -215,6 +226,15 @@ The fourth and final tab gives you a taxonomy of the organisms found in the hits
     * Perform a nucleotide BLAST search for sequence found in the file ``/nfs/course/551-0132-00L/4_Alignment/mystery_sequence_01.fasta``
     * Based on the results, what do you think the sequence is?
 
+    .. hidden-code-block:: bash
+
+        # Make sure the «Align two or more sequences» box is not ticked and the webpage has switched to the database search mode
+        # Open the mystery sequence and copy/paste it into the search field
+        less /nfs/course/551-0132-00L/4_Alignment/mystery_sequence_01.fasta
+
+        # Based on the search you should find out that the sequence is from the Mycobacterium tuberculosis bacterium.
+
+
 BLAST on the command line
 -------------------------
 
@@ -231,7 +251,7 @@ In order to run a search offline, you need a database to search. You can downloa
 
 .. code-block:: bash
 
-    /nfs/nas22/fs2201/biol_micro_unix_modules/databases/NCBI/ref_prok_rep_genomes/ref_prok_rep_genomes
+    /nfs/nas22/fs2201/biol_micro_unix_modules/databases/NCBI/ref_prok_rep_genomes
 
 It's also likely that you want to search a much smaller and specific set of sequences that you have already prepared in FASTA format. For this, there is the command *makeblastdb*:
 
@@ -305,7 +325,21 @@ If you are searching a very large database, *blastn* can take a very long time t
 .. admonition:: Exercise 4.3
     :class: exercise
 
+    * Make sure you are in your homefolder before executing the commands
     * Run BLAST on the command line to determine what sequence ``/nfs/course/551-0132-00L/4_Alignment/mystery_sequence_02.fasta`` might be - be careful to choose the correct algorithm
+
+    .. hidden-code-block:: bash
+       
+        # Go to your homefolder
+        cd
+
+        # It is always good to have a quick look at the sequence you want to find out
+        less /nfs/course/551-0132-00L/4_Alignment/mystery_sequence_02.fasta
+       
+        # Since we want to analyse a protein sequence with a nucleotide database, we have to use tblastn
+        tblastn -db /nfs/nas22/fs2201/biol_micro_unix_modules/databases/NCBI/ref_prok_rep_genomes/ref_prok_rep_genomes -query /nfs/course/551-0132-00L/4_Alignment/mystery_sequence_02.fasta -out tblastn_results.txt -outfmt 6 -num_threads 32
+        
+        # The sequence analysis reveals that the sequence is from the Thermus thermophilus bacterium
 
 Multiple sequence alignment (MSA)
 ---------------------------------
@@ -317,7 +351,7 @@ Progressive alignment
 
 This approach builds a final MSA by combining pairwise alignments, starting with the two closest sequences and working towards the most distantly related. The problem with this method is that part of the alignment that is optimal when it is introduced early in the process might not be so good later when other sequences join the MSA.
 
-One popular implementation of this method is **MAFFT**, available `here <https://mafft.cbrc.jp/alignment/software/>`__. We have also made the software available on our server and will show you the basics of how to use it here. At minimum, MAFFT requires an input file with multiple sequences in fasta format and unusually always outputs to the command line, so we must redirect it.
+One popular implementation of this method is **MAFFT**, available `here <https://mafft.cbrc.jp/alignment/software/>`__. We have also made the software available on our server and will show you the basics of how to use it here. At minimum, MAFFT requires an input file with multiple sequences in fasta format and usually always outputs to the command line, so we must redirect it.
 
 .. code-block:: bash
 
@@ -333,7 +367,7 @@ Another popular implementation of this method is **Clustal**, the current versio
     # Run Clustal Omega
     clustalo -i my_sequences.fasta -o my_msa.fasta
 
-The output is by default, also in fasta format, but now each sequence has gaps inserted at the right points so that the nth position in each sequence is aligned. Once again, there are many command options available, many of which won't make any sense to you at the moment, but some are immediately useful. For instance, *--outfmt* allows you to select a different output format - there is no dominant format for MSA, and programs that use them as input may or may not support any specific format you choose. Clustal has a format itself which is useful for browsing a multiple alignment as it includes a line of characters indicating whether or not a column in the alignment is identical or not. The width of this format can be adjusted with *--wrap*.
+The output is by default also in fasta format, but now each sequence has gaps inserted at the right points so that the nth position in each sequence is aligned. Once again, there are many command options available, many of which won't make any sense to you at the moment, but some are immediately useful. For instance, *--outfmt* allows you to select a different output format - there is no dominant format for MSA, and programs that use them as input may or may not support any specific format you choose. Clustal has a format itself which is useful for browsing a multiple alignment as it includes a line of characters indicating whether or not a column in the alignment is identical or not. The width of this format can be adjusted with *--wrap*.
 
 Iterative alignment
 ^^^^^^^^^^^^^^^^^^^
@@ -345,21 +379,64 @@ A popular iterative-based method is **MUSCLE**, available `here <http://www.driv
 .. code-block:: bash
 
     # Run MUSCLE
-    muscle -in my_sequences.fasta -o my_msa.fasta
+    muscle -in my_sequences.fasta -out my_msa.fasta
 
-The output is by default, also in fasta format, and only a few other formats are supported. Beyond that, the options determine how long the algorithm will run for - more iterations may improve the alignment but will take longer, and each incremental improvement takes longer and longer to achieve.
+The output is by default also in fasta format, and only a few other formats are supported. Beyond that, the options determine how long the algorithm will run for - more iterations may improve the alignment but will take longer, and each incremental improvement takes longer and longer to achieve.
 
 .. admonition:: Exercise 4.4
     :class: exercise
 
-    * Perform a multiple alignment of the file ``/nfs/course/551-0132-00L/4_Alignment/gyra.faa`` with each program and compare the results by looking at the output files
+    * Make sure you are in your homefolder before executing the commands
+    * Perform a multiple alignment of the file ``/nfs/course/551-0132-00L/4_Alignment/gyra.faa`` with each program, obtaining Clustal formatted output, and compare the results by looking at the output files
+
+    .. hidden-code-block:: bash
+    
+        # Go to your homefolder
+        cd
+
+        # MAFFT
+        ml MAFFT
+        mafft --clustalout /nfs/course/551-0132-00L/4_Alignment/gyra.faa > mafft_aln.txt
+
+        # Clustal-Omega
+        ml Clustal-Omega
+        clustalo -i /nfs/course/551-0132-00L/4_Alignment/gyra.faa -o clustal_aln.txt --outfmt clu
+
+        # MUSCLE
+        ml MUSCLE
+        muscle -in /nfs/course/551-0132-00L/4_Alignment/gyra.faa -out muscle_aln.txt -clw
+
+        # See that there are some differences between methods
 
 .. admonition:: Homework 4
     :class: homework
 
-    * ??
+    * The file ``/nfs/course/551-0132-00L/4_Alignment/homework/GCF_000005845.2_ASM584v2_cds_from_genomic.fna`` contains the nucleotide sequences for the genes of *Escherichia coli K12 MG1655*.
+    * Find an example of a potential paralog or duplicated gene from this set. You will need to:
+      
+      * Create a blast database from the file
+      * Use BLAST to query the file against itself
+        
+        * Use a suitable *-outfmt* argument to ensure you get tabular output
+        * Remember you can customise the columns that appear in the table
 
-.. container:: nextlink
+      * Filter the results with command line tools such as grep, or Python, or a combination of the two
+        
+        * Remove matches of genes to themselves - in grep you will need to use a `Back-reference <https://www.gnu.org/software/grep/manual/html_node/Back_002dreferences-and-Subexpressions.html#:~:text=The%20back%2Dreference%20'%20%5C%20n,1%20'%20matches%20'%20aa%20'.>`__
+        * Check that alignments are as long or nearly as long as the shortest of the query or subject
+        * If you use Python, you will need to parse the table by reading one line at a time and using the *split* function to separate columns
 
-    `Next: Annotation <5_Annotation.html>`__
+    * When you have found an example, align the sequences of just those genes and place the result in your homework folder in a file called **ecoli_genes.aln**
+
+    * The file ``/nfs/course/551-0132-00L/4_Alignment/homework/NC_045512.fa`` contains the reference sequence for SARS-CoV-2, and ``/nfs/course/551-0132-00L/4_Alignment/homework/RefSeq_Virus.fa`` contains the sequences of the RefSeq virus database.
+    * Use BLAST to find in the database the closest virus to SARS-CoV-2 with a non-human host. Put the accession number for the virus in a file called **closest.txt** in your homework folder.
+
+.. admonition:: Feedback
+       :class: homework
+
+        Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=731761>`__.
+
+.. .. container:: nextlink
+
+..    `Next: Annotation <5_Annotation.html>`__
 

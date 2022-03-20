@@ -238,7 +238,34 @@ Other than genes, there are techniques and software for annotating an array of o
     :class: homework
 
     * Run pfam to find potential topoisomerases in genomes
+
+Shini's suggestion:
+
+Starting from NC_045512.fa, 
+1) How long is the SARS-CoV2 genome?
+1.extra) How does the length of the SARS-Cov2 genome compare to all viral genomes we know (RefSeq_Virus.fa)?
+Hint: grep -v '>' ../RefSeq_Virus.fa | awk '{print length}'
+Plot histogram in R.
+
+2) Run Prodigal on the reference sequence of SARS-CoV2 (NC_045512.fa)
+- How many protein-coding genes are identified?
+  - None, 11, 110, 1110?
+
+3) Run hmmersearch to find (i.e., annotate) the gene of the spike glycoprotein S and RNA-dependent RNA polymerase
+- What is the gene ID of protein S? NC_045512.2_3
+- What is the gene ID of RdRp? NC_045512.2_2
+
+4) Use the software "bio" to (i) download the genbank file for the reference sequence of the SARS-CoV2, and (ii) to explore its genomic content.
+- How many coding sequences (CDS) are annotated? 
+- How many mature protein regions are annotated? 
+- If there are more mature protein regions than CDS, what does this mean? --> polycistronic mRNA
+4.extra) Two of the CDS share a number of genes. How many?
+
+https://viralzone.expasy.org/9076
+https://www.sciencedirect.com/science/article/pii/S0092867420304062?via%3Dihub
+
     * Perform MSA ready for part 6
+--> Shini: would do this as homework for week 7
 
 .. container:: nextlink
 

@@ -531,8 +531,13 @@ Homework
                 "sort" <file> - sorts a file line by line (by default alphabetically)
                     '-n' sorts numerically (instead of alphabetically)
                     '-r' reverses the order of the output
-                
-.. .. container:: nextlink
 
-..    `Next: Sequence data  <3_Sequence.html>`__
+.. admonition:: Feedback
+    :class: homework
+
+     Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=726869>`__.
+
+.. container:: nextlink
+
+    `Next: Sequence data  <3_Sequence.html>`__
 

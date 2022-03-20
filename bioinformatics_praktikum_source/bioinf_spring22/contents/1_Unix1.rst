@@ -432,7 +432,7 @@ There are many different protocols for transferring files between computers. You
     # First open Windows Command or Mac Terminal
     scp user@rstudio-teaching-XX.ethz.ch:/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna .
     # or
-    rsync -a user@studio-teaching-XX.ethz.ch:/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna .
+    rsync -a user@rstudio-teaching-XX.ethz.ch:/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna .
     # Note the "." at the end of these commands stands for your current location. Replace the XX with 01, 02 or 03 as appropriate.
 
     # Copy the E.coli genome (or any file) from your local computer to the home folder on the server
@@ -585,6 +585,10 @@ Homework
                 # Create a new folder with the mkdir command
                 mkdir homework
 
+.. admonition:: Feedback
+    :class: homework
+
+     Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=715481>`__.
 
 .. container:: nextlink
 
