@@ -237,7 +237,7 @@ Other than genes, there are techniques and software for annotating an array of o
 .. admonition:: Homework
     :class: homework
 
-    In this week's homework, you will annotate and collect some information about the SARS-CoV2. To complete the tasks, you need to review the use of commands and programs from previous weeks/courses, and look for additional information. For example, basic knowledge of [R] is expected; however, you can ask your peers for help on Slack and/or consult online resources. **After completing the tasks, you need to solve a quiz as a requirement to complete this week's homework. The quiz is posted here on Moodle: ADD URL**
+    You will annotate and collect some information about the SARS-CoV2. To complete the tasks, you need to review the use of commands and programs from previous weeks/courses, and look for additional information. For example, basic knowledge of [R] is expected; however, you can ask your peers for help on Slack and/or consult online resources. **After completing the tasks, you need to solve a quiz as a requirement to complete this week's homework. The quiz is posted here on Moodle: ADD URL**
 
     Tasks:
     1) Based on the files that were provided to you in Homework 4, find out the length of the SARS-CoV2 genome and how its length compares to all known viruses in the RefSeq virus database.
