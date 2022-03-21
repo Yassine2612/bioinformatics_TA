@@ -237,35 +237,32 @@ Other than genes, there are techniques and software for annotating an array of o
 .. admonition:: Homework
     :class: homework
 
-    * Run pfam to find potential topoisomerases in genomes
+In this week's homework, you will annotate and collect some information about the SARS-CoV2. To complete the tasks, you need to review the use of some commands and bioinformatic software, and seek for additional information. For example, basic knowledge of [R] is expected; however, you can ask your peers for help on Slack or consult online resources. 
 
-Shini's suggestion:
+**After completing the tasks, you need to solve a quiz as a requirement to complete this week's homework. The quiz is posted here on Moodle.**
 
-Starting from NC_045512.fa, 
-1) How long is the SARS-CoV2 genome?
-1.extra) How does the length of the SARS-Cov2 genome compare to all viral genomes we know (RefSeq_Virus.fa)?
-Hint: grep -v '>' ../RefSeq_Virus.fa | awk '{print length}'
-Plot histogram in R.
+Tasks:
+1) Based on the files that were provided to you in Homework 4, find out the length of the SARS-CoV2 genome and how its length compares to all known viruses in the RefSeq virus database.
+Example approach:
+- Review the FASTA format and find out how to use the command grep to select non-mathcing lines. 
+- Review the use of pipes in UNIX.
+- The length of a string can be printed using the command: awk '{print length}'.
+- Apply these steps to find out the length of SARS-CoV2.
+- Apply these steps to write the lengths of all viral genomes into a file. Import the file into [R] and calculate the mean and median lengths of all viral genomes.
 
-2) Run Prodigal on the reference sequence of SARS-CoV2 (NC_045512.fa)
-- How many protein-coding genes are identified?
-  - None, 11, 110, 1110?
+2) Run Prodigal on the reference sequence of SARS-CoV2 (NC_045512.fa) and check how many protein-coding genes are found.
 
-3) Run hmmersearch to find (i.e., annotate) the gene of the spike glycoprotein S and RNA-dependent RNA polymerase
-- What is the gene ID of protein S? NC_045512.2_3
-- What is the gene ID of RdRp? NC_045512.2_2
+3) Run hmmersearch to find the genes encoding for the spike glycoprotein S and RNA-dependent RNA polymerase. You can find the HMM models (S.hmm and RdRp.hmm) in this directory:
+/nfs/course/551-0132-00L/5_Annotation/homework
 
-4) Use the software "bio" to (i) download the genbank file for the reference sequence of the SARS-CoV2, and (ii) to explore its genomic content.
+Extra task (no quiz question): use the software "bio" to (i) download the genbank file for the reference sequence of the SARS-CoV2, and (ii) to further explore its genomic content.
 - How many coding sequences (CDS) are annotated? 
 - How many mature protein regions are annotated? 
-- If there are more mature protein regions than CDS, what does this mean? --> polycistronic mRNA
-4.extra) Two of the CDS share a number of genes. How many?
+- There are more mature protein regions than CDS. Why?
 
+Further reading:
 https://viralzone.expasy.org/9076
 https://www.sciencedirect.com/science/article/pii/S0092867420304062?via%3Dihub
-
-    * Perform MSA ready for part 6
---> Shini: would do this as homework for week 7
 
 .. container:: nextlink
 
