@@ -95,8 +95,8 @@ The Newick format is one of the most widely used formats to represent phylogenet
 
     .. hidden-code-block:: bash
 
-       Hb/Mb genes within the same species are paralogs.
-       
+       HbA to HbB, HbA to Mb and HbA to Mb, and Ha genes within the same species are paralogs.
+
        Mb genes from different species are orthologs.
        
        HbB genes from different species are orthologs.
@@ -106,8 +106,17 @@ The Newick format is one of the most widely used formats to represent phylogenet
        Similarly, it is not possible to determine which pairs of HbA genes in humans and mice are orthologous to each other.
 
     * Q2: Importance of orthology: if you had only collected the sequences: Homo-sapiens-HbA1, Gallus-gallus-HbA and Mus-musculus-HbB, what would you have inferred about the relationships between human, mice and chicken (which organisms are more closely related to each other)?
-    * Q3: Homo sapiens and Mus musculus have two copies of HbA genes (HbA1 and HbA2). The branch length between them is zero. Formulate a hypothesis when this gene duplication ocurred. What kind of additional data would you collect to test your hypothesis?
-    
+
+    .. hidden-code-block:: bash
+
+       Due to incomplete sampling/data, humans would appear to be more closely related to chicken than to mice.
+
+    * Q3: Homo sapiens and Mus musculus have two isoforms of HbA genes (HbA1 and HbA2). The branch length between the isoforms is zero. Formulate a hypothesis when this gene duplication ocurred. What kind of additional data would you collect to test your hypothesis?
+
+    .. hidden-code-block:: bash
+
+       Sharing the exact same protein sequence suggest a recent (i.e., on an evolutionary time scale) duplication event of the gene; however, sometime before the last common ancestor of humans and mice existed. Testing for the copy number of the HbA gene in more distantly related organisms (e.g., mammals, tetrapods, vertebrates) could provide additional evidence when the duplication of the HbA gene occurred.
+           
     Advanced reading: 
 
     * `Evolution of the globin gene superfamily in vertebrates <https://doi.org/10.1093/molbev/msr207>`__ (note Figure 1).
