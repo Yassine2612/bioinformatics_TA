@@ -414,7 +414,7 @@ The output is by default also in fasta format, and only a few other formats are 
     * The file ``/nfs/course/551-0132-00L/4_Alignment/homework/GCF_000005845.2_ASM584v2_cds_from_genomic.fna`` contains the nucleotide sequences for the genes of *Escherichia coli K12 MG1655*.
     * Find an example of a potential paralog or duplicated gene from this set. You will need to:
       
-      * Create a blast database from the file
+      * Copy the file to your home directory and create a blast database from the file
       * Use BLAST to query the file against itself
         
         * Use a suitable *-outfmt* argument to ensure you get tabular output

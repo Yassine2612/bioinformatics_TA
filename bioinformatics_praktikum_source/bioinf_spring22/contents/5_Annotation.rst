@@ -78,9 +78,21 @@ The most popular prokaryotic gene predictor is a software package called **prodi
 In the second example we add the *-d* and *-a* options to output the nucleotide and amino acid sequences of the predicted genes to files. You can also modify the format of the main output file with *-f* and other options allow you to tailor the algorithm to your application, such as for a metagenome or just to train the algorithm parameters for use on another sequence.
 
 .. admonition:: Exercise 5.1
-    :class: exercises
+    :class: exercise
 
-    * Run prodigal on a genome and get stats on the result
+    * Run prodigal on one of the genomes you have previously worked with, either in ``/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/`` or one you downloaded.
+    * Using command line tools, count how many genes were annotated (you can use any of the output formats for this but some are easier than others).
+
+    .. hidden-code-block:: bash
+
+        # Load the module
+        ml prodigal
+
+        # Run the program (change the filenames for your genome)
+        prodigal -i my_genome.fasta -o my_genome.gbk -d my_genes.fna -a my_genes.faa
+
+        # Count the number of predicted genes
+        grep -c "^>" my_genes.fna
 
 Gene prediction in eukaryotes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -177,6 +189,15 @@ So for annotation, we could take the Pfam family database and check our sequence
 
     * Annotate the sequence mystery_sequence03.fasta using UniProt and Pfam web resources
 
+    .. hidden-code-block:: bash
+
+        Firstly you will need to download the file to your computer using the R Workbench interface or SCP command from your own machine.
+
+        From the Uniprot website, you can perform a BLAST search of the sequence against the Uniprot database. It should match a variety of XerC proteins from E. coli and Shigella.
+
+        From the Pfam website, you can perform a sequence search, but you will need to first convert the nucleotide sequence to protein sequence. You should find two domains in the protein, both integrases, though not exclusively phage-related as the sequence is from a bacteria.
+
+
 Automated annotation
 --------------------
 
@@ -221,48 +242,66 @@ Prokka has some recommended ways of running it, with increasing complexity:
 
 Those are just examples of course, but you can see that there are many ways to customise the annotation, especially the output.
 
-??
-
 .. admonition:: Exercise 5.3
     :class: exercise
 
-    * Run prokka on chosen reference genome from Part 3
-    * Compare stats with exercise 5.1 and official record
+    * Run prokka on one of the genomes you have previously worked with, either in ``/nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/`` or one you downloaded.
+    * How does the annotation differ from the official genbank record? Are there more or fewer genes?
+
+    .. hidden-code-block:: bash
+
+        # Let's choose the name of the output files
+        prokka --outdir prokka --prefix my_genome my_genome.fasta
+
+        The annotation could differ in many ways, even the number of genes could be wrong. The genomes we have worked with so far are very well studied and many of their annotations are based on direct observations rather than computational inference.
 
 Annotating other features
 -------------------------
 
 Other than genes, there are techniques and software for annotating an array of other features. Many of them use similar methods as we have discussed above - build a statistical model of a feature based on example sequences and use that model to find similar features. This is typical for promoters, binding sites and other sequence motifs.
 
+Homework
+--------
+
 .. admonition:: Homework
     :class: homework
 
-    You will annotate and collect some information about the SARS-CoV2. To complete the tasks, you need to review the use of commands and programs from previous weeks/courses, and look for additional information. For example, basic knowledge of [R] is expected; however, you can ask your peers for help on Slack and/or consult online resources. **After completing the tasks, you need to solve a quiz as a requirement to complete this week's homework. The quiz is posted here on Moodle: ADD URL**
+    | You will annotate and collect some information about SARS-CoV2. To complete the tasks, you need to review the use of commands and programs from previous weeks/courses, and look for additional information. For example, basic knowledge of [R] is expected; however, you can ask your peers for help on Slack and/or consult online resources. **After completing the tasks, you need to take a quiz as a requirement to complete this week's homework. The quiz is posted on Moodle `here: <https://moodle-app2.let.ethz.ch/mod/quiz/view.php?id=734361>`__ under "Quizzes".**
 
-    Tasks:
-    1) Based on the files that were provided to you in Homework 4, find out the length of the SARS-CoV2 genome and how its length compares to all known viruses in the RefSeq virus database.
-       Example approach:
-       - Review the FASTA format and find out how to use the command grep to select non-mathcing lines. 
-       - Review the use of pipes in UNIX.
-       - The length of a string can be printed using the command: awk '{print length}'.
-       - Apply these steps to find out the length of SARS-CoV2.
-       - Apply these steps to write the lengths of all viral genomes into a file. Import the file into [R] and calculate the mean and median lengths of all viral genomes.
+    **Tasks**
 
-     2) Run Prodigal on the reference sequence of SARS-CoV2 (NC_045512.fa) and check how many protein-coding genes are found.
+    1. Based on the files that were provided to you in Homework 4, find out the length of the SARS-CoV2 genome and how its length compares to all known viruses in the RefSeq virus database.
+       
+       Here is an example approach. Of course, any other solution that helps answering the quiz question works, too.
 
-     3) Run hmmersearch to find the genes encoding for the spike glycoprotein S and RNA-dependent RNA polymerase. You can find the HMM models (S.hmm and RdRp.hmm) in this directory:
-       /nfs/course/551-0132-00L/5_Annotation/homework
+      * Review the FASTA format and find out how to use the command grep to select non-matching lines. 
+      * Review the use of pipes in UNIX.
+      * The length of a string can be printed using the command: ``awk '{print length}'``.
+      * Apply these steps to find out the length of SARS-CoV2.
+      * Apply these steps to write the lengths of all viral genomes into a file. Import the file into [R] and calculate the mean and median lengths of all viral genomes.
 
-     Extra task (no quiz question): use the software "bio" to (i) download the genbank file for the reference sequence of the SARS-CoV2, and (ii) to further explore its genomic content.
-     - How many coding sequences (CDS) are annotated? 
-     - How many mature protein regions are annotated? 
-     - There are more mature protein regions than CDS. Why?
+    2. Run Prodigal on the reference sequence of SARS-CoV2 (``NC_045512.fa``) and check how many protein-coding genes are found.
 
-     Further reading:
-     https://viralzone.expasy.org/9076
-     https://www.sciencedirect.com/science/article/pii/S0092867420304062?via%3Dihub
+    3. Run hmmsearch to find the genes encoding for the spike glycoprotein S and RNA-dependent RNA polymerase. You can find the HMM models (S.hmm and RdRp.hmm) in the directory ``/nfs/course/551-0132-00L/5_Annotation/homework``.
 
-.. container:: nextlink
+    Extra material (no quiz question): use the software "bio" to (i) download the genbank file for the reference sequence of the SARS-CoV2, and (ii) to further explore its genomic content.
+     
+    * How many coding sequences (CDS) are annotated? 
+    * How many mature protein regions are annotated? 
+    * There are more mature protein regions than CDS. What is the reason for this?
 
-    `Next: Phylogenetics <6_Phylogenetics.html>`__
+    Further reading:
+
+    `SARS coronavirus 2 / Covid-19 genome expression <https://viralzone.expasy.org/9076>`__
+
+    `The Architecture of SARS-CoV-2 Transcriptome <https://www.sciencedirect.com/science/article/pii/S0092867420304062?via%3Dihub>`__
+
+.. admonition:: Feedback
+    :class: homework
+
+    Please consider giving us feedback on this week's lecture and OLM via `Moodle <>`__.
+
+.. .. container:: nextlink
+
+..    `Next: Phylogenetics <6_Phylogenetics.html>`__
 
