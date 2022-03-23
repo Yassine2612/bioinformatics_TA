@@ -94,7 +94,7 @@ Useful command line tricks
 
 * Using a **#** character allows you to make comments that have no effect when run.
 
-.. admonition:: Exercises 1.1
+.. admonition:: Exercise 1.1
     :class: exercise
 
     * Try to *echo* "My first command"
@@ -222,7 +222,7 @@ Navigation
     pwd
 
 
-.. admonition:: Exercises 1.2
+.. admonition:: Exercise 1.2
     :class: exercise
 
     * Use *pwd* to find out where you are in your command line session
@@ -342,7 +342,7 @@ Basic file operations
     rmdir <path to directory>
     rmdir genomes
 
-.. admonition:: Exercises 1.3
+.. admonition:: Exercise 1.3
     :class: exercise
 
     * Create two new directories called "genomes" and "homework" in your home folder
@@ -465,7 +465,7 @@ If you ever need to compress a file, for instance to send it to someone, you can
     # Compress a file
     gzip GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna
 
-.. admonition:: Exercises 1.4
+.. admonition:: Exercise 1.4
     :class: exercise
 
     * On the server, download the E. coli file in the example above to your home folder.
@@ -526,7 +526,7 @@ The command **wc** is a command that will quickly count the number of lines, wor
     # Count things
     wc E.coli_K12_MG1655.fna
 
-.. admonition:: Exercises 1.5
+.. admonition:: Exercise 1.5
     :class: exercise
 
     * Use **cat** to look at the *E. coli* genome file you copied last time, is it suitable for looking at this file?
