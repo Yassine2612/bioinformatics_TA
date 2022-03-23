@@ -95,11 +95,15 @@ The Newick format is one of the most widely used formats to represent phylogenet
 
     .. hidden-code-block:: bash
 
-    Hb/Mb genes within the same species are paralogs.
-    Mb genes from different species are orthologs.
-    HbB genes from different species are orthologs.
-    Without further analysis (e.g. testing gene neighborhood), it is not possible to determine if HbA1 or HbA2 genes in humans and mice are orthologous to the HbA gene in chicken.
-    Similarly, it is not possible to determine which pairs of HbA genes in humans and mice are orthologous to each other.
+       Hb/Mb genes within the same species are paralogs.
+       
+       Mb genes from different species are orthologs.
+       
+       HbB genes from different species are orthologs.
+       
+       Without further analysis (e.g. testing gene neighborhood), it is not possible to determine if HbA1 or HbA2 genes in humans and mice are orthologous to the HbA gene in chicken.
+       
+       Similarly, it is not possible to determine which pairs of HbA genes in humans and mice are orthologous to each other.
 
     * Q2: Importance of orthology: if you had only collected the sequences: Homo-sapiens-HbA1, Gallus-gallus-HbA and Mus-musculus-HbB, what would you have inferred about the relationships between human, mice and chicken (which organisms are more closely related to each other)?
     * Q3: Homo sapiens and Mus musculus have two copies of HbA genes (HbA1 and HbA2). The branch length between them is zero. Formulate a hypothesis when this gene duplication ocurred. What kind of additional data would you collect to test your hypothesis?
