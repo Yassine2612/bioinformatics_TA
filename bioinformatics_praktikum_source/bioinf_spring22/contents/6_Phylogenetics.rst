@@ -91,7 +91,16 @@ The Newick format is one of the most widely used formats to represent phylogenet
 
     Save or copy the Newick-formatted tree data and upload it to `iTOL <https://itol.embl.de/upload.cgi>`__, a powerful online tool for tree visualizatoin and annotation. Once the tree is displayed, click on any branch or leave. A pop-up window will appear and under Editing/Tree structure, you can click on "Root the tree at midpoint". The same can be achieved by clicking on the "Advanced" tab on the "Control panel" and clicking on "Midpoint root" under "Other functions" at the bottom. The tree is now displayed so that the last common ancestor of all sequences is represented as the root. Given this tree, HbA=hemoglobin alpha chain, HbB=hemoglobin beta chain, Mb=Myoglobin and Gb=Globin answer the following questions:
 
-    * Test your knowledge: for any combination of the genes in the tree, determine whether they are orthologs or paralogs (for example, Homo-sapiens-HbA1 and Gallus-gallus-HbA are [orthologs|paralogs]).
+    * Q1: For any combination of the genes in the tree, determine whether they are orthologs or paralogs (for example, Homo-sapiens-HbA1 and Gallus-gallus-HbA are [orthologs|paralogs]).
+
+    .. hidden-code-block:: bash
+
+    Hb/Mb genes within the same species are paralogs.
+    Mb genes from different species are orthologs.
+    HbB genes from different species are orthologs.
+    Without further analysis (e.g. testing gene neighborhood), it is not possible to determine if HbA1 or HbA2 genes in humans and mice are orthologous to the HbA gene in chicken.
+    Similarly, it is not possible to determine which pairs of HbA genes in humans and mice are orthologous to each other.
+
     * Q2: Importance of orthology: if you had only collected the sequences: Homo-sapiens-HbA1, Gallus-gallus-HbA and Mus-musculus-HbB, what would you have inferred about the relationships between human, mice and chicken (which organisms are more closely related to each other)?
     * Q3: Homo sapiens and Mus musculus have two copies of HbA genes (HbA1 and HbA2). The branch length between them is zero. Formulate a hypothesis when this gene duplication ocurred. What kind of additional data would you collect to test your hypothesis?
     
