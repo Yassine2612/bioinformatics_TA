@@ -84,7 +84,7 @@ The curated MSA serves as an input to construct and refine a phylogenetic tree, 
 
 The Newick format is one of the most widely used formats to represent phylogenetic trees in computer-readable form. Several software packages exist to visualize and manipulate trees in different ways. For example, a cladogram displays the branching structure of a tree without branch length scaling, while in a phylogram, the branch lengths are proportional to the inferred evolutionary change. A tree can be unrooted, which makes no assumptions about ancestry. Although it is possible to root a tree on any of its branches, usually, it is rooted at the most recent common ancestor of all species/genes (leaves) in the tree. The layout of trees can be a rectangular or circular cladogram, for example. 
 
-.. admonition:: Exercise
+.. admonition:: Exercise 6.1
     :class: exercise
 
     Please visit the website `https://ngphylogeny.fr <https://ngphylogeny.fr>`__, select "One click workflows" under "Phylogeny Analysis" and upload the file ??/hemoglobin_homologs.faa, which contains homologous protein sequences of the globin gene family from vertebrates (human, mouse, chicken) and a non-vertebrate, the lancelet Branchiostoma floridae, as an outgroup. Once the workflow finishes, you can inspect the resulting tree directly in NGPhylogeny. 

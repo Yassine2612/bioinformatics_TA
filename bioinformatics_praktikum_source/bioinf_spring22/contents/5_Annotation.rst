@@ -268,7 +268,7 @@ Homework
 
     | You will annotate and collect some information about SARS-CoV2. To complete the tasks, you need to review the use of commands and programs from previous weeks/courses, and look for additional information. For example, basic knowledge of [R] is expected; however, you can ask your peers for help on Slack and/or consult online resources. After completing the tasks, **you need to take a quiz as a requirement to complete this week's homework.** The quiz is posted on Moodle (`URL: <https://moodle-app2.let.ethz.ch/mod/quiz/view.php?id=734361>`__) under "Quizzes".
 
-    **Tasks**
+    **Tasks:**
 
     1. Based on the files that were provided to you in Homework 4, find out the length of the SARS-CoV2 genome and how its length compares to all known viruses in the RefSeq virus database.
        
@@ -284,7 +284,7 @@ Homework
 
     3. Run hmmsearch to find the genes encoding for the spike glycoprotein S and RNA-dependent RNA polymerase. You can find the HMM models (S.hmm and RdRp.hmm) in the directory ``/nfs/course/551-0132-00L/5_Annotation/homework``.
 
-    **Extra material** (no quiz questions)
+    **Extra material** (no quiz questions):
 
     Use the software "bio" to (i) download the genbank file for the reference sequence of the SARS-CoV2, and (ii) to further explore its genomic content.
      
