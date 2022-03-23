@@ -117,7 +117,7 @@ The Newick format is one of the most widely used formats to represent phylogenet
 
        Sharing the exact same protein sequence suggest a recent (i.e., on an evolutionary time scale) duplication event of the gene; however, sometime before the last common ancestor of humans and mice existed. Testing for the copy number of the HbA gene in more distantly related organisms (e.g., mammals, tetrapods, vertebrates) could provide additional evidence when the duplication of the HbA gene occurred.
            
-    Advanced reading: 
+    Further reading: 
 
     * `Evolution of the globin gene superfamily in vertebrates <https://doi.org/10.1093/molbev/msr207>`__ (note Figure 1).
     * `Evolutionary Innovations in Hemoglobin-Oxygen Transport <https://doi.org/10.1152/physiol.00060.2015>`__ (note Figures 1 and 3).
