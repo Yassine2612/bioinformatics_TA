@@ -422,7 +422,7 @@ The output is by default also in fasta format, and only a few other formats are 
 
       * Filter the results with command line tools such as grep, or Python, or a combination of the two
         
-        * Remove matches of genes to themselves - in grep you will need to use a `Back-reference <https://www.gnu.org/software/grep/manual/html_node/Back_002dreferences-and-Subexpressions.html#:~:text=The%20back%2Dreference%20'%20%5C%20n,1%20'%20matches%20'%20aa%20'.>`__
+        * Remove matches of genes to themselves - in grep you will need to use a `Back-reference <https://www.gnu.org/software/grep/manual/html_node/Back_002dreferences-and-Subexpressions.html#:~:text=The%20back%2Dreference%20'%20%5C%20n,1%20'%20matches%20'%20aa%20'>`__ and the ``-v`` flag for throwing out matching lines.
         * Check that alignments are as long or nearly as long as the shortest of the query or subject
         * If you use Python, you will need to parse the table by reading one line at a time and using the *split* function to separate columns
 
@@ -436,7 +436,7 @@ The output is by default also in fasta format, and only a few other formats are 
 
         Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=731761>`__.
 
-.. .. container:: nextlink
+.. container:: nextlink
 
-..    `Next: Annotation <5_Annotation.html>`__
+    `Next: Annotation <5_Annotation.html>`__
 

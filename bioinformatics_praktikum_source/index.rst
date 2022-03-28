@@ -43,7 +43,7 @@ Image Analysis
 
 .. |pic5| image:: images/Annotation.png
           :width: 24%
-..          :target: bioinf_spring22/contents/5_Annotation.html
+          :target: bioinf_spring22/contents/5_Annotation.html
 
 .. |pic6| image:: images/Phylogenetics.png
           :width: 24%
@@ -87,7 +87,7 @@ Image Analysis
     bioinf_spring22/contents/2_Unix2.rst
     bioinf_spring22/contents/3_Sequence.rst
     bioinf_spring22/contents/4_Alignment.rst
-..    bioinf_spring22/contents/5_Annotation.rst
+    bioinf_spring22/contents/5_Annotation.rst
 ..    bioinf_spring22/contents/6_Phylogenetics.rst
 ..    bioinf_spring22/contents/7_Connections.rst
 ..    bioinf_spring22/contents/8_Structural_bioinformatics_1.rst

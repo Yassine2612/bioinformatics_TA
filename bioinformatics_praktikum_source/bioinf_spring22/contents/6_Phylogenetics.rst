@@ -2,15 +2,15 @@ Phylogenetics
 =============
 
 General information
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 Main objective
---------------
+^^^^^^^^^^^^^^
 
 Phylogenetic analyses have become central to understanding the evolutionary history, ecology and diversity of life on earth. In this lecture, we will introduce basic concepts of phylogenetic analyses based on DNA sequences. We will show you how to infer the evolutionary relationship of groups of organisms. To this end, we will collect phylogenetically informative sequences and teach you, step-by-step, how to reconstruct a phylogenetic tree via a web-based interface. We will then practice how to use software for phylogenetic tree reconstruction on the command line.
 
 Learning objectives
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 Students are able to collect DNA and protein sequences of interest and store them them in an adequate format. They can explain the different steps and know examples of software required to generate phylogenetic trees. Using phylogenetic trees, they can explain the hypothesised evolutionary relationship between organisms and genes. 
 
@@ -24,7 +24,7 @@ This section requires the use of the R Workbench according to your **surname**:
 * S-Z: `Server 03 <https://rstudio-teaching-03.ethz.ch/>`__
 
 Phylogenetic trees
-^^^^^^^^^^^^^^^^^^
+------------------
 
 The objectives for reconstructing phylogenetic trees can be manifold. Generally speaking, a phylogenetic tree is a hypothesis of how biological species or other entities (e.g., genes, traits) are related through evolution. It is a branching diagram showing the inferred evolutionary relationships among these entities based on similarities in their genetic and/or physical characteristics.
 
@@ -35,7 +35,7 @@ By extension of the concept of homology to DNA and protein sequences, two sequen
 Furthermore, homologous sequences can be **orthologous** or **paralogous** with respect to each other: "Where the homology is the result of gene duplication so that both copies have descended side by side during the history of an organism, (for example, alpha and beta hemoglobin) the genes should be called paralogous (para = in parallel). Where the homology is the result of speciation so that the history of the gene reflects the history of the species (for example alpha hemoglobin in man and mouse) the genes should be called
 orthologous (ortho = exact)." -- `W. Fitch <https://doi.org/10.2307/2412448>`__. Homologous sequences that have been transfered between species are xenologs.
 
-One of the most important implications for phylogenetics is that **only sets of orthologous sequences are expected to reflect the underlying evolution of species**, whereas a set of homologous genes (including orthologs, paralogs and xenologs) can be informative about the evolutionary relationship between (gene duplication within/among species and horizontal gene transfer). Orthologous genes, as compared to paralogs, are also more likely to share the same function. 
+One of the most important implications for phylogenetics is that **only sets of orthologous sequences are expected to reflect the underlying evolution of species**, whereas a set of homologous genes (including orthologs, paralogs and xenologs) can be informative about the evolutionary relationship between species (gene duplication within/among species and horizontal gene transfer). Orthologous genes, as compared to paralogs, are also more likely to share the same function. 
 
 Advanced reading:
 Note that inferring orthology, building a species tree from a set of orthologous genes and assuming functional conservation among orthologous genes is not as straight forward as it seems. For more information, see for example: `Gabaldon and Koonin, 2013 <https://doi.org/10.1038/nrg3456>`__.
@@ -62,7 +62,7 @@ In this section of the course, we will introduce you to `NGPhylogeny <https://ng
 
 The prerequisite for generating multiple sequence alignments (MSAs) is a collection of DNA/protein sequences. The user/researcher is responsibile to collect the sequences of interest and to format them so they can be used as an input to MSA programmes. 
 
-Here, we will use the protein sequences of hemoglobin genes from man, mouse and chicken as an input to NGPhylogeny. For illustration, we will run the "One-click workflow" with default settings.
+Here, we will use the protein sequences of hemoglobin genes from human, mouse and chicken as an input to NGPhylogeny. For illustration, we will run the "One-click workflow" with default settings.
 
 1. Multiple sequence alignment (MSA)
 ------------------------------------
@@ -89,7 +89,7 @@ The Newick format is one of the most widely used formats to represent phylogenet
 
     Please visit the website `https://ngphylogeny.fr <https://ngphylogeny.fr>`__, select "One click workflows" under "Phylogeny Analysis" and upload the file ``/nfs/course/551-0132-00L/6_Phylogenetics/hemoglobin_homologs.faa``, which contains homologous protein sequences of the globin gene family from vertebrates (human, mouse, chicken) and a non-vertebrate, the lancelet Branchiostoma floridae, as an outgroup. Once the workflow finishes, you can inspect the resulting tree directly in NGPhylogeny. 
 
-    Save or copy the Newick-formatted tree data and upload it to `iTOL <https://itol.embl.de/upload.cgi>`__, a powerful online tool for tree visualizatoin and annotation. Once the tree is displayed, click on any branch or leave. A pop-up window will appear and under Editing/Tree structure, you can click on "Root the tree at midpoint". The same can be achieved by clicking on the "Advanced" tab on the "Control panel" and clicking on "Midpoint root" under "Other functions" at the bottom. The tree is now displayed so that the last common ancestor of all sequences is represented as the root. Given this tree, HbA=hemoglobin alpha chain, HbB=hemoglobin beta chain, Mb=Myoglobin and Gb=Globin answer the following questions:
+    Save or copy the Newick-formatted tree data and upload it to `iTOL <https://itol.embl.de/upload.cgi>`__, a powerful online tool for tree visualisation and annotation. Once the tree is displayed, click on any branch or leaf. A pop-up window will appear and under Editing/Tree structure, you can click on "Root the tree at midpoint". The same can be achieved by clicking on the "Advanced" tab on the "Control panel" and clicking on "Midpoint root" under "Other functions" at the bottom. The tree is now displayed so that the last common ancestor of all sequences is represented as the root. Given this tree, HbA=hemoglobin alpha chain, HbB=hemoglobin beta chain, Mb=Myoglobin and Gb=Globin answer the following questions:
 
     * Q1: For any combination of the genes in the tree, determine whether they are orthologs or paralogs (for example, Homo-sapiens-HbA1 and Gallus-gallus-HbA are [orthologs|paralogs]).
 

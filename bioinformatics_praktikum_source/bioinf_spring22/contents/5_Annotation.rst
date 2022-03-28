@@ -187,7 +187,7 @@ So for annotation, we could take the Pfam family database and check our sequence
 .. admonition:: Exercise 5.2
     :class: exercise
 
-    * Annotate the sequence mystery_sequence03.fasta using UniProt and Pfam web resources
+    * Annotate the sequence mystery_sequence03.fasta found in ``/nfs/course/551-0132-00L/5_Annotation`` using UniProt and Pfam web resources
 
     .. hidden-code-block:: bash
 
@@ -301,7 +301,7 @@ Homework
 .. admonition:: Feedback
     :class: homework
 
-    Please consider giving us feedback on this week's lecture and OLM via `Moodle <>`__.
+    Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=731764>`__.
 
 .. .. container:: nextlink
 
