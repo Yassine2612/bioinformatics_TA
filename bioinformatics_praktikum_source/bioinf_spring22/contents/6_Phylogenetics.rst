@@ -38,7 +38,7 @@ orthologous (ortho = exact)." -- `W. Fitch <https://doi.org/10.2307/2412448>`__.
 One of the most important implications for phylogenetics is that **only sets of orthologous sequences are expected to reflect the underlying evolution of species**, whereas a set of homologous genes (including orthologs, paralogs and xenologs) can be informative about the evolutionary relationship between species (gene duplication within/among species and horizontal gene transfer). Orthologous genes, as compared to paralogs, are also more likely to share the same function. 
 
 Advanced reading:
-Phylogenies - lecture notes (by Casey Dunn): `Phylogenetic Biology <http://dunnlab.org/phylogenetic_biology/phylogenies.html?`__.
+Phylogenies - lecture notes (by Casey Dunn): `Phylogenetic Biology <http://dunnlab.org/phylogenetic_biology/phylogenies.html>`__.
 Note that inferring orthology, building a species tree from a set of orthologous genes and assuming functional conservation among orthologous genes is not as straight forward as it seems. For more information, see for example: `Gabaldon and Koonin, 2013 <https://doi.org/10.1038/nrg3456>`__.
 
 
