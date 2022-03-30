@@ -127,7 +127,7 @@ The Newick format is one of the most widely used formats to represent phylogenet
 Homework
 --------
 
-    .. admonition:: Homework
+.. admonition:: Homework
         :class: homework
 
     The homework for this week consists of two parts and should prepare you for an extended discussion in week 7. In addition to improving your practical skills, the emphasis is on applying what you have learned to formulate and test biologically relevant hypotheses. 
