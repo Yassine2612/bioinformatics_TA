@@ -170,7 +170,7 @@ To use Pfam effectively, there is a suite of software called HMMER that can be u
 HMMER
 ^^^^^
 
-HMMER is available `here <http://hmmer.org/>`__, and we have made it available on the module system. We will quickly show you how to build and search with an HMM.
+HMMER is available `here <http://hmmer.org/>`__, and we have made it available on the module system (``ml HMMER``). We will quickly show you how to build and search with an HMM.
 
 To construct an HMM from an MSA, you should use the program **hmmbuild**:
 
@@ -216,7 +216,7 @@ Further it searches different databases in a specific order for protein function
 3. A series of hidden Markov model profile databases, including Pfam and TIGRFAMs.
 4. If no matches can be found, label as ‘hypothetical protein’.
 
-Prokka has some recommended ways of running it, with increasing complexity:
+We have made Prokka available in our module system under the name ``prokka``. It has some recommended ways of running it, with increasing complexity:
 
 .. code-block:: bash
 

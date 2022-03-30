@@ -39,6 +39,7 @@ One of the most important implications for phylogenetics is that **only sets of 
 
 Advanced reading:
 Phylogenies - lecture notes (by Casey Dunn): `Phylogenetic Biology <http://dunnlab.org/phylogenetic_biology/phylogenies.html>`__.
+
 Note that inferring orthology, building a species tree from a set of orthologous genes and assuming functional conservation among orthologous genes is not as straight forward as it seems. For more information, see for example: `Gabaldon and Koonin, 2013 <https://doi.org/10.1038/nrg3456>`__.
 
 
@@ -122,3 +123,15 @@ The Newick format is one of the most widely used formats to represent phylogenet
 
     * `Evolution of the globin gene superfamily in vertebrates <https://doi.org/10.1093/molbev/msr207>`__ (note Figure 1).
     * `Evolutionary Innovations in Hemoglobin-Oxygen Transport <https://doi.org/10.1152/physiol.00060.2015>`__ (note Figures 1 and 3).
+
+Homework
+--------
+
+.. admonition:: Homework
+    :class: homework
+
+The homework for this week consists of two parts and should prepare you for an extended discussion in week 7. In addition to improving your practical skills, the emphasis is on applying what you have learned to formulate and test biologically relevant hypotheses. 
+
+In part 1, you will perform analyses to obtain an overview on the evolution of SARS-CoV2 viruses at different levels of phylogenetic resolution (genus, species, variant).
+
+In part 2, you will use basic UNIX commands to re-format and parse data files that will allow you to get some insights into the selective pressure on some of the proteins encoded by the SARS-CoV-2 virus.
