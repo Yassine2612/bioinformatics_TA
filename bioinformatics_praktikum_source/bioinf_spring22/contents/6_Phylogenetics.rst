@@ -127,11 +127,11 @@ The Newick format is one of the most widely used formats to represent phylogenet
 Homework
 --------
 
-.. admonition:: Homework
-    :class: homework
+    .. admonition:: Homework
+        :class: homework
 
-The homework for this week consists of two parts and should prepare you for an extended discussion in week 7. In addition to improving your practical skills, the emphasis is on applying what you have learned to formulate and test biologically relevant hypotheses. 
+    The homework for this week consists of two parts and should prepare you for an extended discussion in week 7. In addition to improving your practical skills, the emphasis is on applying what you have learned to formulate and test biologically relevant hypotheses. 
 
-In part 1, you will perform analyses to obtain an overview on the evolution of SARS-CoV2 viruses at different levels of phylogenetic resolution (genus, species, variant).
+    In part 1, you will perform analyses to obtain an overview on the evolution of SARS-CoV2 viruses at different levels of phylogenetic resolution (genus, species, variant).
 
-In part 2, you will use basic UNIX commands to re-format and parse data files that will allow you to get some insights into the selective pressure on some of the proteins encoded by the SARS-CoV-2 virus.
+    In part 2, you will use basic UNIX commands to re-format and parse data files that will allow you to get some insights into the selective pressure on some of the proteins encoded by the SARS-CoV-2 virus.
