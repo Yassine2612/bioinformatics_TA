@@ -16,17 +16,17 @@ Advanced participants will also:
 Tasks and exercises
 -------------------
 
-1. Read the background information on the structure and proteins of SARS-CoV-2.
+Read the background information on the structure and proteins of SARS-CoV-2.
 
-2. Based on the background information and knowledge acquired during previous biology courses, formulate a hypothesis on what you expect to find regarding the number of sequence variants when analysing the protein sequences of i) protein S and ii) RdRp from SARS-CoV2 samples collected around the world from the beginning of the outbreak.
+1. Based on the background information and knowledge acquired during previous biology courses, formulate a hypothesis on what you expect to find regarding the number of sequence variants when analysing the protein sequences of i) protein S and ii) RdRp from SARS-CoV2 samples collected around the world from the beginning of the outbreak.
 
-3. Design a strategy how to test this hypothesis assuming you start with FASTA-formatted sequence files that contain >70k amino acid sequences;
+2. Describe a strategy how to test this hypothesis assuming you start with FASTA-formatted sequence files that contain >70k amino acid sequences.
 
-4. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
+3. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
 
 Follow your work plan, by applying what you have learned in the previous weeks, and by consulting your peers via Slack and/or online resources.
 
-5. Provide your answers and code in a document named "Homework_week6.txt" in your homework directory (in your home folder). You will use your notes in the lecture next week.
+Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). DO NOT COPY PASTE THE WORK OF OTHERS. 
 
 Background information: SARS-CoV-2 - structure and proteins
 -----------------------------------------------------------
@@ -52,12 +52,13 @@ After connecting to Euler, create symbolic links of to the files that you will n
 
 .. code-block:: bash
 
-    # Create symbolic links from the original location to your home folder
-    ln -s /cluster/home/ssunagaw/teaching/sars-cov2/protein.*.faa .
-    ln -s /cluster/home/ssunagaw/teaching/sars-cov2/cds.*.fna .
-    ln -s /cluster/home/ssunagaw/teaching/sars-cov2/genome.tsv .
+    # Create symbolic links from the original location to your home folder (or a subfolder, after creating one)
+    cd
+    ln -s /nfs/course/551-0132-00L/6_Phylogenetics/homework/sars-cov2/protein.*.faa .
+    ln -s /nfs/course/551-0132-00L/6_Phylogenetics/homework/sars-cov2/cds.*.fna .
+    ln -s /nfs/course/551-0132-00L/6_Phylogenetics/homework/sars-cov2/genome.tsv .
     
-    # Have a look what is linked to your home folder now (and from where)
+    # Have a look at what has been linked to your home folder now (and from where)
     ls -l
 
 The files protein.S.faa and protein.NSP12.faa contain amino acid sequences of the spike glycoprotein S and RNA-dependent RNA polymerase of SARS-CoV2. The files cds.S.fna and cds.NSP12.fna contain nucleotide sequences of these proteins. Remember: files ending in \*.faa and \*.fna are conventionally used to represent sequences in FASTA format. Lines starting with a ">" symbol contain information about the sequence, such as an identifier, which are followed by the actual sequences.
