@@ -10,6 +10,7 @@ You will:
 * re-format the data to allow for hypothesis testing
 
 Advanced participants will also:
+
 * refine the analysis to account for confounding factors
 
 Tasks and exercises
@@ -17,17 +18,15 @@ Tasks and exercises
 
 1. Read the background information on the structure and proteins of SARS-CoV-2.
 
-2. You will be assigned to breakout rooms and asked to provide your ideas/answers on an online document (links will be provided). In groups, you will:
+2. Based on the background information and knowledge acquired during previous biology courses, formulate a hypothesis on what you expect to find regarding the number of sequence variants when analysing the protein sequences of i) protein S and ii) RdRp from SARS-CoV2 samples collected around the world from the beginning of the outbreak.
 
-   * 2a) based on the background information and knowledge acquired during previous biology courses, discuss and formulate a hypothesis on what you expect to find regarding the number of sequence variants when analysing the protein sequences of i) protein S and ii) RdRp from SARS-CoV2 samples collected around the world;
+3. Design a strategy how to test this hypothesis assuming you start with FASTA-formatted sequence files that contain >70k amino acid sequences;
 
-   * 2b) propose a strategy how to test this hypothesis assuming you start with FASTA-formatted sequence files that contain >70k amino acid sequences;
+4. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
 
-   * 2c) collect ideas on how sequence length or data completeness could impact your results.
+Follow your work plan, by applying what you have learned in the previous weeks, and by consulting your peers via Slack and/or online resources.
 
-3. Follow your work plan, by applying what you have learned in the previous weeks, and by consulting online resources.
-
-4. Document the code of your solutions on the online document.
+5. Provide your answers and code in a document named "Homework_week6.txt" in your homework directory (in your home folder). You will use your notes in the lecture next week.
 
 Background information: SARS-CoV-2 - structure and proteins
 -----------------------------------------------------------
