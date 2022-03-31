@@ -173,3 +173,7 @@ Homework
 	Please visit `this website <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/6_Phylogenetics_SARS-CoV2.html>`__, where you will find detailed information on tasks and what is expected to be submitted.
 
 .. Advanced users will perform analyses to obtain an overview on the evolution of SARS-CoV2 viruses at different levels of phylogenetic resolution (genus, species, variants).
+
+.. container:: nextlink
+
+    `Next: Phylogenetics homework <6_Phylogenetics_SARS-CoV2.html>`__

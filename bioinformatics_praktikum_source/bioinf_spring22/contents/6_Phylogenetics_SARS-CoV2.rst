@@ -162,6 +162,3 @@ Tasks
 
           Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=731766&forceview=1>`__.
 
-.. container:: nextlink
-
-    `Next: Phylogenetics homework <6_Phylogenetics_SARS-CoV2.html>`__
