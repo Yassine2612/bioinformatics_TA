@@ -157,7 +157,7 @@ The Newick format is one of the most widely used formats to represent phylogenet
 
        Although manatees and dolphins live in the ocean, their ancestors have evolved to inhabit the marine environment independently. Manatees are more closely related to elephants than dolphins.
 
-Further reading:
+    Further reading:
 
     * `Convergent evolution of the genomes of marine mammals <https://www.nature.com/articles/ng.3198>`__ (note Figure 1).
 
