@@ -49,9 +49,7 @@ Homework
 
 Get started
 -----------
-To prepare for the next exercises, you will learn a new command to create symbolic links (instead of copying the actual files) to a location. This will save space on the hard drive, and there is no need to maintain several copies of the same file.
-
-After connecting to Euler, create symbolic links of to the files that you will need:
+To prepare the data for the tasks, you will learn a new command to create symbolic links (instead of copying the actual files) to a location. This will save space on the hard drive, and there is no need to maintain several copies of the same file.
 
 .. code-block:: bash
 
@@ -75,11 +73,11 @@ The file genome.tsv contains information on the genomes from which the nucleotid
     head cds.NSP12.fna
     grep MT007544.1 genome.tsv
 
-Once you have the data prepared, here are some questions that may guide your work plan. Feel free to consult your peers or online resources for help.
+Once you have the data prepared, here are some questions that may guide the development of your work plan. Feel free to consult your peers or online resources for help.
 
-How many sequences are in the \*.faa files? - Hint: grep 
-How many different  sequences (i.e. sequence variants) are in a file? - Hint: uniq
-How long are the sequences? - Hint: awk
+How many sequences are in the \*.faa files? - Hint: grep
+How many different sequences (i.e. sequence variants) are in a file? - Hint: sort and uniq
+How long are the sequences? - Hint: awk (see last week's OLM)
 
 Advanced questions:
 Are the data complete? That is, do the sequences only contain the one letter codes used for amino acids?
@@ -125,6 +123,8 @@ Tasks
 3. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
 
 .. code-block:: bash
+
+Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). **DO NOT COPY PASTE THE WORK OF OTHERS.**
 
 ..
   # How long are the sequences (on average)?
