@@ -127,11 +127,11 @@ The Newick format is one of the most widely used formats to represent phylogenet
 .. admonition:: Exercise 6.2
     :class: exercise
 
-Once a set of suitable orthologs has been identified, phylogenies can be inferred to address biological questions. In this exercise, you will explore the evolution of marine mammals.
+    Once a set of suitable orthologs has been identified, phylogenies can be inferred to address biological questions. In this exercise, you will explore the evolution of marine mammals.
 
-Please upload the protein sequences of the tumor supressor gene p53 from several mammals, including many mammals you will be familiar with, to NGPhylogeny according to exercise 6.1. The protein sequences in FASTA format can be found at: ``/nfs/course/551-0132-00L/6_Phylogenetics/p53.marine.mammals.faa``. A table that maps protein identifiers, common names and scientific names is provided here: ``/nfs/course/551-0132-00L/6_Phylogenetics/p53.meta.tsv``.
+    Please upload the protein sequences of the tumor supressor gene p53 from several mammals, including many mammals you will be familiar with, to NGPhylogeny according to exercise 6.1. The protein sequences in FASTA format can be found at: ``/nfs/course/551-0132-00L/6_Phylogenetics/p53.marine.mammals.faa``. A table that maps protein identifiers, common names and scientific names is provided here: ``/nfs/course/551-0132-00L/6_Phylogenetics/p53.meta.tsv``.
 
-The output tree can be exported to iTOL for visualization. Within iTOL, there is a useful feature to translate the protein identifiers into scientific species names. To do this, click on the "Advanced" tab on the control panel, click on "Assign taxonomy" and follow the instructions. Root the tree at its midpoint (Advanced->Other functions->Midpoint root).
+    The output tree can be exported to iTOL for visualization. Within iTOL, there is a useful feature to translate the protein identifiers into scientific species names. To do this, click on the "Advanced" tab on the control panel, click on "Assign taxonomy" and follow the instructions. Root the tree at its midpoint (Advanced->Other functions->Midpoint root).
 
     * Q1: Have mammals evolved to inhabit the marine environment once or on multiple occasions?
 
