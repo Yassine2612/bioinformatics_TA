@@ -62,7 +62,7 @@ In this section of the course, we will introduce you to `NGPhylogeny <https://ng
 0. Collection and formatting of sequence data
 ---------------------------------------------
 
-The prerequisite for generating multiple sequence alignments (MSAs) is a collection of DNA/protein sequences. The user/researcher is responsibile to collect the sequences of interest and to format them so they can be used as an input to MSA programmes. 
+The prerequisite for generating multiple sequence alignments (MSAs) is a collection of DNA/protein sequences. The user/researcher is responsible to collect the sequences of interest and to format them so they can be used as an input to MSA programmes. 
 
 Here, we will use the protein sequences of hemoglobin genes from human, mouse and chicken as an input to NGPhylogeny. For illustration, we will run the "One-click workflow" with default settings.
 
@@ -89,9 +89,9 @@ The Newick format is one of the most widely used formats to represent phylogenet
 .. admonition:: Exercise 6.1
     :class: exercise
 
-    Please visit the website `https://ngphylogeny.fr <https://ngphylogeny.fr>`__, select "One click workflows" under "Phylogeny Analysis" and upload the file ``/nfs/course/551-0132-00L/6_Phylogenetics/hemoglobin_homologs.faa``, which contains homologous protein sequences of the globin gene family from vertebrates (human, mouse, chicken) and a non-vertebrate, the lancelet Branchiostoma floridae, as an outgroup. Once the workflow finishes, you can inspect the resulting tree directly in NGPhylogeny. 
+    Please visit the website `https://ngphylogeny.fr <https://ngphylogeny.fr>`__, select "One click workflows" under "Phylogeny Analysis" and upload (or copy/paste) the file ``/nfs/course/551-0132-00L/6_Phylogenetics/hemoglobin_homologs.faa``, which contains homologous protein sequences of the globin gene family from vertebrates (human, mouse, chicken) and a non-vertebrate, the lancelet Branchiostoma floridae, as an outgroup. Once the workflow finishes, you can inspect the resulting tree directly in NGPhylogeny. 
 
-    Save or copy the Newick-formatted tree data and upload it to `iTOL <https://itol.embl.de/upload.cgi>`__, a powerful online tool for tree visualisation and annotation. Once the tree is displayed, click on any branch or leaf. A pop-up window will appear and under Editing/Tree structure, you can click on "Root the tree at midpoint". The same can be achieved by clicking on the "Advanced" tab on the "Control panel" and clicking on "Midpoint root" under "Other functions" at the bottom. The tree is now displayed so that the last common ancestor of all sequences is represented as the root. Given this tree, HbA=hemoglobin alpha chain, HbB=hemoglobin beta chain, Mb=Myoglobin and Gb=Globin answer the following questions:
+    Save or copy the Newick-formatted tree data and upload it to `iTOL <https://itol.embl.de/upload.cgi>`__ (you can also export the Output Tree directly to iTOL), a powerful online tool for tree visualisation and annotation. Once the tree is displayed, click on any branch or leaf. A pop-up window will appear and under Editing/Tree structure, you can click on "Root the tree at midpoint". The same can be achieved by clicking on the "Advanced" tab on the "Control panel" and clicking on "Midpoint root" under "Other functions" at the bottom. The tree is now displayed so that the last common ancestor of all sequences is represented as the root. Given this tree, HbA=hemoglobin alpha chain, HbB=hemoglobin beta chain, Mb=Myoglobin and Gb=Globin answer the following questions:
 
     * Q1: For any combination of the genes in the tree, determine whether they are orthologs or paralogs (for example, Homo-sapiens-HbA1 and Gallus-gallus-HbA are [orthologs|paralogs]).
 
@@ -124,14 +124,51 @@ The Newick format is one of the most widely used formats to represent phylogenet
     * `Evolution of the globin gene superfamily in vertebrates <https://doi.org/10.1093/molbev/msr207>`__ (note Figure 1).
     * `Evolutionary Innovations in Hemoglobin-Oxygen Transport <https://doi.org/10.1152/physiol.00060.2015>`__ (note Figures 1 and 3).
 
+.. admonition:: Exercise 6.2
+    :class: exercise
+
+Once a set of suitable orthologs has been identified, phylogenies can be inferred to address biological questions. In this exercise, you will explore the evolution of marine mammals.
+
+Please upload the protein sequences of the tumor supressor gene p53 from several mammals, including many mammals you will be familiar with, to NGPhylogeny according to exercise 6.1. The protein sequences in FASTA format can be found at: ``/nfs/course/551-0132-00L/6_Phylogenetics/p53.marine.mammals.faa``. A table that maps protein identifiers, common names and scientific names is provided here: ``/nfs/course/551-0132-00L/6_Phylogenetics/p53.meta.tsv``.
+
+The output tree can be exported to iTOL for visualization. Within iTOL, there is a useful feature to translate the protein identifiers into scientific species names. To do this, click on the "Advanced" tab on the control panel, click on "Assign taxonomy" and follow the instructions. Root the tree at its midpoint (Advanced->Other functions->Midpoint root).
+
+    * Q1: Have mammals evolved to inhabit the marine environment once or on multiple occasions?
+
+    .. hidden-code-block:: bash
+
+    The phylogeny strongly suggests that mammals have evolved to inhabit the marine environment on multiple independent occasions. Cetaceans (whales, dolphins and porpoises) and sirenians (manatees and dugongs) emerged during the Eocene epoch through diversification from the Cetartiodactyla and Afrotheria, respectively. Pinnipeds (seals, sea lions and walruses) emerged approximately 20 million years later during the Miocene from within the Carnivora. 
+
+    * Q2: Are whales more closely related to cows or to elephants?
+
+    Whales are more closely related to cows than to elephants.
+
+    * Q3: Are walrusses more closely related to dogs or pigs?
+
+    Walrusses are closely related to seals and sea lions, which share more recent ancestry with dogs than with pigs.
+
+    * Q4: Are manatees more closely related to elephants or dolphins?
+
+    Although manatees and dolphins live in the ocean, their ancestors have evolved to inhabit the marine environment independently. Manatees are more closely related to elephants than dolphins.
+
+Further reading:
+
+    * `Convergent evolution of the genomes of marine mammals <https://www.nature.com/articles/ng.3198>`__ (note Figure 1).
+
 Homework
 --------
 
-.. admonition:: Homework
+.. admonition:: Homework 6 
         :class: homework
 
-    The homework for this week consists of two parts and should prepare you for an extended discussion in week 7. In addition to improving your practical skills, the emphasis is on applying what you have learned to formulate and test biologically relevant hypotheses. 
+        The homework for this week consists of two parts and should prepare you for an extended discussion in week 7. In addition to improving your practical skills, the emphasis is on applying what you have learned to formulate and test biologically relevant hypotheses. 
 
-    In part 1, you will perform analyses to obtain an overview on the evolution of SARS-CoV2 viruses at different levels of phylogenetic resolution (genus, species, variant).
+        In part 1, you will perform analyses to obtain an overview on the evolution of SARS-CoV2 viruses at different levels of phylogenetic resolution (genus, species, variant).
 
-    In part 2, you will use basic UNIX commands to re-format and parse data files that will allow you to get some insights into the selective pressure on some of the proteins encoded by the SARS-CoV-2 virus.
+        In part 2, you will use basic UNIX commands to re-format and parse data files that will allow you to get some insights into the selective pressure on some of the proteins encoded by the SARS-CoV-2 virus.
+
+.. admonition:: Feedback
+          :class: homework
+
+          Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=731766&forceview=1>`__.
+
