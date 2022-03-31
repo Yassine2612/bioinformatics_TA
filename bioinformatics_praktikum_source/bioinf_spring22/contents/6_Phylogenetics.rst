@@ -167,10 +167,7 @@ Homework
 .. admonition:: Homework 6 
         :class: homework
 
-        The homework for this week consists of two parts and should prepare you for an extended discussion in week 7. In addition to improving your practical skills, the emphasis is on applying what you have learned to formulate and test biologically relevant hypotheses. You will use basic UNIX commands to re-format and parse data files that will allow you to get some insights into the selective pressure on some of the proteins encoded by the SARS-CoV-2 virus. After this, you will perform analyses to obtain an overview on the evolution of SARS-CoV2 viruses at different levels of phylogenetic resolution (genus, species, variant). Please visit the following website: `https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/6_Phylogenetics_SARS-CoV2.html <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/6_Phylogenetics_SARS-CoV2.html>`__.
+        The homework for this week consists of two parts and should prepare you for an extended discussion in week 7. In addition to improving your practical skills, the emphasis is on applying what you have learned to formulate and test biologically relevant hypotheses. You will use basic UNIX commands to re-format and parse data files that will allow you to get some insights into the selective pressure on some of the proteins encoded by the SARS-CoV-2 virus. After this, you will perform analyses to obtain an overview on the evolution of SARS-CoV2 viruses at different levels of phylogenetic resolution (genus, species, variant). 
 
-.. admonition:: Feedback
-          :class: homework
-
-          Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=731766&forceview=1>`__.
+	On the website: `https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/6_Phylogenetics_SARS-CoV2.html <https://sunagawalab.ethz.ch/share/teaching/bioinformatics_praktikum/bioinf_spring22/contents/6_Phylogenetics_SARS-CoV2.html>`__ you will find more detailed information on tasks and what is expected to be submitted.
 

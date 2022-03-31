@@ -13,20 +13,7 @@ Advanced participants will also:
 
 * refine the analysis to account for confounding factors
 
-Tasks and exercises
--------------------
-
-Read the background information on the structure and proteins of SARS-CoV-2.
-
-1. Based on the background information and knowledge acquired during previous biology courses, formulate a hypothesis on what you expect to find regarding the number of sequence variants when analysing the protein sequences of i) protein S and ii) RdRp from SARS-CoV2 samples collected around the world from the beginning of the outbreak.
-
-2. Describe a strategy how to test this hypothesis assuming you start with FASTA-formatted sequence files that contain >70k amino acid sequences.
-
-3. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
-
-Follow your work plan, by applying what you have learned in the previous weeks, and by consulting your peers via Slack and/or online resources.
-
-Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). DO NOT COPY PASTE THE WORK OF OTHERS. 
+Let's start with getting some background information on the structure and proteins of SARS-CoV-2.
 
 Background information: SARS-CoV-2 - structure and proteins
 -----------------------------------------------------------
@@ -43,6 +30,21 @@ Source: https://www.ncbi.nlm.nih.gov/sars-cov-2/
     :align: center
     
 Source: https://www.prof.uzh.ch/en/news/Coronavirus-(2019-nCoV).html
+
+homework tasks
+--------------
+
+.. admonition:: Homework 6
+    :class: homework
+    1. Based on the background information and knowledge acquired during previous biology courses, formulate a hypothesis on what you expect to find regarding the number of sequence variants when analysing the protein sequences of i) protein S and ii) RdRp from SARS-CoV2 samples collected around the world from the beginning of the outbreak.
+
+    2. Describe a work plan how to test this hypothesis assuming you start with FASTA-formatted sequence files that contain >70k amino acid sequences.
+
+    3. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
+
+    Execute your work plan, by applying what you have learned in the previous weeks and by consulting your peers via Slack and/or online resources.
+
+    Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). **DO NOT COPY PASTE THE WORK OF OTHERS.**
 
 Get the data
 ------------
@@ -140,3 +142,8 @@ How long are the individual sequences? Try to think of solutions. To calculate t
   echo 3391 / 1273 | bc -l # per amino acid we have 3391 variants
   
 To account for the random expectation that longer sequences will also have more sequence variants, we can normalize the number of sequence variants by the length of the protein sequence. When comparing the protein sequence length-normalized number of variants, what do you find? Does this finding support or reject your hypothesis?
+
+.. admonition:: Feedback
+          :class: homework
+
+          Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=731766&forceview=1>`__.
