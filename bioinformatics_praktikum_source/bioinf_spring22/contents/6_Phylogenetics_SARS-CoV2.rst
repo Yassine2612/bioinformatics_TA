@@ -47,8 +47,8 @@ Homework
 
 	Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). **DO NOT COPY PASTE THE WORK OF OTHERS.**
 
-Get the data
-------------
+Get started
+-----------
 To prepare for the next exercises, you will learn a new command to create symbolic links (instead of copying the actual files) to a location. This will save space on the hard drive, and there is no need to maintain several copies of the same file.
 
 After connecting to Euler, create symbolic links of to the files that you will need:
@@ -75,23 +75,26 @@ The file genome.tsv contains information on the genomes from which the nucleotid
     head cds.NSP12.fna
     grep MT007544.1 genome.tsv
 
-Data analysis
--------------
-Once you have the workplan prepared, here are some questions that may guide your analysis. Feel free to consult the internet for help.
+Once you have the data prepared, here are some questions that may guide your work plan. Feel free to consult your peers or online resources for help.
 
-How many sequences are in the \*.faa files?
-How many different sequences (i.e. sequence variants) are in a file?
-How long are the individual sequences?
-How long are the sequences on average?
+How many sequences are in the \*.faa files? - Hint: grep 
+How many different  sequences (i.e. sequence variants) are in a file? - Hint: uniq
+How long are the sequences? - Hint: awk
+
+Advanced questions:
 Are the data complete? That is, do the sequences only contain the one letter codes used for amino acids?
 Do all sequences represent the full lengths of the respective proteins?
 
-Example solutions
------------------
-Based on your knowledge on how the immune system works, what would you expect, which protein will have more sequence variants? Formulate a biologically meaningful hypothesis. 
-  
+Tasks
+-----
+1. Based on your knowledge on how the immune system works, what would you expect, which protein will have more sequence variants? Formulate a biologically meaningful hypothesis. 
+
+.. code-block:: bash
+
 ..
  Example: Immunogenic epitopes on the surface of the virus will lead to the generation of antibodies that will ideally bind to them and help the immune system clear the viral infection. Thus, to escape this recognition, it should be advantageous for the virus to generate structural variants of exposed surfaces. On the other hand, non-structural proteins that are important for basic functions, such as the replication of RNA, should maintain a high degree of conservation. We could perform a simple test if we find some evidence for this hypothesis by counting the number of different variants of the spike glycoprotein S and the RNA-dependent RNA polymerase. Other hypotheses may include that a variation of the surface protein may broaden the range of tissues or hosts that the virus can infect, or increase the infectivity of the virus within the same host (individual or animal).
+
+2. Describe your work plan.
 
 .. code-block:: bash
 
@@ -118,6 +121,8 @@ Based on your knowledge on how the immune system works, what would you expect, w
 
 ..
  How long are the individual sequences? Try to think of solutions. To calculate the length of a string, you will likely need to consult the internet for help. Please do so, this is what a professional Bioinformatician also does on a daily basis. Keyword tips: awk, length, string, unix basic calculator.
+
+3. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
 
 .. code-block:: bash
 
@@ -148,7 +153,7 @@ Based on your knowledge on how the immune system works, what would you expect, w
   echo 3391 / 1273 | bc -l # per amino acid we have 3391 variants
   
 .. 
- To account for the random expectation that longer sequences will also have more sequence variants, we can normalize the number of sequence variants by the length of the protein sequence. When comparing the protein sequence length-normalized number of variants, what do you find? Does this finding support or reject your hypothesis?
+ To account for the random expectation that longer sequences will also have more sequence variants, we have to normalize the number of sequence variants by the length of the protein sequence. When comparing the protein sequence length-normalized number of variants, what do you find? Does this change your result?
 
 .. admonition:: Feedback
           :class: homework
