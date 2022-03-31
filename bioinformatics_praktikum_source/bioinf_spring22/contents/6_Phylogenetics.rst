@@ -137,19 +137,25 @@ The Newick format is one of the most widely used formats to represent phylogenet
 
     .. hidden-code-block:: bash
 
-    The phylogeny strongly suggests that mammals have evolved to inhabit the marine environment on multiple independent occasions. Cetaceans (whales, dolphins and porpoises) and sirenians (manatees and dugongs) emerged during the Eocene epoch through diversification from the Cetartiodactyla and Afrotheria, respectively. Pinnipeds (seals, sea lions and walruses) emerged approximately 20 million years later during the Miocene from within the Carnivora. 
+       The phylogeny strongly suggests that mammals have evolved to inhabit the marine environment on multiple independent occasions. Cetaceans (whales, dolphins and porpoises) and sirenians (manatees and dugongs) emerged during the Eocene epoch through diversification from the Cetartiodactyla and Afrotheria, respectively. Pinnipeds (seals, sea lions and walruses) emerged approximately 20 million years later during the Miocene from within the Carnivora. 
 
     * Q2: Are whales more closely related to cows or to elephants?
 
-    Whales are more closely related to cows than to elephants.
+    .. hidden-code-block:: bash
+
+       Whales are more closely related to cows than to elephants.
 
     * Q3: Are walrusses more closely related to dogs or pigs?
 
-    Walrusses are closely related to seals and sea lions, which share more recent ancestry with dogs than with pigs.
+    .. hidden-code-block:: bash
+
+       Walrusses are closely related to seals and sea lions, which share more recent ancestry with dogs than with pigs.
 
     * Q4: Are manatees more closely related to elephants or dolphins?
 
-    Although manatees and dolphins live in the ocean, their ancestors have evolved to inhabit the marine environment independently. Manatees are more closely related to elephants than dolphins.
+    .. hidden-code-block:: bash
+
+       Although manatees and dolphins live in the ocean, their ancestors have evolved to inhabit the marine environment independently. Manatees are more closely related to elephants than dolphins.
 
 Further reading:
 
