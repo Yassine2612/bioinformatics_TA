@@ -303,7 +303,7 @@ Homework
 
     Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=731764>`__.
 
-.. .. container:: nextlink
+.. container:: nextlink
 
-..    `Next: Phylogenetics <6_Phylogenetics.html>`__
+    `Next: Phylogenetics <6_Phylogenetics.html>`__
 

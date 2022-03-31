@@ -7,7 +7,8 @@ General information
 Main objective
 ^^^^^^^^^^^^^^
 
-Phylogenetic analyses have become central to understanding the evolutionary history, ecology and diversity of life on earth. In this lecture, we will introduce basic concepts of phylogenetic analyses based on DNA sequences. We will show you how to infer the evolutionary relationship of groups of organisms. To this end, we will collect phylogenetically informative sequences and teach you, step-by-step, how to reconstruct a phylogenetic tree via a web-based interface. We will then practice how to use software for phylogenetic tree reconstruction on the command line.
+Phylogenetic analyses have become central to understanding the evolutionary history, ecology and diversity of life on earth. In this lecture, we will introduce basic concepts of phylogenetic analyses based on DNA sequences. We will show you how to infer the evolutionary relationship of groups of organisms. To this end, we will collect phylogenetically informative sequences and teach you, step-by-step, how to reconstruct a phylogenetic tree via a web-based interface. 
+.. We will then practice how to use software for phylogenetic tree reconstruction on the command line.
 
 Learning objectives
 ^^^^^^^^^^^^^^^^^^^
