@@ -31,20 +31,21 @@ Source: https://www.ncbi.nlm.nih.gov/sars-cov-2/
     
 Source: https://www.prof.uzh.ch/en/news/Coronavirus-(2019-nCoV).html
 
-homework tasks
---------------
+Homework
+--------
 
 .. admonition:: Homework 6
-    :class: homework
-    1. Based on the background information and knowledge acquired during previous biology courses, formulate a hypothesis on what you expect to find regarding the number of sequence variants when analysing the protein sequences of i) protein S and ii) RdRp from SARS-CoV2 samples collected around the world from the beginning of the outbreak.
+        :class: homework
 
-    2. Describe a work plan how to test this hypothesis assuming you start with FASTA-formatted sequence files that contain >70k amino acid sequences.
+	1. Based on the background information and knowledge acquired during previous biology courses, formulate a hypothesis on what you expect to find regarding the number of sequence variants when analysing the protein sequences of i) protein S and ii) RdRp from SARS-CoV2 samples collected around the world from the beginning of the outbreak.
 
-    3. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
+	2. Describe a work plan how to test this hypothesis assuming you start with FASTA-formatted sequence files that contain >70k amino acid sequences.
 
-    Execute your work plan, by applying what you have learned in the previous weeks and by consulting your peers via Slack and/or online resources.
+	3. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
 
-    Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). **DO NOT COPY PASTE THE WORK OF OTHERS.**
+	Execute your work plan, by applying what you have learned in the previous weeks and by consulting your peers via Slack and/or online resources.
+
+	Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). **DO NOT COPY PASTE THE WORK OF OTHERS.**
 
 Get the data
 ------------
