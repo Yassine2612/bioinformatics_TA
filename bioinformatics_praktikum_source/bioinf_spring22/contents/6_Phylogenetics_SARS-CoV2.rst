@@ -124,7 +124,9 @@ Tasks
 
 .. code-block:: bash
 
-Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). **DO NOT COPY PASTE THE WORK OF OTHERS.**
+.. admonition:: Homework 6
+        :class: homework
+        Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). **DO NOT COPY PASTE THE WORK OF OTHERS.**
 
 ..
   # How long are the sequences (on average)?
