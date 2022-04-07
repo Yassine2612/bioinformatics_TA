@@ -178,4 +178,4 @@ Homework
 
 .. container:: nextlink
 
-    `Next: SARS-CoV2 and consolidation <7_SARS-CoV2.html>`__
+    `Next: SARS-CoV2 and Summary <7_SARS-CoV2.html>`__
