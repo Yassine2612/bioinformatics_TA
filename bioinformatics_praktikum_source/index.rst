@@ -88,8 +88,8 @@ Image Analysis
     bioinf_spring22/contents/3_Sequence.rst
     bioinf_spring22/contents/4_Alignment.rst
     bioinf_spring22/contents/5_Annotation.rst
-..    bioinf_spring22/contents/6_Phylogenetics.rst
-..    bioinf_spring22/contents/7_Connections.rst
+    bioinf_spring22/contents/6_Phylogenetics.rst
+    bioinf_spring22/contents/7_SARS-CoV2.rst
 ..    bioinf_spring22/contents/8_Structural_bioinformatics_1.rst
 ..    bioinf_spring22/contents/9_Structural_bioinformatics_2.rst
 ..    bioinf_spring22/contents/10_Structural_bioinformatics_3.rst

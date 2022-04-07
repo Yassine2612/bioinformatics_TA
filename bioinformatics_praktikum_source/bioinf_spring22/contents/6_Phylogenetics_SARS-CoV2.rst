@@ -35,17 +35,17 @@ Homework
 --------
 
 .. admonition:: Homework 6
-        :class: homework
+    :class: homework
 
-	1. Based on the background information and knowledge acquired during previous biology courses, formulate a hypothesis on what you expect to find regarding the number of sequence variants when analysing the protein sequences of i) protein S and ii) RdRp from SARS-CoV2 samples collected around the world from the beginning of the outbreak.
+    1. Based on the background information and knowledge acquired during previous biology courses, formulate a hypothesis on what you expect to find regarding the number of sequence variants when analysing the protein sequences of i) protein S and ii) RdRp from SARS-CoV2 samples collected around the world from the beginning of the outbreak.
 
-	2. Describe a work plan how to test this hypothesis assuming you start with FASTA-formatted sequence files that contain >70k amino acid sequences.
+    2. Describe a work plan how to test this hypothesis assuming you start with FASTA-formatted sequence files that contain >70k amino acid sequences.
 
-	3. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
+    3. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
 
-	Execute your work plan, by applying what you have learned in the previous weeks and by consulting your peers via Slack and/or online resources.
+    Execute your work plan, by applying what you have learned in the previous weeks and by consulting your peers via Slack and/or online resources.
 
-	Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). **DO NOT COPY PASTE THE WORK OF OTHERS.**
+    Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). **DO NOT COPY PASTE THE WORK OF OTHERS.**
 
 Get started
 -----------
@@ -99,7 +99,7 @@ Tasks
 ..
   ## Hypothesis testing using the provided sequence data.
 
-  # How many sequences are in the *.faa and *.fna files?
+  # How many sequences are in the *.faa file?
   grep -c '>' protein.S.faa
 
   # How many different sequences (i.e. sequence variants) are in a file?
@@ -108,9 +108,6 @@ Tasks
     
   # Then we need to count the number of unique sequences. We can pipe the output of the previous command to a new one:
   grep -v '>' protein.S.faa | sort -u | wc -l
-
-  # Here is another solution. Try to follow what happens in each pipe step:
-  cat protein.S.faa | tr "\n" "\t" | sed 's/\t>/\n>/'g | cut -f2 | sort -u | wc -l
 
   # Calculate the numbers for both proteins. What is your interpretation?
 
@@ -125,8 +122,9 @@ Tasks
 .. code-block:: bash
 
 .. admonition:: Homework 6
-        :class: homework
-        Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). **DO NOT COPY PASTE THE WORK OF OTHERS.**
+    :class: homework
+
+    Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). **DO NOT COPY PASTE THE WORK OF OTHERS.**
 
 ..
   # How long are the sequences (on average)?
@@ -152,13 +150,13 @@ Tasks
   grep -v '>' protein.S.faa | awk 'length==1273' | grep -v X | sort -u | wc -l
   
   # Normalize by protein length
-  echo 3391 / 1273 | bc -l # per amino acid we have 3391 variants
+  echo 3391 / 1273 | bc -l # per amino acid we have 3391 / 1273 variants
   
 .. 
  To account for the random expectation that longer sequences will also have more sequence variants, we have to normalize the number of sequence variants by the length of the protein sequence. When comparing the protein sequence length-normalized number of variants, what do you find? Does this change your result?
 
 .. admonition:: Feedback
-          :class: homework
+    :class: homework
 
-          Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=731766&forceview=1>`__.
+    Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=731766&forceview=1>`__.
 

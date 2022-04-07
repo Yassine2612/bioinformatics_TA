@@ -13,7 +13,9 @@ Phylogenetic analyses have become central to understanding the evolutionary hist
 Learning objectives
 ^^^^^^^^^^^^^^^^^^^
 
-Students are able to collect DNA and protein sequences of interest and store them them in an adequate format. They can explain the different steps and know examples of software required to generate phylogenetic trees. Using phylogenetic trees, they can explain the hypothesised evolutionary relationship between organisms and genes. 
+* Students are able to collect DNA and protein sequences of interest and store them them in an adequate format.
+* They can explain the different steps and know examples of software required to generate phylogenetic trees.
+* Using phylogenetic trees, they can explain the hypothesised evolutionary relationship between organisms and genes. 
 
 Resources
 ^^^^^^^^^
@@ -176,4 +178,4 @@ Homework
 
 .. container:: nextlink
 
-    `Next: Phylogenetics homework <6_Phylogenetics_SARS-CoV2.html>`__
+    `Next: SARS-CoV2 and consolidation <7_SARS-CoV2.html>`__
