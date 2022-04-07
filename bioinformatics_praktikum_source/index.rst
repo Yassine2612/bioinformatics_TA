@@ -51,7 +51,7 @@ Image Analysis
 
 .. |pic7| image:: images/Connections.png 
           :width: 24%
-..          :target: bioinf_spring22/contents/7_Connections.html
+          :target: bioinf_spring22/contents/7_SARS-CoV2.html
 
 .. |pic8| image:: images/Structural_bioinformatics_1.png
           :width: 24%
