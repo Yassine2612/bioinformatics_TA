@@ -87,13 +87,13 @@ Tasks
 -----
 1. Based on your knowledge on how the immune system works, what would you expect, which protein will have more sequence variants? Formulate a biologically meaningful hypothesis. 
 
-    .. hidden-code-block:: bash
+.. hidden-code-block:: bash
 
-       Example: Immunogenic epitopes on the surface of the virus will lead to the generation of antibodies that will bind to them at high affinity and help the immune system clear the infection. Thus, to escape this recognition, it will be advantageous for the virus to generate (i.e., be selected for) structural variants of exposed surfaces. In turn, non-structural proteins that are important for basic functions, such as the replication of RNA, will maintain a high degree of conservation. 
+   Example: Immunogenic epitopes on the surface of the virus will lead to the generation of antibodies that will bind to them at high affinity and help the immune system clear the infection. Thus, to escape this recognition, it will be advantageous for the virus to generate (i.e., be selected for) structural variants of exposed surfaces. In turn, non-structural proteins that are important for basic functions, such as the replication of RNA, will maintain a high degree of conservation. 
 
-       We could test if we find supporting evidence for this hypothesis by counting the number of different variants of the spike glycoprotein S and the RNA-dependent RNA polymerase
+   We could test if we find supporting evidence for this hypothesis by counting the number of different variants of the spike glycoprotein S and the RNA-dependent RNA polymerase
 
-       Other hypotheses may include that a variation of the surface protein broadens the range of tissues or hosts that the virus can infect, or increases the infectivity of the virus within the same host (individual or animal).
+   Other hypotheses may include that a variation of the surface protein broadens the range of tissues or hosts that the virus can infect, or increases the infectivity of the virus within the same host (individual or animal).
 
 2. Describe your work plan.
 
