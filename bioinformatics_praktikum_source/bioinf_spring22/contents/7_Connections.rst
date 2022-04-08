@@ -26,9 +26,10 @@ Identify major steps of how to approach this. The more detailed (e.g., using pse
 
 Metadata table: ``/nfs/course/551-0132-00L/7_Connections/SARS-CoV2.metadata.curated.tsv``
 
-Nextstrain nomenclature: `SARS-CoV2 nomenclature: <https://en.wikipedia.org/wiki/Variants_of_SARS-CoV-2>`__
+Nextstrain nomenclature: `SARS-CoV2 nomenclature <https://nextstrain.org/blog/2021-01-06-updated-SARS-CoV-2-clade-naming>`__
 
    .. hidden-code-block:: bash
+
       IFS=$'\n'
       #Unique Nextstrain clades:
       cut -f19 SARS-CoV2.metadata.curated.tsv | grep -v Nextstrain | sort -u > nextstrain.clades.txt
