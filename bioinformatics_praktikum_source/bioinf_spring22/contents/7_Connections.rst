@@ -22,9 +22,11 @@ We will develop together a workplan on how to reconstruct the evolution of SARS-
 
 Identify major steps of how to approach this. The more detailed (e.g., using pseudo-code), the better. 
 
-``Required Background information``
+**Required Background information**
+
 Metadata table: ``/nfs/course/551-0132-00L/7_Connections/SARS-CoV2.metadata.curated.tsv``
-`SARS-CoV2 nomenclature: <https://en.wikipedia.org/wiki/Variants_of_SARS-CoV-2>`__
+
+Nextstrain nomenclature: `SARS-CoV2 nomenclature: <https://en.wikipedia.org/wiki/Variants_of_SARS-CoV-2>`__
 
    .. hidden-code-block:: bash
       IFS=$'\n'
