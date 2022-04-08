@@ -87,7 +87,7 @@ Tasks
 -----
 1. Based on your knowledge on how the immune system works, what would you expect, which protein will have more sequence variants? Formulate a biologically meaningful hypothesis. 
 
-.. hidden-code-block:: bash
+  .. hidden-code-block:: bash
 
    Example: Immunogenic epitopes on the surface of the virus will lead to the generation of antibodies that will bind to them at high affinity and help the immune system clear the infection. Thus, to escape this recognition, it will be advantageous for the virus to generate (i.e., be selected for) structural variants of exposed surfaces. In turn, non-structural proteins that are important for basic functions, such as the replication of RNA, will maintain a high degree of conservation. 
 
@@ -97,25 +97,25 @@ Tasks
 
 2. Describe your work plan.
 
-    .. hidden-code-block:: bash
+  .. hidden-code-block:: bash
 
-       ## Hypothesis testing using the provided sequence data.
+     ## Hypothesis testing using the provided sequence data.
 
-       # How many sequences are in the *.faa file?
-       grep -c '>' protein.S.faa
+     # How many sequences are in the *.faa file?
+     grep -c '>' protein.S.faa
 
-       # How many different sequences (i.e. sequence variants) are in a file?
-       # We need to only consider the sequence part of the FASTA files, not the headers. One solution would be to use grep -v:
-       grep -v '>' protein.S.faa | head
+     # How many different sequences (i.e. sequence variants) are in a file?
+     # We need to only consider the sequence part of the FASTA files, not the headers. One solution would be to use grep -v:
+     grep -v '>' protein.S.faa | head
     
-       # Then we need to count the number of unique sequences. We can pipe the output of the previous command to a new one:
-       grep -v '>' protein.S.faa | sort -u | wc -l
+     # Then we need to count the number of unique sequences. We can pipe the output of the previous command to a new one:
+     grep -v '>' protein.S.faa | sort -u | wc -l
 
-       # Calculate the numbers for both proteins. What is your interpretation?
+     # Calculate the numbers for both proteins. What is your interpretation?
 
-       This was a basic way to find some support for the hypothesis. Note that it is important to check for potential artifacts. For example, not all sequences may be complete, or some sequences may have missing information. For example, the length of the proteins should not vary significantly. Also, unknown amino acids are conventionally encoded by the letter "X". 
+     This was a basic way to find some support for the hypothesis. Note that it is important to check for potential artifacts. For example, not all sequences may be complete, or some sequences may have missing information. For example, the length of the proteins should not vary significantly. Also, unknown amino acids are conventionally encoded by the letter "X". 
 
-       Take a look at the data (sequences).  How long are the individual sequences? Try to think of solutions. To calculate the length of a string, you will likely need to consult the internet for help. Please do so, this is what a professional Bioinformatician also does on a daily basis. Keyword tips: awk, length, string, unix basic calculator.
+     Take a look at the data (sequences).  How long are the individual sequences? Try to think of solutions. To calculate the length of a string, you will likely need to consult the internet for help. Please do so, this is what a professional Bioinformatician also does on a daily basis. Keyword tips: awk, length, string, unix basic calculator.
 
     .. hidden-code-block:: bash
 
