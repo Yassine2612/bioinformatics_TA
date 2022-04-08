@@ -87,73 +87,72 @@ Tasks
 -----
 1. Based on your knowledge on how the immune system works, what would you expect, which protein will have more sequence variants? Formulate a biologically meaningful hypothesis. 
 
-.. code-block:: bash
+    .. hidden-code-block:: bash
 
-   Example: Immunogenic epitopes on the surface of the virus will lead to the generation of antibodies that will bind to them at high affinity and help the immune system clear the infection. Thus, to escape this recognition, it will be advantageous for the virus to generate (i.e., be selected for) structural variants of exposed surfaces. In turn, non-structural proteins that are important for basic functions, such as the replication of RNA, will maintain a high degree of conservation. 
+       Example: Immunogenic epitopes on the surface of the virus will lead to the generation of antibodies that will bind to them at high affinity and help the immune system clear the infection. Thus, to escape this recognition, it will be advantageous for the virus to generate (i.e., be selected for) structural variants of exposed surfaces. In turn, non-structural proteins that are important for basic functions, such as the replication of RNA, will maintain a high degree of conservation. 
 
-   We could test if we find supporting evidence for this hypothesis by counting the number of different variants of the spike glycoprotein S and the RNA-dependent RNA polymerase
+       We could test if we find supporting evidence for this hypothesis by counting the number of different variants of the spike glycoprotein S and the RNA-dependent RNA polymerase
 
-   Other hypotheses may include that a variation of the surface protein broadens the range of tissues or hosts that the virus can infect, or increases the infectivity of the virus within the same host (individual or animal).
+       Other hypotheses may include that a variation of the surface protein broadens the range of tissues or hosts that the virus can infect, or increases the infectivity of the virus within the same host (individual or animal).
 
 2. Describe your work plan.
 
-.. code-block:: bash
+    .. hidden-code-block:: bash
 
-   ## Hypothesis testing using the provided sequence data.
+       ## Hypothesis testing using the provided sequence data.
 
-  # How many sequences are in the *.faa file?
-  grep -c '>' protein.S.faa
+       # How many sequences are in the *.faa file?
+       grep -c '>' protein.S.faa
 
-  # How many different sequences (i.e. sequence variants) are in a file?
-  # We need to only consider the sequence part of the FASTA files, not the headers. One solution would be to use grep -v:
-  grep -v '>' protein.S.faa | head
+       # How many different sequences (i.e. sequence variants) are in a file?
+       # We need to only consider the sequence part of the FASTA files, not the headers. One solution would be to use grep -v:
+       grep -v '>' protein.S.faa | head
     
-  # Then we need to count the number of unique sequences. We can pipe the output of the previous command to a new one:
-  grep -v '>' protein.S.faa | sort -u | wc -l
+       # Then we need to count the number of unique sequences. We can pipe the output of the previous command to a new one:
+       grep -v '>' protein.S.faa | sort -u | wc -l
 
-  # Calculate the numbers for both proteins. What is your interpretation?
+       # Calculate the numbers for both proteins. What is your interpretation?
 
-This was a basic way to find some support for the hypothesis. Note that it is important to check for potential artifacts. For example, not all sequences may be complete, or some sequences may have missing information. For example, the length of the proteins should not vary significantly. Also, unknown amino acids are conventionally encoded by the letter "X". 
+       This was a basic way to find some support for the hypothesis. Note that it is important to check for potential artifacts. For example, not all sequences may be complete, or some sequences may have missing information. For example, the length of the proteins should not vary significantly. Also, unknown amino acids are conventionally encoded by the letter "X". 
 
-Take a look at the data (sequences).  How long are the individual sequences? Try to think of solutions. To calculate the length of a string, you will likely need to consult the internet for help. Please do so, this is what a professional Bioinformatician also does on a daily basis. Keyword tips: awk, length, string, unix basic calculator.
+       Take a look at the data (sequences).  How long are the individual sequences? Try to think of solutions. To calculate the length of a string, you will likely need to consult the internet for help. Please do so, this is what a professional Bioinformatician also does on a daily basis. Keyword tips: awk, length, string, unix basic calculator.
 
-.. code-block:: bash
+    .. hidden-code-block:: bash
 
-  # Take a look at the sequences
-  less protein.S.faa
+       # Take a look at the sequences
+       less protein.S.faa
 
-  # How long are the sequences (on average)?
-  grep -v '>' protein.S.faa | awk '{print length}'
+       # How long are the sequences (on average)?
+       grep -v '>' protein.S.faa | awk '{print length}'
     
-  # What does the next command tell you?
-  grep -v '>' protein.S.faa | awk '{print length}' | sort | uniq -c | sort -n
+       # What does the next command tell you?
+       grep -v '>' protein.S.faa | awk '{print length}' | sort | uniq -c | sort -n
     
-  # And this one?
-  grep -v '>' protein.S.faa | awk '{print length}' | paste -sd+ - | bc #version 1
-  grep -v '>' protein.S.faa | awk '{n += length $1}; END{print n}' #version 2
+       # And this one?
+       grep -v '>' protein.S.faa | awk '{print length}' | paste -sd+ - | bc #version 1
+       grep -v '>' protein.S.faa | awk '{n += length $1}; END{print n}' #version 2
 
 
 3. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
 
-.. code-block:: bash
+     ..hidden-code-block:: bash
 
-   # Remove artifacts #1: remove amino acid sequences that contain X's
-   grep -v '>' protein.S.faa | grep -v "X" | sort -u | wc -l
+       # Remove artifacts #1: remove amino acid sequences that contain X's
+       grep -v '>' protein.S.faa | grep -v "X" | sort -u | wc -l
 
-   # Remove artifact #2: remove sequences that are too short
-   grep -v '>' protein.S.faa | awk 'length==1273'
+       # Remove artifact #2: remove sequences that are too short
+       grep -v '>' protein.S.faa | awk 'length==1273'
   
-   # Remove artifact #3: remove sequences that are too short or contain X's
-   grep -v '>' protein.S.faa | awk 'length==1273' | grep -v X
+       # Remove artifact #3: remove sequences that are too short or contain X's
+       grep -v '>' protein.S.faa | awk 'length==1273' | grep -v X
   
-   # Count unique sequences without artifacts
-   grep -v '>' protein.S.faa | awk 'length==1273' | grep -v X | sort -u | wc -l
+       # Count unique sequences without artifacts
+       grep -v '>' protein.S.faa | awk 'length==1273' | grep -v X | sort -u | wc -l
   
-   # Normalize by protein length
-   echo 3391 / 1273 | bc -l # per amino acid we have 3391 / 1273 variants
+       # Normalize by protein length
+       echo 3391 / 1273 | bc -l # per amino acid we have 3391 / 1273 variants
   
- 
-   To account for the random expectation that longer sequences will also have more sequence variants, we have to normalize the number of sequence variants by the length of the protein sequence. When comparing the protein sequence length-normalized number of variants, what do you find? Does this change your result?
+       To account for the random expectation that longer sequences will also have more sequence variants, we have to normalize the number of sequence variants by the length of the protein sequence. When comparing the protein sequence length-normalized number of variants, what do you find? Does this change your result?
 
 .. admonition:: Homework 6
     :class: homework
