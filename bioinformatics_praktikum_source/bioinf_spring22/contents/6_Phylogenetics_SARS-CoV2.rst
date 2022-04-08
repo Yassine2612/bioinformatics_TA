@@ -170,3 +170,6 @@ Tasks
 
     Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=731766&forceview=1>`__.
 
+.. container:: nextlink
+
+    `Next: Connections / Summary <7_Connections.html>`__
