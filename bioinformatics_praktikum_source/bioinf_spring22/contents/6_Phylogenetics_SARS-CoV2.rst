@@ -113,13 +113,11 @@ Tasks
 
      # Calculate the numbers for both proteins. What is your interpretation?
 
-     This was a basic way to find some support for the hypothesis. Note that it is important to check for potential artifacts. For example, not all sequences may be complete, or some sequences may have missing information. For example, the length of the proteins should not vary significantly. Also, unknown amino acids are conventionally encoded by the letter "X". 
+     # This was a basic way to find some support for the hypothesis. Note that it is important to check for potential artifacts. For example, not all sequences may be complete, or some sequences may have missing information. For example, the length of the proteins should not vary significantly. Also, unknown amino acids are conventionally encoded by the letter "X". 
 
-     Take a look at the data (sequences).  How long are the individual sequences? Try to think of solutions. To calculate the length of a string, you will likely need to consult the internet for help. Please do so, this is what a professional Bioinformatician also does on a daily basis. Keyword tips: awk, length, string, unix basic calculator.
+     # Take a look at the data, i.e. sequences.  How long are the individual sequences? Try to think of solutions. To calculate the length of a string, you will likely need to consult the internet for help. Please do so, this is what a professional Bioinformatician also does on a daily basis. Keyword tips: awk, length, string, unix basic calculator.
 
-    .. hidden-code-block:: bash
-
-       # Take a look at the sequences
+     # Take a look at the sequences
        less protein.S.faa
 
        # How long are the sequences (on average)?
@@ -135,7 +133,7 @@ Tasks
 
 3. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
 
-     ..hidden-code-block:: bash
+  .. hidden-code-block:: bash
 
        # Remove artifacts #1: remove amino acid sequences that contain X's
        grep -v '>' protein.S.faa | grep -v "X" | sort -u | wc -l
@@ -152,7 +150,7 @@ Tasks
        # Normalize by protein length
        echo 3391 / 1273 | bc -l # per amino acid we have 3391 / 1273 variants
   
-       To account for the random expectation that longer sequences will also have more sequence variants, we have to normalize the number of sequence variants by the length of the protein sequence. When comparing the protein sequence length-normalized number of variants, what do you find? Does this change your result?
+       # To account for the random expectation that longer sequences will also have more sequence variants, we have to normalize the number of sequence variants by the length of the protein sequence. When comparing the protein sequence length-normalized number of variants, what do you find? Does this change your result?
 
 .. admonition:: Homework 6
     :class: homework
