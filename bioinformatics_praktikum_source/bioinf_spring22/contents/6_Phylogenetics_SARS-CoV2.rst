@@ -1,4 +1,4 @@
-SARS-CoV-2 Evolution
+SARS-CoV-2 / Summary
 ====================
 
 The aim of the homework is to test a hypothesis on the evolution of SARS-CoV-2. To this end, you will use basic UNIX commands to re-format and parse data files that will allow you to get some insights into the selective pressure on proteins encoded by the SARS-CoV-2 virus. 
@@ -90,7 +90,11 @@ Tasks
 .. code-block:: bash
 
 ..
- Example: Immunogenic epitopes on the surface of the virus will lead to the generation of antibodies that will ideally bind to them and help the immune system clear the viral infection. Thus, to escape this recognition, it should be advantageous for the virus to generate structural variants of exposed surfaces. On the other hand, non-structural proteins that are important for basic functions, such as the replication of RNA, should maintain a high degree of conservation. We could perform a simple test if we find some evidence for this hypothesis by counting the number of different variants of the spike glycoprotein S and the RNA-dependent RNA polymerase. Other hypotheses may include that a variation of the surface protein may broaden the range of tissues or hosts that the virus can infect, or increase the infectivity of the virus within the same host (individual or animal).
+ Example: Immunogenic epitopes on the surface of the virus will lead to the generation of antibodies that will bind to them at high affinity and help the immune system clear the infection. Thus, to escape this recognition, it will be advantageous for the virus to generate (i.e., be selected for) structural variants of exposed surfaces. In turn, non-structural proteins that are important for basic functions, such as the replication of RNA, will maintain a high degree of conservation. 
+
+.. We could test if we find supporting evidence for this hypothesis by counting the number of different variants of the spike glycoprotein S and the RNA-dependent RNA polymerase
+
+.. Other hypotheses may include that a variation of the surface protein broadens the range of tissues or hosts that the virus can infect, or increases the infectivity of the virus within the same host (individual or animal).
 
 2. Describe your work plan.
 
@@ -112,10 +116,26 @@ Tasks
   # Calculate the numbers for both proteins. What is your interpretation?
 
 ..
- This was the most basic way to find some evidence for the hypothesis. Note that it is important to check for potential artifacts. For example, not all sequences may be complete, or some sequences may have missing information. For example, the length of the proteins should not vary significantly. Also, unknown amino acids are conventionally encoded by the letter "X". Let's do some sanity checks:
+ This was a basic way to find some support for the hypothesis. Note that it is important to check for potential artifacts. For example, not all sequences may be complete, or some sequences may have missing information. For example, the length of the proteins should not vary significantly. Also, unknown amino acids are conventionally encoded by the letter "X". 
 
 ..
- How long are the individual sequences? Try to think of solutions. To calculate the length of a string, you will likely need to consult the internet for help. Please do so, this is what a professional Bioinformatician also does on a daily basis. Keyword tips: awk, length, string, unix basic calculator.
+ Take a look at the data (sequences).  How long are the individual sequences? Try to think of solutions. To calculate the length of a string, you will likely need to consult the internet for help. Please do so, this is what a professional Bioinformatician also does on a daily basis. Keyword tips: awk, length, string, unix basic calculator.
+
+..
+  # Take a look at the sequences
+  less protein.S.faa
+
+  # How long are the sequences (on average)?
+  grep -v '>' protein.S.faa | awk '{print length}'
+    
+  # What does the next command tell you?
+  grep -v '>' protein.S.faa | awk '{print length}' | sort | uniq -c | sort -n
+    
+  # And this one?
+  grep -v '>' protein.S.faa | awk '{print length}' | paste -sd+ - | bc #version 1
+  grep -v '>' protein.S.faa | awk '{n += length $1}; END{print n}' #version 2
+
+..
 
 3. Discuss how differences in the length of the genes would impact your results. What do you need to do to account for gene length differences?
 
@@ -127,16 +147,6 @@ Tasks
     Provide your answers and code for points 1-3 above in a document named "Homework_week6.txt" in your homework directory (in your home folder). **DO NOT COPY PASTE THE WORK OF OTHERS.**
 
 ..
-  # How long are the sequences (on average)?
-  grep -v '>' protein.S.faa | awk '{print length}'
-    
-  # What does the next command tell you?
-  grep -v '>' protein.S.faa | awk '{print length}' | sort | uniq -c | sort -n
-    
-  # And this one?
-  grep -v '>' protein.S.faa | awk '{print length}' | paste -sd+ - | bc #version 1
-  grep -v '>' protein.S.faa | awk '{n += length $1}; END{print n}' #version 2
-
   # Remove artifacts #1: remove amino acid sequences that contain X's
   grep -v '>' protein.S.faa | grep -v "X" | sort -u | wc -l
 
