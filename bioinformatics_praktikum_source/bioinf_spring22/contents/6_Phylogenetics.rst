@@ -178,4 +178,4 @@ Homework
 
 .. container:: nextlink
 
-    `Next: SARS-CoV2 Evolution homework <6_Phylogenetics_SARS-CoV2.html>`__
+    `Next: SARS-CoV2 homework <6_Phylogenetics_SARS-CoV2.html>`__
