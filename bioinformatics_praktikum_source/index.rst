@@ -55,7 +55,7 @@ Image Analysis
 
 .. |pic8| image:: images/Structural_bioinformatics_1.png
           :width: 24%
-..          :target: bioinf_spring22/contents/8_Structural_bioinformatics_1.html
+          :target: bioinf_spring22/contents/8_Structural_bioinformatics_1.html
 
 .. |pic9| image:: images/Structural_bioinformatics_2.png
           :width: 24%

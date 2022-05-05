@@ -263,10 +263,14 @@ Other than genes, there are techniques and software for annotating an array of o
 Homework
 --------
 
+.. |br| raw:: html
+
+   <br />
+
 .. admonition:: Homework 5
     :class: homework
 
-    | You will annotate and collect some information about SARS-CoV2. To complete the tasks, you need to review the use of commands and programs from previous weeks/courses, and look for additional information. For example, basic knowledge of [R] is expected; however, you can ask your peers for help on Slack and/or consult online resources. After completing the tasks, **you need to take a quiz as a requirement to complete this week's homework.** The quiz is posted on Moodle (`URL: <https://moodle-app2.let.ethz.ch/mod/quiz/view.php?id=734361>`__) under "Quizzes".
+    |br| You will annotate and collect some information about SARS-CoV2. To complete the tasks, you need to review the use of commands and programs from previous weeks/courses, and look for additional information. For example, basic knowledge of [R] is expected; however, you can ask your peers for help on Slack and/or consult online resources. After completing the tasks, **you need to take a quiz as a requirement to complete this week's homework.** The quiz is posted on Moodle (`URL: <https://moodle-app2.let.ethz.ch/mod/quiz/view.php?id=734361>`__) under "Quizzes".
 
     **Tasks:**
 

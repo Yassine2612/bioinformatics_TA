@@ -518,10 +518,14 @@ Then the equivalent commands:
 Homework
 --------
 
+.. |br| raw:: html
+
+   <br />
+
 .. admonition:: Homework 2
     :class: homework
 
-    Learning a new language and computational programming have many similarities with verbs, adverbs and objects equating to commands (action), options (modify action) and arguments (target of the option). As with learning languages, mastering programming requires practice and repetition. 
+    |br| Learning a new language and computational programming have many similarities with verbs, adverbs and objects equating to commands (action), options (modify action) and arguments (target of the option). As with learning languages, mastering programming requires practice and repetition. 
     
     To take a first step, please create a “cheat sheet” for at least **three** commands used in Unix 1 and 2. You should define the general purpose of the command, the most important options and show examples with meaningful placeholders (example below). Of course the example is **not** allowed to be one of your three commands. You can either use an text editor on your computer to create your cheat sheet and then upload it into your homework folder or you can use a text editor directly in the terminal such as **vim** and **emacs**. Either way, please name your cheat sheet **cheatsheet_<Your First Name>_<Your Last Name>.txt**
 
