@@ -51,7 +51,7 @@ If you use the option *-n*, then it will not add a 'new line' to the end of the 
 
 Some commands end up with very complex structures, because they can have many options and arguments. In general, options will be of the format ``-a`` where a is a single letter or ``--word`` where word is a string (a series of letters, in computer terms).
 
-* Note: the command line is case-sensitive! So it **does** matter if you write *-a* or *-A*.
+**Note:** the command line is case-sensitive! So it **does** matter if you write *-a* or *-A*.
 
 Getting help
 ^^^^^^^^^^^^
@@ -80,7 +80,7 @@ Useful command line tricks
 
 * Mac: You can fortunately use *Cmd + c* and *Cmd + v* to copy and paste as normal. You can use *Ctrl* and various keys for in-terminal commands.
 
-* When typing a command or file name, you can press the 'tab' key to **auto complete** what you are typing. If there are multiple commands or files with similar names, auto completion will fill in as far as the first ambiguous character before you have to give it some more input. This method makes it *much* less likely that you make a spelling error.
+* When typing a command or file name, you can press the 'tab' key to **auto complete** what you are typing. If there are multiple commands or files with similar names, auto completion will fill in as far as the first ambiguous character before you have to give it some more input. This method makes it *much* less likely that you make a spelling error. Also, if you double press the 'tab' key all the available options to complete will be shown.
 
 * Pressing **Ctrl + c** will send an interrupt signal that cancels the currently running command and brings you back to the command line.
 
@@ -145,7 +145,6 @@ Useful command line tricks
         # To clear the screen use ctrl + l and you can still paste the command
         echo 'My first command'
 
-
         # echo -n does not add a new line to the output
         echo -n 'My first command'
         My first command[]$
@@ -157,7 +156,7 @@ Useful command line tricks
 The file system
 ---------------
 
-You may be used to the file system in Windows or Mac OS X, where directories can contain files and more directories. The Unix filesystem is structured in the same way, as a tree, that begins at the 'root' directory '**/**'. Directories are separated by slash characters **/**. The image below shows just a part of this tree: the ``genomes`` directory is actually located at ``/nfs/course/551-0132-00L/1_Unix1/genomes``.
+You may be used to the file system in Windows or Mac OS X, where directories can contain files and more directories. The Unix filesystem is structured in the same way - as a tree - that begins at the 'root' directory '**/**'. Directories are separated by slash characters **/**. The image below shows just a part of this tree: the ``genomes`` directory is actually located at ``/nfs/course/551-0132-00L/1_Unix1/genomes``.
 
 .. thumbnail:: images/filesystem_hierarchy.png
 
@@ -359,17 +358,14 @@ Basic file operations
         mkdir genomes
         mkdir homework
 
-
         # Use the cp function to copy. cp <source> <destination>
         cp /nfs/course/551-0132-00L/1_Unix1/genomes/bacteria/escherichia/GCF_000005845.2_ASM584v2/GCF_000005845.2_ASM584v2_genomic.fna ~/genomes
-
 
         # Use the move function to rename a file mv <source> <destination>
         # Enter the genomes directory
         cd genomes
         # Rename file
         mv GCF_000005845.2_ASM584v2_genomic.fna E_coli.fna
-
 
         # ls --help lists all the options possible
         ls --help
@@ -416,13 +412,16 @@ Transferring files between computers
 
 There are many different protocols for transferring files between computers. You may have heard of **FTP** - **F**\ile **T**\ransfer **P**\rotocol - which is a non-secure but commonly used example. A more secure file transfer protocol is **SCP** - **S**\ecure **C**\opy **P**\rotocol, and programs such as *WinSCP* use it. The command **scp** is an easy way to transfer a file immediately between the server you are working on and another (or two different servers!). Another command to copy files is **rsync**, which can be used with many options such as preserving the ownership and date of creation of a file (and much more).
 
+Tip: Remember that with the 'tab ' key you can auto complete and see the available options by double pressing. This can make finding a file you want to upload way easier. (Note: This works only for the machine you are currently on.) 
+
+
 .. code-block:: bash
 
     # Secure CoPy
     man scp
     scp source user@server:destination # local to server
     scp user@server:source destination # server to local
-
+    
     # Rsync
     man rsync
     rsync -a source user@server:destination # local to server
@@ -570,7 +569,7 @@ Homework
     :class: homework
 
     * Upload a picture into your homework folder you created in the third exercise and name it **<Your First Name>_<Your Last Name>.png**
-    * Find the out-of-place file in ``/nfs/course/551-0132-00L/1_Unix1/genomes`` and copy it into your homework folder
+    * Find the out-of-place file in ``/nfs/course/551-0132-00L/1_Unix1/genomes`` (hint: look if all the file names are similar within a folder) and copy it into your homework folder
     * Consider these interesting questions for next time (nothing to submit):
         * What happens when you copy a file with the same name as an existing file?
         * What happens when you delete the directory you are currently in?

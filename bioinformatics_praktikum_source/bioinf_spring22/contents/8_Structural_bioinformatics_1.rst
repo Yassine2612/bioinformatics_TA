@@ -297,7 +297,7 @@ Homework
 .. admonition:: Homework 8
     :class: homework
 
-    |br| For the homework we are going to be looking into the structure of the spike or surface glycoprotein (S) protein of SARS-CoV-2. This protein forms a trimmer whereby three copies of the same protein form a complex. This protein has been intensively studied by structural approaches since it is a key protein involved in the entry of the virus into the target cells and the key protein used for the development of vaccines. We are going to use the PDB entry 7FCD as the reference structure for analyses. Using the information provided before use the bio3d library to load the 7FCD structure This structure is very large because it has 3 copies of a very large protein. Before moving forward create a new structure object that only has the atoms from chain A.
+    |br| For the homework we are going to be looking into the structure of the spike or surface glycoprotein (S) protein of SARS-CoV-2. This protein forms a trimer whereby three copies of the same protein form a complex. This protein has been intensively studied by structural approaches since it is a key protein involved in the entry of the virus into the target cells and the key protein used for the development of vaccines. We are going to use the PDB entry 7FCD as the reference structure for analyses. Using the information provided before use the bio3d library to load the 7FCD structure This structure is very large because it has 3 copies of a very large protein. Before moving forward create a new structure object that only has the atoms from chain A.
     
     To complete this week’s homework requirements, **you need to take a quiz**. The quiz is posted on Moodle (`URL <https://moodle-app2.let.ethz.ch/mod/quiz/view.php?id=745962>`__) under “Quizzes” and has the following questions:
  
@@ -314,8 +314,8 @@ Homework
     Please consider giving us feedback on this week's lecture and OLM via `Moodle <https://moodle-app2.let.ethz.ch/mod/feedback/view.php?id=745961>`__.
 
 
-.. .. container:: nextlink
+.. container:: nextlink
 
-..    `Next: Structural bioinformatics 2 <9_Structural_bioinformatics_2.html>`__
+    `Next: Protein interfaces and structural similarity <9_Structural_bioinformatics_2.html>`__
 
 

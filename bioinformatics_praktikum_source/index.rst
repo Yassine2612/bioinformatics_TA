@@ -59,23 +59,23 @@ Image Analysis
 
 .. |pic9| image:: images/Structural_bioinformatics_2.png
           :width: 24%
-..          :target: bioinf_spring22/contents/9_Structural_bioinformatics_2.html
+          :target: bioinf_spring22/contents/9_Structural_bioinformatics_2.html
 
 .. |pic10| image:: images/Structural_bioinformatics_3.png
            :width: 24%
-..           :target: bioinf_spring22/contents/10_Structural_bioinformatics_3.html
+           :target: bioinf_spring22/contents/10_Structural_bioinformatics_3.html
 
 .. |pic11| image:: images/Image_analysis_1.png
            :width: 24%
-..           :target: bioinf_spring22/contents/11_Image_analysis_1.html
+           :target: bioinf_spring22/contents/11_Image_analysis_1.html
 
 .. |pic12| image:: images/Image_analysis_2.png
            :width: 24%
-..           :target: bioinf_spring22/contents/12_Image_analysis_2.html
+           :target: bioinf_spring22/contents/12_Image_analysis_2.html
 
 .. |pic13| image:: images/Image_analysis_3.png
            :width: 24%
-..           :target: bioinf_spring22/contents/13_Image_analysis_3.html
+           :target: bioinf_spring22/contents/13_Image_analysis_3.html
 
 .. toctree::
     :maxdepth: 1
@@ -90,9 +90,9 @@ Image Analysis
     bioinf_spring22/contents/5_Annotation.rst
     bioinf_spring22/contents/6_Phylogenetics.rst
     bioinf_spring22/contents/7_Connections.rst
-..    bioinf_spring22/contents/8_Structural_bioinformatics_1.rst
-..    bioinf_spring22/contents/9_Structural_bioinformatics_2.rst
-..    bioinf_spring22/contents/10_Structural_bioinformatics_3.rst
-..    bioinf_spring22/contents/11_Image_analysis_1.rst
-..    bioinf_spring22/contents/12_Image_analysis_2.rst
-..    bioinf_spring22/contents/13_Image_analysis_3.rst
+    bioinf_spring22/contents/8_Structural_bioinformatics_1.rst
+    bioinf_spring22/contents/9_Structural_bioinformatics_2.rst
+    bioinf_spring22/contents/10_Structural_bioinformatics_3.rst
+    bioinf_spring22/contents/11_Image_analysis_1.rst
+    bioinf_spring22/contents/12_Image_analysis_2.rst
+    bioinf_spring22/contents/13_Image_analysis_3.rst

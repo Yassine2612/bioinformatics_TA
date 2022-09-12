@@ -375,7 +375,7 @@ Writing and running a script
 
 If you construct a series of commands that you want to perform repeatedly, you can write them into a **script** and then run this script instead of each command individually. This makes it less likely that you make an error in one of the individual commands, and also keeps a record of the computation you performed so that your work is reproducible.
 
-You can write the script using a text editor on your computer, then uploading it, or in R Workbench. If you want to write a script directly in the terminal there are text editors available such as **vim** and **emacs** - you should be able to find tutorials for both online.
+You can write the script using a text editor on your computer, then uploading it, or in R Workbench. If you want to write a script directly in the terminal there are text editors available such as **vim** and **emacs** - you should be able to find tutorials for both online (for exmple `openvim <https://www.openvim.com/>`__ or `GNU Emacs <https://www.gnu.org/software/emacs/tour/>`__).
 
 You can create a new script in R Workbench following the menu **File -> New File -> Shell Script**
 
@@ -485,7 +485,7 @@ Then the equivalent commands:
         # Copy the submit script to your home directory
         cp /nfs/course/551-0132-00L/2_Unix2/submit_lsf.sh ~/
 
-        # Modify the submit script to look something like this:
+        # Modify the submit script (submit_lsf.sh) to look something like this:
 
             #!/bin/bash
             #BSUB -n 1                                  # number of threads

@@ -35,3 +35,13 @@ div.homework {
     border: 1px solid #d2c880;
 }
 
+div.tip {
+    background-color: #e0ebbe;
+    border: 1px solid #bdd280;
+}
+
+.caption.admonition {
+    text-align: center;
+    font-style: italic;
+}
+

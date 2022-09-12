@@ -29,7 +29,8 @@ This section requires the use of the R Workbench according to your **surname**:
 Sequence data
 -------------
 
-DNA and protein sequences are fundamental to our understanding of biology and with the advent of high-throughput sequencing technologies, we generate ever more sequencing data at an ever increasing rate. At the core of our ability to use this data are two standard file formats:
+DNA and protein sequences are fundamental to our understanding of biology and with the advent of high-throughput sequencing technologies, we generate ever more sequencing data at an ever increasing rate. Sequence data is nowadays involved in almost every biological project in one form or another and it is consequently very likely that you will encounter and work with sequence data if you stay in biology (designing a primer, working with CRISPR or checking the genotype of a mouse; all these tasks use sequence data even though they are not directly linked to bioinformatics). Therefore, it is crucial to understand this type of data.  
+At the core of our ability to use this data are two standard file formats:
 
 * FASTQ - this is data from DNA sequencing that includes a quality score for each base
 * FASTA - this is processed data, and can be DNA or protein sequence
@@ -254,7 +255,7 @@ There are two main components you are likely to want to use, the **Seq** object 
     from Bio import SeqIO
 
 Seq objects
-^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 To declare a new Seq object is straightforward:
 
@@ -305,10 +306,13 @@ Sequences can also be concatenated and sliced like strings, remembering that pyt
     # Get the last 10bp
     my_subseq = my_seq[-10:]
 
+More information about Seq objects can be found `here <http://biopython.org/DIST/docs/tutorial/Tutorial.html#sec17>`__.
+
 Reading files with SeqIO
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-SeqIO provides a function *parse()* that allows you to read in a multi-fasta file as an iterator or using a handle:
+SeqIO provides a function `parse() <http://biopython.org/DIST/docs/tutorial/Tutorial.html#sec53>`__ that allows you to read in a multi-fasta file as an `iterator <https://en.wikipedia.org/wiki/Iterator>`__ or using a `handle <http://biopython.org/DIST/docs/tutorial/Tutorial.html#sec420>`__:
+
 
 .. code-block:: python
 
@@ -375,6 +379,8 @@ SeqIO can also be used to output records to file, in the supported format of you
     with open("myrecords.fasta", w) as handle:
         SeqIO.write(records, handle, "fasta")
 
+More information about Seq records can be found `here <http://biopython.org/DIST/docs/tutorial/Tutorial.html#sec32>`__.
+
 Converting file formats
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -424,7 +430,7 @@ If you use SeqIO to read in a file in one format, you can convert it by writing 
         my_gene_trans.description = my_gene_seqrec.description      # Ditto
         SeqIO.write(my_gene_trans, 'my_gene.faa', 'fasta')
 
-Additional martial about Biopython can be found `here <http://biopython.org/DIST/docs/tutorial/Tutorial.html>`__. 
+**Note:** More thorough explanations and additional material about Biopython can be found `here <http://biopython.org/DIST/docs/tutorial/Tutorial.html>`__. (it is worth a look)
 
 Sequence databases
 ------------------

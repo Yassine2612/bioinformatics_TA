@@ -372,6 +372,6 @@ Homework
 
 .. .. container:: nextlink
 
-..    `Next: Structural bioinformatics 2 <10_Structural_bioinformatics_3.html>`__
+..    `Next: Predicting protein folding and the impact of mutations <10_Structural_bioinformatics_3.html>`__
 
 

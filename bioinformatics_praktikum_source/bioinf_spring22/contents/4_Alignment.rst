@@ -46,7 +46,7 @@ We then need an algorithm that will arrange and score different possible alignme
 BLAST
 ^^^^^
 
-BLAST, or the **B**\asic **L**\ocal **A**\lignment **S**\earch **T**\ool (**BLAST**), is the most commonly used alignment tool and, which you may be able to tell from its acronym, performs local alignment. The details of the algorithm are beyond the scope of this course, but understanding the scoring system is important.
+BLAST, or the **B**\asic **L**\ocal **A**\lignment **S**\earch **T**\ool (**BLAST**), is the most commonly used alignment tool and, which you may be able to tell from its acronym, performs local alignment. The details of the algorithm (`here <https://en.wikipedia.org/wiki/BLAST_(biotechnology)>`__) are beyond the scope of this course, but understanding the scoring system is important.
 
 BLAST scores an alignment residue by residue based on whether it is a **match**, **mismatch**, or a **gap** (which might exist due to the insertion or deletion of 1 or more residues in one sequence).
 
@@ -99,6 +99,8 @@ The four main varieties of BLAST are neatly summarised on this frontpage.
 * blastp: protein blast for comparing protein sequences (right)
 
 You should therefore choose your BLAST algorithm based on the nature, nucleotide or protein, of your query and your database. There are also further versions available for more specialised applications.
+
+More details about BLAST on the NCBI-Webpage can be found `here <https://www.ncbi.nlm.nih.gov/books/NBK1734/#:~:text=BLAST%20is%20an%20acronym%20for,to%20as%20%E2%80%9Csubject%E2%80%9D%20sequences>`__.
 
 Pairwise alignment
 ------------------
