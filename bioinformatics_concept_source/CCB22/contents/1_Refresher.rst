@@ -25,7 +25,7 @@ Networks
 
 Computers have been connected to each other to exchange data since the 1950s and now we take internet access for granted on our mobile devices. Behind the screen, there are countless pieces of software and protocols that make everything work, but we won't go into the details.
 
-.. thumbnail:: images/client_server_model.png
+.. thumbnail::images/client_server_model.png
     :align: center
 
 It is important however to understand the concept of a **remote server**. This is a computer sitting somewhere, possibly in the ETH basement, possibly in an enormous data center in Iceland, which we are only supposed to be connected to over the internet. To be able to connect to a server you need to have appropriate access - a username and password - and perhaps you will have to be connecting from an allowed location. For instance, you can only access the ETH remote servers from within the ETH domain, either because you are on the ETH WiFi or have connected via **VPN**.
