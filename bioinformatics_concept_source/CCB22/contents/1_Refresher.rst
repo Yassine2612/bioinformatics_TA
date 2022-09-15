@@ -1,16 +1,15 @@
+
 Refresher
 ======================
-
 General information
 -------------------
 
-Main objective
-^^^^^^^^^^^^^^
-
-In this lecture we will introduce **Unix**: an operating system that runs on almost all high performance computing (HPC) servers, which we interface with via the **command line**.
+Main objective 
+^^^^^^^^^^^^^^^^^^
+In this lecture we will introduce **Unix**: an operating system that runs on almost all high performance computing (HPC) servers, which we interact with via the **command line**.
 
 Learning objectives
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 * Students can use the command line to issue basic commands with arguments
 * Students can navigate the Unix file system and perform basic file operations
@@ -29,11 +28,11 @@ Computers have been connected to each other to exchange data since the 1950s and
 .. thumbnail:: images/client_server_model.png
     :align: center
 
-It is important however to understand the concept of a **remote server**. This is a computer sitting somewhere, possibly in the ETH basement, possibly in an enormous data centre in Iceland, which is only supposed to be connected to over the internet. To be able to connect to a server you need to have appropriate access - a username and password - and perhaps you will have to be connecting from an allowed location. For instance, you can only access the ETH remote servers from within the ETH domain, either because you are on the ETH WiFi or have connected via **VPN**.
+It is important however to understand the concept of a **remote server**. This is a computer sitting somewhere, possibly in the ETH basement, possibly in an enormous data center in Iceland, which we are only supposed to be connected to over the internet. To be able to connect to a server you need to have appropriate access - a username and password - and perhaps you will have to be connecting from an allowed location. For instance, you can only access the ETH remote servers from within the ETH domain, either because you are on the ETH WiFi or have connected via **VPN**.
 
 **VPN**, or **V**\irtual **P**\rivate **N**\etwork, is a way of connecting to a server that then channels all of your internet traffic through the server as if you were in its location. So if you use the ETH VPN, you will have access to everything as if you were connected to the ETH WiFi or cable network.
 
-If you have not already connected your devices with the ETH VPN you can find the instructions to do so `here <https://ethz.ch/content/dam/ethz/special-interest/hest/isg-hest-dam/documents/pdf/vpn-de.pdf>`__.
+If you have not already connected your devices with the ETH VPN you can find the instructions to do so : In german`here <https://ethz.ch/content/dam/ethz/special-interest/hest/isg-hest-dam/documents/pdf/vpn-de.pdf>`. In english `here <https://ethz.ch/content/dam/ethz/special-interest/hest/isg-hest-dam/documents/pdf/vpn-en.pdf>`__.
 
 
 .. admonition:: Exercises 0.1
@@ -147,9 +146,9 @@ Other programs have different ways to provide help on how to use them. An online
 Useful command line tricks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* You can use the **up and down arrow keys** to navigate through previously used commands (known as your history) and repeat or modify them.
+* You can use the **up ▲ and down ▼ arrow keys** to navigate through previously used commands (known as your history) and repeat or modify them.
 
-* Windows: To copy text from the terminal you will have to highlight it and right-click to use the in-browser menu and copy. Similarly you have to use the in-browser menu to paste into the terminal. The reason for this is that *Ctrl + c* and *Ctrl + v* have effects inside the terminal.
+* Windows: To copy text from the terminal you will have to highlight it and right-click to use the in-browser menu and copy or use the **Ctrl+shift+c keys** . Similarly you have to use the in-browser menu to paste into the terminal or the **Ctrl+shift+v** keys. This is because the **Ctrl+c** keys are ‘reserved’ for stopping a command , so both the the **Ctrl+c** and **Ctrl+v** cannot be used for copying and pasting inside the terminal .The reason for this is that *Ctrl + c* and *Ctrl + v* have effects inside the terminal.
 
 * Mac: You can fortunately use *Cmd + c* and *Cmd + v* to copy and paste as normal. You can use *Ctrl* and various keys for in-terminal commands.
 
@@ -241,7 +240,10 @@ When you work on the command line, you are located in a directory somewhere in t
 
     # Relative path
     ../../home/<user_name>
-
+    
+.. thumbnail:: images/client_server_model.png
+    :align: center
+    
 The **..** refers to the directory above a location, so the relative path here goes up twic, then back down to your home directory. If a path starts with **~/** then it refers to your home directory. If a path starts with **./** then it refers to the current directory.
 
 .. code-block:: bash
@@ -291,75 +293,18 @@ Navigation
     # Going to the root
     cd /
     pwd
-
-
-.. admonition:: Exercise 1.2
-    :class: exercise
-
-    * Use *pwd* to find out where you are in your command line session
-    * Use *ls* to see if you have any files in your home directory
-    * Use *cd* to go up one level
-    * Use *ls* to see all the home directories of other users on the server
-    * Try to go up two levels using cd
-    * Use cd to go back to your home directory
-    * Go to the root and check what is there
-    * Go home
-
-    .. hidden-code-block:: bash
-
-        #use pwd to find you current location
-        pwd
-         /cluster/home/<your eth name>
-
-        #Use ls to see what in the directory is.
-        ls
-
-        #Use cd to change directory and .. to go up one level
-        cd ..
-
-        #Use ls to see what is in the directory
-        ls
-
-        #use cd to change directory and .. to go up one level
-        cd ../..
-
-        #To get to the home directory just typing cd
-        cd
-
-        # Go to thr root and check what is there
-        cd /
-        ls
-
-        # Finally let's go home
-        cd
-
-Wildcards
-^^^^^^^^^
-
-When providing a file path as an argument to a command, it is often possible to provide multiple file paths using *wildcards*. These are special characters or strings that can be substituted for a matching pattern. For many commands using wildcards allows you to execute the associated action on each file that matches the pattern, though this obviously does not work in all cases.
-
-* **?** matches any single character
-* \* matches any number of any characters
-* **[...]** matches any character within the brackets
-* **{word1,word2,...}** matches any string inside the brackets
-
-For instance:
-
-.. code-block:: bash
-
-    # Pattern matching
-    ls /cluster/home/*      # lists all files in the ecoli directory
-    ls /cluster/home/*.fna  # lists all nucleotide fasta files there
-    ls /cluster/home/*.f?a  # lists all nucleotide and protein fasta files there
-
 Basic file operations
 ---------------------
-
-**cp** copies a file from one location to another. The example will copy a file containing the genome sequence of *E. coli K12 MG1655* to your home directory.
-
+**touch** create a file in the current location .
 .. code-block:: bash
 
-    # Copy
+    # Create a file
+    touch <absolute_path/file_name> 
+    
+**cp** copies a file from one location to another.
+.. code-block:: bash
+
+    # Copy a file from <source> to <destination> 
     cp <source> <destination>
 
 **mv** moves a file from one location to another. The example actually renames the file, because the destination is not a directory. Thus you can move and rename a file with the same command.
@@ -392,34 +337,94 @@ Basic file operations
     rmdir <path to directory>
     rmdir genomes
 
-.. admonition:: Exercise 1.3
+.. admonition:: Exercise 1.2
     :class: exercise
 
-    * Create two new directories called "genomes" and "homework" in your home folder
-    * Using the *man* and *cp*, find out how to copy a directory.
+    * Use *pwd* to find out where you are in your command line session
+    * Use *cd* to go to your home directory
+    * In your <your_eth_name> directory , use *mkdir* to create two new directories called “genomes” and "homework"
+    * Use *ls* to see if the newly created "genomes" and "homework" directories are there
+    * Use *touch* to create a text file <dna.txt> in <your_eth_name>/genomes directory
+    * Use *cp* to copy the newly created file into <your_eth_name>/homework directory
+    * Use *mv* to rename the <dna.txt> file into <rna.txt> inside the "homework" directory
+    * Use *rm* to remove the <rna.txt> file from the "homework" directory
+    * Using the "man" and "cp", find out how to copy the "genomes" directory into "homework"
+    * Remove <your_eth_name>/genomes directory (make sure the it's empty before 
+    #The figure below summarizes the steps 
+    .. thumbnail:: images/file_operation_ex_steps.png
+    :align: center
 
     .. hidden-code-block:: bash
 
-        # First go to your home folder
-        cd
-        # Use the mkdir function to create a directory
-        mkdir genomes
-        mkdir homework
+        #use pwd to find you current location
+        pwd
+         /cluster/home/<your eth name>
+        #Use cd to return to the home directory
+        #Create new directories using mkdir 
+       mkdir genomes 
+       mkdir homework
+        #Use ls to see the changes 
+        ls
+        #You should have this output 
+        genomes  homework
+        #Use touch to create a new file 
+        touch <your eth name>/genomes/dna.txt
+         #copy dna.txt from genomes into homework directory
+         cp /cluster/home/<your eth name>/genomes/dna.txt
+         /cluster/home/<your eth name>/homework
+         #rename "dna.txt" into "rna.txt" inside the < your eth name>/homework directory
+         mv /cluster/home/<your eth name>/homework/dna.txt /cluster/home/<your eth name>/homework/rna.txt
+         #removing "rna.txt" from <your eth name>/homework directory
+         rm /cluster/home/<your eth name>/homework/rna.txt
+         #Copy <your eth name>/genomes into <your eth name>/homework
+         cp /cluster/home/<your eth name>/genomes /cluster/home/<your eth name>/homework
+         cp: genomes is a directory **(**not copied**)**.
+         #If you check 'man cp', you see that you have to use -R:_man cp
+         cp -R /cluster/home/<your eth name>/genomes /cluster/home/<your eth name>/homework
+         #remove the <your eth name>/genomes directory
+         rmrm /cluster/home/<your eth name>/genomes/dna.txt
+         rmdir /cluster/home/<your eth name>/genomes
 
-        # Enter home directory
-        cd
-        # Create two directory
-        mkdir dir1
-        mkdir dir2
+Wildcards
+^^^^^^^^^
 
-        # Try to copy dir1 into dir2
-        cp dir1 dir2
-        cp: dir1 is a directory (not copied).
+When providing a file path as an argument to a command, it is often possible to provide multiple file paths using *wildcards*. These are special characters or strings that can be substituted for a matching pattern. For many commands using wildcards allows you to execute the associated action on each file that matches the pattern, though this obviously does not work in all cases.
 
-        # If you check 'man cp', you see that you have to use -R:
-        man cp
-        cp -R dir1 dir2
+* **?** matches any single character
+* \* matches any number of any characters
+* **[...]** matches any character within the brackets
+* **{word1,word2,...}** matches any string inside the brackets
 
+For instance:
+
+.. code-block:: bash
+
+    # Pattern matching
+    ls /cluster/home/*      # lists all files in the home directory
+    ls /cluster/home/*.fna  # lists all nucleotide fasta files there
+    ls /cluster/home/*.f?a  # lists all nucleotide and protein fasta files there
+
+.. admonition:: Exercise 1.3
+    :class: exercise
+    
+    * Use *touch* to create a three new files in <your eth name>/homework/genomes directory :
+    - "dna.fasta"
+    - "rna.fna"
+    - "protein.faa"
+    * Using *ls* list all the files inside <your eth name>/homework/genomes directory .
+    * Using the pattern matching , first list only the rna and protein fasta files , then list only the dna ones in the <your eth name>/homework/genomes directory .
+
+    .. hidden-code-block:: bash
+    _#lists all files in the genomes directory_
+    ls /cluster/home/<your eth name>/homework/genomes/* 
+    _#You should get this output:_
+    /cluster/home/ydamergi/homework/genomes/dna.fasta   /cluster/home/ydamergi/homework/genomes/protein.faa 
+    /cluster/home/ydamergi/homework/genomes/dna.txt  /cluster/home/ydamergi/homework/genomes/rna.fna
+    _#lists the rna and protein fasta files_
+    ls /cluster/home/<your eth name>/homework/genomes/*.f?a
+    /cluster/home/ydamergi/homework/genomes/protein.faa  /cluster/home/ydamergi/homework/genomes/rna.fna
+    _# lists the dna files_
+    ls /cluster/home/<your eth name>/homework/genomes/[d]na.* 
 
 File name conventions
 ^^^^^^^^^^^^^^^^^^^^^
@@ -488,20 +493,19 @@ If you ever need to compress a file, for instance to send it to someone, you can
 .. admonition:: Exercise 1.4
     :class: exercise
 
-    * Download the E. coli file in the example above to your home folder.
-    * Decompress the file.
+    * Using **wget** ,download the E. coli file to <your eth name>/homework/genomes directory ( make use of the link given in the example above) .
+    * Decompress the file  .
     * Rename the file E.coli_K12_MG1655.fna (hint use move)
 
     .. hidden-code-block:: bash
 
-        # Make sure I am in my home directory
-        cd ~
-
-
+        # Make sure I am in the correct directory home directory
+        cd 
+        cd /homework/genomes/
+        
         # Download the file
         wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/482/265/GCF_000482265.1_EC_K12_MG1655_Broad_SNP/GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna.gz
-
-
+        
         # Decompress it
         gunzip GCF_000482265.1_EC_K12_MG1655_Broad_SNP_genomic.fna.gz
 
@@ -518,7 +522,7 @@ The command **cat** displays the entire contents of a file directly on the termi
 
 .. code-block:: bash
 
-    # ConCATenate
+    # Concatenate
     cat E.coli_K12_MG1655.fna
 
 The command **head** displays only the first 10 lines of a file directly on the terminal. If you look at the available options for the command, *-n x* outputs the first *x* lines instead, and using a negative number outputs the lines except for the last *x*.
@@ -553,10 +557,10 @@ The command **wc** is a command that will quickly count the number of lines, wor
 .. admonition:: Exercise 1.5
     :class: exercise
 
-    * Use **cat** to look at the *E. coli* genome file you copied last time, is it suitable for looking at this file?
-    * Use **head** and **tail** to examine the first and last 10 lines of the genome file. Now try to look at the first and last 20 lines.
-    * Use **less** to look at the genome file. Navigate through the file with the keys listed above, then return to the Terminal.
-    * Use the **man** command we learned to read about the **wc** command.
+    * Use *cat* to look at the *E. coli* genome file you copied last time, is it suitable for looking at this file?
+    * Use *head* and **tail** to examine the first and last 10 lines of the genome file. Now try to look at the first and last 20 lines.
+    * Use *less* to look at the genome file. Navigate through the file with the keys listed above, then return to the Terminal.
+    * Use the *man* command we learned to read about the **wc** command.
     * Can you find out how many lines are in the genome file with the **wc** command?
 
     .. hidden-code-block:: bash
@@ -658,7 +662,7 @@ The command **grep** allows you to search within files without opening them firs
 
 .. code-block:: bash
 
-    # A simple **grep**
+    # A simple *grep*
     grep "AAAAAAAAA" E.coli_K12_MG1655.fna        # shows all lines containing "AAAAAAAAA" highlighted
 
     # Using grep with a regex
@@ -668,21 +672,22 @@ The command **grep** allows you to search within files without opening them firs
     grep -o  # show only the matches
     grep -c  # show only a count of the matches
 
-.. admonition:: Exercise 2.2
+.. admonition:: Exercise 1.6
     :class: exercise
-
-    * Use **less** to look at the *E.coli_K12_MG1655.fna* file, containing nucleotide gene sequences.
+    
+    * Use the *find* -name command to search the _E_coli_fasta file inside <your eth name>/homework/genomes directory .
+    * Use *less* to look at the _E.coli_K12_MG1655.fna_ file, containing nucleotide gene sequences.
     * Search within less to find the sequence for **AATTTGCCCGTTG**.
-    * Use **man** to look at the **grep** command
-    * Use **grep** to find the same entry in the file.
-    * Use **grep** to count how many '>' enteries the file has.
+    * Use *man* to look at the **grep** command
+    * Use *grep* to look for the matches of the  **AATTTGCCCGTTG**. sequence in _E.coli_K12_MG1655.fna_ file
+    * Use *grep* to count how many **AATTTGCCCGTTG matches is there in _E.coli_K12_MG1655.fna_ file
     * If you are interested in learning regular expressions, try the exercises `here <https://regexone.com/>`__
 
     .. hidden-code-block:: bash
-
+	    # Look for the _E.coli_K12_MG1655.fna_ file 
+	    find homework/genomes/ -name E.coli* _#(Use cd to go back to your home directory before )_
         # Look at the file
-        less GCF_000005845.2_ASM584v2_cds_from_genomic.fna
-
+        less E.coli_K12_MG1655.fna
         # Type this within less:
         /AATTTGCCCGTTG
         # Type 'n' or 'N' after to see if there are more search hits (there should be two)
@@ -690,11 +695,11 @@ The command **grep** allows you to search within files without opening them firs
         #Looking at grep
         man grep
 
-        #Using grep to search for dnaA
+        #Using grep for pattern matching
         grep 'AATTTGCCCGTTG' E.coli_K12_MG1655.fna
-
-        # Use grep to count
-        grep -c '>' E.coli_K12_MG1655.fna
+        
+        # Use grep to count pattern matches 
+        grep -c 'AATTTGCCCGTTG' E.coli_K12_MG1655.fna
 
 
 Data wrangling
@@ -765,6 +770,7 @@ Although you can usually give files as input to a program through an argument, y
     # Using the standard streams
     head < E.coli.fna                  # send the file to head via stdin using '<'
     head E.coli.fna > E.coli_head.fna  # send stdout to a new file using '>'
+    tail E.coli.fna >> E.coli_head.fna # Adding the 10 last lines of E.coli.fna to E.coli_head.fna using '>>'
     head E.coli.fna 2> E.coli_err.fna  # send stderr to a new file using '2>'
     head E.coli.fna &> Ecoli_both.fna  # send both stdout and stderr to the same file using '&>'
 
@@ -778,14 +784,62 @@ Sometimes you want to take the output of one program and use it in another -- fo
     # Piping
     head E.coli.fna | grep "ACGT"                  # send the output of head to grep and search
 
+.. admonition:: Exercise 1.7
+    :class: exercise
+
+    * Use *mkdir* command to create a data_wrangling directory under _<your eth name>/homework_ .
+    * Use the *echo* command to create _alphabet.txt_ file , inside the newly created directory with this content :
+    f $'\n'g $'\n'e $'\n'j $'\n'l $'\n'd $'\n'r $'\n't $'\n'o $'\n'k $'\n'q $'\n'u $'\n's $'\n'n $'\n'a $'\n'c $'\n'y $'\n'b $'\n'x $'\n'v $'\n'p $'\n'w $'\n'm $'\n'i $'\n'z $'\n'h
+    * Use the *echo* command to create _nuimbers.txt_ file containing this :
+    8 $'\n' 4 $'\n'9 $'\n'6$'\n'1 $'\n'5 $'\n'3 $'\n'2 $'\n'7 
+    * Sort _alphabet.txt_ file alphabetically and the _numbers.txt_ numerically
+    * Use the *tr* command to convert the letter in _the _alphabet.txt_ into uppercase 
+    * Making use of the pipe "|" , simultaneously, add *0* to the _<numbers.txt>_ and delete the *1* from it . 
+    * Use the *paste* command to copy the _numbers.txt_ contant into the _alphabet.txt_
+
+.. hidden-code-block:: bash
+
+		# Going back to the home directory 
+		cd
+		
+		# Creating a new directory called _"data_wrangling"_
+		mkdir <your eth name>/homework/data_wrangling
+		
+	    # Creating _alphabet.txt_ file inside the newly created directory 
+	    echo f $'\n'g $'\n'e $'\n'j $'\n'l $'\n'd $'\n'r $'\n't $'\n'o 
+	    $'\n'k $'\n'q $'\n'u $'\n's $'\n'n $'\n'a $'\n'c $'\n'y $'\n'b
+	    $'\n'x $'\n'v $'\n'p $'\n'w $'\n'm $'\n'i $'\n'z $'\n'h > <your eth name>/homework/data_wrangling/alphabet.txt
+	    
+	    # Creating _numbers.txt_ file inside the newly created directory 
+	    echo 8$'\n'4$'\n9$'\n'6$'\n'1$'\n'5$'\n'3$'\n'2$'\n'7 > <your eth name>/homework/data_wrangling/numbers.txt
+	    
+	    #Sorting alphabetically 
+	    sort <your eth name>/homework/data_wrangling/alphabet.txt
+	    
+	    #Sorting numerically
+	    sort <your eth name>/homework/data_wrangling/numbers.txt
+	    
+	    #Translating the _alphabet.txt_ content to uppercase
+        cat <your eth name>/homework/data_wrangling/alphabet.txt | tr “[a-z]” “[A-Z]” 
+        
+        # Making use of the pipe to add and delete content 
+        echo 0 >> <your eth name>/homework/data_wrangling/numbers.txt | tr -d 1 
 
 Writing and running a script
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you construct a series of commands that you want to perform repeatedly, you can write them into a **script** and then run this script instead of each command individually. This makes it less likely that you make an error in one of the individual commands, and also keeps a record of the computation you performed so that your work is reproducible.
 
+By convention, a script should be named ending in *.sh*  . We will use *Vim* , a text editor to create the scripts . For now , the most important Vim commands that we need to know in order to create our bash scripts are given below . If you want to know more about Vim and it's commands , try this `link <__https://www.tutorialspoint.com/vim/vim_editing.htm>` .
 
-By convention, a script should be named ending in *.sh* and is run as follows:
+.. code-block:: bash
+
+    #create an empty script
+    vim <file_name>.sh
+    
+Press **i** to activate the _insert mode_ allowing to add the command lines to the newly created script . 
+Once you finished editing the script , you can save the changes you have made and quit the text editor window by first typing **esc** , than **:wq** . 
+Now , to test if the script runs properly and produces the desired tasks , you need to run it and this is done as follows :
 
 .. code-block:: bash
 
@@ -794,22 +848,13 @@ By convention, a script should be named ending in *.sh* and is run as follows:
 
     # Run a script in another directory
     ./mydir/myscript.sh
+    
+As **bash** is the default shell for most of the _Mac_ and _Windows OS_ , the first line of the script should include : **#!/bin/bash** as shown in the picture below : 
 
-The command line interface, or shell, that we use is called **bash** and it allows you to use arguments in your scripts, encoded as variables *$1*, *$2*, etc.
+.. thumbnail:: images/header_bash_script.png
+    :align: center
 
-For instance we could have a simple script:
-
-.. code-block:: bash
-
-    # Run a script in the same directory
-    ./myscript.sh
-
-    # Run a script in another directory
-    ./mydir/myscript.sh
-
-The command line interface, or shell, that we use is called **bash** and it allows you to use arguments in your scripts, encoded as variables *$1*, *$2*, etc.
-
-For instance we could have a simple script:
+This command line interface, allows you to use arguments in your scripts, encoded as variables *$1*, *$2*, etc.
 
 .. code-block:: bash
 
@@ -824,25 +869,36 @@ For instance we could have a simple script:
     "Hello, my name is Chris"
 
 This means you could write a script that performs some operations on a file, and then replace the file path in your code with *$1* to allow you to declare the file when you execute the script. Just remember that if your script changes working directory, the relative path to your file may be incorrect, so sometimes it is best to use the absolute path.
+It's also important to know , that before being able to run your script , you will need to make it executable . 
+.. code-block:: bash
 
-.. admonition:: Exercise 2.5
+
+.. admonition:: Exercise 1.8
     :class: exercise
 
-    * Write a simple script that will count the number of A in a file
-    * Use a variable to allow you to declare the file when you run the script
-    * Make your script *executable* with the command "chmod +x myscript.sh"
-    * Test it on some of the fasta files in the ``/nfs/course/551-0132-00L/1_Unix1/genomes`` subdirectories
-
+    * Create a bash script _fastacount.sh_ inside <your eth name>/homework/genomes , to count how many **A** are in the _E.coli_K12_MG1655.fna_ file (that should be within the same directory )
+    
     .. hidden-code-block:: bash
 
-        # Simple script to count fasta entries in a file, fastacount.sh:
-        grep -c "A" $1
+	# Going back to the home directory 
+		cd
+		
+    # Creating the bash script 
+    vim <your eth name>/homework/genomes/fastacount.sh
+    
+    # Press *i* to start editing the script , you have to include the following lines :
+    
+    # #!/bin/bash
+    # grep -c "A" $1
+    
+    #Press *esc* to stop the editing and than *:wq* to save and leave the text editor 
+    
+    #Make _fastacount.sh_ executable
+    chmod +x <your eth name>/homework/genomes/fastacount.sh
+    
+    #Run the script on _E.coli_K12_MG1655.fna_
+    ./homework/genomes/fastacount.sh homework/genomes/E.coli_K12_MG1655.fna
 
-        # Make it executable
-        chmod +x Acount.sh
-
-        # Run the script
-        ./Acount.sh E.coli_K12_MG1655.fna # 57988
 
 
 Working on a computing cluster
